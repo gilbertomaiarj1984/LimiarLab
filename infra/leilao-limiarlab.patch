@@ -1,0 +1,25 @@
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 8167683..4dc87dd 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -89,6 +89,10 @@ services:
+       # participam. Criada fora deste compose (`docker network create agendaboa_db`).
+       agendaboa_db:
+         aliases: [agendaboa-postgres]
++      # Rede dedicada ao LimiarLab (app separado, /opt/limiarlab): só o Postgres e o app dele
++      # participam. Criada fora deste compose (`docker network create limiarlab_db`).
++      limiarlab_db:
++        aliases: [limiarlab-postgres]
+     # Sem `ports:` de propósito — acesso administrativo só por túnel SSH
+     # (ver "Endurecimento da máquina" em docs/arquivo/economia-fase-2-vps-unico.md).
+     # `app` e `backup` só sobem com o Postgres aceitando conexões: o primeiro dump depois de um
+@@ -148,6 +152,9 @@ networks:
+   # Rede externa do AgendaBoa (ver serviço postgres).
+   agendaboa_db:
+     external: true
++  # Rede externa do LimiarLab (ver serviço postgres).
++  limiarlab_db:
++    external: true
+   default:
+ 
+ volumes:

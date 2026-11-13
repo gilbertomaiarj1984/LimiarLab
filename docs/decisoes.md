@@ -87,3 +87,31 @@ Cada entrada: o que foi decidido, por quê e o estado. Mais recentes no fim.
 - **Decisão:** exames de sangue e PDFs de laudo ficam fora do repositório (pasta `private/` no `.gitignore`). Ficam no repositório apenas os números usados no treino (limiares, FC, VO2máx).
 - **Por quê:** o repositório é público.
 - **Estado:** a confirmar com o atleta.
+
+## D13 · Stack do app igual à do AgendaBoa
+
+- **Data:** 13/11/2026
+- **Decisão:** Next.js 16 + postgres.js + PWA, numa pasta `web/`, rodando na VPS como app isolado (`/opt/limiarlab`, container `limiarlab-app`, banco e rede `limiarlab_db` próprios no Postgres compartilhado, Caddy compartilhado).
+- **Por quê:** a VPS já roda esse modelo; reaproveita deploy, backup e regras de isolamento.
+- **Estado:** adotada (aprovada pelo atleta).
+
+## D14 · Senha dentro do app em vez de autenticação básica no Caddy
+
+- **Data:** 13/11/2026
+- **Decisão:** a tela `/entrar` pede uma senha (`APP_PASSWORD`) e grava um cookie assinado por 180 dias. `/api/import` usa um token próprio.
+- **Por quê:** o aprovado era senha no Caddy, mas a autenticação básica do navegador funciona mal em PWA instalado no iPhone (pede a senha de novo ou falha ao abrir pela tela inicial). O efeito é o mesmo: nada é visível sem senha.
+- **Estado:** adotada; a confirmar com o atleta.
+
+## D15 · Fontes de dados da fase 1
+
+- **Data:** 13/11/2026
+- **Decisão:** uma rotina do Claude lê Garmin (realizados e treinos agendados) e o plano semanal, e envia ao app. Strava direto fica para a fase 2. Nada é escrito no Garmin.
+- **Por quê:** o Claude já tem os conectores; evita guardar credenciais do Garmin na VPS.
+- **Estado:** adotada.
+
+## D16 · Regra das 3 faixas de intensidade
+
+- **Data:** 13/11/2026
+- **Decisão:** pelo tempo por zona do Garmin, leve = zona inteira abaixo do LV1 (141), forte = zona a partir de 157, moderado = o resto (inclui a zona que cruza o LV1). Meta de referência ~80% leve. Salto de volume acima de 30% gera aviso cauteloso.
+- **Por quê:** usa os limiares do teste cardiopulmonar; na dúvida, não chama de leve. Referências e força de cada uma em [`evidencias.md`](evidencias.md).
+- **Estado:** adotada.
