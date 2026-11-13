@@ -1,0 +1,19 @@
+# Bloco do LimiarLab para o Caddy compartilhado da VPS. Vai como ARQUIVO NOVO em
+# <pasta do compose do garimpo>/sites/limiarlab.caddy (o Caddyfile do garimpo termina com
+# `import /etc/caddy/sites/*.caddy`). Nenhum bloco existente é editado.
+# O acesso é protegido pelo próprio app (senha em APP_PASSWORD); /api/import exige IMPORT_TOKEN.
+limiar.143-95-214-240.sslip.io {
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Content-Security-Policy "frame-ancestors 'none'"
+		-Server
+	}
+	encode zstd gzip
+	reverse_proxy limiarlab-app:3000 {
+		health_uri /api/health
+		health_interval 10s
+		health_timeout 5s
+	}
+}

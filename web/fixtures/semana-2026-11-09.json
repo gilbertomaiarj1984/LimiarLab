@@ -1,0 +1,419 @@
+{
+  "athlete": "giba",
+  "_comment": "Dados reais do Garmin (Forerunner 955) de 02 a 13/11/2026 e o plano da semana de 09/11. Usado pelos testes e para popular o banco em desenvolvimento.",
+  "planned_replace": [
+    {
+      "source": "garmin",
+      "from": "2026-11-09",
+      "to": "2026-11-15"
+    },
+    {
+      "source": "limiarlab",
+      "from": "2026-11-09",
+      "to": "2026-11-15"
+    }
+  ],
+  "planned": [
+    {
+      "source": "garmin",
+      "external_id": "1836423033",
+      "date": "2026-11-09",
+      "sport": "run",
+      "kind": "corrida_leve",
+      "title": "Rodagem leve 40 min",
+      "notes": "Treinus: Z1 regenerativo",
+      "target_duration_s": 2400,
+      "target_hr_max": 135
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-09-sup",
+      "date": "2026-11-09",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Superiores (priorizar costas)"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-10-run",
+      "date": "2026-11-10",
+      "sport": "run",
+      "kind": "qualidade",
+      "title": "Intervalado",
+      "notes": "Fase forte acima de 157 bpm"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-10-inf",
+      "date": "2026-11-10",
+      "sport": "strength",
+      "kind": "forca_inferiores",
+      "title": "Inferiores pesado"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-11-sup",
+      "date": "2026-11-11",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Superiores + core"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-12-run",
+      "date": "2026-11-12",
+      "sport": "run",
+      "kind": "qualidade",
+      "title": "Areia ou fartlek"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-12-inf",
+      "date": "2026-11-12",
+      "sport": "strength",
+      "kind": "forca_inferiores",
+      "title": "Inferiores leve"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-13-opc",
+      "date": "2026-11-13",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Opcional: superiores, ou descanso total",
+      "optional": true
+    },
+    {
+      "source": "garmin",
+      "external_id": "1836423041",
+      "date": "2026-11-14",
+      "sport": "run",
+      "kind": "longo",
+      "title": "Longão 18 km",
+      "notes": "Maior parte abaixo de 135–138 bpm, mesmo que o pace caia para 6:15–6:45/km.",
+      "target_distance_m": 18000,
+      "target_hr_max": 138
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-15-desc",
+      "date": "2026-11-15",
+      "sport": "other",
+      "kind": "descanso",
+      "title": "Descanso"
+    }
+  ],
+  "activities": [
+    {
+      "source": "garmin",
+      "external_id": "25017794928",
+      "start_time": "2026-11-09T06:37:31-03:00",
+      "sport": "run",
+      "kind": "corrida_leve",
+      "name": "Niterói Corrida",
+      "duration_s": 2725.178955078125,
+      "distance_m": 7988.60986328125,
+      "elevation_gain_m": 10,
+      "avg_hr": 144,
+      "max_hr": 153,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 26.0
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 437.135
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 1710.601
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 517.949
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 0.0
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "25029339471",
+      "start_time": "2026-11-10T06:24:43-03:00",
+      "sport": "run",
+      "kind": "qualidade",
+      "name": "Niterói - Corrida ter 10/11",
+      "duration_s": 3178.819091796875,
+      "distance_m": 8902.26953125,
+      "elevation_gain_m": 32,
+      "avg_hr": 142,
+      "max_hr": 163,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 382.454
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 844.52
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 698.258
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 937.976
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 289.889
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "25037425705",
+      "start_time": "2026-11-10T20:15:42-03:00",
+      "sport": "strength",
+      "kind": "forca",
+      "name": "Serie Academia",
+      "duration_s": 2803.365966796875,
+      "avg_hr": 71,
+      "max_hr": 110
+    },
+    {
+      "source": "garmin",
+      "external_id": "25049331643",
+      "start_time": "2026-11-11T20:21:29-03:00",
+      "sport": "strength",
+      "kind": "forca",
+      "name": "Serie Academia",
+      "duration_s": 2390.696044921875,
+      "avg_hr": 81,
+      "max_hr": 130
+    },
+    {
+      "source": "garmin",
+      "external_id": "25053046565",
+      "start_time": "2026-11-12T06:27:11-03:00",
+      "sport": "run",
+      "kind": "qualidade",
+      "name": "Niterói - Corrida qui 12/11",
+      "duration_s": 2903.177978515625,
+      "distance_m": 8309.3896484375,
+      "elevation_gain_m": 41,
+      "avg_hr": 141,
+      "max_hr": 161,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 408.968
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 819.299
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 470.826
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 764.318
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 408.649
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "25060263662",
+      "start_time": "2026-11-12T20:22:53-03:00",
+      "sport": "strength",
+      "kind": "forca",
+      "name": "Força",
+      "duration_s": 3103.989990234375,
+      "avg_hr": 85,
+      "max_hr": 125
+    },
+    {
+      "source": "garmin",
+      "external_id": "24937679035",
+      "start_time": "2026-11-02T06:16:06-03:00",
+      "sport": "run",
+      "kind": "corrida_leve",
+      "name": "Niterói Corrida",
+      "duration_s": 4989.134765625,
+      "distance_m": 15009.4296875,
+      "elevation_gain_m": 195,
+      "avg_hr": 142,
+      "max_hr": 169,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 382.917
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 1657.669
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 1932.195
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 479.552
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 518.773
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "24958120559",
+      "start_time": "2026-11-03T20:29:47-03:00",
+      "sport": "strength",
+      "kind": "forca",
+      "name": "Serie Academia",
+      "duration_s": 1909.4210205078125,
+      "avg_hr": 86,
+      "max_hr": 124
+    },
+    {
+      "source": "garmin",
+      "external_id": "24961674511",
+      "start_time": "2026-11-04T06:12:29-03:00",
+      "sport": "run",
+      "kind": "qualidade",
+      "name": "Niterói - Corrida ter 03/11",
+      "duration_s": 2967.014892578125,
+      "distance_m": 8405.83984375,
+      "elevation_gain_m": 27,
+      "avg_hr": 146,
+      "max_hr": 170,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 189.413
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 852.044
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 435.005
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 560.932
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 899.322
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "24969800024",
+      "start_time": "2026-11-04T19:50:28-03:00",
+      "sport": "strength",
+      "kind": "forca",
+      "name": "Serie Academia",
+      "duration_s": 2681.491943359375,
+      "avg_hr": 74,
+      "max_hr": 120
+    },
+    {
+      "source": "garmin",
+      "external_id": "24973413890",
+      "start_time": "2026-11-05T06:08:37-03:00",
+      "sport": "run",
+      "kind": "qualidade",
+      "name": "Niterói - Corrida qui 05/11",
+      "duration_s": 3491.2099609375,
+      "distance_m": 10330.580078125,
+      "elevation_gain_m": 29,
+      "avg_hr": 140,
+      "max_hr": 157,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 217.0
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 1433.714
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 1324.943
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 476.486
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 2.001
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "24981491117",
+      "start_time": "2026-11-05T20:31:45-03:00",
+      "sport": "strength",
+      "kind": "forca",
+      "name": "Serie Academia",
+      "duration_s": 2296.70703125,
+      "avg_hr": 74,
+      "max_hr": 123
+    },
+    {
+      "source": "garmin",
+      "external_id": "24995875512",
+      "start_time": "2026-11-07T06:11:15-03:00",
+      "sport": "run",
+      "kind": "longo",
+      "name": "Niterói Corrida",
+      "duration_s": 4767.4580078125,
+      "distance_m": 15008.849609375,
+      "elevation_gain_m": 206,
+      "avg_hr": 151,
+      "max_hr": 173,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 43.044
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 292.98
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 1642.026
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 1510.152
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 1234.689
+        }
+      ]
+    }
+  ]
+}
