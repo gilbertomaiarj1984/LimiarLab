@@ -1,0 +1,9 @@
+# Dados de saúde e documentos pessoais (não versionar)
+private/
+*.pdf
+
+# Sistema
+.DS_Store
+Thumbs.db
+node_modules/
+.env

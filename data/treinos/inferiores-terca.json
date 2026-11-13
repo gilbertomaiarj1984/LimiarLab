@@ -1,0 +1,17 @@
+{
+  "id": "inferiores-terca",
+  "nome": "Inferiores pesado (terça)",
+  "dia": "terça",
+  "status": "proposto",
+  "objetivo": "Força máxima e pliometria no dia do intervalado",
+  "rir": [1, 2],
+  "exercicios": [
+    { "ordem": 1, "nome": "Pliometria leve: saltitos de tornozelo (pogo)", "series": 3, "duracao_s": [15, 20], "foco": "Rigidez do tendão e economia" },
+    { "ordem": 2, "nome": "Agachamento no smith, pesado", "series": 4, "reps": [5, 6], "foco": "Força máxima" },
+    { "ordem": 3, "nome": "Agachamento búlgaro", "series": 3, "reps": 8, "unidade": "por perna", "foco": "Unilateral" },
+    { "ordem": 4, "nome": "Stiff ou hip thrust", "series": 3, "reps": 8, "foco": "Glúteo e posteriores no quadril" },
+    { "ordem": 5, "nome": "Panturrilha em pé (protocolo completo)", "series": 4, "reps": "15 completos + 20 curtos", "foco": "Gastrocnêmio" },
+    { "ordem": 6, "nome": "Panturrilha sentado", "series": 3, "reps": 15, "foco": "Sóleo" }
+  ],
+  "acessorios_opcionais": ["Cadeira extensora", "Cadeira flexora"]
+}

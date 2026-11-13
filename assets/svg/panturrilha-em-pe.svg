@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 60 700 262" role="img" aria-label="Panturrilha em pé: início e fim">
+<style>.i,.a{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.i{stroke:#15201c}.a{stroke:#2a6fdb}.e{fill:none;stroke:#b8c3be;stroke-width:1.6}.d{stroke:#2a6fdb;stroke-width:1.6;stroke-dasharray:7 7}.h{fill:#15201c}.w{fill:#b8c3be}.p{fill:#2a6fdb;fill-opacity:.35;stroke:#2a6fdb;stroke-width:1.4}.x{fill:none;stroke:#c7392f;stroke-width:2.5}.t{fill:#15201c;font-family:Inter,system-ui,sans-serif;font-size:24px;font-weight:600;text-anchor:middle}</style>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b8c3be"/></marker></defs>
+<rect x="0" y="0" width="760" height="400" fill="#ffffff"/>
+    <line class="e" x1="80" y1="270" x2="330" y2="270"/><rect class="e" x="200" y="240" width="60" height="30" rx="3"/><line class="e" x1="250" y1="110" x2="250" y2="240"/>
+    <polyline class="a" points="186,252 194,246 216,240"/><polyline class="a" points="194,246 196,200"/><polyline class="i" points="196,200 194,156 194,110"/><polyline class="i" points="194,118 220,140 248,146"/><circle class="h" cx="194" cy="96" r="10"/>
+    <path class="e" d="M345 170H435" marker-end="url(#arr)"/>
+    <line class="e" x1="460" y1="270" x2="710" y2="270"/><rect class="e" x="580" y="240" width="60" height="30" rx="3"/><line class="e" x1="630" y1="96" x2="630" y2="240"/>
+    <polyline class="a" points="584,224 590,220 600,240"/><polyline class="a" points="590,220 588,180"/><polyline class="i" points="588,180 586,138 586,96"/><polyline class="i" points="586,104 608,124 628,130"/><circle class="h" cx="586" cy="84" r="10"/>
+    <text class="t" x="200" y="310">Início</text><text class="t" x="590" y="310">Fim</text>
+  </svg>

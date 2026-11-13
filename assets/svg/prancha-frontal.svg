@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 150 700 170" role="img" aria-label="Prancha frontal: certo e evite">
+<style>.i,.a{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.i{stroke:#15201c}.a{stroke:#2a6fdb}.e{fill:none;stroke:#b8c3be;stroke-width:1.6}.d{stroke:#2a6fdb;stroke-width:1.6;stroke-dasharray:7 7}.h{fill:#15201c}.w{fill:#b8c3be}.p{fill:#2a6fdb;fill-opacity:.35;stroke:#2a6fdb;stroke-width:1.4}.x{fill:none;stroke:#c7392f;stroke-width:2.5}.t{fill:#15201c;font-family:Inter,system-ui,sans-serif;font-size:24px;font-weight:600;text-anchor:middle}</style>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b8c3be"/></marker></defs>
+<rect x="0" y="0" width="760" height="400" fill="#ffffff"/>
+    <line class="e" x1="80" y1="250" x2="350" y2="250"/><line class="d" x1="90" y1="250" x2="330" y2="198"/>
+    <polyline class="i" points="104,246 202,225 300,204"/><polyline class="i" points="300,204 300,248 340,248"/><circle class="h" cx="318" cy="198" r="10"/>
+    <line class="e" x1="460" y1="250" x2="730" y2="250"/>
+    <polyline class="i" points="484,246 582,240 680,204"/><polyline class="i" points="680,204 680,248 720,248"/><circle class="h" cx="698" cy="198" r="10"/><circle class="x" cx="582" cy="240" r="14"/>
+    <text class="t" x="215" y="298">Certo</text><text class="t" x="595" y="298">Evite</text>
+  </svg>

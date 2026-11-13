@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 60 700 262" role="img" aria-label="Abdutora com tronco inclinado: de lado e de frente">
+<style>.i,.a{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.i{stroke:#15201c}.a{stroke:#2a6fdb}.e{fill:none;stroke:#b8c3be;stroke-width:1.6}.d{stroke:#2a6fdb;stroke-width:1.6;stroke-dasharray:7 7}.h{fill:#15201c}.w{fill:#b8c3be}.p{fill:#2a6fdb;fill-opacity:.35;stroke:#2a6fdb;stroke-width:1.4}.x{fill:none;stroke:#c7392f;stroke-width:2.5}.t{fill:#15201c;font-family:Inter,system-ui,sans-serif;font-size:24px;font-weight:600;text-anchor:middle}</style>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b8c3be"/></marker></defs>
+<rect x="0" y="0" width="760" height="400" fill="#ffffff"/>
+    <line class="e" x1="80" y1="270" x2="320" y2="270"/><rect class="e" x="112" y="110" width="8" height="86" rx="2"/><rect class="e" x="112" y="196" width="108" height="8" rx="2"/><line class="e" x1="166" y1="204" x2="166" y2="270"/>
+    <polyline class="i" points="150,190 200,190 204,250"/><polyline class="i" points="150,190 190,150"/><polyline class="i" points="190,150 210,170 226,184"/>
+    <rect class="p" x="190" y="176" width="20" height="12" rx="3"/><circle class="h" cx="200" cy="138" r="10"/>
+    <line class="e" x1="450" y1="270" x2="690" y2="270"/><line class="e" x1="520" y1="198" x2="620" y2="198"/>
+    <polyline class="i" points="570,124 570,186"/><polyline class="i" points="554,190 586,190"/><polyline class="i" points="554,190 528,208 526,262"/><polyline class="i" points="586,190 612,208 614,262"/>
+    <polyline class="i" points="556,136 584,136"/><polyline class="i" points="556,136 546,166 554,188"/><polyline class="i" points="584,136 594,166 586,188"/>
+    <rect class="p" x="510" y="194" width="8" height="28" rx="3"/><rect class="p" x="622" y="194" width="8" height="28" rx="3"/>
+    <path class="e" d="M504 208H478" marker-end="url(#arr)"/><path class="e" d="M636 208H662" marker-end="url(#arr)"/><circle class="h" cx="570" cy="112" r="10"/>
+    <text class="t" x="200" y="310">De lado</text><text class="t" x="570" y="310">De frente</text>
+  </svg>

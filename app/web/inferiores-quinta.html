@@ -1,0 +1,268 @@
+<title>Inferiores de Quinta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: coluna única de cartões por exercício, na ordem do treino; barra de descanso fixa no rodapé */
+:root{
+  --bg:#eef2f1; --card:#ffffff; --ink:#15201c; --muted:#5b6964; --line:#b8c3be;
+  --acc:#2a6fdb; --acc-soft:#e3ecfb; --bad:#c7392f; --fig:#15201c;
+  --f-display:"Space Grotesk", system-ui, sans-serif;
+  --f-body:"Inter", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101614; --card:#18201d; --ink:#e7eeeb; --muted:#9aa8a2; --line:#4a5752;
+  --acc:#6b9ff0; --acc-soft:#1d2a40; --bad:#ef6b61; --fig:#e7eeeb; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101614; --card:#18201d; --ink:#e7eeeb; --muted:#9aa8a2; --line:#4a5752;
+  --acc:#6b9ff0; --acc-soft:#1d2a40; --bad:#ef6b61; --fig:#e7eeeb; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 110px}
+main{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-family:var(--f-display);font-size:1.75rem;line-height:1.15;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-size:1.15rem;line-height:1.25;margin:0;text-wrap:balance}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 4px}
+.lead{color:var(--muted);margin:6px 0 0}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.fact{background:var(--card);border-radius:12px;padding:10px 12px}
+.fact b{display:block;font-family:var(--f-display);font-size:1.1rem;font-variant-numeric:tabular-nums}
+.fact span{font-size:.75rem;color:var(--muted)}
+.note{background:var(--card);border-radius:14px;padding:14px 16px;font-size:.92rem}
+.note p{margin:0}
+.note p+p{margin-top:8px}
+.card{background:var(--card);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.head{display:flex;gap:12px;align-items:flex-start}
+.num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--acc-soft);color:var(--acc);font-family:var(--f-display);font-weight:700;display:grid;place-items:center}
+.head>div{min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-size:.8rem;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink);font-variant-numeric:tabular-nums}
+.chip.k{background:var(--acc-soft);border-color:transparent;color:var(--acc);font-weight:600}
+svg.fig{width:100%;height:auto;display:block}
+.i,.a{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.i{stroke:var(--fig)} .a{stroke:var(--acc)}
+.e{fill:none;stroke:var(--line);stroke-width:1.6}
+.d{stroke:var(--acc);stroke-width:1.6;stroke-dasharray:7 7}
+.h{fill:var(--fig)} .w{fill:var(--line)} .p{fill:var(--acc);fill-opacity:.35;stroke:var(--acc);stroke-width:1.4}
+.x{fill:none;stroke:var(--bad);stroke-width:2.5}
+.t{fill:var(--ink);font-family:var(--f-body);font-size:24px;font-weight:600;text-anchor:middle}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:.95rem}
+.var{background:var(--acc-soft);border-radius:10px;padding:10px 12px;font-size:.9rem}
+.sets{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sets span{font-size:.8rem;color:var(--muted);margin-right:2px}
+.set{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:transparent;color:var(--ink);font:600 1rem var(--f-display);cursor:pointer}
+.set[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.set:focus-visible,.btn:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.foot{display:flex;justify-content:center}
+.btn{font:500 .9rem var(--f-body);color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer}
+.rest{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:var(--bg);
+  padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:5}
+.rest b{font-family:var(--f-display);font-size:1.5rem;font-variant-numeric:tabular-nums}
+.rest button{font:600 .9rem var(--f-body);background:var(--bg);color:var(--ink);border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--line)"/></marker>
+</defs></svg>
+
+<main>
+<header>
+  <p class="eyebrow">Treino de inferiores · leve</p>
+  <h1>Quinta, véspera do longão</h1>
+  <p class="lead">Estímulo sem cansaço. Termine cada série com 2–3 repetições sobrando.</p>
+  <div class="facts">
+    <div class="fact"><b>35–40</b><span>minutos</span></div>
+    <div class="fact"><b>60–90 s</b><span>descanso</span></div>
+    <div class="fact"><b>RIR 2–3</b><span>longe da falha</span></div>
+  </div>
+</header>
+
+<div class="note">
+  <p><strong>Aquecimento (5 min):</strong> bicicleta ou elíptico leve, 10 agachamentos sem peso e 10 elevações de panturrilha.</p>
+  <p><strong>Carga:</strong> o % é da carga máxima para 1 repetição (1RM). Sem esse número, use cerca de 80–85% da carga que você usa no 4 × 12. Se a série chegar perto da falha, reduza.</p>
+</div>
+
+<!-- 1 -->
+<article class="card" data-ex="1">
+  <div class="head"><div class="num">1</div><div><h2>Step-up no banco com halteres</h2>
+    <div class="chips"><span class="chip">3 × 8 por perna</span><span class="chip k">65–70% 1RM</span></div></div></div>
+  <svg class="fig" viewBox="40 60 700 262" role="img" aria-label="Step-up: início e fim">
+    <line class="e" x1="80" y1="270" x2="330" y2="270"/><rect class="e" x="210" y="220" width="100" height="50" rx="4"/>
+    <polyline class="i" points="150,270 162,234 178,198"/><polyline class="a" points="178,198 214,186 232,220"/>
+    <polyline class="i" points="178,198 192,154"/><polyline class="i" points="192,154 190,184 188,210"/>
+    <rect class="w" x="178" y="208" width="20" height="8" rx="2"/><circle class="h" cx="196" cy="140" r="10"/>
+    <path class="e" d="M345 170H435" marker-end="url(#arr)"/>
+    <line class="e" x1="470" y1="270" x2="730" y2="270"/><rect class="e" x="590" y="220" width="100" height="50" rx="4"/>
+    <polyline class="a" points="630,220 630,182 630,144"/><polyline class="i" points="630,144 622,182 616,220"/>
+    <polyline class="i" points="630,144 632,98"/><polyline class="i" points="632,98 630,128 628,156"/>
+    <rect class="w" x="618" y="152" width="20" height="8" rx="2"/><circle class="h" cx="633" cy="84" r="10"/>
+    <text class="t" x="200" y="310">Início</text><text class="t" x="600" y="310">Fim</text>
+  </svg>
+  <ul>
+    <li>Banco na altura do joelho ou um pouco abaixo; pé inteiro em cima.</li>
+    <li>Um halter em cada mão, braços soltos ao lado do corpo.</li>
+    <li>Suba empurrando com a perna de cima, sem impulso da de baixo.</li>
+    <li>Desça em cerca de 2 s, joelho alinhado ao 2º dedo do pé.</li>
+  </ul>
+  <div class="var"><strong>Variação:</strong> quando a execução estiver firme, use um halter só, na mão contrária à perna que sobe. Carga menor, tronco sem inclinar.</div>
+</article>
+
+<!-- 2 -->
+<article class="card" data-ex="2">
+  <div class="head"><div class="num">2</div><div><h2>Cadeira flexora</h2>
+    <div class="chips"><span class="chip">3 × 12</span><span class="chip k">60–65% 1RM</span></div></div></div>
+  <svg class="fig" viewBox="40 60 700 262" role="img" aria-label="Cadeira flexora: início e fim">
+    <line class="e" x1="80" y1="270" x2="330" y2="270"/><rect class="e" x="120" y="110" width="8" height="88" rx="2"/><rect class="e" x="120" y="196" width="90" height="8" rx="2"/><line class="e" x1="164" y1="204" x2="164" y2="270"/>
+    <polyline class="i" points="142,190 138,140"/><polyline class="i" points="138,146 156,168 172,186"/><polyline class="i" points="142,190 200,190"/><polyline class="a" points="200,190 256,198"/>
+    <rect class="w" x="180" y="174" width="34" height="9" rx="3"/><circle class="e" cx="252" cy="210" r="8"/><circle class="h" cx="137" cy="126" r="10"/>
+    <path class="e" d="M345 170H435" marker-end="url(#arr)"/>
+    <line class="e" x1="460" y1="270" x2="710" y2="270"/><rect class="e" x="500" y="110" width="8" height="88" rx="2"/><rect class="e" x="500" y="196" width="90" height="8" rx="2"/><line class="e" x1="544" y1="204" x2="544" y2="270"/>
+    <polyline class="i" points="522,190 518,140"/><polyline class="i" points="518,146 536,168 552,186"/><polyline class="i" points="522,190 580,190"/><polyline class="a" points="580,190 566,246"/>
+    <rect class="w" x="560" y="174" width="34" height="9" rx="3"/><circle class="e" cx="576" cy="250" r="8"/><circle class="h" cx="517" cy="126" r="10"/>
+    <text class="t" x="190" y="310">Início</text><text class="t" x="570" y="310">Fim</text>
+  </svg>
+  <ul>
+    <li>Rolo atrás do tornozelo, pernas estendidas.</li>
+    <li>Dobre o joelho levando o calcanhar para baixo do banco.</li>
+    <li>Volte em 2 s, sem deixar o peso bater.</li>
+  </ul>
+</article>
+
+<!-- 3 -->
+<article class="card" data-ex="3">
+  <div class="head"><div class="num">3</div><div><h2>Panturrilha em pé</h2>
+    <div class="chips"><span class="chip">3 × 15</span><span class="chip k">55–60% 1RM</span></div></div></div>
+  <svg class="fig" viewBox="40 60 700 262" role="img" aria-label="Panturrilha em pé: início e fim">
+    <line class="e" x1="80" y1="270" x2="330" y2="270"/><rect class="e" x="200" y="240" width="60" height="30" rx="3"/><line class="e" x1="250" y1="110" x2="250" y2="240"/>
+    <polyline class="a" points="186,252 194,246 216,240"/><polyline class="a" points="194,246 196,200"/><polyline class="i" points="196,200 194,156 194,110"/><polyline class="i" points="194,118 220,140 248,146"/><circle class="h" cx="194" cy="96" r="10"/>
+    <path class="e" d="M345 170H435" marker-end="url(#arr)"/>
+    <line class="e" x1="460" y1="270" x2="710" y2="270"/><rect class="e" x="580" y="240" width="60" height="30" rx="3"/><line class="e" x1="630" y1="96" x2="630" y2="240"/>
+    <polyline class="a" points="584,224 590,220 600,240"/><polyline class="a" points="590,220 588,180"/><polyline class="i" points="588,180 586,138 586,96"/><polyline class="i" points="586,104 608,124 628,130"/><circle class="h" cx="586" cy="84" r="10"/>
+    <text class="t" x="200" y="310">Início</text><text class="t" x="590" y="310">Fim</text>
+  </svg>
+  <ul>
+    <li>Ponta do pé no degrau, calcanhar desce e alonga.</li>
+    <li>Pausa de 1 s embaixo e 1 s em cima, na ponta do pé.</li>
+    <li>Hoje só o movimento completo; os 20 curtos ficam para terça.</li>
+  </ul>
+</article>
+
+<!-- 4 -->
+<article class="card" data-ex="4">
+  <div class="head"><div class="num">4</div><div><h2>Abdutora com tronco inclinado</h2>
+    <div class="chips"><span class="chip">3 × 15</span><span class="chip k">55–60% 1RM</span></div></div></div>
+  <svg class="fig" viewBox="40 60 700 262" role="img" aria-label="Abdutora com tronco inclinado: de lado e de frente">
+    <line class="e" x1="80" y1="270" x2="320" y2="270"/><rect class="e" x="112" y="110" width="8" height="86" rx="2"/><rect class="e" x="112" y="196" width="108" height="8" rx="2"/><line class="e" x1="166" y1="204" x2="166" y2="270"/>
+    <polyline class="i" points="150,190 200,190 204,250"/><polyline class="i" points="150,190 190,150"/><polyline class="i" points="190,150 210,170 226,184"/>
+    <rect class="p" x="190" y="176" width="20" height="12" rx="3"/><circle class="h" cx="200" cy="138" r="10"/>
+    <line class="e" x1="450" y1="270" x2="690" y2="270"/><line class="e" x1="520" y1="198" x2="620" y2="198"/>
+    <polyline class="i" points="570,124 570,186"/><polyline class="i" points="554,190 586,190"/><polyline class="i" points="554,190 528,208 526,262"/><polyline class="i" points="586,190 612,208 614,262"/>
+    <polyline class="i" points="556,136 584,136"/><polyline class="i" points="556,136 546,166 554,188"/><polyline class="i" points="584,136 594,166 586,188"/>
+    <rect class="p" x="510" y="194" width="8" height="28" rx="3"/><rect class="p" x="622" y="194" width="8" height="28" rx="3"/>
+    <path class="e" d="M504 208H478" marker-end="url(#arr)"/><path class="e" d="M636 208H662" marker-end="url(#arr)"/><circle class="h" cx="570" cy="112" r="10"/>
+    <text class="t" x="200" y="310">De lado</text><text class="t" x="570" y="310">De frente</text>
+  </svg>
+  <ul>
+    <li>Incline o tronco à frente, segurando nas alças ou no banco.</li>
+    <li>Abra contra as almofadas, pausa de 1 s aberto.</li>
+    <li>Volte em 2 s sem deixar o peso bater; o glúteo faz o trabalho.</li>
+  </ul>
+</article>
+
+<!-- 5 -->
+<article class="card" data-ex="5">
+  <div class="head"><div class="num">5</div><div><h2>Panturrilha sentado (sóleo)</h2>
+    <div class="chips"><span class="chip">3 × 15</span><span class="chip k">55–60% 1RM</span></div></div></div>
+  <svg class="fig" viewBox="40 60 700 262" role="img" aria-label="Panturrilha sentado: início e fim">
+    <line class="e" x1="80" y1="270" x2="330" y2="270"/><rect class="e" x="110" y="192" width="80" height="8" rx="2"/><line class="e" x1="122" y1="200" x2="122" y2="270"/><line class="e" x1="178" y1="200" x2="178" y2="270"/><rect class="e" x="222" y="248" width="44" height="22" rx="3"/>
+    <polyline class="i" points="160,188 166,142"/><polyline class="i" points="166,148 186,168 204,174"/><polyline class="i" points="160,188 204,188"/><polyline class="a" points="204,188 206,252 238,246"/>
+    <rect class="w" x="186" y="174" width="38" height="8" rx="3"/><circle class="h" cx="168" cy="128" r="10"/>
+    <path class="e" d="M345 170H435" marker-end="url(#arr)"/>
+    <line class="e" x1="460" y1="270" x2="710" y2="270"/><rect class="e" x="490" y="192" width="80" height="8" rx="2"/><line class="e" x1="502" y1="200" x2="502" y2="270"/><line class="e" x1="558" y1="200" x2="558" y2="270"/><rect class="e" x="602" y="248" width="44" height="22" rx="3"/>
+    <polyline class="i" points="540,188 546,142"/><polyline class="i" points="546,148 566,162 584,162"/><polyline class="i" points="540,188 584,174"/><polyline class="a" points="584,174 592,232 618,246"/>
+    <rect class="w" x="566" y="160" width="38" height="8" rx="3"/><circle class="h" cx="548" cy="128" r="10"/>
+    <text class="t" x="190" y="310">Início</text><text class="t" x="570" y="310">Fim</text>
+  </svg>
+  <ul>
+    <li>Joelho a 90°, apoio sobre a coxa perto do joelho.</li>
+    <li>Alonga embaixo, pausa, sobe até a ponta do pé.</li>
+    <li>Sem a máquina: sentado no banco, halter apoiado sobre o joelho.</li>
+  </ul>
+</article>
+
+<!-- 6 -->
+<article class="card" data-ex="6">
+  <div class="head"><div class="num">6</div><div><h2>Prancha lateral</h2>
+    <div class="chips"><span class="chip">3 × 30 s por lado</span><span class="chip k">Peso corporal</span></div></div></div>
+  <svg class="fig" viewBox="40 150 700 170" role="img" aria-label="Prancha lateral: certo e evite">
+    <line class="e" x1="80" y1="250" x2="350" y2="250"/><line class="d" x1="96" y1="251" x2="336" y2="177"/>
+    <polyline class="i" points="110,246 210,216 300,188"/><polyline class="i" points="300,188 300,248 340,248"/><polyline class="i" points="300,192 262,202 224,212"/><circle class="h" cx="318" cy="176" r="10"/>
+    <line class="e" x1="460" y1="250" x2="730" y2="250"/>
+    <polyline class="i" points="490,246 590,234 680,188"/><polyline class="i" points="680,188 680,248 720,248"/><polyline class="i" points="680,192 642,210 604,228"/><circle class="h" cx="698" cy="176" r="10"/><circle class="x" cx="590" cy="234" r="14"/>
+    <text class="t" x="215" y="298">Certo</text><text class="t" x="595" y="298">Evite</text>
+  </svg>
+  <ul>
+    <li>Cotovelo sob o ombro, corpo em linha reta da cabeça aos pés.</li>
+    <li>Quadril alto; se ficar fácil, levante a perna de cima.</li>
+  </ul>
+</article>
+
+<!-- 7 -->
+<article class="card" data-ex="7">
+  <div class="head"><div class="num">7</div><div><h2>Prancha frontal</h2>
+    <div class="chips"><span class="chip">3 × 30–45 s</span><span class="chip k">Peso corporal</span></div></div></div>
+  <svg class="fig" viewBox="40 150 700 170" role="img" aria-label="Prancha frontal: certo e evite">
+    <line class="e" x1="80" y1="250" x2="350" y2="250"/><line class="d" x1="90" y1="250" x2="330" y2="198"/>
+    <polyline class="i" points="104,246 202,225 300,204"/><polyline class="i" points="300,204 300,248 340,248"/><circle class="h" cx="318" cy="198" r="10"/>
+    <line class="e" x1="460" y1="250" x2="730" y2="250"/>
+    <polyline class="i" points="484,246 582,240 680,204"/><polyline class="i" points="680,204 680,248 720,248"/><circle class="h" cx="698" cy="198" r="10"/><circle class="x" cx="582" cy="240" r="14"/>
+    <text class="t" x="215" y="298">Certo</text><text class="t" x="595" y="298">Evite</text>
+  </svg>
+  <ul>
+    <li>Antebraços no chão, cotovelos sob os ombros.</li>
+    <li>Contraia abdômen e glúteos; quadril nem cai nem sobe.</li>
+    <li>Respire normalmente; se a postura piorar, encerre a série.</li>
+  </ul>
+</article>
+
+<div class="foot"><button class="btn" id="reset" type="button">Zerar séries marcadas</button></div>
+</main>
+
+<div class="rest" id="rest" hidden aria-live="polite">
+  <div><div style="font-size:.75rem;opacity:.75">Descanso</div><b id="clock">1:15</b></div>
+  <div style="display:flex;gap:8px"><button type="button" id="plus">+15 s</button><button type="button" id="skip">Pular</button></div>
+</div>
+
+<script>
+(function(){
+  var KEY='inferiores-quinta-sets';
+  var state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+
+  var timer=null,left=0,rest=document.getElementById('rest'),clock=document.getElementById('clock');
+  function show(){var m=Math.floor(left/60),s=left%60;clock.textContent=m+':'+(s<10?'0':'')+s}
+  function stop(){clearInterval(timer);timer=null;rest.hidden=true}
+  function start(sec){left=sec;show();rest.hidden=false;clearInterval(timer);
+    timer=setInterval(function(){left--;if(left<=0){stop();return}show()},1000)}
+  document.getElementById('plus').onclick=function(){left+=15;show()};
+  document.getElementById('skip').onclick=stop;
+
+  document.querySelectorAll('article.card').forEach(function(card){
+    var ex=card.dataset.ex,row=document.createElement('div');
+    row.className='sets';row.innerHTML='<span>Séries</span>';
+    for(var n=1;n<=3;n++){
+      var b=document.createElement('button');b.type='button';b.className='set';b.id='s'+ex+'-'+n;
+      b.textContent=n;b.setAttribute('aria-label','Série '+n+' feita');
+      b.setAttribute('aria-pressed',state[b.id]?'true':'false');
+      b.onclick=function(){var on=this.getAttribute('aria-pressed')!=='true';
+        this.setAttribute('aria-pressed',on?'true':'false');
+        if(on){state[this.id]=1;start(75)}else{delete state[this.id]}save()};
+      row.appendChild(b);
+    }
+    card.appendChild(row);
+  });
+  document.getElementById('reset').onclick=function(){state={};save();
+    document.querySelectorAll('.set').forEach(function(b){b.setAttribute('aria-pressed','false')});stop()};
+})();
+</script>

@@ -1,0 +1,13 @@
+{
+  "atualizado_em": "2026-11-12",
+  "fonte_corrida": "Treinus (assessoria) via Garmin",
+  "dias": [
+    { "dia": "segunda", "corrida": "Rodagem leve 40-50 min, abaixo de 135 bpm", "academia": "Superiores (priorizar costas)" },
+    { "dia": "terça", "corrida": "Intervalado; fase forte acima de 157 bpm", "academia": "Inferiores pesado", "treino_forca": "inferiores-terca" },
+    { "dia": "quarta", "corrida": "Descanso", "academia": "Superiores + core" },
+    { "dia": "quinta", "corrida": "Areia ou fartlek", "academia": "Inferiores leve", "treino_forca": "inferiores-quinta" },
+    { "dia": "sexta", "corrida": "Descanso", "academia": "Opcional: superiores, ou descanso total" },
+    { "dia": "sábado", "corrida": "Longão, maior parte abaixo de 135-138 bpm", "academia": null },
+    { "dia": "domingo", "corrida": "Descanso", "academia": null }
+  ]
+}

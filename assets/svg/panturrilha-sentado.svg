@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 60 700 262" role="img" aria-label="Panturrilha sentado: início e fim">
+<style>.i,.a{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.i{stroke:#15201c}.a{stroke:#2a6fdb}.e{fill:none;stroke:#b8c3be;stroke-width:1.6}.d{stroke:#2a6fdb;stroke-width:1.6;stroke-dasharray:7 7}.h{fill:#15201c}.w{fill:#b8c3be}.p{fill:#2a6fdb;fill-opacity:.35;stroke:#2a6fdb;stroke-width:1.4}.x{fill:none;stroke:#c7392f;stroke-width:2.5}.t{fill:#15201c;font-family:Inter,system-ui,sans-serif;font-size:24px;font-weight:600;text-anchor:middle}</style>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b8c3be"/></marker></defs>
+<rect x="0" y="0" width="760" height="400" fill="#ffffff"/>
+    <line class="e" x1="80" y1="270" x2="330" y2="270"/><rect class="e" x="110" y="192" width="80" height="8" rx="2"/><line class="e" x1="122" y1="200" x2="122" y2="270"/><line class="e" x1="178" y1="200" x2="178" y2="270"/><rect class="e" x="222" y="248" width="44" height="22" rx="3"/>
+    <polyline class="i" points="160,188 166,142"/><polyline class="i" points="166,148 186,168 204,174"/><polyline class="i" points="160,188 204,188"/><polyline class="a" points="204,188 206,252 238,246"/>
+    <rect class="w" x="186" y="174" width="38" height="8" rx="3"/><circle class="h" cx="168" cy="128" r="10"/>
+    <path class="e" d="M345 170H435" marker-end="url(#arr)"/>
+    <line class="e" x1="460" y1="270" x2="710" y2="270"/><rect class="e" x="490" y="192" width="80" height="8" rx="2"/><line class="e" x1="502" y1="200" x2="502" y2="270"/><line class="e" x1="558" y1="200" x2="558" y2="270"/><rect class="e" x="602" y="248" width="44" height="22" rx="3"/>
+    <polyline class="i" points="540,188 546,142"/><polyline class="i" points="546,148 566,162 584,162"/><polyline class="i" points="540,188 584,174"/><polyline class="a" points="584,174 592,232 618,246"/>
+    <rect class="w" x="566" y="160" width="38" height="8" rx="3"/><circle class="h" cx="548" cy="128" r="10"/>
+    <text class="t" x="190" y="310">Início</text><text class="t" x="570" y="310">Fim</text>
+  </svg>

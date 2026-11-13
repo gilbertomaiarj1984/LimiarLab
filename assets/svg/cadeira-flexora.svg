@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 60 700 262" role="img" aria-label="Cadeira flexora: início e fim">
+<style>.i,.a{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.i{stroke:#15201c}.a{stroke:#2a6fdb}.e{fill:none;stroke:#b8c3be;stroke-width:1.6}.d{stroke:#2a6fdb;stroke-width:1.6;stroke-dasharray:7 7}.h{fill:#15201c}.w{fill:#b8c3be}.p{fill:#2a6fdb;fill-opacity:.35;stroke:#2a6fdb;stroke-width:1.4}.x{fill:none;stroke:#c7392f;stroke-width:2.5}.t{fill:#15201c;font-family:Inter,system-ui,sans-serif;font-size:24px;font-weight:600;text-anchor:middle}</style>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b8c3be"/></marker></defs>
+<rect x="0" y="0" width="760" height="400" fill="#ffffff"/>
+    <line class="e" x1="80" y1="270" x2="330" y2="270"/><rect class="e" x="120" y="110" width="8" height="88" rx="2"/><rect class="e" x="120" y="196" width="90" height="8" rx="2"/><line class="e" x1="164" y1="204" x2="164" y2="270"/>
+    <polyline class="i" points="142,190 138,140"/><polyline class="i" points="138,146 156,168 172,186"/><polyline class="i" points="142,190 200,190"/><polyline class="a" points="200,190 256,198"/>
+    <rect class="w" x="180" y="174" width="34" height="9" rx="3"/><circle class="e" cx="252" cy="210" r="8"/><circle class="h" cx="137" cy="126" r="10"/>
+    <path class="e" d="M345 170H435" marker-end="url(#arr)"/>
+    <line class="e" x1="460" y1="270" x2="710" y2="270"/><rect class="e" x="500" y="110" width="8" height="88" rx="2"/><rect class="e" x="500" y="196" width="90" height="8" rx="2"/><line class="e" x1="544" y1="204" x2="544" y2="270"/>
+    <polyline class="i" points="522,190 518,140"/><polyline class="i" points="518,146 536,168 552,186"/><polyline class="i" points="522,190 580,190"/><polyline class="a" points="580,190 566,246"/>
+    <rect class="w" x="560" y="174" width="34" height="9" rx="3"/><circle class="e" cx="576" cy="250" r="8"/><circle class="h" cx="517" cy="126" r="10"/>
+    <text class="t" x="190" y="310">Início</text><text class="t" x="570" y="310">Fim</text>
+  </svg>

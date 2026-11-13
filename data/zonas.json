@@ -1,0 +1,53 @@
+{
+  "atualizado_em": "2026-11-12",
+  "unidade": "bpm",
+  "teste_cardiopulmonar": {
+    "data": "2026-07-23",
+    "lv1": 141,
+    "lv2": 159,
+    "fc_max_medida": 165,
+    "vo2max_ml_kg_min": 47.1,
+    "vo2max_pct_previsto": 115,
+    "lv1_velocidade_esteira_kmh": 12.5,
+    "lv2_velocidade_esteira_kmh": 16.2,
+    "nota": "Velocidades de esteira superestimam o ritmo na rua; usar FC.",
+    "zonas_laudo": [
+      { "zona": 1, "min": 93, "max": 131 },
+      { "zona": 2, "min": 132, "max": 141 },
+      { "zona": 3, "min": 141, "max": 152 },
+      { "zona": 4, "min": 152, "max": 162 },
+      { "zona": 5, "min": 162, "max": null }
+    ]
+  },
+  "garmin_corrida": {
+    "metodo": "limiar de lactato",
+    "limiar_fc": 159,
+    "limiar_pace_s_km": 303,
+    "fc_repouso": 42,
+    "fc_max_usada": 176,
+    "status": "alinhadas com o teste; manter",
+    "zonas": [
+      { "zona": 1, "min": 102, "max": 124 },
+      { "zona": 2, "min": 125, "max": 140 },
+      { "zona": 3, "min": 141, "max": 149 },
+      { "zona": 4, "min": 150, "max": 156 },
+      { "zona": 5, "min": 157, "max": null }
+    ]
+  },
+  "strava": {
+    "fonte": "manual",
+    "status": "desalinhadas; ajustar",
+    "zonas": [
+      { "zona": 1, "min": 0, "max": 139 },
+      { "zona": 2, "min": 140, "max": 147 },
+      { "zona": 3, "min": 148, "max": 155 },
+      { "zona": 4, "min": 156, "max": 164 },
+      { "zona": 5, "min": 165, "max": null }
+    ]
+  },
+  "regra_pratica": {
+    "facil_abaixo_de": 135,
+    "longao_maior_parte_abaixo_de": 138,
+    "forte_acima_de": 157
+  }
+}

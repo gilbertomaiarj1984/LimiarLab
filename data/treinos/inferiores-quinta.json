@@ -1,0 +1,117 @@
+{
+  "id": "inferiores-quinta",
+  "nome": "Inferiores leve (quinta)",
+  "dia": "quinta",
+  "objetivo": "Estímulo sem cansaço na véspera do longão de sábado",
+  "duracao_min": [35, 40],
+  "rir": [2, 3],
+  "descanso_s": [60, 90],
+  "aquecimento": "5 min de bicicleta ou elíptico leve, 10 agachamentos sem peso e 10 elevações de panturrilha",
+  "nota_carga": "% de 1RM. Sem 1RM, usar ~80-85% da carga usada no 4 x 12. Referência final: 2-3 repetições sobrando.",
+  "exercicios": [
+    {
+      "ordem": 1,
+      "nome": "Step-up no banco com halteres",
+      "series": 3,
+      "reps": 8,
+      "unidade": "por perna",
+      "carga_pct_1rm": [65, 70],
+      "foco": "Unilateral",
+      "ilustracao": "assets/svg/step-up.svg",
+      "dicas": [
+        "Banco na altura do joelho ou um pouco abaixo; pé inteiro em cima.",
+        "Um halter em cada mão, braços soltos ao lado do corpo.",
+        "Suba empurrando com a perna de cima, sem impulso da de baixo.",
+        "Desça em cerca de 2 s, joelho alinhado ao 2º dedo do pé."
+      ],
+      "variacao": "Um halter só, na mão contrária à perna que sobe. Carga menor, tronco sem inclinar."
+    },
+    {
+      "ordem": 2,
+      "nome": "Cadeira flexora",
+      "series": 3,
+      "reps": 12,
+      "carga_pct_1rm": [60, 65],
+      "foco": "Posteriores",
+      "ilustracao": "assets/svg/cadeira-flexora.svg",
+      "dicas": [
+        "Rolo atrás do tornozelo, pernas estendidas.",
+        "Dobre o joelho levando o calcanhar para baixo do banco.",
+        "Volte em 2 s, sem deixar o peso bater."
+      ]
+    },
+    {
+      "ordem": 3,
+      "nome": "Panturrilha em pé",
+      "series": 3,
+      "reps": 15,
+      "carga_pct_1rm": [55, 60],
+      "foco": "Gastrocnêmio",
+      "ilustracao": "assets/svg/panturrilha-em-pe.svg",
+      "dicas": [
+        "Ponta do pé no degrau, calcanhar desce e alonga.",
+        "Pausa de 1 s embaixo e 1 s em cima.",
+        "Só o movimento completo; os 20 curtos ficam para terça."
+      ]
+    },
+    {
+      "ordem": 4,
+      "nome": "Abdutora com tronco inclinado",
+      "series": 3,
+      "reps": 15,
+      "carga_pct_1rm": [55, 60],
+      "foco": "Glúteo médio",
+      "ilustracao": "assets/svg/abdutora-inclinada.svg",
+      "dicas": [
+        "Incline o tronco à frente, segurando nas alças ou no banco.",
+        "Abra contra as almofadas, pausa de 1 s aberto.",
+        "Volte em 2 s sem deixar o peso bater."
+      ]
+    },
+    {
+      "ordem": 5,
+      "nome": "Panturrilha sentado (sóleo)",
+      "series": 3,
+      "reps": 15,
+      "carga_pct_1rm": [55, 60],
+      "foco": "Sóleo",
+      "ilustracao": "assets/svg/panturrilha-sentado.svg",
+      "dicas": [
+        "Joelho a 90°, apoio sobre a coxa perto do joelho.",
+        "Alonga embaixo, pausa, sobe até a ponta do pé.",
+        "Sem a máquina: sentado no banco, halter apoiado sobre o joelho."
+      ]
+    },
+    {
+      "ordem": 6,
+      "nome": "Prancha lateral",
+      "series": 3,
+      "duracao_s": 30,
+      "unidade": "por lado",
+      "carga_pct_1rm": null,
+      "foco": "Estabilidade de quadril",
+      "ilustracao": "assets/svg/prancha-lateral.svg",
+      "dicas": [
+        "Cotovelo sob o ombro, corpo em linha reta da cabeça aos pés.",
+        "Quadril alto; se ficar fácil, levante a perna de cima."
+      ]
+    },
+    {
+      "ordem": 7,
+      "nome": "Prancha frontal",
+      "series": 3,
+      "duracao_s": [30, 45],
+      "carga_pct_1rm": null,
+      "foco": "Core",
+      "ilustracao": "assets/svg/prancha-frontal.svg",
+      "dicas": [
+        "Antebraços no chão, cotovelos sob os ombros.",
+        "Contraia abdômen e glúteos; quadril nem cai nem sobe.",
+        "Respire normalmente; se a postura piorar, encerre a série."
+      ]
+    }
+  ],
+  "historico": [
+    { "data": "2026-11-12", "feito": true, "comentario": "foi bom" }
+  ]
+}
