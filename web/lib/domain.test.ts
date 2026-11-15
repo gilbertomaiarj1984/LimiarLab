@@ -155,3 +155,30 @@ test("formatação", () => {
   assert.equal(hm(3120), "52 min");
   assert.equal(hm(3600), "1h00");
 });
+
+// Semana fechada (domingo 15/11) com o longão de sábado importado depois (fixtures/atualizacao-2026-11-15.json).
+test("semana fechada em 15/11 com o longão de sábado", () => {
+  const upd = importSchema.parse(JSON.parse(readFileSync(new URL("../fixtures/atualizacao-2026-11-15.json", import.meta.url), "utf8")));
+  const acts = [...allActs, ...payloadActivities(upd, TZ)];
+  const plans = [...planned, ...payloadPlanned(upd)];
+  const wk = inferKinds(acts.filter((a) => a.date >= "2026-11-09" && a.date <= "2026-11-15"), plans);
+  const plan = matchPlan(plans.filter((p) => p.date >= "2026-11-09" && p.date <= "2026-11-15"), wk, "2026-11-15");
+  const s = weekStats(wk, plan, prev, PHYS, "2026-11-15");
+  assert.equal(km(s.run.km), "41,2");
+  assert.equal(hm(s.run.seconds), "3h58");
+  assert.equal(s.run.count, 4);
+  assert.equal(Math.round(s.run.elevGainM), 459);
+  assert.equal(km(s.run.longestKm), "16,0");
+  assert.equal(hm(s.totalSeconds), "6h16");
+  assert.deepEqual(splitPercents(s.intensity), { easy: 35, moderate: 55, hard: 10 });
+  assert.deepEqual(s.plan, { doneDue: 7, due: 8, total: 8 });
+  assert.equal(s.volume.plannedRemainingKm, 0);
+  assert.equal(Math.round(s.volume.delta! * 100), -16);
+  assert.equal(s.volume.warn, false);
+  const longo = wk.find((a) => a.date === "2026-11-14")!;
+  assert.deepEqual(splitPercents(intensitySplit(longo.hrZones!, PHYS)), { easy: 37, moderate: 49, hard: 14 });
+  assert.ok(easyDayOffTarget(longo, PHYS));
+  // O sábado atende o longão planejado (18 km), e a sexta opcional sem registro não conta como devida.
+  assert.equal(plan.find((p) => p.date === "2026-11-14")!.status, "feito");
+  assert.equal(plan.find((p) => p.date === "2026-11-13")!.status, "opcional");
+});
