@@ -17,6 +17,7 @@ Ideias levantadas na sessão inicial. Nada aqui está decidido além do que cons
 - [x] Importação pela rotina do Claude (`POST /api/import`), PWA instalável, deploy na VPS.
 - [x] Navegar entre semanas na tela inicial (anterior, próxima, voltar para hoje).
 - [x] Treinos de força detalhados no app, ligados ao plano do dia.
+- [x] Metas: provas com prioridade A/B/C e orientações em volta de cada prova.
 - [ ] Subir na VPS (passos manuais em `infra/README.md`).
 - [ ] Rotina agendada do Claude para importar Garmin todo dia.
 

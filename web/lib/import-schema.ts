@@ -72,6 +72,19 @@ export const activitySchema = z.object({
   hr_zones: z.array(z.object({ min_bpm: bpm, seconds: z.number().min(0) }).strict()).max(10).nullish(),
 }).strict();
 
+/** Prova no calendário. A = prova-alvo, B = no caminho, C = como treino. */
+export const raceSchema = z.object({
+  source,
+  external_id: externalId,
+  date: isoDate,
+  name: z.string().min(1).max(160),
+  distance_m: z.number().positive().max(500_000),
+  elevation_gain_m: z.number().min(0).max(20_000).nullish(),
+  priority: z.enum(["A", "B", "C"]),
+  goal_time_s: z.number().int().positive().max(864_000).nullish(),
+  notes: z.string().max(2000).nullish(),
+}).strict();
+
 export const replaceSchema = z.object({ source, from: isoDate, to: isoDate }).strict()
   .refine((r) => r.from <= r.to, "from deve ser <= to");
 
@@ -83,6 +96,9 @@ export const importSchema = z.object({
   planned: z.array(plannedSchema).max(500).default([]),
   activities: z.array(activitySchema).max(500).default([]),
   workouts: z.array(workoutSchema).max(30).default([]),
+  /** Provas desta fonte no intervalo que não vierem no lote são apagadas (prova cancelada). */
+  races_replace: z.array(replaceSchema).max(10).optional(),
+  races: z.array(raceSchema).max(100).default([]),
 }).strict().superRefine((p, ctx) => {
   for (const r of p.planned_replace ?? []) {
     p.planned.forEach((x, i) => {
@@ -96,6 +112,19 @@ export const importSchema = z.object({
   for (const [i, x] of p.planned.entries()) {
     const k = `${x.source}:${x.external_id}`;
     if (seen.has(k)) ctx.addIssue({ code: "custom", path: ["planned", i], message: `duplicado: ${k}` });
+    seen.add(k);
+  }
+  for (const r of p.races_replace ?? []) {
+    p.races.forEach((x, i) => {
+      if (x.source === r.source && (x.date < r.from || x.date > r.to)) {
+        ctx.addIssue({ code: "custom", path: ["races", i, "date"], message: `fora do intervalo de races_replace de ${r.source}` });
+      }
+    });
+  }
+  seen.clear();
+  for (const [i, x] of p.races.entries()) {
+    const k = `${x.source}:${x.external_id}`;
+    if (seen.has(k)) ctx.addIssue({ code: "custom", path: ["races", i], message: `duplicado: ${k}` });
     seen.add(k);
   }
   seen.clear();

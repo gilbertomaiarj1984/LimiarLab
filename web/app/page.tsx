@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { loadContext } from "@/lib/context";
-import { getActivities, getPlanned } from "@/lib/repo";
+import { getActivities, getPlanned, getRaces } from "@/lib/repo";
+import { countdown, notesForDay, PRIORITY_LABEL } from "@/lib/races";
 import {
   WEEKDAY_LONG, WEEKDAY_SHORT, addDays, inferKinds, isIsoDate, localTime, longDate, matchPlan, shortDate, splitPercents,
   weekDays, weekStart, weekStats, weekdayIndex, VOLUME_JUMP_WARN,
@@ -22,14 +23,18 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
   const thisWeek = weekStart(today);
   const isCurrent = start === thisWeek;
   const isFuture = start > today;
+  const isNext = start === addDays(thisWeek, 7);
   const sel = pick;
   const dayHref = (d: string) => (d === today ? "/" : `/?dia=${d}`);
 
-  const [rawActs, planned, prevActs] = await Promise.all([
+  const [rawActs, planned, prevActs, races] = await Promise.all([
     getActivities(athlete.id, start, end),
     getPlanned(athlete.id, start, end),
     getActivities(athlete.id, addDays(start, -7), addDays(start, -1)),
+    getRaces(athlete.id, addDays(start, -21), addDays(today > end ? today : end, 400)),
   ]);
+  const nextRace = races.find((r) => r.date >= today);
+  const selNotes = notesForDay(sel, races);
   const acts = inferKinds(rawActs, planned);
   const plan = matchPlan(planned, acts, today);
   const s = weekStats(acts, plan, prevActs, phys, today);
@@ -53,9 +58,16 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
           <h1>{longDate(today)}</h1>
         </header>
 
+        {nextRace && (
+          <Link href="/metas" className="racebar">
+            <span>Próxima prova: <b>{nextRace.name}</b> · {shortDate(nextRace.date)} · {PRIORITY_LABEL[nextRace.priority].toLowerCase()}</span>
+            <span className="muted">{countdown(today, nextRace.date)} ›</span>
+          </Link>
+        )}
+
         <section aria-label="Semana">
           <div className="sec-head">
-            <h2>{isCurrent ? "Semana" : isFuture ? "Próxima semana" : "Semana"} de {shortDate(start)} a {shortDate(end)}</h2>
+            <h2>{isNext ? "Próxima semana" : "Semana"} de {shortDate(start)} a {shortDate(end)}</h2>
             <nav className="weeknav" aria-label="Trocar de semana">
               <Link href={dayHref(addDays(start, -7))} scroll={false} aria-label="Semana anterior">‹</Link>
               {!isCurrent && <Link href="/" className="now" scroll={false}>hoje</Link>}
@@ -79,6 +91,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
                   <span className="dw">{WEEKDAY_SHORT[weekdayIndex(d)]}</span>
                   <span className="dn">{Number(d.slice(8))}</span>
                   <span className="marks">
+                    {races.some((r) => r.date === d) && <i className="mk flag" />}
                     {done.map((a) => <i key={a.id} className={`mk ${a.sport === "run" ? "run" : "str"} done`} />)}
                     {open.map((p) => <i key={p.id} className={`mk ${p.sport === "run" ? "run" : "str"} ${p.status === "sem_registro" ? "miss" : "plan"}`} />)}
                   </span>
@@ -91,6 +104,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
             <span><i className="mk run plan" />corrida planejada</span>
             <span><i className="mk str done" />força feita</span>
             <span><i className="mk str miss" />planejado sem registro</span>
+            {races.some((r) => r.date >= start && r.date <= end) && <span><i className="mk flag" />prova</span>}
           </div>
         </section>
 
@@ -100,9 +114,10 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
             <span>{selActs.length ? `${selActs.length} realizado${selActs.length > 1 ? "s" : ""}` : ""}</span>
           </div>
           <div className="list">
+            {selNotes.map((n) => <div key={n.raceId + n.kind} className={`note race-n${n.kind === "prova" ? " strong" : ""}`}>{n.kind === "prova" ? <b>{n.text}</b> : n.text}</div>)}
             {selActs.map((a) => <ActivityCard key={a.id} a={a} phys={phys} time={time(a.startTime)} />)}
             {selPlan.map((p) => <PlannedCard key={p.id} p={p} />)}
-            {!selActs.length && !selPlan.length && <div className="empty">Nada planejado nem registrado neste dia.</div>}
+            {!selActs.length && !selPlan.length && !selNotes.length && <div className="empty">Nada planejado nem registrado neste dia.</div>}
             {sel === today && tomorrow && (
               <div className="note">Amanhã: <strong>{tomorrow.title}</strong>.{tomorrow.targetHrMax ? ` Alvo: FC abaixo de ${tomorrow.targetHrMax}.` : ""}</div>
             )}
@@ -119,7 +134,8 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
                   <div key={d} className="dayrow wide">
                     <div className="dl">{WEEKDAY_LONG[weekdayIndex(d)]}<small>{shortDate(d)}</small></div>
                     <div>
-                      {items.length === 0 && <div className="item muted">Nada planejado</div>}
+                      {notesForDay(d, races).map((n) => <div key={n.raceId + n.kind} className="note race-n">{n.text}</div>)}
+                      {items.length === 0 && !notesForDay(d, races).length && <div className="item muted">Nada planejado</div>}
                       {items.map((p) => <UpcomingItem key={p.id} p={p} />)}
                     </div>
                   </div>

@@ -44,6 +44,8 @@ Content-Type: application/json
 | `planned_replace` | os planejados dessa fonte no intervalo que **não** vierem no lote são apagados (treino removido do calendário). Um planejado fora do intervalo recusa o lote. |
 | `optional` | marca sessão opcional (não conta como devida) |
 | `workout` | (planejado de força) slug de um treino detalhado em `workouts`, do mesmo lote ou já gravado; um slug inexistente recusa o lote |
+| `races` | provas: `source`, `external_id`, `date`, `name`, `distance_m`, `elevation_gain_m`, `priority` (`A` prova-alvo, `B` no caminho, `C` como treino), `goal_time_s`, `notes`. O app mostra a prova na semana e as orientações nos dias em volta (ver `web/lib/races.ts`). Exemplo em [`web/fixtures/metas-2026-11-15.json`](../web/fixtures/metas-2026-11-15.json). |
+| `races_replace` | como `planned_replace`, para provas canceladas |
 | `workouts` | treinos de força detalhados: `slug`, `title`, `goal`, `duration`, `rir`, `rest`, `warmup`, `load_note`, `reference` e `exercises` (`name`, `sets`, `reps` como texto, `load`, `focus`, `tips`, `alternative`). Reenviar o mesmo slug substitui o treino. Exemplo em [`web/fixtures/plano-2026-11-16.json`](../web/fixtures/plano-2026-11-16.json). |
 
 Força vinda do Garmin chega só como `strength`. O app infere inferiores ou superiores pelo plano do dia quando existe exatamente uma sessão de força específica planejada.

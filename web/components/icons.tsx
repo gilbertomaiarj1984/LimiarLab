@@ -20,6 +20,9 @@ export const CalendarIcon = () => (
 export const ChartIcon = () => (
   <svg {...base}><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>
 );
+export const FlagIcon = () => (
+  <svg {...base}><path d="M5 21V4M5 4h11l-2 4 2 4H5" /></svg>
+);
 export const UserIcon = () => (
   <svg {...base}><circle cx="12" cy="8" r="4" /><path d="M4 21c1-4 4-6 8-6s7 2 8 6" /></svg>
 );

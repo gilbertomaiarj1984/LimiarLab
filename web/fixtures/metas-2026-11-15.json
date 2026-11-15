@@ -1,0 +1,12 @@
+{
+  "athlete": "giba",
+  "_comment": "Provas informadas pelo Giba em 15/11/2026. 15 km em 13/12: não é a prova-alvo, mas está no caminho (prioridade B). Prova-alvo ainda não definida. Não há provas no calendário do Garmin.",
+  "races_replace": [{ "source": "limiarlab", "from": "2026-11-15", "to": "2027-12-31" }],
+  "races": [
+    {
+      "source": "limiarlab", "external_id": "2026-12-13-15k", "date": "2026-12-13",
+      "name": "Prova de 15 km", "distance_m": 15000, "priority": "B",
+      "notes": "Estimativa de hoje, em terreno plano: 1:14:30 a 1:15:15 (cerca de 5:00/km), pela fórmula de Riegel sobre as previsões do Garmin de 15/11 para 10 km (48:27) e meia (1:48:02). Com subida ou calor, mais lento."
+    }
+  ]
+}

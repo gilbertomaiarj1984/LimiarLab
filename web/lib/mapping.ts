@@ -1,6 +1,7 @@
 // Converte o lote de importação para os tipos de domínio (sem banco). Usado nos testes
 // e como referência do que o banco grava a partir de cada campo.
 import type { Activity, Planned } from "./domain.ts";
+import type { Race } from "./races.ts";
 import { activityDate, type ImportPayload } from "./import-schema.ts";
 
 export function payloadActivities(p: ImportPayload, timeZone: string): Activity[] {
@@ -35,5 +36,19 @@ export function payloadPlanned(p: ImportPayload): Planned[] {
     optional: x.optional ?? false,
     source: x.source,
     workout: x.workout ?? null,
+  }));
+}
+
+export function payloadRaces(p: ImportPayload): Race[] {
+  return p.races.map((r) => ({
+    id: `${r.source}:${r.external_id}`,
+    date: r.date,
+    name: r.name,
+    distanceM: r.distance_m,
+    elevGainM: r.elevation_gain_m ?? null,
+    priority: r.priority,
+    goalTimeS: r.goal_time_s ?? null,
+    notes: r.notes ?? null,
+    source: r.source,
   }));
 }

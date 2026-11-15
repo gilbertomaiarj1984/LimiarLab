@@ -1,5 +1,6 @@
 import { loadContext } from "@/lib/context";
-import { getActivities, getPlanned } from "@/lib/repo";
+import { getActivities, getPlanned, getRaces } from "@/lib/repo";
+import { notesForDay, type Race } from "@/lib/races";
 import { WEEKDAY_SHORT, addDays, matchPlan, shortDate, weekDays, weekStart, type PlanItem } from "@/lib/domain";
 import { km } from "@/lib/format";
 import TabBar from "@/components/TabBar";
@@ -12,7 +13,7 @@ const STATUS: Record<PlanItem["status"], string> = {
 };
 const SOURCE: Record<string, string> = { garmin: "Garmin", limiarlab: "plano semanal", claude: "Claude", manual: "manual" };
 
-function Week({ title, start, plan, today }: { title: string; start: string; plan: PlanItem[]; today: string }) {
+function Week({ title, start, plan, today, races }: { title: string; start: string; plan: PlanItem[]; today: string; races: Race[] }) {
   return (
     <section>
       <div className="sec-head"><h2>{title} · {shortDate(start)} a {shortDate(addDays(start, 6))}</h2></div>
@@ -26,7 +27,8 @@ function Week({ title, start, plan, today }: { title: string; start: string; pla
               <div key={d} className={`dayrow${d === today ? " today" : ""}`}>
                 <div className="dl">{WEEKDAY_SHORT[i]}<small>{shortDate(d)}</small></div>
                 <div>
-                  {items.length === 0 && <div className="item muted">—</div>}
+                  {notesForDay(d, races).map((n) => <div key={n.raceId + n.kind} className="note race-n">{n.text}</div>)}
+                  {items.length === 0 && !notesForDay(d, races).length && <div className="item muted">—</div>}
                   {items.map((p) => {
                     const state = p.status === "feito" ? "done" : p.status === "sem_registro" ? "miss" : "plan";
                     const target = [p.targetDistanceM ? `${km(p.targetDistanceM / 1000)} km` : null, p.targetHrMax ? `FC < ${p.targetHrMax}` : null].filter(Boolean).join(" · ");
@@ -56,17 +58,18 @@ export default async function Plano() {
   const { athlete, today } = await loadContext();
   const start = weekStart(today);
   const next = addDays(start, 7);
-  const [planned, acts] = await Promise.all([
+  const [planned, acts, races] = await Promise.all([
     getPlanned(athlete.id, start, addDays(next, 6)),
     getActivities(athlete.id, start, addDays(start, 6)),
+    getRaces(athlete.id, addDays(start, -21), addDays(next, 40)),
   ]);
   const plan = matchPlan(planned, acts, today);
   return (
     <>
       <main className="view">
         <header><p className="eyebrow">Plano</p><h1>Treinos programados</h1></header>
-        <Week title="Esta semana" start={start} plan={plan.filter((p) => p.date < next)} today={today} />
-        <Week title="Próxima semana" start={next} plan={plan.filter((p) => p.date >= next)} today={today} />
+        <Week title="Esta semana" start={start} plan={plan.filter((p) => p.date < next)} today={today} races={races} />
+        <Week title="Próxima semana" start={next} plan={plan.filter((p) => p.date >= next)} today={today} races={races} />
         <p className="foot">Corridas vêm da assessoria (Treinus) pelo Garmin; força e orientações vêm do plano do LimiarLab, gravado pela rotina do Claude.</p>
       </main>
       <TabBar current="/plano" />

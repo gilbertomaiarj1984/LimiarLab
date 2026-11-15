@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { CalendarIcon, ChartIcon, HomeIcon, UserIcon } from "./icons";
+import { CalendarIcon, ChartIcon, FlagIcon, HomeIcon, UserIcon } from "./icons";
 
 const TABS = [
   { href: "/", label: "Início", Icon: HomeIcon },
   { href: "/plano", label: "Plano", Icon: CalendarIcon },
+  { href: "/metas", label: "Metas", Icon: FlagIcon },
   { href: "/analise", label: "Análise", Icon: ChartIcon },
   { href: "/perfil", label: "Perfil", Icon: UserIcon },
 ] as const;

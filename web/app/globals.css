@@ -215,3 +215,22 @@ a.wk{color:var(--acc);text-decoration:none;font-weight:600}
 .weeknav{display:flex;gap:6px;align-items:center}
 .weeknav a{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:32px;padding:0 10px;border-radius:9px;background:var(--card);color:var(--ink);text-decoration:none;font-size:.85rem;font-weight:600}
 .weeknav a.now{color:var(--acc)}
+
+/* Metas */
+.race{background:var(--card);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.race-head{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.85rem}
+.race h4{font-family:var(--f-display);font-size:.95rem;margin:6px 0 0}
+.prio{font-size:.78rem;font-weight:600;padding:3px 9px;border-radius:999px}
+.prio.pA{background:var(--hard-soft);color:var(--hard)}
+.prio.pB{background:var(--acc-soft);color:var(--acc)}
+.prio.pC{background:var(--grid);color:var(--muted)}
+.race-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+.race-steps li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:8px}
+.race-steps b{font-variant-numeric:tabular-nums}
+.small{font-size:.85rem}
+.sess.plain{grid-template-columns:minmax(0,1fr)}
+.mk.flag{width:9px;height:9px;background:var(--acc);border-radius:1px;transform:rotate(45deg) scale(.85)}
+.day[aria-pressed="true"] .mk.flag{background:#fff}
+.racebar{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--acc-soft);color:var(--ink);border-radius:12px;padding:10px 14px;text-decoration:none;font-size:.9rem}
+.racebar b{color:var(--acc)}
+.note.race-n{background:var(--acc-soft)}

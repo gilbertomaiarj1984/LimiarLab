@@ -2,6 +2,7 @@
 import { sql, ensureSchema } from "./db";
 import type { Activity, HrZone, Kind, Physiology, Planned, Sport } from "./domain";
 import { activityDate, type ImportPayload, type Workout } from "./import-schema";
+import type { Race } from "./races";
 
 export type Athlete = { id: string; slug: string; name: string; timezone: string; goal: string | null };
 export type PhysiologyRow = Physiology & { validFrom: string; hrMax: number | null; vo2max: number | null; source: string };
@@ -59,6 +60,19 @@ export async function getPlanned(athleteId: string, from: string, to: string): P
     ORDER BY date, CASE sport WHEN 'run' THEN 0 WHEN 'strength' THEN 1 ELSE 2 END, created_at`;
 }
 
+export async function getRaces(athleteId: string, from: string, to: string): Promise<Race[]> {
+  return sql<Race[]>`
+    SELECT id, to_char(date, 'YYYY-MM-DD') AS date, name, distance_m AS "distanceM", elevation_gain_m AS "elevGainM",
+           priority, goal_time_s AS "goalTimeS", notes, source
+    FROM races WHERE athlete_id = ${athleteId} AND date BETWEEN ${from} AND ${to}
+    ORDER BY date`;
+}
+
+/** Provas já corridas: atividades marcadas como prova. */
+export async function getRaceResults(athleteId: string, from: string, to: string): Promise<Activity[]> {
+  return (await getActivities(athleteId, from, to)).filter((a) => a.kind === "prova").reverse();
+}
+
 export async function getWorkout(athleteId: string, slug: string): Promise<Workout | null> {
   const [r] = await sql<{ content: Workout }[]>`SELECT content FROM workouts WHERE athlete_id = ${athleteId} AND slug = ${slug}`;
   return r?.content ?? null;
@@ -72,7 +86,7 @@ export async function lastImport(athleteId: string): Promise<Date | null> {
   return r?.at ?? null;
 }
 
-export type ImportResult = { planned: number; activities: number; workouts: number; removed: number };
+export type ImportResult = { planned: number; activities: number; workouts: number; races: number; removed: number };
 
 /** Grava o lote numa transação única: ou entra tudo, ou nada. */
 export async function applyImport(athlete: Athlete, p: ImportPayload): Promise<ImportResult> {
@@ -90,6 +104,24 @@ export async function applyImport(athlete: Athlete, p: ImportPayload): Promise<I
       if (missing.length) throw new ImportRefError(`treino de força inexistente: ${missing.join(", ")}`);
     }
     let removed = 0;
+    for (const r of p.races_replace ?? []) {
+      const keep = p.races.filter((x) => x.source === r.source).map((x) => x.external_id);
+      const res = await tx`
+        DELETE FROM races
+        WHERE athlete_id = ${athlete.id} AND source = ${r.source} AND date BETWEEN ${r.from} AND ${r.to}
+          AND NOT (external_id = ANY(${keep}::text[]))`;
+      removed += res.count;
+    }
+    for (const x of p.races) {
+      await tx`
+        INSERT INTO races (athlete_id, source, external_id, date, name, distance_m, elevation_gain_m, priority, goal_time_s, notes)
+        VALUES (${athlete.id}, ${x.source}, ${x.external_id}, ${x.date}, ${x.name}, ${x.distance_m}, ${x.elevation_gain_m ?? null},
+                ${x.priority}, ${x.goal_time_s ?? null}, ${x.notes ?? null})
+        ON CONFLICT (athlete_id, source, external_id) DO UPDATE SET
+          date = EXCLUDED.date, name = EXCLUDED.name, distance_m = EXCLUDED.distance_m,
+          elevation_gain_m = EXCLUDED.elevation_gain_m, priority = EXCLUDED.priority,
+          goal_time_s = EXCLUDED.goal_time_s, notes = EXCLUDED.notes, updated_at = now()`;
+    }
     for (const r of p.planned_replace ?? []) {
       const keep = p.planned.filter((x) => x.source === r.source).map((x) => x.external_id);
       const res = await tx`
@@ -130,6 +162,6 @@ export async function applyImport(athlete: Athlete, p: ImportPayload): Promise<I
     await tx`
       INSERT INTO import_log (athlete_id, planned, activities, removed)
       VALUES (${athlete.id}, ${p.planned.length}, ${p.activities.length}, ${removed})`;
-    return { planned: p.planned.length, activities: p.activities.length, workouts: p.workouts.length, removed };
+    return { planned: p.planned.length, activities: p.activities.length, workouts: p.workouts.length, races: p.races.length, removed };
   });
 }

@@ -94,6 +94,25 @@ export function ensureSchema(): Promise<void> {
           UNIQUE (athlete_id, slug)
         )`;
       await tx`ALTER TABLE planned_sessions ADD COLUMN IF NOT EXISTS workout_slug text`;
+      // Provas e metas (A = alvo, B = no caminho, C = como treino).
+      await tx`
+        CREATE TABLE IF NOT EXISTS races (
+          id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+          athlete_id        uuid NOT NULL REFERENCES athletes(id) ON DELETE CASCADE,
+          source            text NOT NULL,
+          external_id       text NOT NULL,
+          date              date NOT NULL,
+          name              text NOT NULL,
+          distance_m        numeric(9,1) NOT NULL CHECK (distance_m > 0),
+          elevation_gain_m  numeric(7,1),
+          priority          text NOT NULL CHECK (priority IN ('A', 'B', 'C')),
+          goal_time_s       integer,
+          notes             text,
+          created_at        timestamptz NOT NULL DEFAULT now(),
+          updated_at        timestamptz NOT NULL DEFAULT now(),
+          UNIQUE (athlete_id, source, external_id)
+        )`;
+      await tx`CREATE INDEX IF NOT EXISTS races_athlete_date_idx ON races (athlete_id, date)`;
       await tx`
         CREATE TABLE IF NOT EXISTS activities (
           id                 uuid PRIMARY KEY DEFAULT gen_random_uuid(),

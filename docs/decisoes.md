@@ -115,3 +115,11 @@ Cada entrada: o que foi decidido, por quê e o estado. Mais recentes no fim.
 - **Decisão:** pelo tempo por zona do Garmin, leve = zona inteira abaixo do LV1 (141), forte = zona a partir de 157, moderado = o resto (inclui a zona que cruza o LV1). Meta de referência ~80% leve. Salto de volume acima de 30% gera aviso cauteloso.
 - **Por quê:** usa os limiares do teste cardiopulmonar; na dúvida, não chama de leve. Referências e força de cada uma em [`evidencias.md`](evidencias.md).
 - **Estado:** adotada.
+
+## D17 · Metas com prioridade de prova
+
+- **Data:** 15/11/2026
+- **Decisão:** cada prova tem prioridade A (prova-alvo, polimento de 2 semanas), B (no caminho, mini-polimento de uma semana) ou C (como treino). O app mostra a prova na semana, uma tela de Metas com a contagem e as orientações dia a dia em volta de cada prova.
+- **Por quê:** o atleta tem uma prova de 15 km em 13/12 que não é a alvo, mas precisa entrar no planejamento. Regras e força da evidência em [`evidencias.md`](evidencias.md).
+- **Estado:** adotada; prova-alvo a definir.
+
