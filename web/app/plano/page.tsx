@@ -3,6 +3,7 @@ import { getActivities, getPlanned } from "@/lib/repo";
 import { WEEKDAY_SHORT, addDays, matchPlan, shortDate, weekDays, weekStart, type PlanItem } from "@/lib/domain";
 import { km } from "@/lib/format";
 import TabBar from "@/components/TabBar";
+import { WorkoutLink } from "@/components/Cards";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +37,7 @@ function Week({ title, start, plan, today }: { title: string; start: string; pla
                           {p.sport === "strength" && !p.optional ? "Força · " : ""}{p.title}
                           <span className="muted">{STATUS[p.status]}</span>
                           <div className="src">{SOURCE[p.source] ?? p.source}{target ? ` · ${target}` : ""}</div>
+                          {p.workout && <WorkoutLink p={p} />}
                         </div>
                       </div>
                     );

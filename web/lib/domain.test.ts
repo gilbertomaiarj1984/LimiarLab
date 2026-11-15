@@ -182,3 +182,27 @@ test("semana fechada em 15/11 com o longão de sábado", () => {
   assert.equal(plan.find((p) => p.date === "2026-11-14")!.status, "feito");
   assert.equal(plan.find((p) => p.date === "2026-11-13")!.status, "opcional");
 });
+
+test("plano de força da semana de 16/11: treinos detalhados e referências", () => {
+  const raw2 = JSON.parse(readFileSync(new URL("../fixtures/plano-2026-11-16.json", import.meta.url), "utf8"));
+  const p = importSchema.parse(raw2);
+  assert.equal(p.workouts.length, 4);
+  const slugs = new Set(p.workouts.map((w) => w.slug));
+  for (const x of p.planned) if (x.workout) assert.ok(slugs.has(x.workout), x.workout);
+  const plans = payloadPlanned(p);
+  assert.equal(plans.filter((x) => x.workout).length, 4);
+  // Semana futura: nada feito ainda, tudo pendente (o opcional e o descanso têm status próprios).
+  const status = matchPlan(plans, [], "2026-11-15").map((x) => x.status);
+  assert.deepEqual(status, ["pendente", "pendente", "pendente", "pendente", "opcional", "descanso"]);
+  // Costas: 12 séries na semana entre as duas sessões de superiores (meta ~10+).
+  const back = p.workouts.filter((w) => w.slug.startsWith("superiores"))
+    .flatMap((w) => w.exercises).filter((e) => e.focus?.startsWith("Costas")).reduce((s, e) => s + e.sets, 0);
+  assert.equal(back, 12);
+  // Campo desconhecido num exercício e slug duplicado recusam o lote.
+  const bad = structuredClone(raw2);
+  bad.workouts[0].exercises[0].peso = 20;
+  assert.equal(importSchema.safeParse(bad).success, false);
+  const dup = structuredClone(raw2);
+  dup.workouts.push(dup.workouts[0]);
+  assert.equal(importSchema.safeParse(dup).success, false);
+});

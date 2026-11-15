@@ -13,11 +13,17 @@ export const dynamic = "force-dynamic";
 
 export default async function Inicio({ searchParams }: { searchParams: Promise<{ dia?: string }> }) {
   const { athlete, today, phys } = await loadContext();
-  const start = weekStart(today);
+  const { dia } = await searchParams;
+  // A semana exibida é a do dia escolhido (?dia=); sem ele, a semana de hoje. Semana começa na segunda.
+  const pick = dia && isIsoDate(dia) && Math.abs(Date.parse(dia) - Date.parse(today)) <= 366 * 864e5 ? dia : today;
+  const start = weekStart(pick);
   const end = addDays(start, 6);
   const days = weekDays(start);
-  const { dia } = await searchParams;
-  const sel = dia && isIsoDate(dia) && days.includes(dia) ? dia : today;
+  const thisWeek = weekStart(today);
+  const isCurrent = start === thisWeek;
+  const isFuture = start > today;
+  const sel = pick;
+  const dayHref = (d: string) => (d === today ? "/" : `/?dia=${d}`);
 
   const [rawActs, planned, prevActs] = await Promise.all([
     getActivities(athlete.id, start, end),
@@ -48,7 +54,14 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
         </header>
 
         <section aria-label="Semana">
-          <div className="sec-head"><h2>Semana de {shortDate(start)} a {shortDate(end)}</h2><span>toque num dia</span></div>
+          <div className="sec-head">
+            <h2>{isCurrent ? "Semana" : isFuture ? "Próxima semana" : "Semana"} de {shortDate(start)} a {shortDate(end)}</h2>
+            <nav className="weeknav" aria-label="Trocar de semana">
+              <Link href={dayHref(addDays(start, -7))} scroll={false} aria-label="Semana anterior">‹</Link>
+              {!isCurrent && <Link href="/" className="now" scroll={false}>hoje</Link>}
+              <Link href={dayHref(addDays(start, 7))} scroll={false} aria-label="Semana seguinte">›</Link>
+            </nav>
+          </div>
           <div className="week">
             {days.map((d) => {
               const done = acts.filter((a) => a.date === d);
@@ -56,7 +69,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
               return (
                 <Link
                   key={d}
-                  href={d === today ? "/" : `/?dia=${d}`}
+                  href={dayHref(d)}
                   className="day"
                   aria-pressed={d === sel}
                   aria-current={d === today ? "date" : undefined}
@@ -98,7 +111,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
 
         {today < end && (
           <section aria-labelledby="prox-titulo">
-            <div className="sec-head"><h2 id="prox-titulo">Ainda nesta semana</h2><span>até domingo</span></div>
+            <div className="sec-head"><h2 id="prox-titulo">{isFuture ? "Programado na semana" : "Ainda nesta semana"}</h2><span>{isFuture ? "seg a dom" : "até domingo"}</span></div>
             <div className="box">
               {days.filter((d) => d > today).map((d) => {
                 const items = upcoming.filter((p) => p.date === d);
@@ -116,15 +129,20 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
           </section>
         )}
 
+        {isCurrent && today === end && (
+          <div className="note">A semana fecha hoje. <Link href={`/?dia=${addDays(end, 1)}`} className="wk">Ver a próxima semana ›</Link></div>
+        )}
+
+        {!isFuture && (<>
         <section aria-labelledby="stats-titulo">
-          <div className="sec-head"><h2 id="stats-titulo">Estatísticas da semana</h2><span>seg a hoje</span></div>
+          <div className="sec-head"><h2 id="stats-titulo">Estatísticas da semana</h2><span>{isCurrent ? "seg a hoje" : "semana completa"}</span></div>
           <div className="tiles">
             <div className="tile"><span className="k">Corrida</span><span className="v">{km(s.run.km)} <small>km</small></span><span className="s">{hm(s.run.seconds)} em {s.run.count} corrida{s.run.count === 1 ? "" : "s"}</span></div>
             <div className="tile"><span className="k">Ganho de elevação</span><span className="v">{Math.round(s.run.elevGainM)} <small>m</small></span><span className="s">D+ das corridas</span></div>
             <div className="tile"><span className="k">Força</span><span className="v">{s.strength.count} <small>sess{s.strength.count === 1 ? "ão" : "ões"}</small></span><span className="s">{s.strength.lower} inferiores · {s.strength.upper} superiores{s.strength.other ? ` · ${s.strength.other} sem tipo` : ""} · {hm(s.strength.seconds)}</span></div>
             <div className="tile"><span className="k">Treino total</span><span className="v">{hm(s.totalSeconds)}</span><span className="s">todas as atividades</span></div>
             <div className="tile"><span className="k">Maior corrida</span><span className="v">{km(s.run.longestKm)} <small>km</small></span><span className="s">{longestAct ? longestAct.name : "nenhuma ainda"}</span></div>
-            <div className="tile"><span className="k">Plano cumprido</span><span className="v">{s.plan.doneDue} <small>de {s.plan.due}</small></span><span className="s">até hoje · {s.plan.total} na semana</span></div>
+            <div className="tile"><span className="k">Plano cumprido</span>{s.plan.total === 0 ? <><span className="v">—</span><span className="s">sem plano registrado</span></> : <><span className="v">{s.plan.doneDue} <small>de {s.plan.due}</small></span><span className="s">{isCurrent ? `até hoje · ${s.plan.total} na semana` : `${s.plan.total} na semana`}</span></>}</div>
           </div>
 
           <div className="panel">
@@ -154,7 +172,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
                 ? "Sem corridas na semana anterior para comparar."
                 : `${s.volume.plannedRemainingKm > 0 ? "Com o que está planejado, a semana fecha" : "A semana está"} em ${km(s.volume.projectedKm)} km, ${Math.abs(Math.round(s.volume.delta * 100))}% ${s.volume.delta < 0 ? "abaixo" : "acima"} da anterior. `}
               {s.volume.warn
-                ? `Atenção: salto acima de ${VOLUME_JUMP_WARN * 100}%, num estudo com iniciantes (Nielsen et al., 2014), saltos assim tiveram mais lesões por sobrecarga, mas o resultado foi exploratório e não significativo. Vale cautela.`
+                ? `Atenção: salto acima de ${VOLUME_JUMP_WARN * 100}%. Num estudo com iniciantes (Nielsen et al., 2014), saltos assim tiveram mais lesões por sobrecarga, mas a diferença não foi estatisticamente significativa. Vale cautela.`
                 : s.volume.delta != null ? `Sem salto de volume (o aviso aparece acima de ${VOLUME_JUMP_WARN * 100}%).` : ""}
             </p>
           </div>
@@ -166,6 +184,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
             {history.length ? history.map((a) => <ActivityCard key={a.id} a={a} phys={phys} time={time(a.startTime)} />) : <div className="empty">Nada registrado nesta semana ainda.</div>}
           </div>
         </section>
+        </>)}
 
         <p className="foot">
           Zonas pelo teste de {shortDate(phys.validFrom)}/{phys.validFrom.slice(0, 4)}: leve abaixo de {phys.lv1} bpm (LV1), forte a partir de {phys.hardFrom} bpm. O Garmin registra só &quot;força&quot;; inferiores ou superiores vem do plano do dia.

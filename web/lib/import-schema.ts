@@ -22,6 +22,32 @@ export const plannedSchema = z.object({
   target_distance_m: z.number().positive().max(500_000).nullish(),
   target_hr_max: bpm.nullish(),
   optional: z.boolean().optional(),
+  workout: z.string().regex(/^[a-z0-9-]{2,60}$/).nullish(),
+}).strict();
+
+const text = (max: number) => z.string().min(1).max(max);
+export const exerciseSchema = z.object({
+  name: text(120),
+  sets: z.number().int().min(1).max(10),
+  reps: text(40),
+  load: text(120).nullish(),
+  focus: text(60).nullish(),
+  tips: z.array(text(240)).max(6).nullish(),
+  alternative: text(240).nullish(),
+}).strict();
+
+/** Treino de força detalhado, referenciado pelos planejados em `workout`. */
+export const workoutSchema = z.object({
+  slug: z.string().regex(/^[a-z0-9-]{2,60}$/),
+  title: text(120),
+  goal: text(400).nullish(),
+  duration: text(40).nullish(),
+  rir: text(40).nullish(),
+  rest: text(40).nullish(),
+  warmup: text(300).nullish(),
+  load_note: text(400).nullish(),
+  exercises: z.array(exerciseSchema).min(1).max(15),
+  reference: text(400).nullish(),
 }).strict();
 
 export const activitySchema = z.object({
@@ -52,6 +78,7 @@ export const importSchema = z.object({
   planned_replace: z.array(replaceSchema).max(10).optional(),
   planned: z.array(plannedSchema).max(500).default([]),
   activities: z.array(activitySchema).max(500).default([]),
+  workouts: z.array(workoutSchema).max(30).default([]),
 }).strict().superRefine((p, ctx) => {
   for (const r of p.planned_replace ?? []) {
     p.planned.forEach((x, i) => {
@@ -68,6 +95,11 @@ export const importSchema = z.object({
     seen.add(k);
   }
   seen.clear();
+  for (const [i, w] of p.workouts.entries()) {
+    if (seen.has(w.slug)) ctx.addIssue({ code: "custom", path: ["workouts", i], message: `duplicado: ${w.slug}` });
+    seen.add(w.slug);
+  }
+  seen.clear();
   for (const [i, x] of p.activities.entries()) {
     const k = `${x.source}:${x.external_id}`;
     if (seen.has(k)) ctx.addIssue({ code: "custom", path: ["activities", i], message: `duplicado: ${k}` });
@@ -76,6 +108,7 @@ export const importSchema = z.object({
 });
 
 export type ImportPayload = z.infer<typeof importSchema>;
+export type Workout = z.infer<typeof workoutSchema>;
 
 /** Data de calendário da atividade no fuso do atleta. */
 export function activityDate(startTime: string, timeZone: string): string {

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   KIND_LABEL, WEEKDAY_SHORT, easyDayOffTarget, intensitySplit, shortDate, splitPercents, weekdayIndex,
   type Activity, type Physiology, type PlanItem,
@@ -77,6 +78,7 @@ export function PlannedCard({ p }: { p: PlanItem }) {
         <h3>{p.sport === "strength" && !p.title.toLowerCase().startsWith("opcional") ? `Força · ${p.title}` : p.title}</h3>
         <div className="meta">{dayLabel(p.date)} · {sourceLabel(p.source)}{target ? ` · ${target}` : ""}</div>
         {p.notes && <div className="note">{p.notes}</div>}
+        {p.workout && <WorkoutLink p={p} />}
         {p.status === "sem_registro" && <div className="chips"><span className="chip hard">sem registro</span></div>}
       </div>
     </article>
@@ -98,7 +100,13 @@ export function UpcomingItem({ p }: { p: PlanItem }) {
         <strong>{p.sport === "strength" && !p.optional ? `Força · ${p.title}` : p.title}</strong>
         <div className="src">{sourceLabel(p.source)}{target ? ` · ${target}` : ""}</div>
         {p.notes && <div className="note">{p.notes}</div>}
+        {p.workout && <WorkoutLink p={p} />}
       </div>
     </div>
   );
+}
+
+/** Link para o treino de força detalhado do dia. */
+export function WorkoutLink({ p }: { p: Pick<PlanItem, "workout" | "date"> }) {
+  return <div className="chips"><Link className="chip wk" href={`/treino/${p.workout}?dia=${p.date}`}>Ver exercícios ›</Link></div>;
 }

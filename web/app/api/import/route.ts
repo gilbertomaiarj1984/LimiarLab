@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { importSchema } from "@/lib/import-schema";
-import { applyImport, getAthlete } from "@/lib/repo";
+import { ImportRefError, applyImport, getAthlete } from "@/lib/repo";
 import { bearerMatches } from "@/lib/session";
 
 // Recebe treinos planejados e realizados (rotina do Claude). Contrato em docs/importacao.md.
@@ -26,6 +26,13 @@ export async function POST(req: Request) {
   }
   const athlete = await getAthlete(parsed.data.athlete);
   if (!athlete) return NextResponse.json({ erro: `atleta "${parsed.data.athlete}" não existe` }, { status: 404 });
-  const result = await applyImport(athlete, parsed.data);
-  return NextResponse.json({ ok: true, ...result });
+  try {
+    const result = await applyImport(athlete, parsed.data);
+    return NextResponse.json({ ok: true, ...result });
+  } catch (e) {
+    if (e instanceof ImportRefError) {
+      return NextResponse.json({ erro: "lote recusado; nada foi gravado", detalhes: [{ caminho: "planned.workout", msg: e.message }] }, { status: 422 });
+    }
+    throw e;
+  }
 }

@@ -1,7 +1,7 @@
 // Acesso a dados. Toda consulta filtra por athlete_id.
 import { sql, ensureSchema } from "./db";
 import type { Activity, HrZone, Kind, Physiology, Planned, Sport } from "./domain";
-import { activityDate, type ImportPayload } from "./import-schema";
+import { activityDate, type ImportPayload, type Workout } from "./import-schema";
 
 export type Athlete = { id: string; slug: string; name: string; timezone: string; goal: string | null };
 export type PhysiologyRow = Physiology & { validFrom: string; hrMax: number | null; vo2max: number | null; source: string };
@@ -53,23 +53,42 @@ export async function getPlanned(athleteId: string, from: string, to: string): P
   return sql<Planned[]>`
     SELECT id, to_char(date, 'YYYY-MM-DD') AS date, sport, kind, title, notes,
            target_duration_s AS "targetDurationS", target_distance_m AS "targetDistanceM",
-           target_hr_max AS "targetHrMax", optional, source
+           target_hr_max AS "targetHrMax", optional, source, workout_slug AS workout
     FROM planned_sessions
     WHERE athlete_id = ${athleteId} AND date BETWEEN ${from} AND ${to}
     ORDER BY date, CASE sport WHEN 'run' THEN 0 WHEN 'strength' THEN 1 ELSE 2 END, created_at`;
 }
+
+export async function getWorkout(athleteId: string, slug: string): Promise<Workout | null> {
+  const [r] = await sql<{ content: Workout }[]>`SELECT content FROM workouts WHERE athlete_id = ${athleteId} AND slug = ${slug}`;
+  return r?.content ?? null;
+}
+
+/** Lote que referencia um treino de força inexistente: recusado inteiro (vira 422 na rota). */
+export class ImportRefError extends Error {}
 
 export async function lastImport(athleteId: string): Promise<Date | null> {
   const [r] = await sql<{ at: Date }[]>`SELECT max(received_at) AS at FROM import_log WHERE athlete_id = ${athleteId}`;
   return r?.at ?? null;
 }
 
-export type ImportResult = { planned: number; activities: number; removed: number };
+export type ImportResult = { planned: number; activities: number; workouts: number; removed: number };
 
 /** Grava o lote numa transação única: ou entra tudo, ou nada. */
 export async function applyImport(athlete: Athlete, p: ImportPayload): Promise<ImportResult> {
   await ensureSchema();
   return sql.begin(async (tx) => {
+    for (const w of p.workouts) {
+      await tx`
+        INSERT INTO workouts (athlete_id, slug, content) VALUES (${athlete.id}, ${w.slug}, ${tx.json(w)})
+        ON CONFLICT (athlete_id, slug) DO UPDATE SET content = EXCLUDED.content, updated_at = now()`;
+    }
+    const refs = [...new Set(p.planned.map((x) => x.workout).filter((s): s is string => !!s))];
+    if (refs.length) {
+      const found = await tx<{ slug: string }[]>`SELECT slug FROM workouts WHERE athlete_id = ${athlete.id} AND slug = ANY(${refs}::text[])`;
+      const missing = refs.filter((s) => !found.some((f) => f.slug === s));
+      if (missing.length) throw new ImportRefError(`treino de força inexistente: ${missing.join(", ")}`);
+    }
     let removed = 0;
     for (const r of p.planned_replace ?? []) {
       const keep = p.planned.filter((x) => x.source === r.source).map((x) => x.external_id);
@@ -83,15 +102,15 @@ export async function applyImport(athlete: Athlete, p: ImportPayload): Promise<I
       await tx`
         INSERT INTO planned_sessions
           (athlete_id, source, external_id, date, sport, kind, title, notes,
-           target_duration_s, target_distance_m, target_hr_max, optional)
+           target_duration_s, target_distance_m, target_hr_max, optional, workout_slug)
         VALUES (${athlete.id}, ${x.source}, ${x.external_id}, ${x.date}, ${x.sport}, ${x.kind}, ${x.title},
                 ${x.notes ?? null}, ${x.target_duration_s ?? null}, ${x.target_distance_m ?? null},
-                ${x.target_hr_max ?? null}, ${x.optional ?? false})
+                ${x.target_hr_max ?? null}, ${x.optional ?? false}, ${x.workout ?? null})
         ON CONFLICT (athlete_id, source, external_id) DO UPDATE SET
           date = EXCLUDED.date, sport = EXCLUDED.sport, kind = EXCLUDED.kind, title = EXCLUDED.title,
           notes = EXCLUDED.notes, target_duration_s = EXCLUDED.target_duration_s,
           target_distance_m = EXCLUDED.target_distance_m, target_hr_max = EXCLUDED.target_hr_max,
-          optional = EXCLUDED.optional, updated_at = now()`;
+          optional = EXCLUDED.optional, workout_slug = EXCLUDED.workout_slug, updated_at = now()`;
     }
     for (const a of p.activities) {
       const zones = a.hr_zones ? tx.json(a.hr_zones) : null;
@@ -111,6 +130,6 @@ export async function applyImport(athlete: Athlete, p: ImportPayload): Promise<I
     await tx`
       INSERT INTO import_log (athlete_id, planned, activities, removed)
       VALUES (${athlete.id}, ${p.planned.length}, ${p.activities.length}, ${removed})`;
-    return { planned: p.planned.length, activities: p.activities.length, removed };
+    return { planned: p.planned.length, activities: p.activities.length, workouts: p.workouts.length, removed };
   });
 }

@@ -51,6 +51,8 @@ export type Planned = {
   targetHrMax: number | null;
   optional: boolean;
   source: string;
+  /** Treino de força detalhado (slug em workouts), quando houver. */
+  workout: string | null;
 };
 
 export type Physiology = {

@@ -26,6 +26,10 @@
 
 - **Quinta (leve, adotado):** [`../data/treinos/inferiores-quinta.json`](../data/treinos/inferiores-quinta.json) · tela em [`../app/web/inferiores-quinta.html`](../app/web/inferiores-quinta.html)
 - **Terça (pesado, proposto):** [`../data/treinos/inferiores-terca.json`](../data/treinos/inferiores-terca.json)
+- **Segunda, superiores A (proposto 15/11):** [`../data/treinos/superiores-segunda.json`](../data/treinos/superiores-segunda.json): puxada, remada baixa, supino inclinado, desenvolvimento, face pull, bíceps e tríceps.
+- **Quarta, superiores B + core (proposto 15/11):** [`../data/treinos/superiores-quarta.json`](../data/treinos/superiores-quarta.json): serrote, puxada neutra, supino reto, elevação lateral, braços alternados, pallof press e suitcase carry.
+
+Superiores somam 12 séries de costas por semana (prioridade, D10), 6 de peito e cerca de 8 de ombros, com 8–12 repetições e 1–3 sobrando. Referência de volume: Schoenfeld et al., 2017. No app, cada sessão de força planejada tem o link "Ver exercícios".
 
 ## RIR em uma frase
 

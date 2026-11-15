@@ -34,5 +34,6 @@ export function payloadPlanned(p: ImportPayload): Planned[] {
     targetHrMax: x.target_hr_max ?? null,
     optional: x.optional ?? false,
     source: x.source,
+    workout: x.workout ?? null,
   }));
 }

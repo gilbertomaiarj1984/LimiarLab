@@ -1,0 +1,409 @@
+{
+  "athlete": "giba",
+  "_comment": "Plano de força da semana de 16/11/2026 (plano semanal do LimiarLab) com os treinos detalhados de data/treinos/. As corridas da semana vêm do Garmin (atualizacao-2026-11-15.json).",
+  "planned_replace": [
+    {
+      "source": "limiarlab",
+      "from": "2026-11-16",
+      "to": "2026-11-22"
+    }
+  ],
+  "planned": [
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-16-sup",
+      "date": "2026-11-16",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Superiores A: costas e peito",
+      "workout": "superiores-segunda"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-17-inf",
+      "date": "2026-11-17",
+      "sport": "strength",
+      "kind": "forca_inferiores",
+      "title": "Inferiores pesado",
+      "notes": "À noite, depois do intervalado da manhã: dia duro fica duro.",
+      "workout": "inferiores-terca"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-18-sup",
+      "date": "2026-11-18",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Superiores B: costas, ombros e core",
+      "workout": "superiores-quarta"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-19-inf",
+      "date": "2026-11-19",
+      "sport": "strength",
+      "kind": "forca_inferiores",
+      "title": "Inferiores leve",
+      "notes": "Curto e sem chegar perto da falha: a corrida da manhã tem 20 min de areia fofa e o longão é no sábado.",
+      "workout": "inferiores-quinta"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-20-opc",
+      "date": "2026-11-20",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Opcional: superiores, ou descanso total",
+      "optional": true
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-22-desc",
+      "date": "2026-11-22",
+      "sport": "other",
+      "kind": "descanso",
+      "title": "Descanso"
+    }
+  ],
+  "activities": [],
+  "workouts": [
+    {
+      "slug": "superiores-segunda",
+      "title": "Superiores A: costas e peito (segunda)",
+      "exercises": [
+        {
+          "name": "Puxada frontal (pulldown)",
+          "sets": 3,
+          "reps": "8–12",
+          "focus": "Costas (dorsal)",
+          "tips": [
+            "Pegada um pouco mais larga que os ombros.",
+            "Puxe a barra até o alto do peito, levando os cotovelos para baixo.",
+            "Suba em 2 s até alongar, sem soltar os ombros."
+          ]
+        },
+        {
+          "name": "Remada baixa no cabo, pegada neutra",
+          "sets": 3,
+          "reps": "8–12",
+          "focus": "Costas (meio)",
+          "tips": [
+            "Tronco firme e quase vertical; não balance.",
+            "Puxe até o abdômen juntando as escápulas.",
+            "Volte devagar até os braços esticarem."
+          ]
+        },
+        {
+          "name": "Supino inclinado com halteres",
+          "sets": 3,
+          "reps": "8–12",
+          "focus": "Peito",
+          "tips": [
+            "Banco em 30°.",
+            "Desça até os halteres ficarem na linha do peito, cotovelos a ~45° do tronco.",
+            "Empurre sem bater os halteres em cima."
+          ]
+        },
+        {
+          "name": "Desenvolvimento com halteres sentado",
+          "sets": 3,
+          "reps": "8–12",
+          "focus": "Ombros",
+          "tips": [
+            "Encosto quase vertical, lombar apoiada.",
+            "Desça até a altura das orelhas e empurre para cima."
+          ]
+        },
+        {
+          "name": "Face pull na polia",
+          "sets": 2,
+          "reps": "12–15",
+          "focus": "Ombro posterior e postura",
+          "tips": [
+            "Corda na altura do rosto.",
+            "Puxe abrindo as mãos para os lados da cabeça, cotovelos altos."
+          ]
+        },
+        {
+          "name": "Rosca direta com halteres",
+          "sets": 2,
+          "reps": "10–12",
+          "focus": "Bíceps",
+          "tips": [
+            "Cotovelos parados ao lado do corpo.",
+            "Desça em 2 s até esticar."
+          ]
+        },
+        {
+          "name": "Tríceps na polia com corda",
+          "sets": 2,
+          "reps": "10–12",
+          "focus": "Tríceps",
+          "tips": [
+            "Cotovelos colados ao corpo.",
+            "Estenda e abra a corda no final."
+          ]
+        }
+      ],
+      "goal": "Estética, com prioridade para costas. Dia de rodagem leve: não deve deixar cansaço para o intervalado de terça.",
+      "duration": "40–45 min",
+      "rir": "1–3",
+      "rest": "60–90 s",
+      "warmup": "5 min de remo ou elíptico leve e 1 série leve de 12 do primeiro exercício",
+      "load_note": "Faixa de 8 a 12 repetições. Quando fizer 12 em todas as séries com 1–2 sobrando, suba a carga na semana seguinte.",
+      "reference": "Schoenfeld et al., 2017: cerca de 10 ou mais séries por semana por grupo muscular para hipertrofia. Costas somam 12 séries na semana (seg + qua)."
+    },
+    {
+      "slug": "inferiores-terca",
+      "title": "Inferiores pesado (terça)",
+      "exercises": [
+        {
+          "name": "Pliometria leve: saltitos de tornozelo (pogo)",
+          "sets": 3,
+          "reps": "15–20 s",
+          "focus": "Rigidez do tendão e economia",
+          "tips": [
+            "Pés juntos, saltos curtos e rápidos só com o tornozelo.",
+            "Joelhos quase retos; o calcanhar quase não toca o chão.",
+            "Pare a série se o contato com o chão ficar lento ou pesado."
+          ]
+        },
+        {
+          "name": "Agachamento no smith, pesado",
+          "sets": 4,
+          "reps": "5–6",
+          "focus": "Força máxima",
+          "tips": [
+            "Pés na largura dos ombros, um pouco à frente da barra.",
+            "Desça até a coxa ficar paralela ao chão, joelhos na direção dos pés.",
+            "Suba com intenção de velocidade. Pare com 1-2 repetições sobrando."
+          ]
+        },
+        {
+          "name": "Agachamento búlgaro",
+          "sets": 3,
+          "reps": "8 por perna",
+          "focus": "Unilateral",
+          "tips": [
+            "Pé de trás apoiado no banco, pé da frente a cerca de um passo largo.",
+            "Desça o joelho de trás em direção ao chão, tronco levemente à frente.",
+            "Comece só com o peso do corpo se for a primeira vez."
+          ]
+        },
+        {
+          "name": "Stiff ou hip thrust",
+          "sets": 3,
+          "reps": "8",
+          "focus": "Glúteo e posteriores no quadril",
+          "tips": [
+            "Stiff: joelhos levemente dobrados, leve o quadril para trás com as costas retas.",
+            "Hip thrust: costas no banco, suba o quadril até o tronco ficar alinhado, pausa de 1 s."
+          ]
+        },
+        {
+          "name": "Panturrilha em pé (protocolo completo)",
+          "sets": 4,
+          "reps": "15 completos + 20 curtos",
+          "focus": "Gastrocnêmio",
+          "tips": [
+            "15 repetições completas, depois 20 curtas e rápidas na parte de cima.",
+            "Sem pressa na descida das completas."
+          ]
+        },
+        {
+          "name": "Panturrilha sentado",
+          "sets": 3,
+          "reps": "15",
+          "focus": "Sóleo",
+          "tips": [
+            "Joelho a 90°, alonga embaixo e sobe até a ponta do pé."
+          ]
+        }
+      ],
+      "goal": "Força máxima e pliometria no dia do intervalado",
+      "duration": "45–50 min",
+      "rir": "1–2",
+      "rest": "90–180 s",
+      "warmup": "5 min de bicicleta leve, 10 agachamentos sem peso e 2 séries progressivas de agachamento antes das pesadas",
+      "load_note": "Agachamento pesado: 4 × 5–6 com 1–2 repetições sobrando (aproximadamente 80–85% de 1RM). Demais: 2–3 sobrando. Acessórios opcionais: Cadeira extensora, Cadeira flexora."
+    },
+    {
+      "slug": "superiores-quarta",
+      "title": "Superiores B: costas, ombros e core (quarta)",
+      "exercises": [
+        {
+          "name": "Remada unilateral com halter (serrote)",
+          "sets": 3,
+          "reps": "8–12 por lado",
+          "focus": "Costas (dorsal)",
+          "tips": [
+            "Joelho e mão do mesmo lado apoiados no banco, costas retas.",
+            "Puxe o halter em direção ao quadril.",
+            "Sem girar o tronco."
+          ]
+        },
+        {
+          "name": "Puxada com pegada neutra fechada",
+          "sets": 3,
+          "reps": "8–12",
+          "focus": "Costas (dorsal)",
+          "tips": [
+            "Triângulo ou pegada neutra.",
+            "Leve o puxador ao peito, cotovelos rentes ao corpo."
+          ]
+        },
+        {
+          "name": "Supino reto na máquina ou com halteres",
+          "sets": 3,
+          "reps": "8–12",
+          "focus": "Peito",
+          "tips": [
+            "Escápulas juntas e apoiadas.",
+            "Desça controlado até a linha do peito."
+          ]
+        },
+        {
+          "name": "Elevação lateral com halteres",
+          "sets": 3,
+          "reps": "12–15",
+          "focus": "Ombros (lateral)",
+          "tips": [
+            "Cotovelos levemente dobrados.",
+            "Suba até a linha dos ombros, sem balançar o tronco."
+          ]
+        },
+        {
+          "name": "Rosca martelo + tríceps francês (alternados)",
+          "sets": 2,
+          "reps": "10–12 cada",
+          "focus": "Braços",
+          "tips": [
+            "Faça uma série de cada, um depois do outro, e descanse depois do par."
+          ]
+        },
+        {
+          "name": "Pallof press no cabo",
+          "sets": 3,
+          "reps": "10 por lado",
+          "focus": "Core antirrotação",
+          "tips": [
+            "De lado para a polia, cabo na altura do peito.",
+            "Empurre as mãos à frente e segure 2 s sem deixar o tronco girar."
+          ]
+        },
+        {
+          "name": "Caminhada com halter em uma mão (suitcase carry)",
+          "sets": 3,
+          "reps": "30 m por lado",
+          "focus": "Core lateral e quadril",
+          "tips": [
+            "Halter pesado numa mão só.",
+            "Ande devagar com o tronco reto, sem inclinar para o lado do peso."
+          ]
+        }
+      ],
+      "goal": "Estética com prioridade para costas, mais core antirrotação para a corrida. Dia sem corrida.",
+      "duration": "40–45 min",
+      "rir": "1–3",
+      "rest": "60–90 s",
+      "warmup": "5 min de remo ou elíptico leve e 1 série leve de 12 do primeiro exercício",
+      "load_note": "Faixa de 8 a 12 repetições (12 a 15 na elevação lateral). Core sem carga alta: qualidade antes de volume.",
+      "reference": "Schoenfeld et al., 2017 (volume semanal por grupo). Core antirrotação conforme D10."
+    },
+    {
+      "slug": "inferiores-quinta",
+      "title": "Inferiores leve (quinta)",
+      "exercises": [
+        {
+          "name": "Step-up no banco com halteres",
+          "sets": 3,
+          "reps": "8 por perna",
+          "load": "65–70% de 1RM",
+          "focus": "Unilateral",
+          "tips": [
+            "Banco na altura do joelho ou um pouco abaixo; pé inteiro em cima.",
+            "Um halter em cada mão, braços soltos ao lado do corpo.",
+            "Suba empurrando com a perna de cima, sem impulso da de baixo.",
+            "Desça em cerca de 2 s, joelho alinhado ao 2º dedo do pé."
+          ],
+          "alternative": "Um halter só, na mão contrária à perna que sobe. Carga menor, tronco sem inclinar."
+        },
+        {
+          "name": "Cadeira flexora",
+          "sets": 3,
+          "reps": "12",
+          "load": "60–65% de 1RM",
+          "focus": "Posteriores",
+          "tips": [
+            "Rolo atrás do tornozelo, pernas estendidas.",
+            "Dobre o joelho levando o calcanhar para baixo do banco.",
+            "Volte em 2 s, sem deixar o peso bater."
+          ]
+        },
+        {
+          "name": "Panturrilha em pé",
+          "sets": 3,
+          "reps": "15",
+          "load": "55–60% de 1RM",
+          "focus": "Gastrocnêmio",
+          "tips": [
+            "Ponta do pé no degrau, calcanhar desce e alonga.",
+            "Pausa de 1 s embaixo e 1 s em cima.",
+            "Só o movimento completo; os 20 curtos ficam para terça."
+          ]
+        },
+        {
+          "name": "Abdutora com tronco inclinado",
+          "sets": 3,
+          "reps": "15",
+          "load": "55–60% de 1RM",
+          "focus": "Glúteo médio",
+          "tips": [
+            "Incline o tronco à frente, segurando nas alças ou no banco.",
+            "Abra contra as almofadas, pausa de 1 s aberto.",
+            "Volte em 2 s sem deixar o peso bater."
+          ]
+        },
+        {
+          "name": "Panturrilha sentado (sóleo)",
+          "sets": 3,
+          "reps": "15",
+          "load": "55–60% de 1RM",
+          "focus": "Sóleo",
+          "tips": [
+            "Joelho a 90°, apoio sobre a coxa perto do joelho.",
+            "Alonga embaixo, pausa, sobe até a ponta do pé.",
+            "Sem a máquina: sentado no banco, halter apoiado sobre o joelho."
+          ]
+        },
+        {
+          "name": "Prancha lateral",
+          "sets": 3,
+          "reps": "30 s por lado",
+          "focus": "Estabilidade de quadril",
+          "tips": [
+            "Cotovelo sob o ombro, corpo em linha reta da cabeça aos pés.",
+            "Quadril alto; se ficar fácil, levante a perna de cima."
+          ]
+        },
+        {
+          "name": "Prancha frontal",
+          "sets": 3,
+          "reps": "30–45 s",
+          "focus": "Core",
+          "tips": [
+            "Antebraços no chão, cotovelos sob os ombros.",
+            "Contraia abdômen e glúteos; quadril nem cai nem sobe.",
+            "Respire normalmente; se a postura piorar, encerre a série."
+          ]
+        }
+      ],
+      "goal": "Estímulo sem cansaço na véspera do longão de sábado",
+      "duration": "35–40 min",
+      "rir": "2–3",
+      "rest": "60–90 s",
+      "warmup": "5 min de bicicleta ou elíptico leve, 10 agachamentos sem peso e 10 elevações de panturrilha",
+      "load_note": "% de 1RM. Sem 1RM, usar ~80–85% da carga usada no 4 x 12. Referência final: 2–3 repetições sobrando."
+    }
+  ]
+}

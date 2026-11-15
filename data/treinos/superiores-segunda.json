@@ -1,0 +1,29 @@
+{
+  "id": "superiores-segunda",
+  "nome": "Superiores A: costas e peito (segunda)",
+  "dia": "segunda",
+  "status": "proposto",
+  "objetivo": "Estética, com prioridade para costas. Dia de rodagem leve: não deve deixar cansaço para o intervalado de terça.",
+  "duracao_min": [40, 45],
+  "rir": [1, 3],
+  "descanso_s": [60, 90],
+  "aquecimento": "5 min de remo ou elíptico leve e 1 série leve de 12 do primeiro exercício",
+  "nota_carga": "Faixa de 8 a 12 repetições. Quando fizer 12 em todas as séries com 1-2 sobrando, suba a carga na semana seguinte.",
+  "exercicios": [
+    { "ordem": 1, "nome": "Puxada frontal (pulldown)", "series": 3, "reps": "8-12", "foco": "Costas (dorsal)",
+      "dicas": ["Pegada um pouco mais larga que os ombros.", "Puxe a barra até o alto do peito, levando os cotovelos para baixo.", "Suba em 2 s até alongar, sem soltar os ombros."] },
+    { "ordem": 2, "nome": "Remada baixa no cabo, pegada neutra", "series": 3, "reps": "8-12", "foco": "Costas (meio)",
+      "dicas": ["Tronco firme e quase vertical; não balance.", "Puxe até o abdômen juntando as escápulas.", "Volte devagar até os braços esticarem."] },
+    { "ordem": 3, "nome": "Supino inclinado com halteres", "series": 3, "reps": "8-12", "foco": "Peito",
+      "dicas": ["Banco em 30°.", "Desça até os halteres ficarem na linha do peito, cotovelos a ~45° do tronco.", "Empurre sem bater os halteres em cima."] },
+    { "ordem": 4, "nome": "Desenvolvimento com halteres sentado", "series": 3, "reps": "8-12", "foco": "Ombros",
+      "dicas": ["Encosto quase vertical, lombar apoiada.", "Desça até a altura das orelhas e empurre para cima."] },
+    { "ordem": 5, "nome": "Face pull na polia", "series": 2, "reps": "12-15", "foco": "Ombro posterior e postura",
+      "dicas": ["Corda na altura do rosto.", "Puxe abrindo as mãos para os lados da cabeça, cotovelos altos."] },
+    { "ordem": 6, "nome": "Rosca direta com halteres", "series": 2, "reps": "10-12", "foco": "Bíceps",
+      "dicas": ["Cotovelos parados ao lado do corpo.", "Desça em 2 s até esticar."] },
+    { "ordem": 7, "nome": "Tríceps na polia com corda", "series": 2, "reps": "10-12", "foco": "Tríceps",
+      "dicas": ["Cotovelos colados ao corpo.", "Estenda e abra a corda no final."] }
+  ],
+  "referencia": "Schoenfeld et al., 2017: cerca de 10 ou mais séries por semana por grupo muscular para hipertrofia. Costas somam 12 séries na semana (seg + qua)."
+}

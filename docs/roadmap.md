@@ -15,6 +15,8 @@ Ideias levantadas na sessão inicial. Nada aqui está decidido além do que cons
 - [x] **Distribuição de intensidade** pelas zonas do teste (leve abaixo de 141, forte a partir de 157).
 - [x] Plano (esta semana e a próxima), Análise (5 semanas) e Perfil.
 - [x] Importação pela rotina do Claude (`POST /api/import`), PWA instalável, deploy na VPS.
+- [x] Navegar entre semanas na tela inicial (anterior, próxima, voltar para hoje).
+- [x] Treinos de força detalhados no app, ligados ao plano do dia.
 - [ ] Subir na VPS (passos manuais em `infra/README.md`).
 - [ ] Rotina agendada do Claude para importar Garmin todo dia.
 

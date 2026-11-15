@@ -82,6 +82,18 @@ export function ensureSchema(): Promise<void> {
           UNIQUE (athlete_id, source, external_id)
         )`;
       await tx`CREATE INDEX IF NOT EXISTS planned_athlete_date_idx ON planned_sessions (athlete_id, date)`;
+      // Treinos de força detalhados (exercícios, séries, dicas), enviados pela rotina do Claude.
+      await tx`
+        CREATE TABLE IF NOT EXISTS workouts (
+          id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+          athlete_id  uuid NOT NULL REFERENCES athletes(id) ON DELETE CASCADE,
+          slug        text NOT NULL CHECK (slug ~ '^[a-z0-9-]{2,60}$'),
+          content     jsonb NOT NULL,
+          created_at  timestamptz NOT NULL DEFAULT now(),
+          updated_at  timestamptz NOT NULL DEFAULT now(),
+          UNIQUE (athlete_id, slug)
+        )`;
+      await tx`ALTER TABLE planned_sessions ADD COLUMN IF NOT EXISTS workout_slug text`;
       await tx`
         CREATE TABLE IF NOT EXISTS activities (
           id                 uuid PRIMARY KEY DEFAULT gen_random_uuid(),

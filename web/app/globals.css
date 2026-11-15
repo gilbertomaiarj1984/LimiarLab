@@ -167,3 +167,16 @@ a.day{text-decoration:none;color:inherit}
 .login button{font:600 1rem var(--f-body);padding:12px 14px;border-radius:12px;border:0;background:var(--acc);color:#fff;cursor:pointer}
 .login input:focus-visible,.login button:focus-visible,a.day:focus-visible,a.tab:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .err{color:var(--hard);font-size:.9rem}
+
+/* Treino de força detalhado */
+.exlist{list-style:none;margin:0;padding:0}
+.check{width:36px;height:36px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:#fff;font-size:1.1rem;font-weight:700;cursor:pointer;padding:0}
+.check[aria-pressed="true"]{background:var(--easy);border-color:var(--easy)}
+.sess.ex:has(.check[aria-pressed="true"]) h3{color:var(--muted);text-decoration:line-through}
+.tips{margin:8px 0 0;padding-left:18px;font-size:.88rem;color:var(--muted)}
+.tips li+li{margin-top:2px}
+.eyebrow a{color:inherit;text-decoration:none}
+a.wk{color:var(--acc);text-decoration:none;font-weight:600}
+.weeknav{display:flex;gap:6px;align-items:center}
+.weeknav a{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:32px;padding:0 10px;border-radius:9px;background:var(--card);color:var(--ink);text-decoration:none;font-size:.85rem;font-weight:600}
+.weeknav a.now{color:var(--acc)}

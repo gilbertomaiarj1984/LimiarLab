@@ -4,14 +4,99 @@
   "dia": "terça",
   "status": "proposto",
   "objetivo": "Força máxima e pliometria no dia do intervalado",
-  "rir": [1, 2],
-  "exercicios": [
-    { "ordem": 1, "nome": "Pliometria leve: saltitos de tornozelo (pogo)", "series": 3, "duracao_s": [15, 20], "foco": "Rigidez do tendão e economia" },
-    { "ordem": 2, "nome": "Agachamento no smith, pesado", "series": 4, "reps": [5, 6], "foco": "Força máxima" },
-    { "ordem": 3, "nome": "Agachamento búlgaro", "series": 3, "reps": 8, "unidade": "por perna", "foco": "Unilateral" },
-    { "ordem": 4, "nome": "Stiff ou hip thrust", "series": 3, "reps": 8, "foco": "Glúteo e posteriores no quadril" },
-    { "ordem": 5, "nome": "Panturrilha em pé (protocolo completo)", "series": 4, "reps": "15 completos + 20 curtos", "foco": "Gastrocnêmio" },
-    { "ordem": 6, "nome": "Panturrilha sentado", "series": 3, "reps": 15, "foco": "Sóleo" }
+  "rir": [
+    1,
+    2
   ],
-  "acessorios_opcionais": ["Cadeira extensora", "Cadeira flexora"]
+  "exercicios": [
+    {
+      "ordem": 1,
+      "nome": "Pliometria leve: saltitos de tornozelo (pogo)",
+      "series": 3,
+      "duracao_s": [
+        15,
+        20
+      ],
+      "foco": "Rigidez do tendão e economia",
+      "dicas": [
+        "Pés juntos, saltos curtos e rápidos só com o tornozelo.",
+        "Joelhos quase retos; o calcanhar quase não toca o chão.",
+        "Pare a série se o contato com o chão ficar lento ou pesado."
+      ]
+    },
+    {
+      "ordem": 2,
+      "nome": "Agachamento no smith, pesado",
+      "series": 4,
+      "reps": [
+        5,
+        6
+      ],
+      "foco": "Força máxima",
+      "dicas": [
+        "Pés na largura dos ombros, um pouco à frente da barra.",
+        "Desça até a coxa ficar paralela ao chão, joelhos na direção dos pés.",
+        "Suba com intenção de velocidade. Pare com 1-2 repetições sobrando."
+      ]
+    },
+    {
+      "ordem": 3,
+      "nome": "Agachamento búlgaro",
+      "series": 3,
+      "reps": 8,
+      "unidade": "por perna",
+      "foco": "Unilateral",
+      "dicas": [
+        "Pé de trás apoiado no banco, pé da frente a cerca de um passo largo.",
+        "Desça o joelho de trás em direção ao chão, tronco levemente à frente.",
+        "Comece só com o peso do corpo se for a primeira vez."
+      ]
+    },
+    {
+      "ordem": 4,
+      "nome": "Stiff ou hip thrust",
+      "series": 3,
+      "reps": 8,
+      "foco": "Glúteo e posteriores no quadril",
+      "dicas": [
+        "Stiff: joelhos levemente dobrados, leve o quadril para trás com as costas retas.",
+        "Hip thrust: costas no banco, suba o quadril até o tronco ficar alinhado, pausa de 1 s."
+      ]
+    },
+    {
+      "ordem": 5,
+      "nome": "Panturrilha em pé (protocolo completo)",
+      "series": 4,
+      "reps": "15 completos + 20 curtos",
+      "foco": "Gastrocnêmio",
+      "dicas": [
+        "15 repetições completas, depois 20 curtas e rápidas na parte de cima.",
+        "Sem pressa na descida das completas."
+      ]
+    },
+    {
+      "ordem": 6,
+      "nome": "Panturrilha sentado",
+      "series": 3,
+      "reps": 15,
+      "foco": "Sóleo",
+      "dicas": [
+        "Joelho a 90°, alonga embaixo e sobe até a ponta do pé."
+      ]
+    }
+  ],
+  "acessorios_opcionais": [
+    "Cadeira extensora",
+    "Cadeira flexora"
+  ],
+  "nota_carga": "Agachamento pesado: 4 × 5-6 com 1-2 repetições sobrando (aproximadamente 80-85% de 1RM). Demais: 2-3 sobrando.",
+  "aquecimento": "5 min de bicicleta leve, 10 agachamentos sem peso e 2 séries progressivas de agachamento antes das pesadas",
+  "duracao_min": [
+    45,
+    50
+  ],
+  "descanso_s": [
+    90,
+    180
+  ]
 }
