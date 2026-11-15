@@ -34,6 +34,10 @@ export const exerciseSchema = z.object({
   focus: text(60).nullish(),
   tips: z.array(text(240)).max(6).nullish(),
   alternative: text(240).nullish(),
+  /** Ilustração (chave em web/lib/figures.ts). */
+  figure: z.string().regex(/^[a-z0-9-]{2,60}$/).nullish(),
+  /** Descanso depois de cada série, para o contador da tela do treino. */
+  rest_s: z.number().int().min(15).max(600).nullish(),
 }).strict();
 
 /** Treino de força detalhado, referenciado pelos planejados em `workout`. */

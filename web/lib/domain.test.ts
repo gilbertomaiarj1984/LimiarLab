@@ -10,6 +10,7 @@ import {
 import { importSchema } from "./import-schema.ts";
 import { payloadActivities, payloadPlanned } from "./mapping.ts";
 import { clock, hm, km, pace } from "./format.ts";
+import { FIGURES } from "./figures.ts";
 
 const PHYS: Physiology = { lv1: 141, lv2: 159, hardFrom: 157, easyTarget: 135, longTarget: 138 };
 const TZ = "America/Sao_Paulo";
@@ -202,6 +203,12 @@ test("plano de força da semana de 16/11: treinos detalhados e referências", ()
   const bad = structuredClone(raw2);
   bad.workouts[0].exercises[0].peso = 20;
   assert.equal(importSchema.safeParse(bad).success, false);
+  // Todo exercício tem ilustração existente, % de carga ou indicação de carga, e descanso para o contador.
+  for (const w of p.workouts) for (const e of w.exercises) {
+    assert.ok(e.figure && FIGURES[e.figure], `${w.slug}: ${e.name} sem ilustração`);
+    assert.ok(e.load, `${w.slug}: ${e.name} sem carga`);
+    assert.ok(e.rest_s, `${w.slug}: ${e.name} sem descanso`);
+  }
   const dup = structuredClone(raw2);
   dup.workouts.push(dup.workouts[0]);
   assert.equal(importSchema.safeParse(dup).success, false);

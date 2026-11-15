@@ -75,6 +75,9 @@
           "name": "Puxada frontal (pulldown)",
           "sets": 3,
           "reps": "8–12",
+          "load": "65–75% 1RM",
+          "figure": "puxada",
+          "rest_s": 90,
           "focus": "Costas (dorsal)",
           "tips": [
             "Pegada um pouco mais larga que os ombros.",
@@ -86,6 +89,9 @@
           "name": "Remada baixa no cabo, pegada neutra",
           "sets": 3,
           "reps": "8–12",
+          "load": "65–75% 1RM",
+          "figure": "remada-baixa",
+          "rest_s": 90,
           "focus": "Costas (meio)",
           "tips": [
             "Tronco firme e quase vertical; não balance.",
@@ -97,6 +103,9 @@
           "name": "Supino inclinado com halteres",
           "sets": 3,
           "reps": "8–12",
+          "load": "65–75% 1RM",
+          "figure": "supino-inclinado",
+          "rest_s": 90,
           "focus": "Peito",
           "tips": [
             "Banco em 30°.",
@@ -108,6 +117,9 @@
           "name": "Desenvolvimento com halteres sentado",
           "sets": 3,
           "reps": "8–12",
+          "load": "65–75% 1RM",
+          "figure": "desenvolvimento",
+          "rest_s": 90,
           "focus": "Ombros",
           "tips": [
             "Encosto quase vertical, lombar apoiada.",
@@ -118,6 +130,9 @@
           "name": "Face pull na polia",
           "sets": 2,
           "reps": "12–15",
+          "load": "55–65% 1RM",
+          "figure": "face-pull",
+          "rest_s": 60,
           "focus": "Ombro posterior e postura",
           "tips": [
             "Corda na altura do rosto.",
@@ -128,6 +143,9 @@
           "name": "Rosca direta com halteres",
           "sets": 2,
           "reps": "10–12",
+          "load": "60–70% 1RM",
+          "figure": "rosca-direta",
+          "rest_s": 60,
           "focus": "Bíceps",
           "tips": [
             "Cotovelos parados ao lado do corpo.",
@@ -138,6 +156,9 @@
           "name": "Tríceps na polia com corda",
           "sets": 2,
           "reps": "10–12",
+          "load": "60–70% 1RM",
+          "figure": "triceps-polia",
+          "rest_s": 60,
           "focus": "Tríceps",
           "tips": [
             "Cotovelos colados ao corpo.",
@@ -150,7 +171,7 @@
       "rir": "1–3",
       "rest": "60–90 s",
       "warmup": "5 min de remo ou elíptico leve e 1 série leve de 12 do primeiro exercício",
-      "load_note": "Faixa de 8 a 12 repetições. Quando fizer 12 em todas as séries com 1–2 sobrando, suba a carga na semana seguinte.",
+      "load_note": "Faixa de 8 a 12 repetições. Quando fizer 12 em todas as séries com 1–2 sobrando, suba a carga na semana seguinte. % de 1RM aproximado para 8–12 repetições com 1–3 sobrando; vale a carga que deixa essa reserva.",
       "reference": "Schoenfeld et al., 2017: cerca de 10 ou mais séries por semana por grupo muscular para hipertrofia. Costas somam 12 séries na semana (seg + qua)."
     },
     {
@@ -161,6 +182,9 @@
           "name": "Pliometria leve: saltitos de tornozelo (pogo)",
           "sets": 3,
           "reps": "15–20 s",
+          "load": "Peso corporal",
+          "figure": "pogo",
+          "rest_s": 60,
           "focus": "Rigidez do tendão e economia",
           "tips": [
             "Pés juntos, saltos curtos e rápidos só com o tornozelo.",
@@ -172,6 +196,9 @@
           "name": "Agachamento no smith, pesado",
           "sets": 4,
           "reps": "5–6",
+          "load": "80–85% 1RM",
+          "figure": "agachamento-smith",
+          "rest_s": 150,
           "focus": "Força máxima",
           "tips": [
             "Pés na largura dos ombros, um pouco à frente da barra.",
@@ -183,6 +210,9 @@
           "name": "Agachamento búlgaro",
           "sets": 3,
           "reps": "8 por perna",
+          "load": "65–70% 1RM",
+          "figure": "bulgaro",
+          "rest_s": 90,
           "focus": "Unilateral",
           "tips": [
             "Pé de trás apoiado no banco, pé da frente a cerca de um passo largo.",
@@ -194,6 +224,9 @@
           "name": "Stiff ou hip thrust",
           "sets": 3,
           "reps": "8",
+          "load": "65–70% 1RM",
+          "figure": "stiff",
+          "rest_s": 90,
           "focus": "Glúteo e posteriores no quadril",
           "tips": [
             "Stiff: joelhos levemente dobrados, leve o quadril para trás com as costas retas.",
@@ -204,6 +237,9 @@
           "name": "Panturrilha em pé (protocolo completo)",
           "sets": 4,
           "reps": "15 completos + 20 curtos",
+          "load": "55–60% 1RM",
+          "figure": "panturrilha-em-pe",
+          "rest_s": 75,
           "focus": "Gastrocnêmio",
           "tips": [
             "15 repetições completas, depois 20 curtas e rápidas na parte de cima.",
@@ -214,6 +250,9 @@
           "name": "Panturrilha sentado",
           "sets": 3,
           "reps": "15",
+          "load": "55–60% 1RM",
+          "figure": "panturrilha-sentado",
+          "rest_s": 60,
           "focus": "Sóleo",
           "tips": [
             "Joelho a 90°, alonga embaixo e sobe até a ponta do pé."
@@ -235,6 +274,9 @@
           "name": "Remada unilateral com halter (serrote)",
           "sets": 3,
           "reps": "8–12 por lado",
+          "load": "65–75% 1RM",
+          "figure": "serrote",
+          "rest_s": 90,
           "focus": "Costas (dorsal)",
           "tips": [
             "Joelho e mão do mesmo lado apoiados no banco, costas retas.",
@@ -246,6 +288,9 @@
           "name": "Puxada com pegada neutra fechada",
           "sets": 3,
           "reps": "8–12",
+          "load": "65–75% 1RM",
+          "figure": "puxada",
+          "rest_s": 90,
           "focus": "Costas (dorsal)",
           "tips": [
             "Triângulo ou pegada neutra.",
@@ -256,6 +301,9 @@
           "name": "Supino reto na máquina ou com halteres",
           "sets": 3,
           "reps": "8–12",
+          "load": "65–75% 1RM",
+          "figure": "supino-reto",
+          "rest_s": 90,
           "focus": "Peito",
           "tips": [
             "Escápulas juntas e apoiadas.",
@@ -266,6 +314,9 @@
           "name": "Elevação lateral com halteres",
           "sets": 3,
           "reps": "12–15",
+          "load": "55–65% 1RM",
+          "figure": "elevacao-lateral",
+          "rest_s": 60,
           "focus": "Ombros (lateral)",
           "tips": [
             "Cotovelos levemente dobrados.",
@@ -276,6 +327,9 @@
           "name": "Rosca martelo + tríceps francês (alternados)",
           "sets": 2,
           "reps": "10–12 cada",
+          "load": "60–70% 1RM",
+          "figure": "martelo-frances",
+          "rest_s": 60,
           "focus": "Braços",
           "tips": [
             "Faça uma série de cada, um depois do outro, e descanse depois do par."
@@ -285,6 +339,9 @@
           "name": "Pallof press no cabo",
           "sets": 3,
           "reps": "10 por lado",
+          "load": "Leve a moderada",
+          "figure": "pallof",
+          "rest_s": 45,
           "focus": "Core antirrotação",
           "tips": [
             "De lado para a polia, cabo na altura do peito.",
@@ -295,6 +352,9 @@
           "name": "Caminhada com halter em uma mão (suitcase carry)",
           "sets": 3,
           "reps": "30 m por lado",
+          "load": "Halter pesado",
+          "figure": "suitcase-carry",
+          "rest_s": 60,
           "focus": "Core lateral e quadril",
           "tips": [
             "Halter pesado numa mão só.",
@@ -307,7 +367,7 @@
       "rir": "1–3",
       "rest": "60–90 s",
       "warmup": "5 min de remo ou elíptico leve e 1 série leve de 12 do primeiro exercício",
-      "load_note": "Faixa de 8 a 12 repetições (12 a 15 na elevação lateral). Core sem carga alta: qualidade antes de volume.",
+      "load_note": "Faixa de 8 a 12 repetições (12 a 15 na elevação lateral). Core sem carga alta: qualidade antes de volume. % de 1RM aproximado para 8–12 repetições com 1–3 sobrando; vale a carga que deixa essa reserva.",
       "reference": "Schoenfeld et al., 2017 (volume semanal por grupo). Core antirrotação conforme D10."
     },
     {
@@ -318,7 +378,9 @@
           "name": "Step-up no banco com halteres",
           "sets": 3,
           "reps": "8 por perna",
-          "load": "65–70% de 1RM",
+          "load": "65–70% 1RM",
+          "figure": "step-up",
+          "rest_s": 75,
           "focus": "Unilateral",
           "tips": [
             "Banco na altura do joelho ou um pouco abaixo; pé inteiro em cima.",
@@ -332,7 +394,9 @@
           "name": "Cadeira flexora",
           "sets": 3,
           "reps": "12",
-          "load": "60–65% de 1RM",
+          "load": "60–65% 1RM",
+          "figure": "cadeira-flexora",
+          "rest_s": 75,
           "focus": "Posteriores",
           "tips": [
             "Rolo atrás do tornozelo, pernas estendidas.",
@@ -344,7 +408,9 @@
           "name": "Panturrilha em pé",
           "sets": 3,
           "reps": "15",
-          "load": "55–60% de 1RM",
+          "load": "55–60% 1RM",
+          "figure": "panturrilha-em-pe",
+          "rest_s": 75,
           "focus": "Gastrocnêmio",
           "tips": [
             "Ponta do pé no degrau, calcanhar desce e alonga.",
@@ -356,7 +422,9 @@
           "name": "Abdutora com tronco inclinado",
           "sets": 3,
           "reps": "15",
-          "load": "55–60% de 1RM",
+          "load": "55–60% 1RM",
+          "figure": "abdutora-inclinada",
+          "rest_s": 75,
           "focus": "Glúteo médio",
           "tips": [
             "Incline o tronco à frente, segurando nas alças ou no banco.",
@@ -368,7 +436,9 @@
           "name": "Panturrilha sentado (sóleo)",
           "sets": 3,
           "reps": "15",
-          "load": "55–60% de 1RM",
+          "load": "55–60% 1RM",
+          "figure": "panturrilha-sentado",
+          "rest_s": 75,
           "focus": "Sóleo",
           "tips": [
             "Joelho a 90°, apoio sobre a coxa perto do joelho.",
@@ -380,6 +450,9 @@
           "name": "Prancha lateral",
           "sets": 3,
           "reps": "30 s por lado",
+          "load": "Peso corporal",
+          "figure": "prancha-lateral",
+          "rest_s": 75,
           "focus": "Estabilidade de quadril",
           "tips": [
             "Cotovelo sob o ombro, corpo em linha reta da cabeça aos pés.",
@@ -390,6 +463,9 @@
           "name": "Prancha frontal",
           "sets": 3,
           "reps": "30–45 s",
+          "load": "Peso corporal",
+          "figure": "prancha-frontal",
+          "rest_s": 75,
           "focus": "Core",
           "tips": [
             "Antebraços no chão, cotovelos sob os ombros.",

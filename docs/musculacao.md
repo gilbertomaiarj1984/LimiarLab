@@ -29,7 +29,7 @@
 - **Segunda, superiores A (proposto 15/11):** [`../data/treinos/superiores-segunda.json`](../data/treinos/superiores-segunda.json): puxada, remada baixa, supino inclinado, desenvolvimento, face pull, bíceps e tríceps.
 - **Quarta, superiores B + core (proposto 15/11):** [`../data/treinos/superiores-quarta.json`](../data/treinos/superiores-quarta.json): serrote, puxada neutra, supino reto, elevação lateral, braços alternados, pallof press e suitcase carry.
 
-Superiores somam 12 séries de costas por semana (prioridade, D10), 6 de peito e cerca de 8 de ombros, com 8–12 repetições e 1–3 sobrando. Referência de volume: Schoenfeld et al., 2017. No app, cada sessão de força planejada tem o link "Ver exercícios".
+Superiores somam 12 séries de costas por semana (prioridade, D10), 6 de peito e cerca de 8 de ombros, com 8–12 repetições e 1–3 sobrando. Referência de volume: Schoenfeld et al., 2017. No app, cada sessão de força planejada tem o link "Ver exercícios", que abre o treino no mesmo formato da página de quinta: um cartão por exercício com ilustração, séries × repetições, % de 1RM, dicas, botões para marcar cada série e contador de descanso (o tempo vem de `descanso_s` de cada exercício). As ilustrações novas estão em `assets/svg/`, desenhadas por `scripts/desenhos_exercicios.py`; `python3 scripts/figuras.py` regenera `web/lib/figures.ts`.
 
 ## RIR em uma frase
 

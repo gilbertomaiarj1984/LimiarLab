@@ -22,7 +22,10 @@
         "Pés juntos, saltos curtos e rápidos só com o tornozelo.",
         "Joelhos quase retos; o calcanhar quase não toca o chão.",
         "Pare a série se o contato com o chão ficar lento ou pesado."
-      ]
+      ],
+      "ilustracao": "assets/svg/pogo.svg",
+      "carga": "Peso corporal",
+      "descanso_s": 60
     },
     {
       "ordem": 2,
@@ -37,6 +40,12 @@
         "Pés na largura dos ombros, um pouco à frente da barra.",
         "Desça até a coxa ficar paralela ao chão, joelhos na direção dos pés.",
         "Suba com intenção de velocidade. Pare com 1-2 repetições sobrando."
+      ],
+      "ilustracao": "assets/svg/agachamento-smith.svg",
+      "descanso_s": 150,
+      "carga_pct_1rm": [
+        80,
+        85
       ]
     },
     {
@@ -50,6 +59,12 @@
         "Pé de trás apoiado no banco, pé da frente a cerca de um passo largo.",
         "Desça o joelho de trás em direção ao chão, tronco levemente à frente.",
         "Comece só com o peso do corpo se for a primeira vez."
+      ],
+      "ilustracao": "assets/svg/bulgaro.svg",
+      "descanso_s": 90,
+      "carga_pct_1rm": [
+        65,
+        70
       ]
     },
     {
@@ -61,6 +76,12 @@
       "dicas": [
         "Stiff: joelhos levemente dobrados, leve o quadril para trás com as costas retas.",
         "Hip thrust: costas no banco, suba o quadril até o tronco ficar alinhado, pausa de 1 s."
+      ],
+      "ilustracao": "assets/svg/stiff.svg",
+      "descanso_s": 90,
+      "carga_pct_1rm": [
+        65,
+        70
       ]
     },
     {
@@ -72,6 +93,12 @@
       "dicas": [
         "15 repetições completas, depois 20 curtas e rápidas na parte de cima.",
         "Sem pressa na descida das completas."
+      ],
+      "ilustracao": "assets/svg/panturrilha-em-pe.svg",
+      "descanso_s": 75,
+      "carga_pct_1rm": [
+        55,
+        60
       ]
     },
     {
@@ -82,6 +109,12 @@
       "foco": "Sóleo",
       "dicas": [
         "Joelho a 90°, alonga embaixo e sobe até a ponta do pé."
+      ],
+      "ilustracao": "assets/svg/panturrilha-sentado.svg",
+      "descanso_s": 60,
+      "carga_pct_1rm": [
+        55,
+        60
       ]
     }
   ],
