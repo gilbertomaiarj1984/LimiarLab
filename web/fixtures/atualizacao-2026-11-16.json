@@ -1,0 +1,55 @@
+{
+  "athlete": "giba",
+  "_comment": "16/11/2026: Garmin sem atividades em 15 e 16/11. A rodagem de segunda (Treinus, ainda agendada no Garmin em 16/11) não foi feita; fica como opcional aqui e o LimiarLab a remarca para quarta 18/11. O agendamento no Garmin não foi alterado.",
+  "planned_replace": [
+    {
+      "source": "garmin",
+      "from": "2026-11-16",
+      "to": "2026-11-22"
+    }
+  ],
+  "planned": [
+    {
+      "source": "garmin",
+      "external_id": "1840717986",
+      "date": "2026-11-16",
+      "sport": "run",
+      "kind": "corrida_leve",
+      "title": "Rodagem leve 40 min (remarcada para quarta)",
+      "notes": "Não deu hoje. Remarcada para quarta 18/11. Treinus: Z1 regenerativo",
+      "target_duration_s": 2400,
+      "target_hr_max": 135,
+      "optional": true
+    },
+    {
+      "source": "garmin",
+      "external_id": "1840717988",
+      "date": "2026-11-17",
+      "sport": "run",
+      "kind": "qualidade",
+      "title": "Intervalado 8 × 800 m",
+      "notes": "Treinus: aquecer 10', depois 8 × 800 m Z3 (moderado/forte) com 1'25\" de descanso"
+    },
+    {
+      "source": "garmin",
+      "external_id": "1840718305",
+      "date": "2026-11-19",
+      "sport": "run",
+      "kind": "qualidade",
+      "title": "Rua e areia fofa 60 min",
+      "notes": "Treinus: 20' Z2 na rua, 20' na areia fofa, 20' Z2 na rua",
+      "target_duration_s": 3600
+    },
+    {
+      "source": "garmin",
+      "external_id": "1840718237",
+      "date": "2026-11-21",
+      "sport": "run",
+      "kind": "longo",
+      "title": "Longão 17 km",
+      "notes": "Maior parte abaixo de 135–138 bpm, mesmo que o pace caia.",
+      "target_distance_m": 17000,
+      "target_hr_max": 138
+    }
+  ]
+}

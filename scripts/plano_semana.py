@@ -36,12 +36,15 @@ L=lambda eid,date,kind,title,**k: dict(source="limiarlab",external_id=eid,date=d
 planned=[
  L("2026-11-16-sup","2026-11-16","forca_superiores","Superiores A: costas e peito",workout="superiores-segunda"),
  L("2026-11-17-inf","2026-11-17","forca_inferiores","Inferiores pesado",notes="À noite, depois do intervalado da manhã: dia duro fica duro.",workout="inferiores-terca"),
+ L("2026-11-18-run","2026-11-18","corrida_leve","Rodagem leve 40 min (remarcada de segunda)",sport="run",
+   notes="A rodagem de segunda não deu (16/11). Abaixo de 135 bpm; com as pernas pesadas do intervalado, 30 min já servem.",
+   target_duration_s=2400,target_hr_max=135),
  L("2026-11-18-sup","2026-11-18","forca_superiores","Superiores B: costas, ombros e core",workout="superiores-quarta"),
  L("2026-11-19-inf","2026-11-19","forca_inferiores","Inferiores leve",notes="Curto e sem chegar perto da falha: a corrida da manhã tem 20 min de areia fofa e o longão é no sábado.",workout="inferiores-quinta"),
  L("2026-11-20-opc","2026-11-20","forca_superiores","Opcional: superiores, ou descanso total",optional=True),
  L("2026-11-22-desc","2026-11-22","descanso","Descanso",sport="other"),
 ]
-out={"athlete":"giba","_comment":"Plano de força da semana de 16/11/2026 (plano semanal do LimiarLab) com os treinos detalhados de data/treinos/. As corridas da semana vêm do Garmin (atualizacao-2026-11-15.json).",
+out={"athlete":"giba","_comment":"Plano da semana de 16/11/2026 (força e a rodagem de segunda remarcada para quarta em 16/11) (plano semanal do LimiarLab) com os treinos detalhados de data/treinos/. As corridas da semana vêm do Garmin (atualizacao-2026-11-15.json).",
  "planned_replace":[{"source":"limiarlab","from":"2026-11-16","to":"2026-11-22"}],"planned":planned,"activities":[],"workouts":[conv(s) for s in slugs]}
 json.dump(out,open(R+'web/fixtures/plano-2026-11-16.json','w'),ensure_ascii=False,indent=2); open(R+'web/fixtures/plano-2026-11-16.json','a').write("\n")
 print(json.dumps(out['workouts'][3]['exercises'][0],ensure_ascii=False)); print(json.dumps(out['workouts'][1]['exercises'][4],ensure_ascii=False)); print(out['workouts'][1].get('load_note'))

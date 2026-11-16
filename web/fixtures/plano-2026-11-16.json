@@ -1,6 +1,6 @@
 {
   "athlete": "giba",
-  "_comment": "Plano de força da semana de 16/11/2026 (plano semanal do LimiarLab) com os treinos detalhados de data/treinos/. As corridas da semana vêm do Garmin (atualizacao-2026-11-15.json).",
+  "_comment": "Plano da semana de 16/11/2026 (força e a rodagem de segunda remarcada para quarta em 16/11) (plano semanal do LimiarLab) com os treinos detalhados de data/treinos/. As corridas da semana vêm do Garmin (atualizacao-2026-11-15.json).",
   "planned_replace": [
     {
       "source": "limiarlab",
@@ -27,6 +27,17 @@
       "title": "Inferiores pesado",
       "notes": "À noite, depois do intervalado da manhã: dia duro fica duro.",
       "workout": "inferiores-terca"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-18-run",
+      "date": "2026-11-18",
+      "sport": "run",
+      "kind": "corrida_leve",
+      "title": "Rodagem leve 40 min (remarcada de segunda)",
+      "notes": "A rodagem de segunda não deu (16/11). Abaixo de 135 bpm; com as pernas pesadas do intervalado, 30 min já servem.",
+      "target_duration_s": 2400,
+      "target_hr_max": 135
     },
     {
       "source": "limiarlab",

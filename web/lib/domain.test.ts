@@ -192,9 +192,12 @@ test("plano de força da semana de 16/11: treinos detalhados e referências", ()
   for (const x of p.planned) if (x.workout) assert.ok(slugs.has(x.workout), x.workout);
   const plans = payloadPlanned(p);
   assert.equal(plans.filter((x) => x.workout).length, 4);
+  // Rodagem de segunda (16/11) remarcada para quarta: alvo dos dias leves.
+  const moved = plans.find((x) => x.date === "2026-11-18" && x.sport === "run")!;
+  assert.equal(moved.targetHrMax, 135);
   // Semana futura: nada feito ainda, tudo pendente (o opcional e o descanso têm status próprios).
   const status = matchPlan(plans, [], "2026-11-15").map((x) => x.status);
-  assert.deepEqual(status, ["pendente", "pendente", "pendente", "pendente", "opcional", "descanso"]);
+  assert.deepEqual(status, ["pendente", "pendente", "pendente", "pendente", "pendente", "opcional", "descanso"]);
   // Costas: 12 séries na semana entre as duas sessões de superiores (meta ~10+).
   const back = p.workouts.filter((w) => w.slug.startsWith("superiores"))
     .flatMap((w) => w.exercises).filter((e) => e.focus?.startsWith("Costas")).reduce((s, e) => s + e.sets, 0);
