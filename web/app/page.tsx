@@ -9,12 +9,15 @@ import {
 import { hm, km } from "@/lib/format";
 import { ActivityCard, PlannedCard, UpcomingItem } from "@/components/Cards";
 import TabBar from "@/components/TabBar";
+import SyncButton from "@/components/SyncButton";
+import { syncStatus } from "@/lib/sync-status";
 
 export const dynamic = "force-dynamic";
 
 export default async function Inicio({ searchParams }: { searchParams: Promise<{ dia?: string }> }) {
   const { athlete, today, phys } = await loadContext();
   const { dia } = await searchParams;
+  const sync = await syncStatus(athlete.id, athlete.timezone);
   // A semana exibida é a do dia escolhido (?dia=); sem ele, a semana de hoje. Semana começa na segunda.
   const pick = dia && isIsoDate(dia) && Math.abs(Date.parse(dia) - Date.parse(today)) <= 366 * 864e5 ? dia : today;
   const start = weekStart(pick);
@@ -56,6 +59,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
         <header>
           <p className="eyebrow">LimiarLab · {athlete.name}</p>
           <h1>{longDate(today)}</h1>
+          <SyncButton {...sync} />
         </header>
 
         {nextRace && (

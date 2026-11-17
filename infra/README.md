@@ -58,6 +58,16 @@ docker run --rm -v limiarlab_backups:/b alpine cat /b/<arquivo>.sql.gz | gunzip 
 
 Esse volume mora na própria VPS: quando o app tiver dados de valor, vale copiar os dumps para fora dela.
 
+## Atualizar treinos realizados (Strava)
+
+O botão **Atualizar** (Início e telas de treino) e uma rotina diária às 9h (horário do atleta, dentro do próprio app) consultam o Strava, que espelha o Garmin, e gravam só atividades novas. Nada é escrito no Strava e nenhum outro app é tocado.
+
+1. Em https://www.strava.com/settings/api crie um app (qualquer nome) com "Authorization Callback Domain" `limiar.143-95-214-240.sslip.io`.
+2. Em `/opt/limiarlab/.env.production` acrescente `APP_URL=https://limiar.143-95-214-240.sslip.io`, `STRAVA_CLIENT_ID=...` e `STRAVA_CLIENT_SECRET=...` (arquivo `chmod 600`).
+3. `docker compose up -d app` (dentro de `/opt/limiarlab`), depois toque em "Conectar Strava para atualizar" no app e autorize.
+
+Atividades do Strava que vêm do Garmin entram com a mesma identidade do import do Garmin (sem duplicar), e nunca sobrescrevem uma atividade que já existe, para preservar as zonas de FC.
+
 ## Rotina do Claude
 
 Configure a rotina com o `IMPORT_TOKEN` (ver [`docs/importacao.md`](../docs/importacao.md)).

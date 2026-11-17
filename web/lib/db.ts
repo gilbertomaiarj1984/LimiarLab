@@ -137,6 +137,20 @@ export function ensureSchema(): Promise<void> {
           UNIQUE (athlete_id, source, external_id)
         )`;
       await tx`CREATE INDEX IF NOT EXISTS activities_athlete_date_idx ON activities (athlete_id, date)`;
+      // Conexão com o Strava (leitura). Tokens ficam só neste banco; a rotina das 9h marca last_auto_date.
+      await tx`
+        CREATE TABLE IF NOT EXISTS strava_connections (
+          athlete_id      uuid PRIMARY KEY REFERENCES athletes(id) ON DELETE CASCADE,
+          strava_athlete  bigint NOT NULL,
+          access_token    text NOT NULL,
+          refresh_token   text NOT NULL,
+          expires_at      timestamptz NOT NULL,
+          last_sync_at    timestamptz,
+          last_sync_error text,
+          last_auto_date  date,
+          last_try_at     timestamptz,
+          created_at      timestamptz NOT NULL DEFAULT now()
+        )`;
       await tx`
         CREATE TABLE IF NOT EXISTS import_log (
           id           bigserial PRIMARY KEY,

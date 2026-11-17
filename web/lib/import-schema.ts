@@ -140,6 +140,7 @@ export const importSchema = z.object({
   }
 });
 
+export type ActivityIn = z.infer<typeof activitySchema>;
 export type ImportPayload = z.infer<typeof importSchema>;
 export type Workout = z.infer<typeof workoutSchema>;
 

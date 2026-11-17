@@ -7,6 +7,8 @@ import { FIGURES } from "@/lib/figures";
 import { swapGroups } from "@/lib/equivalencias";
 import TabBar from "@/components/TabBar";
 import Script from "next/script";
+import SyncButton from "@/components/SyncButton";
+import { syncStatus } from "@/lib/sync-status";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +26,7 @@ export default async function Treino({ params, searchParams }: { params: Promise
   const { athlete, today } = await loadContext();
   const w = await getWorkout(athlete.id, slug);
   if (!w) notFound();
+  const sync = await syncStatus(athlete.id, athlete.timezone);
   const day = dia && isIsoDate(dia) ? dia : today;
   const back = day === today ? "/" : `/?dia=${day}`;
   const defRest = midRest(w.rest);
@@ -46,6 +49,7 @@ export default async function Treino({ params, searchParams }: { params: Promise
           <p className="eyebrow"><Link href={back}>‹ {longDate(day)}</Link></p>
           <h1>{w.title}</h1>
           {w.goal && <p className="wo-lead">{w.goal}</p>}
+          <SyncButton {...sync} />
           {facts.length > 0 && (
             <div className="wo-facts">{facts.map(([v, k]) => <div key={k} className="wo-fact"><b>{v}</b><span>{k}</span></div>)}</div>
           )}
