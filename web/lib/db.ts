@@ -137,6 +137,9 @@ export function ensureSchema(): Promise<void> {
           UNIQUE (athlete_id, source, external_id)
         )`;
       await tx`CREATE INDEX IF NOT EXISTS activities_athlete_date_idx ON activities (athlete_id, date)`;
+      // Detalhe de corrida: id no Strava (para buscar as voltas) e as voltas já lidas (cache).
+      await tx`ALTER TABLE activities ADD COLUMN IF NOT EXISTS strava_id bigint`;
+      await tx`ALTER TABLE activities ADD COLUMN IF NOT EXISTS laps jsonb`;
       // Conexão com o Strava (leitura). Tokens ficam só neste banco; a rotina das 9h marca last_auto_date.
       await tx`
         CREATE TABLE IF NOT EXISTS strava_connections (

@@ -3,6 +3,7 @@ import { sql, ensureSchema } from "./db";
 import type { Activity, HrZone, Kind, Physiology, Planned, Sport } from "./domain";
 import { activityDate, type ImportPayload, type Workout } from "./import-schema";
 import type { Race } from "./races";
+import type { Lap } from "./laps";
 
 export type Athlete = { id: string; slug: string; name: string; timezone: string; goal: string | null };
 export type PhysiologyRow = Physiology & { validFrom: string; hrMax: number | null; vo2max: number | null; source: string };
@@ -32,14 +33,14 @@ export async function getPhysiology(athleteId: string, onDate: string): Promise<
 type ActivityRow = {
   id: string; date: string; startTime: Date; sport: Sport; kind: Kind; name: string; durationS: number;
   distanceM: number | null; elevGainM: number | null; avgHr: number | null; maxHr: number | null;
-  hrZones: { min_bpm: number; seconds: number }[] | null; source: string;
+  hrZones: { min_bpm: number; seconds: number }[] | null; source: string; laps?: Lap[] | null;
 };
 
 export async function getActivities(athleteId: string, from: string, to: string): Promise<Activity[]> {
   const rows = await sql<ActivityRow[]>`
     SELECT id, to_char(date, 'YYYY-MM-DD') AS date, start_time AS "startTime", sport, kind, name,
            duration_s AS "durationS", distance_m AS "distanceM", elevation_gain_m AS "elevGainM",
-           avg_hr AS "avgHr", max_hr AS "maxHr", hr_zones AS "hrZones", source
+           avg_hr AS "avgHr", max_hr AS "maxHr", hr_zones AS "hrZones", source, laps
     FROM activities
     WHERE athlete_id = ${athleteId} AND date BETWEEN ${from} AND ${to}
     ORDER BY start_time`;
@@ -48,6 +49,17 @@ export async function getActivities(athleteId: string, from: string, to: string)
     startTime: r.startTime.toISOString(),
     hrZones: r.hrZones?.map((z): HrZone => ({ minBpm: z.min_bpm, seconds: z.seconds })) ?? null,
   }));
+}
+
+export async function getActivity(athleteId: string, id: string): Promise<Activity | null> {
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return null;
+  const [r] = await sql<ActivityRow[]>`
+    SELECT id, to_char(date, 'YYYY-MM-DD') AS date, start_time AS "startTime", sport, kind, name,
+           duration_s AS "durationS", distance_m AS "distanceM", elevation_gain_m AS "elevGainM",
+           avg_hr AS "avgHr", max_hr AS "maxHr", hr_zones AS "hrZones", source
+    FROM activities WHERE athlete_id = ${athleteId} AND id = ${id}`;
+  if (!r) return null;
+  return { ...r, startTime: r.startTime.toISOString(), hrZones: r.hrZones?.map((z): HrZone => ({ minBpm: z.min_bpm, seconds: z.seconds })) ?? null };
 }
 
 export async function getPlanned(athleteId: string, from: string, to: string): Promise<Planned[]> {
