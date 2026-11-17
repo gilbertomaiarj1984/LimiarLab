@@ -5,6 +5,7 @@ Uso, na raiz do repositório:  python3 garmin/tools/gerar_treinos.py
 import glob
 import json
 import os
+import re
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ORDEM_DIAS = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
@@ -31,7 +32,7 @@ treinos = []
 for arq in glob.glob(os.path.join(RAIZ, "data", "treinos", "*.json")):
     t = json.load(open(arq, encoding="utf-8"))
     treinos.append({
-        "nome": t["nome"],
+        "nome": re.sub(r"\s*\([^)]*\)\s*$", "", t["nome"]),  # o dia já aparece no menu
         "dia": t["dia"],
         "ex": [
             {

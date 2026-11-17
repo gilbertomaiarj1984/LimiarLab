@@ -41,12 +41,12 @@ class LimiarApp extends Application.AppBase {
         var menu = new WatchUi.Menu2({ :title => "Treino" });
         for (var i = 0; i < treinos.size(); i++) {
             if (treinos[i]["dia"].equals(hoje)) {
-                menu.addItem(new WatchUi.MenuItem(treinos[i]["nome"], "Hoje", i, {}));
+                menu.addItem(new WatchUi.MenuItem(treinos[i]["nome"], "Hoje, " + treinos[i]["ex"].size() + " exercícios", i, {}));
             }
         }
         for (var i = 0; i < treinos.size(); i++) {
             if (!treinos[i]["dia"].equals(hoje)) {
-                menu.addItem(new WatchUi.MenuItem(treinos[i]["nome"], treinos[i]["ex"].size() + " exercícios", i, {}));
+                menu.addItem(new WatchUi.MenuItem(treinos[i]["nome"], treinos[i]["dia"] + ", " + treinos[i]["ex"].size() + " exercícios", i, {}));
             }
         }
         return menu;

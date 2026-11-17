@@ -145,13 +145,19 @@ class TreinoView extends WatchUi.View {
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);
         texto(dc, cx, y, Graphics.FONT_TINY, Graphics.COLOR_WHITE, ex["r"]);
         y += dc.getFontHeight(Graphics.FONT_TINY);
-        if (ex["c"].length() > 0) {
+        var hx = dc.getFontHeight(Graphics.FONT_XTINY);
+        var limite = dc.getHeight() - 46;
+        if (ex["c"].length() > 0 && y + hx <= limite) {
             texto(dc, cx, y, Graphics.FONT_XTINY, COR_SUAVE, ex["c"]);
+            y += hx;
         }
-        if (exIdx < exs.size() - 1) {
-            linhas(dc, cx, 186, w - 70, Graphics.FONT_XTINY, COR_SUAVE, "Próx: " + exs[exIdx + 1]["n"], 1);
-        } else {
-            texto(dc, cx, 186, Graphics.FONT_XTINY, COR_SUAVE, "Último exercício");
+        // O próximo exercício só aparece se couber acima do rodapé (nomes longos ocupam 2 linhas).
+        if (y + hx <= limite) {
+            if (exIdx < exs.size() - 1) {
+                linhas(dc, cx, y, w - 70, Graphics.FONT_XTINY, COR_SUAVE, "Próx: " + exs[exIdx + 1]["n"], 1);
+            } else {
+                texto(dc, cx, y, Graphics.FONT_XTINY, COR_SUAVE, "Último exercício");
+            }
         }
     }
 
