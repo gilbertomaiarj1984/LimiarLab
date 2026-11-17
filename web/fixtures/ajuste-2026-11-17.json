@@ -1,0 +1,63 @@
+{
+  "athlete": "giba",
+  "_comment": "Ajuste de 17/11/2026: sem academia na terça; inferiores pesado vai para a quarta (noite), superiores B para a quinta, inferiores leve sai da semana. Reenvia só o intervalo 17–22/11 do limiarlab.",
+  "planned_replace": [
+    {
+      "source": "limiarlab",
+      "from": "2026-11-17",
+      "to": "2026-11-22"
+    }
+  ],
+  "activities": [],
+  "workouts": [],
+  "planned": [
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-18-run",
+      "date": "2026-11-18",
+      "sport": "run",
+      "kind": "corrida_leve",
+      "title": "Rodagem leve 40 min (remarcada de segunda)",
+      "notes": "A rodagem de segunda não deu (16/11). Abaixo de 135 bpm; com as pernas pesadas do intervalado, 30 min já servem.",
+      "target_duration_s": 2400,
+      "target_hr_max": 135
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-18-inf",
+      "date": "2026-11-18",
+      "sport": "strength",
+      "kind": "forca_inferiores",
+      "title": "Inferiores pesado (remarcado de terça)",
+      "notes": "Remarcado de terça: à noite, depois da rodagem leve da manhã. Último treino de pernas pesado da semana: pare com 2 repetições sobrando e, se o corpo estiver muito cansado, faça 3 séries no agachamento em vez de 4. Não repita pesado depois disso; o longão de sábado vem primeiro.",
+      "workout": "inferiores-terca"
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-19-sup",
+      "date": "2026-11-19",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Superiores B: costas, ombros e core",
+      "workout": "superiores-quarta",
+      "notes": "Remarcado de quarta para quinta, à noite, depois da corrida de 60 min. Só tronco: não pesa nas pernas antes do longão."
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-20-opc",
+      "date": "2026-11-20",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Opcional: superiores, ou descanso total",
+      "optional": true
+    },
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-22-desc",
+      "date": "2026-11-22",
+      "sport": "other",
+      "kind": "descanso",
+      "title": "Descanso"
+    }
+  ]
+}
