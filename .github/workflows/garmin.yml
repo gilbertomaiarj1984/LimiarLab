@@ -1,0 +1,39 @@
+# App do relógio (pasta garmin/): compila para o Forerunner 955 e tira capturas do simulador.
+# O .prg e as telas ficam no artifact "garmin-build" da execução (nada é commitado).
+name: garmin
+
+on:
+  push:
+    branches: ["claude/**"]
+    paths: ["garmin/**", ".github/workflows/garmin.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compilar e capturar telas
+        run: |
+          docker run --rm -v "$PWD/garmin:/app" --entrypoint /bin/bash \
+            ghcr.io/matco/connectiq-tester:latest /app/tools/ci.sh
+          sudo chown -R "$(id -u):$(id -g)" garmin/build
+          cat garmin/build/ambiente.txt garmin/build/compilacao.txt
+          cat garmin/build/monkeydo.txt 2>/dev/null || true
+      - name: Telas reduzidas no log (base64)
+        run: |
+          sudo apt-get install -y -qq imagemagick > /dev/null 2>&1 || true
+          for f in garmin/build/tela-*.png; do
+            [ -f "$f" ] || continue
+            convert "$f" -resize 50% -quality 60 "${f%.png}.jpg"
+            echo "=== $(basename "${f%.png}.jpg") ==="
+            base64 -w 0 "${f%.png}.jpg"; echo
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: garmin-build
+          path: garmin/build/
