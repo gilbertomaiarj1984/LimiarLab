@@ -45,9 +45,23 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      # Número do PR da versão (merge "Merge pull request #N" ou squash "(#N)"); a mensagem entra por env, nunca inline.
+      - id: ver
+        env:
+          MSG: ${{ github.event.head_commit.message }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          pr="$PR_NUMBER"
+          if [ -z "$pr" ]; then
+            pr=$(printf '%s' "$MSG" | head -n1 | grep -oE '(#|pull request #)[0-9]+' | head -n1 | grep -oE '[0-9]+' || true)
+          fi
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v6
         with:
           context: web
+          build-args: |
+            APP_COMMIT=${{ github.sha }}
+            APP_PR=${{ steps.ver.outputs.pr }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ghcr.io/gilbertomaiarj1984/limiarlab:latest

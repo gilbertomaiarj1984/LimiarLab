@@ -13,6 +13,10 @@ RUN npm test && npm run build
 
 FROM node:22-alpine AS run
 WORKDIR /app
+# Identifica a versão no ar (mostrada no rodapé do app). Vêm do workflow.
+ARG APP_COMMIT=""
+ARG APP_PR=""
+ENV APP_COMMIT=$APP_COMMIT APP_PR=$APP_PR
 ENV NODE_ENV=production PORT=3000 HOSTNAME=0.0.0.0 NEXT_TELEMETRY_DISABLED=1
 RUN addgroup -S app && adduser -S app -G app
 COPY --from=build --chown=app:app /app/.next/standalone ./

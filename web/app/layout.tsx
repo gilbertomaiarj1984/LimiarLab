@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import RegisterSW from "@/components/RegisterSW";
+import BuildTag from "@/components/BuildTag";
 import "./globals.css";
 
 // Fontes servidas pelo próprio app (sem chamada ao Google em tempo de uso; funciona offline).
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" className={`${body.variable} ${display.variable}`}>
       <body>
         {children}
+        <BuildTag />
         <RegisterSW />
       </body>
     </html>
