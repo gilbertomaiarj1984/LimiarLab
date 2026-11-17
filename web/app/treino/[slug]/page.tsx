@@ -4,6 +4,7 @@ import { loadContext } from "@/lib/context";
 import { getWorkout } from "@/lib/repo";
 import { isIsoDate, longDate } from "@/lib/domain";
 import { FIGURES } from "@/lib/figures";
+import { swapGroups } from "@/lib/equivalencias";
 import TabBar from "@/components/TabBar";
 import Script from "next/script";
 
@@ -26,6 +27,9 @@ export default async function Treino({ params, searchParams }: { params: Promise
   const day = dia && isIsoDate(dia) ? dia : today;
   const back = day === today ? "/" : `/?dia=${day}`;
   const defRest = midRest(w.rest);
+  // Trocas de exercício (base de equivalência): por posição do exercício no treino.
+  const swaps: Record<number, ReturnType<typeof swapGroups>> = {};
+  w.exercises.forEach((_, i) => { const g = swapGroups(slug, i + 1); if (g.length) swaps[i + 1] = g; });
   const facts: [string, string][] = [
     ...(w.duration ? [[w.duration.replace(/\s*min$/, ""), "minutos"] as [string, string]] : []),
     ...(w.rest ? [[w.rest, "descanso"] as [string, string]] : []),
@@ -55,21 +59,24 @@ export default async function Treino({ params, searchParams }: { params: Promise
         )}
 
         <section className="wo-log" data-key={`ll:treino:${slug}:${day}`}>
+          <script type="application/json" className="wo-swapdata" dangerouslySetInnerHTML={{ __html: JSON.stringify(swaps).replace(/</g, "\\u003c") }} />
           {w.exercises.map((e, i) => {
             const fig = e.figure ? FIGURES[e.figure] : undefined;
             return (
               <article key={i} className="wo-card" data-ex={i + 1} data-name={e.name} data-rest={e.rest_s ?? defRest}>
                 <div className="wo-head">
                   <div className="wo-num">{i + 1}</div>
-                  <div>
+                  <div className="wo-title">
                     <h2>{e.name}</h2>
                     <div className="wo-chips">
                       <span className="wo-chip">{e.sets} × {e.reps}</span>
                       {e.load && <span className="wo-chip k">{e.load}</span>}
-                      {e.focus && <span className="wo-chip">{e.focus}</span>}
+                      {e.focus && <span className="wo-chip wo-focus">{e.focus}</span>}
                     </div>
                   </div>
+                  {swaps[i + 1] && <button type="button" className="wo-swap" aria-haspopup="dialog">Trocar</button>}
                 </div>
+                <div className="wo-swapped" hidden></div>
                 {fig && <svg className="fig" viewBox={fig.viewBox} role="img" aria-label={fig.label} dangerouslySetInnerHTML={{ __html: fig.body }} />}
                 {e.tips?.length ? <ul className="wo-tips">{e.tips.map((t) => <li key={t}>{t}</li>)}</ul> : null}
                 {e.alternative && <div className="wo-var"><strong>Variação:</strong> {e.alternative}</div>}

@@ -237,3 +237,30 @@ a.wk{color:var(--acc);text-decoration:none;font-weight:600}
 .wo-sets span{font-size:.8rem;color:var(--muted);margin-right:2px}
 
 .wo-log{display:flex;flex-direction:column;gap:inherit}
+
+/* Trocar exercício */
+.wo-title{flex:1}
+.wo-swap{flex:none;align-self:flex-start;font:600 .85rem var(--f-body);color:var(--acc);background:var(--acc-soft);border:0;border-radius:999px;padding:8px 14px;cursor:pointer;min-height:36px}
+.wo-swap:focus-visible,.wo-undo:focus-visible,.wo-alt:focus-visible,.wo-sheet button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wo-swapped{display:flex;gap:8px 12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:.85rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px}
+.wo-undo{font:600 .85rem var(--f-body);color:var(--ink);background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.wo-sheet{width:min(560px,100% - 16px);max-height:calc(100% - 32px);margin:auto;border:0;border-radius:18px;padding:16px;background:var(--bg);color:var(--ink);overflow-y:auto;font-family:var(--f-body)}
+.wo-sheet::backdrop{background:rgba(0,0,0,.5)}
+.wo-sheet[open]{display:flex;flex-direction:column;gap:12px}
+.wo-sheet-h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.wo-sheet-sub,.wo-sheet-crit{font-size:.88rem;color:var(--muted)}
+.wo-sheet-g{display:flex;flex-direction:column;gap:10px}
+.wo-alt{display:flex;flex-direction:column;gap:6px;text-align:left;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;width:100%}
+.wo-alt[aria-current="true"]{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+.wo-alt-orig{font-weight:600;text-align:center;background:var(--acc-soft);border-color:transparent;color:var(--acc)}
+.wo-alt-top{display:flex;gap:8px;align-items:baseline}
+.wo-alt-n{font-family:var(--f-display);font-weight:700;color:var(--muted)}
+.wo-alt-name{flex:1;min-width:0;font-weight:600}
+.wo-pill{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.wo-pill.alta{background:var(--easy-soft);color:var(--easy)}.wo-pill.media{background:var(--mod-soft);color:var(--mod)}.wo-pill.baixa{background:var(--hard-soft);color:var(--hard)}
+.wo-alt-tags{display:flex;flex-wrap:wrap;gap:4px}
+.wo-tag{font-size:.72rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.wo-alt-row{font-size:.88rem;margin:0}
+.wo-avoid{font-size:.88rem;border-left:3px solid var(--hard);padding-left:10px}
+.wo-avoid summary{cursor:pointer;font-weight:600;color:var(--hard)}
+.wo-avoid p{margin-top:6px}

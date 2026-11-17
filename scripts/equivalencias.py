@@ -84,3 +84,9 @@ os.makedirs(R + "app/web", exist_ok=True)
 open(R + "app/web/equivalencias.html", "w", encoding="utf-8").write(html)
 sem_fig = sorted(i for i, e in ex.items() if not e.get("ilustracao"))
 print(f"ok: {len(ex)} exercícios, {len(D['slots'])} slots, {len(figs)} figuras; sem ilustração: {len(sem_fig)}")
+
+# cópia compacta para o app (web/lib), quando o app existe neste branch
+if os.path.isdir(R + 'web/lib'):
+    slim = dict(D)
+    open(R + 'web/lib/equivalencias-data.json', 'w', encoding='utf-8').write(json.dumps(slim, ensure_ascii=False, separators=(',', ':')) + '\n')
+    print('web/lib/equivalencias-data.json atualizado')
