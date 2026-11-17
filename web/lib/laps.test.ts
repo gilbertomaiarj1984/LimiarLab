@@ -41,3 +41,25 @@ test("linha de resumo do card", () => {
   assert.equal(intervalSummary(Array.from({ length: 9 }, (_, i) => lap(i + 1, 1000, 360))), null);
   assert.equal(intervalSummary(null), null);
 });
+
+test("recuperação parada (dados reais do Garmin): 8 × 800 m, recup. 7 × 1:25 parado", () => {
+  const rest = (i: number, d: number, hr: number, s = 85) => lap(i, d, s, hr);
+  const laps: Lap[] = [lap(1, 1000, 420, 110), lap(2, 1000, 298, 125)];
+  const dists = [29, 35, 48, 40, 33, 38, 45];
+  for (let i = 0; i < 8; i++) {
+    laps.push(lap(laps.length + 1, 800, 216 + i, 137 + i * 2));
+    if (i < 7) laps.push(rest(laps.length + 1, dists[i], 120 + i * 3));
+    else laps.push(rest(laps.length + 1, 30, 140, 62));
+  }
+  laps.push(lap(laps.length + 1, 395, 150, 125));
+  const r = readLaps(laps);
+  assert.equal(r.kind, "intervalado");
+  assert.equal(r.work?.count, 8);
+  assert.equal(r.rest?.count, 7);
+  assert.equal(r.rest?.stationary, true);
+  assert.equal(r.roles[0], "aquecimento");
+  assert.equal(r.roles[laps.length - 2], "recuperacao");
+  assert.equal(r.roles[laps.length - 1], "desaquecimento");
+  const s = intervalSummary(laps)!;
+  assert.match(s, /^8 × 800 m · 4:\d\d\/km · FC 14\d · recup\. 7 × 1:25 parado$/);
+});

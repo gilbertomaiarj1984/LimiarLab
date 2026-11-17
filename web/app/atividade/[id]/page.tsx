@@ -17,10 +17,10 @@ function GroupLine({ title, g }: { title: string; g: LapGroup }) {
   return (
     <div className="tile">
       <span className="k">{title}</span>
-      <span className="v">{g.count} <small>× {g.avgDistanceM >= 1000 ? `${km(g.avgDistanceM / 1000)} km` : `${Math.round(g.avgDistanceM / 10) * 10} m`}</small></span>
+      <span className="v">{g.count} <small>× {g.stationary ? `${clock(g.avgElapsedS)} parado` : g.avgDistanceM >= 1000 ? `${km(g.avgDistanceM / 1000)} km` : `${Math.round(g.avgDistanceM / 10) * 10} m`}</small></span>
       <span className="s">
         {g.paceS != null ? `pace ${fmtPace(g.paceS)}/km` : ""}{g.bestPaceS != null && g.worstPaceS != null && g.count > 1 ? ` (${fmtPace(g.bestPaceS)} a ${fmtPace(g.worstPaceS)})` : ""}
-        {g.avgHr != null ? ` · FC ${g.avgHr}${g.maxHr != null ? ` / máx ${g.maxHr}` : ""}` : ""} · {clock(g.avgElapsedS)} cada
+        {g.avgHr != null ? `${g.paceS != null ? " · " : ""}FC ${g.avgHr}${g.maxHr != null ? ` / máx ${g.maxHr}` : ""}` : ""}{g.stationary ? "" : ` · ${clock(g.avgElapsedS)} cada`}
       </span>
     </div>
   );
