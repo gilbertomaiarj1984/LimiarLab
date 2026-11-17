@@ -14,15 +14,23 @@ ORDEM_DIAS = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domi
 def carga(e):
     pct = e.get("carga_pct_1rm")
     if pct:
-        return f"{pct[0]}-{pct[1]}% 1RM" if len(pct) == 2 and pct[0] != pct[1] else f"{pct[0]}% 1RM"
+        return f"{pct[0]}-{pct[1]}%" if len(pct) == 2 and pct[0] != pct[1] else f"{pct[0]}%"
     return e.get("carga", "")
+
+
+def faixa(v):
+    if isinstance(v, list):
+        return f"{v[0]}-{v[1]}" if len(v) == 2 and v[0] != v[1] else str(v[0])
+    return str(v)
 
 
 def reps(e):
     if e.get("duracao_s"):
-        texto = f"{e['duracao_s']} s"
+        texto = f"{faixa(e['duracao_s'])} s"
     else:
-        texto = f"{e.get('reps', '')} reps"
+        r = faixa(e.get("reps", ""))
+        # "8-12" vira "8-12 reps"; textos como "10 por lado" ficam como estão.
+        texto = r if any(c.isalpha() for c in r) else f"{r} reps"
     if e.get("unidade"):
         texto += f" {e['unidade']}"
     return texto

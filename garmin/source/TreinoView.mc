@@ -143,14 +143,18 @@ class TreinoView extends WatchUi.View {
         y += 4;
         texto(dc, cx, y, Graphics.FONT_MEDIUM, COR_DESTAQUE, "Série " + serie + " de " + ex["s"]);
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);
-        texto(dc, cx, y, Graphics.FONT_TINY, Graphics.COLOR_WHITE, ex["r"]);
+        // Reps e carga (% de 1RM) na mesma linha; se não couber, só as reps.
+        var linha = ex["r"];
+        if (ex["c"].length() > 0) {
+            var comCarga = ex["r"] + "  " + ex["c"];
+            if (dc.getTextWidthInPixels(comCarga, Graphics.FONT_TINY) <= w - 40) {
+                linha = comCarga;
+            }
+        }
+        texto(dc, cx, y, Graphics.FONT_TINY, Graphics.COLOR_WHITE, linha);
         y += dc.getFontHeight(Graphics.FONT_TINY);
         var hx = dc.getFontHeight(Graphics.FONT_XTINY);
         var limite = dc.getHeight() - 46;
-        if (ex["c"].length() > 0 && y + hx <= limite) {
-            texto(dc, cx, y, Graphics.FONT_XTINY, COR_SUAVE, ex["c"]);
-            y += hx;
-        }
         // O próximo exercício só aparece se couber acima do rodapé (nomes longos ocupam 2 linhas).
         if (y + hx <= limite) {
             if (exIdx < exs.size() - 1) {
