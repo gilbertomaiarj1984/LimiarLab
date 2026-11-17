@@ -10,8 +10,9 @@ Base para trocar um exercício na hora, quando o aparelho está ocupado, quebrad
 1. **Primeiro tente reordenar, não trocar.** Se o aparelho libera em 2 a 3 minutos, faça o próximo exercício e volte. Exceção: o que é técnico ou pesado (pogo, agachamento pesado, step-up) fica no começo do treino, enquanto tornozelo e quadril estão descansados. Se esse estiver ocupado, troque em vez de empurrar para o fim.
 2. **Abra o exercício do treino e pegue o primeiro substituto disponível.** A lista já vem ordenada do mais parecido para o menos parecido.
 3. **Mantenha o padrão de movimento e o objetivo do dia.** Terça é força pesada (1 a 2 repetições sobrando). Quinta é estímulo leve, véspera do longão (2 a 3 sobrando).
-4. **Refaça a carga pela reserva, não pelo número do aparelho.** Carga de máquina não passa para halter nem para outra máquina. Use a primeira série como teste: escolha uma carga conservadora, veja quantas repetições sobraram e ajuste nas seguintes.
-5. **Anote a troca** no registro do treino (exercício usado e carga). Isso alimenta a revisão do mês.
+4. **Use as séries e repetições do substituto, não as do original.** Cada troca traz `series` e `reps` próprios (elástico sobe para 12–20, unilateral conta por lado, prancha e carregada contam em tempo ou metros). A tela de acompanhamento já ajusta o chip e o número de botões de série.
+5. **Refaça a carga pela reserva, não pelo número do aparelho.** Carga de máquina não passa para halter nem para outra máquina. Use a primeira série como teste: escolha uma carga conservadora, veja quantas repetições sobraram e ajuste nas seguintes.
+6. **Anote a troca** no registro do treino (exercício usado e carga). Isso alimenta a revisão do mês.
 
 ## Regras que não mudam
 
@@ -73,5 +74,6 @@ Todo início de mês, revisar a lista com o uso real. Leva uns 15 minutos.
 
 | Data | O que mudou | Por quê |
 | --- | --- | --- |
+| 17/11/2026 | Séries e repetições estruturadas por substituto (151), com validação contra o texto do ajuste; a tela de acompanhamento passa a usá-las | Pedido do Giba |
 | 17/11/2026 | Figuras para os 134 substitutos que não tinham | Pedido do Giba |
 | 16/11/2026 | Primeira versão: 4 treinos (Superiores A e B, Inferiores pesado e leve), todos os exercícios com substitutos | Pedido do Giba para trocar exercício com a academia cheia |

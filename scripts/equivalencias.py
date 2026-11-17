@@ -49,6 +49,12 @@ for s in D["slots"]:
     for x in subs:
         if x["id"] not in ex: erros.append(f"{tag}: substituto sem cadastro {x['id']}")
         if x.get("equivalencia") not in EQUIV: erros.append(f"{tag}: equivalencia inválida em {x['id']}")
+        if not (isinstance(x.get("series"), int) and 1 <= x["series"] <= 6): erros.append(f"{tag}: series inválida em {x['id']}")
+        if not (isinstance(x.get("reps"), str) and x["reps"].strip()): erros.append(f"{tag}: reps ausente em {x['id']}")
+        m = re.search(r"(\d+(?:-\d+)?)\s*[x×]\s*(\d+(?:-\d+)?)", x.get("ajuste") or "")
+        if m and isinstance(x.get("series"), int) and isinstance(x.get("reps"), str):
+            if x["series"] != int(m.group(1).split("-")[-1]) or not x["reps"].startswith(m.group(2).replace("-", "–")):
+                erros.append(f"{tag}: series/reps de {x['id']} não batem com o ajuste ({x['series']} × {x['reps']} contra {m.group(0)})")
     for x in s.get("evitar", []):
         if x["id"] not in ex: erros.append(f"{tag}: evitar sem cadastro {x['id']}")
         if x["id"] in ids: erros.append(f"{tag}: {x['id']} está em substitutos e em evitar")

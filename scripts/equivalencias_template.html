@@ -134,6 +134,7 @@ function altCard(s,i){
     ${tags(e)}
     ${fig(s.id)}
     <dl class="kv">
+      ${s.series&&s.reps?`<dt>Séries</dt><dd><b>${esc(s.series)} × ${esc(s.reps)}</b></dd>`:''}
       ${s.ajuste?`<dt>Ajuste</dt><dd>${esc(s.ajuste)}</dd>`:''}
       ${s.quando?`<dt>Quando</dt><dd>${esc(s.quando)}</dd>`:''}
       ${s.atencao?`<dt>Atenção</dt><dd>${esc(s.atencao)}</dd>`:''}
