@@ -53,6 +53,10 @@ Referências usadas nas trocas (conferidas uma a uma em 16/11/2026, incluindo se
 
 Uma referência foi retirada na revisão: Lusk et al., 2010 não testou pegada neutra e mostrou mais dorsal na pronada, então não sustenta a troca entre puxada aberta e neutra (ficou como prática comum).
 
+## Figuras
+
+Todos os exercícios do catálogo têm figura em `assets/svg/`. As das trocas são esquemáticas (bonecos de traço) e ficam em `scripts/figs_*.py`; `python3 scripts/gerar_figuras_eq.py` gera os SVGs e `python3 scripts/equivalencias.py` regenera a tela. As mais fracas, a refazer na revisão: rotação de tronco na máquina, russian twist, dead bug, pranchas laterais, remada invertida, elevação pélvica na máquina e leg press unilateral.
+
 ## Revisão mensal
 
 Todo início de mês, revisar a lista com o uso real. Leva uns 15 minutos.
@@ -69,4 +73,5 @@ Todo início de mês, revisar a lista com o uso real. Leva uns 15 minutos.
 
 | Data | O que mudou | Por quê |
 | --- | --- | --- |
+| 17/11/2026 | Figuras para os 134 substitutos que não tinham | Pedido do Giba |
 | 16/11/2026 | Primeira versão: 4 treinos (Superiores A e B, Inferiores pesado e leve), todos os exercícios com substitutos | Pedido do Giba para trocar exercício com a academia cheia |

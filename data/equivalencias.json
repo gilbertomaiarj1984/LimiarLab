@@ -70,7 +70,7 @@
     "Leve a perna para o lado sem inclinar o tronco.",
     "Segure na máquina para equilíbrio."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/abducao-cabo-em-pe.svg"
   },
   {
    "id": "abducao-deitado-lateral",
@@ -110,7 +110,7 @@
     "Suba até cerca de 30-40 graus, ponta do pé para frente.",
     "Desça em 2 s."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/abducao-deitado-lateral.svg"
   },
   {
    "id": "abdutora-inclinada",
@@ -189,7 +189,7 @@
     "Costas apoiadas, abra contra as almofadas.",
     "Pausa de 1 s aberto, volta em 2 s."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/abdutora-sentada.svg"
   },
   {
    "id": "afundo-andando",
@@ -232,7 +232,7 @@
     "Tronco alto, halteres ao lado do corpo.",
     "Volume moderado; costuma doer nos dias seguintes."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/afundo-andando.svg"
   },
   {
    "id": "afundo-estatico",
@@ -276,7 +276,7 @@
     "Desça reto, joelho da frente alinhado ao pé.",
     "Halteres ao lado do corpo."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/afundo-estatico.svg"
   },
   {
    "id": "afundo-reverso",
@@ -321,7 +321,7 @@
     "Peso no pé da frente; volte empurrando com ele.",
     "Halteres ao lado do corpo, tronco alto."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/afundo-reverso.svg"
   },
   {
    "id": "afundo-saltado",
@@ -364,7 +364,7 @@
     "Aterrisse macio, joelho alinhado ao pé.",
     "Volume baixo; não usar perto de corridas importantes."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/afundo-saltado.svg"
   },
   {
    "id": "agachamento-bulgaro",
@@ -451,7 +451,7 @@
     "Desça vertical, sem empurrar a barra para frente.",
     "Ajuste a distância do banco antes de pôr carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/agachamento-bulgaro-smith.svg"
   },
   {
    "id": "agachamento-espanhol",
@@ -492,7 +492,7 @@
     "Recline para trás e desça com canelas verticais.",
     "Também funciona como isometria (30-45 s parado embaixo)."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/agachamento-espanhol.svg"
   },
   {
    "id": "agachamento-goblet",
@@ -538,7 +538,7 @@
     "Desça entre os joelhos com o tronco alto.",
     "Calcanhares elevados (anilha) aumentam a ênfase no quadríceps."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/agachamento-goblet.svg"
   },
   {
    "id": "agachamento-hack",
@@ -581,7 +581,7 @@
     "Desça controlado até a coxa paralela ou pouco abaixo.",
     "Primeira série pesada como teste de carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/agachamento-hack.svg"
   },
   {
    "id": "agachamento-instavel",
@@ -619,7 +619,7 @@
     "Não recomendado para o objetivo deste plano.",
     "Se usado, apenas como aquecimento leve."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/agachamento-instavel.svg"
   },
   {
    "id": "agachamento-livre",
@@ -664,7 +664,7 @@
     "Tronco firme (respire e trave o abdômen) antes de descer.",
     "Use o rack com travas de segurança na altura certa."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/agachamento-livre.svg"
   },
   {
    "id": "agachamento-pistol",
@@ -707,7 +707,7 @@
     "Exige mobilidade de tornozelo e quadril; use banco atrás como limite.",
     "Não é bom para carga progressiva."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/agachamento-pistol.svg"
   },
   {
    "id": "agachamento-sissy",
@@ -745,7 +745,7 @@
     "Exige apoio e progressão lenta.",
     "Não é necessário para corredores."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/agachamento-sissy.svg"
   },
   {
    "id": "agachamento-smith",
@@ -832,7 +832,7 @@
     "Gire as palmas para a frente enquanto empurra para cima.",
     "Use um pouco menos de carga que no desenvolvimento comum."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/arnold-press.svg"
   },
   {
    "id": "band-pull-apart",
@@ -875,7 +875,7 @@
     "Abra até o elástico encostar no peito.",
     "Volte devagar; faça 15-20."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/band-pull-apart.svg"
   },
   {
    "id": "barra-fixa",
@@ -919,7 +919,7 @@
     "Suba até o queixo passar a barra, sem impulso de pernas.",
     "Se não fizer 8, use elástico de assistência ou faça só a descida lenta com poucas repetições."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/barra-fixa.svg"
   },
   {
    "id": "barra-fixa-assistida",
@@ -964,7 +964,7 @@
     "Pegada neutra ou pronada, desça até esticar os braços.",
     "Suba levando o peito à barra, sem balançar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/barra-fixa-assistida.svg"
   },
   {
    "id": "bird-dog",
@@ -1008,7 +1008,7 @@
     "Segure 5-8 s sem girar o quadril nem arquear a lombar.",
     "Volte devagar e troque de lado."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/bird-dog.svg"
   },
   {
    "id": "cadeira-extensora",
@@ -1047,7 +1047,7 @@
     "Suba até quase estender e volte em 2 s.",
     "Carga moderada, sem trancos."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/cadeira-extensora.svg"
   },
   {
    "id": "cadeira-flexora",
@@ -1126,7 +1126,7 @@
     "Tornozeleira na polia baixa, leve a perna para trás sem arquear a lombar.",
     "Movimento curto e controlado."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/coice-gluteo-cabo.svg"
   },
   {
    "id": "concha-elastico",
@@ -1164,7 +1164,7 @@
     "Deitado de lado, joelhos dobrados, elástico acima dos joelhos.",
     "Abra o joelho de cima sem rodar o quadril para trás."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/concha-elastico.svg"
   },
   {
    "id": "crossover-baixo-cabo",
@@ -1206,7 +1206,7 @@
     "Leve as mãos para cima e para dentro até a altura do queixo.",
     "Cotovelos levemente dobrados e fixos."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/crossover-baixo-cabo.svg"
   },
   {
    "id": "crucifixo-inclinado-halteres",
@@ -1248,7 +1248,7 @@
     "Abra até sentir alongar sem passar da linha dos ombros.",
     "Use carga moderada: o braço longo pesa no ombro."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/crucifixo-inclinado-halteres.svg"
   },
   {
    "id": "crucifixo-invertido-curvado",
@@ -1289,7 +1289,7 @@
     "Sem apoio, a lombar sustenta o tronco inclinado.",
     "Prefira a versão apoiada no banco."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/crucifixo-invertido-curvado.svg"
   },
   {
    "id": "crucifixo-invertido-halteres-apoio",
@@ -1332,7 +1332,7 @@
     "Abra os braços para os lados até a linha dos ombros.",
     "Halteres leves e movimento lento."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/crucifixo-invertido-halteres-apoio.svg"
   },
   {
    "id": "crucifixo-invertido-maquina",
@@ -1375,7 +1375,7 @@
     "Abra os braços para trás com cotovelos levemente dobrados.",
     "Não junte as escápulas com força: o foco é o ombro de trás."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/crucifixo-invertido-maquina.svg"
   },
   {
    "id": "crucifixo-maquina",
@@ -1417,7 +1417,7 @@
     "Feche os braços até as mãos quase se tocarem.",
     "Volte devagar sem levar os cotovelos para trás da linha do corpo."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/crucifixo-maquina.svg"
   },
   {
    "id": "dead-bug",
@@ -1456,7 +1456,7 @@
     "Estenda braço e perna opostos sem a lombar descolar.",
     "Expire ao estender."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/dead-bug.svg"
   },
   {
    "id": "desenvolvimento-atras-nuca",
@@ -1497,7 +1497,7 @@
     "Combina abdução e rotação externa máximas sob carga.",
     "Não recomendado neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/desenvolvimento-atras-nuca.svg"
   },
   {
    "id": "desenvolvimento-barra-em-pe",
@@ -1540,7 +1540,7 @@
     "Em pé, a carga pesada tende a arquear a lombar.",
     "Não recomendado como troca neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/desenvolvimento-barra-em-pe.svg"
   },
   {
    "id": "desenvolvimento-elastico",
@@ -1581,7 +1581,7 @@
     "Empurre para cima sem arquear a lombar.",
     "Encurte o elástico para aumentar a carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/desenvolvimento-elastico.svg"
   },
   {
    "id": "desenvolvimento-halteres",
@@ -1667,7 +1667,7 @@
     "Costas apoiadas, empurre sem travar os cotovelos.",
     "Volte devagar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/desenvolvimento-maquina.svg"
   },
   {
    "id": "desenvolvimento-smith",
@@ -1709,7 +1709,7 @@
     "Desça até a altura do queixo.",
     "Travas de segurança ajustadas."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/desenvolvimento-smith.svg"
   },
   {
    "id": "elevacao-lateral",
@@ -1791,7 +1791,7 @@
     "Suba até a linha do ombro com o cotovelo levemente dobrado.",
     "Segure em algo com a outra mão para não balançar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/elevacao-lateral-cabo.svg"
   },
   {
    "id": "elevacao-lateral-elastico",
@@ -1831,7 +1831,7 @@
     "Suba até a linha dos ombros.",
     "A carga aumenta no alto: controle a descida."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/elevacao-lateral-elastico.svg"
   },
   {
    "id": "elevacao-lateral-inclinada-halter",
@@ -1872,7 +1872,7 @@
     "Suba o braço até a vertical com o cotovelo levemente dobrado.",
     "Use halter mais leve que na elevação comum."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/elevacao-lateral-inclinada-halter.svg"
   },
   {
    "id": "elevacao-lateral-maquina",
@@ -1913,7 +1913,7 @@
     "Empurre com os cotovelos até a linha dos ombros.",
     "Desça devagar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/elevacao-lateral-maquina.svg"
   },
   {
    "id": "elevacao-pelvica-maquina",
@@ -1955,7 +1955,7 @@
     "Pausa de 1 s em cima.",
     "Primeira série como teste de carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/elevacao-pelvica-maquina.svg"
   },
   {
    "id": "face-pull",
@@ -2040,7 +2040,7 @@
     "Puxe abrindo as mãos para os lados da cabeça, cotovelos altos.",
     "Segure 1 s no fim."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/face-pull-elastico.svg"
   },
   {
    "id": "farmer-walk",
@@ -2085,7 +2085,7 @@
     "Ande com passos curtos e tronco alto.",
     "Com o peso dividido, a exigência lateral é menor que no suitcase."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/farmer-walk.svg"
   },
   {
    "id": "flexao-de-bracos",
@@ -2129,7 +2129,7 @@
     "Desça o peito até perto do chão com cotovelos a cerca de 45°.",
     "Para ficar mais difícil: pés elevados, pausa embaixo ou elástico nas costas."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexao-de-bracos.svg"
   },
   {
    "id": "flexao-lateral-halter",
@@ -2166,7 +2166,7 @@
     "Movimento de dobrar a coluna para o lado com carga, o oposto do objetivo do suitcase carry.",
     "Não recomendado neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexao-lateral-halter.svg"
   },
   {
    "id": "flexao-pes-elevados",
@@ -2210,7 +2210,7 @@
     "Corpo em linha reta, desça o peito até perto do chão.",
     "Pés mais altos deixam mais difícil; elástico nas costas aumenta a carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexao-pes-elevados.svg"
   },
   {
    "id": "flexao-pike",
@@ -2252,7 +2252,7 @@
     "Desça a cabeça em direção ao chão entre as mãos.",
     "Pés num banco deixam mais difícil."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexao-pike.svg"
   },
   {
    "id": "flexora-cabo-em-pe",
@@ -2290,7 +2290,7 @@
     "Dobre o joelho levando o calcanhar ao glúteo, coxa parada.",
     "Volte em 2 s."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexora-cabo-em-pe.svg"
   },
   {
    "id": "flexora-com-bola",
@@ -2329,7 +2329,7 @@
     "Puxe a bola para perto com o quadril alto e volte devagar.",
     "Progrida para uma perna quando ficar fácil."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexora-com-bola.svg"
   },
   {
    "id": "flexora-deitada",
@@ -2371,7 +2371,7 @@
     "Quadril colado no banco durante a subida.",
     "Volte em 2 s."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexora-deitada.svg"
   },
   {
    "id": "flexora-deslizante",
@@ -2410,7 +2410,7 @@
     "Estenda as pernas devagar e puxe de volta.",
     "Se novo, gera dor tardia forte nos posteriores."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexora-deslizante.svg"
   },
   {
    "id": "flexora-em-pe-maquina",
@@ -2448,7 +2448,7 @@
     "Dobre o joelho sem mexer o quadril.",
     "Volte em 2 s."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexora-em-pe-maquina.svg"
   },
   {
    "id": "flexora-halter-deitado",
@@ -2487,7 +2487,7 @@
     "Dobre o joelho até 90 graus; acima disso o halter pode escorregar.",
     "Peça ajuda para posicionar o halter."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/flexora-halter-deitado.svg"
   },
   {
    "id": "hip-thrust",
@@ -2532,7 +2532,7 @@
     "Suba até o tronco ficar alinhado, pausa de 1 s, sem arquear a lombar.",
     "Use almofada na barra."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/hip-thrust.svg"
   },
   {
    "id": "hip-thrust-unilateral",
@@ -2576,7 +2576,7 @@
     "Quadril nivelado durante toda a subida.",
     "Halter sobre o quadril para progredir."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/hip-thrust-unilateral.svg"
   },
   {
    "id": "hiperextensao-45",
@@ -2620,7 +2620,7 @@
     "Suba até o corpo ficar em linha, sem hiperestender a coluna.",
     "Segure anilha ou halter no peito para progredir."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/hiperextensao-45.svg"
   },
   {
    "id": "leg-press-45",
@@ -2664,7 +2664,7 @@
     "Desça até onde a lombar continua colada no encosto.",
     "Não trave os joelhos no topo."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/leg-press-45.svg"
   },
   {
    "id": "leg-press-unilateral",
@@ -2707,7 +2707,7 @@
     "Desça até onde a lombar continua colada no encosto.",
     "Carga bem menor que a metade da bilateral no começo."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/leg-press-unilateral.svg"
   },
   {
    "id": "lenhador-cabo",
@@ -2747,7 +2747,7 @@
     "Exercício de rotação, não de antirrotação.",
     "Não substitui o pallof neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/lenhador-cabo.svg"
   },
   {
    "id": "levantamento-terra",
@@ -2792,7 +2792,7 @@
     "Barra sobre o meio do pé, coluna neutra, empurre o chão.",
     "Exige técnica e progressão própria."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/levantamento-terra.svg"
   },
   {
    "id": "mergulho-banco",
@@ -2833,7 +2833,7 @@
     "Coloca o ombro em extensão e rotação interna com o peso do corpo.",
     "Não recomendado neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/mergulho-banco.svg"
   },
   {
    "id": "mergulho-paralelas",
@@ -2874,7 +2874,7 @@
     "Grande extensão do ombro sob o peso do corpo.",
     "Não recomendado como troca neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/mergulho-paralelas.svg"
   },
   {
    "id": "monster-walk",
@@ -2915,7 +2915,7 @@
     "Elástico acima dos joelhos ou nos tornozelos, semiagachado.",
     "Passos laterais curtos sem deixar os pés se juntarem."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/monster-walk.svg"
   },
   {
    "id": "nordic",
@@ -2953,7 +2953,7 @@
     "Introduzir com volume mínimo e longe de corridas importantes.",
     "Use as mãos para amortecer no fim."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/nordic.svg"
   },
   {
    "id": "pallof-elastico",
@@ -2994,7 +2994,7 @@
     "Empurre à frente e segure 2-3 s sem girar.",
     "Afaste-se da ancoragem para aumentar a carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/pallof-elastico.svg"
   },
   {
    "id": "pallof-meio-ajoelhado",
@@ -3039,7 +3039,7 @@
     "Contraia o glúteo da perna de trás e empurre as mãos à frente.",
     "Segure 2 s sem girar nem inclinar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/pallof-meio-ajoelhado.svg"
   },
   {
    "id": "pallof-press",
@@ -3165,7 +3165,7 @@
     "Sobe com as duas pernas, desce devagar com uma só.",
     "Introduzir longe de corridas longas."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/panturrilha-excentrica.svg"
   },
   {
    "id": "panturrilha-explosiva-leg-press",
@@ -3206,7 +3206,7 @@
     "Não solte a plataforma e mantenha as travas de segurança à mão.",
     "Séries curtas (10-15 repetições rápidas)."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/panturrilha-explosiva-leg-press.svg"
   },
   {
    "id": "panturrilha-joelho-flexionado",
@@ -3249,7 +3249,7 @@
     "Suba e desça só pelo tornozelo.",
     "Halter na mão do mesmo lado para progredir."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/panturrilha-joelho-flexionado.svg"
   },
   {
    "id": "panturrilha-leg-press",
@@ -3287,7 +3287,7 @@
     "Não solte as travas de segurança.",
     "Amplitude completa com pausas."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/panturrilha-leg-press.svg"
   },
   {
    "id": "panturrilha-sentado",
@@ -3365,7 +3365,7 @@
     "Amplitude completa com pausa embaixo.",
     "Uma perna por vez dobra a carga relativa."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/panturrilha-sentado-halter.svg"
   },
   {
    "id": "panturrilha-sentado-smith",
@@ -3404,7 +3404,7 @@
     "Ponta dos pés numa anilha ou step.",
     "Primeira série como teste de carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/panturrilha-sentado-smith.svg"
   },
   {
    "id": "panturrilha-smith",
@@ -3444,7 +3444,7 @@
     "Amplitude completa com pausas.",
     "Primeira série como teste de carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/panturrilha-smith.svg"
   },
   {
    "id": "panturrilha-unilateral-halter",
@@ -3485,7 +3485,7 @@
     "Desça alongando e suba até a ponta do pé.",
     "Faça a perna mais fraca primeiro."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/panturrilha-unilateral-halter.svg"
   },
   {
    "id": "pogo",
@@ -3571,7 +3571,7 @@
     "Séries curtas (8-12 contatos por perna); pare se o joelho cair para dentro.",
     "Comece apoiando uma mão na parede se estiver instável."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/pogo-unilateral.svg"
   },
   {
    "id": "ponte-gluteo",
@@ -3615,7 +3615,7 @@
     "Suba contraindo o glúteo, pausa de 1-2 s.",
     "Progrida com pausa mais longa ou versão unilateral."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/ponte-gluteo.svg"
   },
   {
    "id": "prancha-alta",
@@ -3659,7 +3659,7 @@
     "Mãos sob os ombros, braços estendidos, corpo em linha.",
     "Glúteo e abdômen contraídos."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/prancha-alta.svg"
   },
   {
    "id": "prancha-copenhagen",
@@ -3700,7 +3700,7 @@
     "Comece apoiando o joelho (alavanca curta).",
     "Introduzir em dia distante do longão."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/prancha-copenhagen.svg"
   },
   {
    "id": "prancha-frontal",
@@ -3825,7 +3825,7 @@
     "Na prancha lateral, eleve e segure a perna de cima.",
     "Quadril alto, sem rodar o tronco."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/prancha-lateral-com-abducao.svg"
   },
   {
    "id": "prancha-lateral-joelhos",
@@ -3864,7 +3864,7 @@
     "Joelhos dobrados a 90 graus, cotovelo sob o ombro.",
     "Linha reta do ombro ao joelho."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/prancha-lateral-joelhos.svg"
   },
   {
    "id": "prancha-remada-halter",
@@ -3909,7 +3909,7 @@
     "Puxe um halter sem deixar o quadril girar.",
     "Halteres leves; o objetivo é o tronco parado."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/prancha-remada-halter.svg"
   },
   {
    "id": "prancha-toque-ombro",
@@ -3950,7 +3950,7 @@
     "Prancha alta com pés um pouco afastados.",
     "Toque o ombro oposto devagar, sem o quadril balançar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/prancha-toque-ombro.svg"
   },
   {
    "id": "pular-corda",
@@ -3992,7 +3992,7 @@
     "Blocos curtos (20-30 s) em vez de minutos seguidos.",
     "Sem corda: imite o movimento no lugar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/pular-corda.svg"
   },
   {
    "id": "pull-through-cabo",
@@ -4032,7 +4032,7 @@
     "Leve o quadril para trás e estenda contraindo o glúteo.",
     "Braços apenas seguram; o movimento é do quadril."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/pull-through-cabo.svg"
   },
   {
    "id": "pullover-cabo",
@@ -4075,7 +4075,7 @@
     "Leve as mãos até as coxas com o tronco levemente inclinado e firme.",
     "Volte até a altura dos olhos sem soltar os ombros."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/pullover-cabo.svg"
   },
   {
    "id": "pullover-halter",
@@ -4118,7 +4118,7 @@
     "Desça o halter atrás da cabeça com cotovelos levemente dobrados até sentir alongar.",
     "Não force além do conforto do ombro."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/pullover-halter.svg"
   },
   {
    "id": "puxada-atras-nuca",
@@ -4159,7 +4159,7 @@
     "Exige rotação externa e projeção da cabeça para a frente.",
     "Não recomendado neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/puxada-atras-nuca.svg"
   },
   {
    "id": "puxada-elastico",
@@ -4201,7 +4201,7 @@
     "Ajoelhado, puxe as mãos até o peito levando os cotovelos para baixo.",
     "Controle a volta: o elástico puxa mais forte no fim."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/puxada-elastico.svg"
   },
   {
    "id": "puxada-frontal",
@@ -4334,7 +4334,7 @@
     "Puxe o cotovelo em direção ao quadril sem girar o tronco.",
     "Faça todas as repetições de um lado antes de trocar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/puxada-unilateral-cabo.svg"
   },
   {
    "id": "remada-alta-barra",
@@ -4375,7 +4375,7 @@
     "Elevar os cotovelos acima dos ombros com rotação interna aperta o ombro.",
     "Não recomendado neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/remada-alta-barra.svg"
   },
   {
    "id": "remada-baixa-neutra",
@@ -4464,7 +4464,7 @@
     "Sem apoio no peito, a lombar segura o tronco inclinado.",
     "Prefira a versão com apoio no peito, se houver."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/remada-cavalinho.svg"
   },
   {
    "id": "remada-curvada-barra",
@@ -4508,7 +4508,7 @@
     "Tronco inclinado sustentado pela lombar e posteriores durante toda a série.",
     "Não recomendado neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/remada-curvada-barra.svg"
   },
   {
    "id": "remada-elastico",
@@ -4551,7 +4551,7 @@
     "Puxe até o abdômen juntando as escápulas e segure 1 s.",
     "Controle a volta."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/remada-elastico.svg"
   },
   {
    "id": "remada-halter-apoio-peito",
@@ -4597,7 +4597,7 @@
     "Puxe os halteres até a lateral do tronco.",
     "Pés no chão e queixo neutro."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/remada-halter-apoio-peito.svg"
   },
   {
    "id": "remada-invertida",
@@ -4644,7 +4644,7 @@
     "Corpo reto como prancha, puxe o peito até a barra.",
     "Pés mais à frente deixa mais difícil."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/remada-invertida.svg"
   },
   {
    "id": "remada-maquina-apoio-peito",
@@ -4689,7 +4689,7 @@
     "Puxe os cotovelos para trás juntando as escápulas.",
     "Muitas máquinas permitem fazer um braço por vez."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/remada-maquina-apoio-peito.svg"
   },
   {
    "id": "remada-serrote",
@@ -4777,7 +4777,7 @@
     "Puxe o cotovelo para trás sem girar o tronco.",
     "Alongue à frente na volta, mantendo o quadril parado."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/remada-unilateral-cabo.svg"
   },
   {
    "id": "roda-abdominal",
@@ -4818,7 +4818,7 @@
     "Comece ajoelhado e com amplitude curta.",
     "Pare antes de a lombar arquear."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/roda-abdominal.svg"
   },
   {
    "id": "rosca-alternada-halteres",
@@ -4859,7 +4859,7 @@
     "Sem balançar o tronco para ajudar.",
     "Desça em 2 s."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-alternada-halteres.svg"
   },
   {
    "id": "rosca-barra-reta",
@@ -4899,7 +4899,7 @@
     "Barra reta força o punho em supinação total e tende a gerar balanço do tronco com carga alta.",
     "Se usar, carga moderada e sem roubo."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-barra-reta.svg"
   },
   {
    "id": "rosca-barra-w",
@@ -4941,7 +4941,7 @@
     "Suba sem jogar o quadril.",
     "Desça em 2 s."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-barra-w.svg"
   },
   {
    "id": "rosca-cabo",
@@ -4982,7 +4982,7 @@
     "Cotovelos fixos, suba até o alto.",
     "O cabo mantém tensão o tempo todo; controle a descida."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-cabo.svg"
   },
   {
    "id": "rosca-direta-halteres",
@@ -5064,7 +5064,7 @@
     "Suba e segure 1 s no alto.",
     "Encurte o elástico para aumentar a carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-elastico.svg"
   },
   {
    "id": "rosca-inclinada-halteres",
@@ -5105,7 +5105,7 @@
     "Suba sem trazer os cotovelos para a frente.",
     "Carga um pouco menor que na rosca em pé."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-inclinada-halteres.svg"
   },
   {
    "id": "rosca-inversa-barra-w",
@@ -5149,7 +5149,7 @@
     "Suba sem dobrar o punho.",
     "Carga menor que na rosca comum."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-inversa-barra-w.svg"
   },
   {
    "id": "rosca-martelo",
@@ -5233,7 +5233,7 @@
     "Cotovelos fixos ao lado do corpo.",
     "Suba até o alto e desça devagar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-martelo-corda.svg"
   },
   {
    "id": "rosca-martelo-cruzada",
@@ -5275,7 +5275,7 @@
     "Um braço de cada vez.",
     "Sem girar o tronco."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-martelo-cruzada.svg"
   },
   {
    "id": "rosca-martelo-elastico",
@@ -5316,7 +5316,7 @@
     "Cotovelos parados.",
     "Controle a descida."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-martelo-elastico.svg"
   },
   {
    "id": "rosca-scott-maquina",
@@ -5360,7 +5360,7 @@
     "Desça até quase esticar, sem soltar o peso no fim.",
     "Carga menor que na rosca em pé."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rosca-scott-maquina.svg"
   },
   {
    "id": "rotacao-tronco-maquina",
@@ -5396,7 +5396,7 @@
     "Rotação da coluna contra carga, sem relação com a estabilidade da corrida.",
     "Não recomendado neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/rotacao-tronco-maquina.svg"
   },
   {
    "id": "russian-twist",
@@ -5436,7 +5436,7 @@
     "Combina flexão e rotação repetidas da coluna.",
     "Não recomendado neste plano."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/russian-twist.svg"
   },
   {
    "id": "saltitos-laterais-linha",
@@ -5478,7 +5478,7 @@
     "Contato rápido, tronco estável, olhar à frente.",
     "Séries de 10-15 s."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/saltitos-laterais-linha.svg"
   },
   {
    "id": "salto-profundidade",
@@ -5522,7 +5522,7 @@
     "Só depois de semanas de pogo e saltos baixos sem dor.",
     "Poucos contatos (até 20-30 na sessão)."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/salto-profundidade.svg"
   },
   {
    "id": "saltos-alternados",
@@ -5566,7 +5566,7 @@
     "Exige espaço, superfície boa e base de pliometria.",
     "Poucos contatos por série."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/saltos-alternados.svg"
   },
   {
    "id": "saltos-laterais-skater",
@@ -5610,7 +5610,7 @@
     "Segure 1 s na aterrissagem antes do próximo salto.",
     "Controle o joelho para não cair para dentro."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/saltos-laterais-skater.svg"
   },
   {
    "id": "saltos-step-baixo",
@@ -5653,7 +5653,7 @@
     "Aterrisse na ponta dos pés, joelhos levemente flexionados.",
     "Poucos contatos por série (10-15); qualidade acima de quantidade."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/saltos-step-baixo.svg"
   },
   {
    "id": "step-up",
@@ -5743,7 +5743,7 @@
     "Step mais baixo que no step-up frontal (meia canela a joelho).",
     "Desça controlado, quadril nivelado."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/step-up-lateral.svg"
   },
   {
    "id": "stiff",
@@ -5833,7 +5833,7 @@
     "Halter na mão contrária à perna de apoio; quadril nivelado.",
     "Pode apoiar a mão livre num banco para focar na carga."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/stiff-unilateral.svg"
   },
   {
    "id": "suitcase-carry",
@@ -5920,7 +5920,7 @@
     "Tronco reto, sem inclinar para o lado do peso.",
     "Passos curtos e controlados."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/suitcase-carry-kettlebell.svg"
   },
   {
    "id": "suitcase-hold",
@@ -5964,7 +5964,7 @@
     "Segure 30-40 s com o tronco reto e ombros nivelados.",
     "Bom quando não há espaço para andar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/suitcase-hold.svg"
   },
   {
    "id": "supino-chao-halteres",
@@ -6007,7 +6007,7 @@
     "Desça até os braços encostarem de leve no chão e empurre.",
     "Amplitude menor: bom quando não há banco livre."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/supino-chao-halteres.svg"
   },
   {
    "id": "supino-elastico",
@@ -6049,7 +6049,7 @@
     "Empurre à frente; inclinando para cima trabalha mais o peito superior.",
     "Controle a volta."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/supino-elastico.svg"
   },
   {
    "id": "supino-inclinado-halteres",
@@ -6134,7 +6134,7 @@
     "Escápulas apoiadas, empurre sem travar os cotovelos.",
     "Volte devagar até sentir alongar o peito."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/supino-inclinado-maquina.svg"
   },
   {
    "id": "supino-inclinado-smith",
@@ -6176,7 +6176,7 @@
     "Trave de segurança ajustada.",
     "Desça controlado e empurre sem quicar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/supino-inclinado-smith.svg"
   },
   {
    "id": "supino-reto",
@@ -6264,7 +6264,7 @@
     "Desça a barra até o peito e empurre.",
     "Sem parceiro, use rack com travas de segurança."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/supino-reto-barra.svg"
   },
   {
    "id": "supino-smith",
@@ -6306,7 +6306,7 @@
     "Travas de segurança ajustadas.",
     "Desça controlado sem quicar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/supino-smith.svg"
   },
   {
    "id": "triceps-barra-polia",
@@ -6346,7 +6346,7 @@
     "Estenda até travar sem bater.",
     "Volte devagar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/triceps-barra-polia.svg"
   },
   {
    "id": "triceps-coice-halter",
@@ -6386,7 +6386,7 @@
     "Estenda o cotovelo até o braço ficar reto.",
     "Carga leve, segure 1 s no fim."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/triceps-coice-halter.svg"
   },
   {
    "id": "triceps-corda",
@@ -6464,7 +6464,7 @@
     "Cotovelos colados ao corpo, estenda e abra as mãos no final.",
     "Controle a volta."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/triceps-elastico.svg"
   },
   {
    "id": "triceps-frances",
@@ -6544,7 +6544,7 @@
     "Um pé à frente, estenda os braços para a frente e para cima.",
     "Volte até sentir alongar o tríceps."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/triceps-frances-cabo.svg"
   },
   {
    "id": "triceps-frances-elastico",
@@ -6582,7 +6582,7 @@
     "Estenda os braços para cima.",
     "Cotovelos apontando para a frente."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/triceps-frances-elastico.svg"
   },
   {
    "id": "triceps-frances-unilateral-halter",
@@ -6621,7 +6621,7 @@
     "Desça atrás da cabeça com o cotovelo apontando para cima.",
     "Use a outra mão para segurar o cotovelo no lugar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/triceps-frances-unilateral-halter.svg"
   },
   {
    "id": "triceps-testa-halteres",
@@ -6661,7 +6661,7 @@
     "Dobre só os cotovelos levando os halteres ao lado da cabeça.",
     "Carga moderada: o cotovelo sente com peso alto."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/triceps-testa-halteres.svg"
   },
   {
    "id": "triceps-unilateral-cabo",
@@ -6700,7 +6700,7 @@
     "Estenda totalmente com a palma para baixo ou neutra.",
     "Faça todas as repetições de um lado antes de trocar."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/triceps-unilateral-cabo.svg"
   },
   {
    "id": "waiter-walk",
@@ -6744,7 +6744,7 @@
     "Ande devagar sem arquear a lombar.",
     "Carga bem menor que no suitcase."
    ],
-   "ilustracao": null
+   "ilustracao": "assets/svg/waiter-walk.svg"
   }
  ],
  "slots": [
