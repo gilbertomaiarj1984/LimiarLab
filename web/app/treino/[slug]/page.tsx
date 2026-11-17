@@ -54,7 +54,7 @@ export default async function Treino({ params, searchParams }: { params: Promise
           </div>
         )}
 
-        <section className="wo-log" data-key={`ll:treino:${slug}:${day}`} data-day={day} data-daylabel={longDate(day)} data-title={w.title}>
+        <section className="wo-log" data-key={`ll:treino:${slug}:${day}`}>
           {w.exercises.map((e, i) => {
             const fig = e.figure ? FIGURES[e.figure] : undefined;
             return (
@@ -73,16 +73,11 @@ export default async function Treino({ params, searchParams }: { params: Promise
                 {fig && <svg className="fig" viewBox={fig.viewBox} role="img" aria-label={fig.label} dangerouslySetInnerHTML={{ __html: fig.body }} />}
                 {e.tips?.length ? <ul className="wo-tips">{e.tips.map((t) => <li key={t}>{t}</li>)}</ul> : null}
                 {e.alternative && <div className="wo-var"><strong>Variação:</strong> {e.alternative}</div>}
-                <SetRows sets={e.sets} reps={e.reps} />
+                <SetButtons sets={e.sets} />
               </article>
             );
           })}
-          <div className="wo-sum">
-            <div className="wo-sum-h"><h2>Registro do treino</h2><span className="wo-count">0 séries</span></div>
-            <pre className="wo-out">Nenhuma série marcada ainda. Anote carga e reps e toque no ✓ ao terminar cada série.</pre>
-            <p className="wo-sum-n">Fica salvo neste aparelho. Ao terminar, copie e me mande, ou guarde para importar depois.</p>
-            <div className="wo-foot"><button className="wo-btn wo-copy" type="button">Copiar registro</button><button className="wo-btn wo-reset" type="button">Zerar registro</button></div>
-          </div>
+          <div className="wo-foot"><button className="wo-btn wo-reset" type="button">Zerar séries marcadas</button></div>
           <div className="wo-rest" hidden aria-live="polite">
             <div><div className="wo-rest-k">Descanso</div><b>0:00</b></div>
             <div className="wo-rest-b"><button type="button" className="wo-plus">+15 s</button><button type="button" className="wo-skip">Pular</button></div>
@@ -96,17 +91,12 @@ export default async function Treino({ params, searchParams }: { params: Promise
   );
 }
 
-function SetRows({ sets, reps }: { sets: number; reps: string }) {
+function SetButtons({ sets }: { sets: number }) {
   return (
-    <div className="wo-rows">
-      <div className="wo-rows-h"><span>Série</span><span>Carga</span><span>Reps</span><span>Feita</span></div>
+    <div className="wo-sets">
+      <span>Séries</span>
       {Array.from({ length: sets }, (_, i) => (
-        <div key={i} className="wo-row" data-set={i + 1}>
-          <span className="wo-n">{i + 1}</span>
-          <label className="wo-in"><input className="wo-kg" inputMode="decimal" autoComplete="off" placeholder="kg" aria-label={`Carga da série ${i + 1}, em kg`} /><span>kg</span></label>
-          <input className="wo-reps" inputMode="numeric" autoComplete="off" placeholder={reps} aria-label={`Repetições da série ${i + 1}`} />
-          <button type="button" className="wo-set" aria-pressed="false" aria-label={`Série ${i + 1} feita`}>✓</button>
-        </div>
+        <button key={i} type="button" className="wo-set" data-set={i + 1} aria-pressed="false" aria-label={`Série ${i + 1} feita`}>{i + 1}</button>
       ))}
     </div>
   );
