@@ -1,15 +1,49 @@
-# Projeto isolado: nome, container, volumes e env próprios (prefixo limiarlab). Mesmo modelo do
-# AgendaBoa na VPS: sem portas publicadas; o Caddy compartilhado alcança o app pela rede externa
-# `proxy`; o Postgres compartilhado é alcançado por uma rede externa DEDICADA (`limiarlab_db`)
-# que só contém este app e o container do Postgres. Passos manuais em infra/README.md.
+# Projeto 100% isolado (prefixo limiarlab): app, Postgres PRÓPRIO e backup num compose só.
+# Nada aqui toca nos outros apps da VPS: não usa o Postgres do garimpo, não cria nem altera
+# redes ou volumes deles. Sem portas publicadas. O único ponto de contato é a rede externa
+# `proxy`, que já existe e na qual o app entra para o Caddy alcançá-lo (como o AgendaBoa faz).
+# Rodar SEMPRE de dentro de /opt/limiarlab. Passos em infra/README.md.
 name: limiarlab
 
 services:
+  postgres:
+    container_name: limiarlab-postgres
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: limiarlab
+      POSTGRES_DB: limiarlab
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no arquivo .env}
+    # Parâmetros baixos de propósito: a VPS é compartilhada e o banco é pequeno.
+    command: ["postgres", "-c", "shared_buffers=64MB", "-c", "max_connections=20", "-c", "work_mem=4MB"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    security_opt: ["no-new-privileges:true"]
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U limiarlab -d limiarlab"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    networks:
+      db: {}
+
   app:
     container_name: limiarlab-app
     image: ${APP_IMAGE:-ghcr.io/gilbertomaiarj1984/limiarlab:latest}
     restart: unless-stopped
     env_file: .env.production        # fica só na VPS, nunca no git
+    environment:
+      DATABASE_URL: postgresql://limiarlab:${POSTGRES_PASSWORD}@limiarlab-postgres:5432/limiarlab
+    depends_on:
+      postgres:
+        condition: service_healthy
     mem_limit: 256m
     cpus: 0.5
     read_only: true
@@ -17,7 +51,6 @@ services:
     security_opt: ["no-new-privileges:true"]
     cap_drop: [ALL]
     pids_limit: 200
-    # Logs com teto: o disco da VPS é compartilhado com os outros apps.
     logging:
       driver: json-file
       options: { max-size: "10m", max-file: "3" }
@@ -31,18 +64,22 @@ services:
       proxy:
         # Alias único: `app` é nome comum e já existe em outros projetos na rede `proxy`.
         aliases: [limiarlab-app]
-      limiarlab_db: {}
+      db: {}
 
-  # Backup diário do banco `limiarlab` (pg_dump -> volume local, retenção de 14 dias).
+  # Backup diário do banco (pg_dump -> volume local, retenção de 14 dias).
   backup:
     container_name: limiarlab-backup
     image: postgres:17-alpine
     restart: unless-stopped
-    env_file: .env.production
+    environment:
+      DATABASE_URL: postgresql://limiarlab:${POSTGRES_PASSWORD}@limiarlab-postgres:5432/limiarlab
     entrypoint: ["sh", "/backup.sh"]
     volumes:
       - ./backup.sh:/backup.sh:ro
       - backups:/backups
+    depends_on:
+      postgres:
+        condition: service_healthy
     mem_limit: 64m
     cpus: 0.2
     pids_limit: 50
@@ -54,13 +91,15 @@ services:
       driver: json-file
       options: { max-size: "10m", max-file: "3" }
     networks:
-      limiarlab_db: {}
+      db: {}
 
 volumes:
+  pgdata:
   backups:
 
 networks:
+  # Rede própria do projeto (criada e removida pelo próprio compose; só os 3 serviços daqui).
+  db:
+  # Já existe na VPS (criada para o Caddy). Só entramos nela; não é criada nem alterada aqui.
   proxy:
-    external: true
-  limiarlab_db:
     external: true
