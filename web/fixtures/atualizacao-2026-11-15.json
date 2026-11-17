@@ -1,0 +1,231 @@
+{
+  "athlete": "giba",
+  "_comment": "Lote lido do Garmin em 15/11/2026: longão de sábado 14/11, corridas de 19/10 a 01/11 (para a Análise de 5 semanas; o Garmin não tem força nesse período) e os treinos agendados (Treinus) da semana de 16/11. Sem força planejada para 16-22/11 ainda.",
+  "planned_replace": [
+    {
+      "source": "garmin",
+      "from": "2026-11-16",
+      "to": "2026-11-22"
+    }
+  ],
+  "planned": [
+    {
+      "source": "garmin",
+      "external_id": "1840717986",
+      "date": "2026-11-16",
+      "sport": "run",
+      "kind": "corrida_leve",
+      "title": "Rodagem leve 40 min",
+      "notes": "Treinus: Z1 regenerativo",
+      "target_duration_s": 2400,
+      "target_hr_max": 135
+    },
+    {
+      "source": "garmin",
+      "external_id": "1840717988",
+      "date": "2026-11-17",
+      "sport": "run",
+      "kind": "qualidade",
+      "title": "Intervalado 8 × 800 m",
+      "notes": "Treinus: aquecer 10', depois 8 × 800 m Z3 (moderado/forte) com 1'25\" de descanso"
+    },
+    {
+      "source": "garmin",
+      "external_id": "1840718305",
+      "date": "2026-11-19",
+      "sport": "run",
+      "kind": "qualidade",
+      "title": "Rua e areia fofa 60 min",
+      "notes": "Treinus: 20' Z2 na rua, 20' na areia fofa, 20' Z2 na rua",
+      "target_duration_s": 3600
+    },
+    {
+      "source": "garmin",
+      "external_id": "1840718237",
+      "date": "2026-11-21",
+      "sport": "run",
+      "kind": "longo",
+      "title": "Longão 17 km",
+      "notes": "Maior parte abaixo de 135–138 bpm, mesmo que o pace caia.",
+      "target_distance_m": 17000,
+      "target_hr_max": 138
+    }
+  ],
+  "activities": [
+    {
+      "source": "garmin",
+      "external_id": "25074036305",
+      "start_time": "2026-11-14T05:33:20-03:00",
+      "sport": "run",
+      "kind": "longo",
+      "name": "Niterói Corrida",
+      "duration_s": 5463.77392578125,
+      "distance_m": 15991.83984375,
+      "elevation_gain_m": 376,
+      "avg_hr": 145,
+      "max_hr": 163,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 95.195
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 1931.288
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 1503.05
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 1161.379
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 733.648
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "24914666211",
+      "start_time": "2026-10-31T05:51:24-03:00",
+      "sport": "run",
+      "kind": "longo",
+      "name": "Niterói - Corrida  sáb 31/10",
+      "duration_s": 4900.0361328125,
+      "distance_m": 15012.0,
+      "elevation_gain_m": 93,
+      "avg_hr": 144,
+      "max_hr": 165,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 342.44
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 1258.858
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 1430.157
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 712.279
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 1098.979
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "24891472082",
+      "start_time": "2026-10-29T06:36:54-03:00",
+      "sport": "run",
+      "kind": "qualidade",
+      "name": "Niterói - Corrida  qui 29/10",
+      "duration_s": 3238.43896484375,
+      "distance_m": 10443.4599609375,
+      "elevation_gain_m": 36,
+      "avg_hr": 147,
+      "max_hr": 158,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 66.735
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 269.0
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 1077.272
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 1748.6
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 41.999
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "24867331627",
+      "start_time": "2026-10-27T06:43:53-03:00",
+      "sport": "run",
+      "kind": "corrida",
+      "name": "Niterói - Corrida  ter 27/10",
+      "duration_s": 2706.10107421875,
+      "distance_m": 6367.60986328125,
+      "elevation_gain_m": 8,
+      "avg_hr": 137,
+      "max_hr": 150,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 43.0
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 1697.026
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 903.982
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 11.998
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 0.0
+        }
+      ]
+    },
+    {
+      "source": "garmin",
+      "external_id": "24864150903",
+      "start_time": "2026-10-24T06:32:18-03:00",
+      "sport": "run",
+      "kind": "longo",
+      "name": "Niterói Corrida",
+      "duration_s": 3098.799072265625,
+      "distance_m": 10419.669921875,
+      "elevation_gain_m": 38,
+      "avg_hr": 150,
+      "max_hr": 166,
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 34.53
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 390.993
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 597.273
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 1199.486
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 839.912
+        }
+      ]
+    }
+  ]
+}

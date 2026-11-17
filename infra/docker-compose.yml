@@ -1,0 +1,66 @@
+# Projeto isolado: nome, container, volumes e env próprios (prefixo limiarlab). Mesmo modelo do
+# AgendaBoa na VPS: sem portas publicadas; o Caddy compartilhado alcança o app pela rede externa
+# `proxy`; o Postgres compartilhado é alcançado por uma rede externa DEDICADA (`limiarlab_db`)
+# que só contém este app e o container do Postgres. Passos manuais em infra/README.md.
+name: limiarlab
+
+services:
+  app:
+    container_name: limiarlab-app
+    image: ${APP_IMAGE:-ghcr.io/gilbertomaiarj1984/limiarlab:latest}
+    restart: unless-stopped
+    env_file: .env.production        # fica só na VPS, nunca no git
+    mem_limit: 256m
+    cpus: 0.5
+    read_only: true
+    tmpfs: [/tmp, /app/.next/cache]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    pids_limit: 200
+    # Logs com teto: o disco da VPS é compartilhado com os outros apps.
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      proxy:
+        # Alias único: `app` é nome comum e já existe em outros projetos na rede `proxy`.
+        aliases: [limiarlab-app]
+      limiarlab_db: {}
+
+  # Backup diário do banco `limiarlab` (pg_dump -> volume local, retenção de 14 dias).
+  backup:
+    container_name: limiarlab-backup
+    image: postgres:17-alpine
+    restart: unless-stopped
+    env_file: .env.production
+    entrypoint: ["sh", "/backup.sh"]
+    volumes:
+      - ./backup.sh:/backup.sh:ro
+      - backups:/backups
+    mem_limit: 64m
+    cpus: 0.2
+    pids_limit: 50
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+    networks:
+      limiarlab_db: {}
+
+volumes:
+  backups:
+
+networks:
+  proxy:
+    external: true
+  limiarlab_db:
+    external: true

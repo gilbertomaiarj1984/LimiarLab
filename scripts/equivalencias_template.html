@@ -1,0 +1,191 @@
+<title>Trocas de Exercício</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: abas por treino no topo; lista do treino em cartões que abrem os substitutos em ordem; busca no catálogo inteiro. Mesmo sistema visual da tela de quinta. */
+:root{
+  --bg:#eef2f1; --card:#ffffff; --ink:#15201c; --muted:#5b6964; --line:#b8c3be;
+  --acc:#2a6fdb; --acc-soft:#e3ecfb; --bad:#c7392f; --bad-soft:#f8e3e1;
+  --ok:#1f7a4d; --ok-soft:#dff1e7; --mid:#8a5a00; --mid-soft:#f6ecd6; --fig:#15201c;
+  --f-display:"Space Grotesk", system-ui, sans-serif;
+  --f-body:"Inter", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101614; --card:#18201d; --ink:#e7eeeb; --muted:#9aa8a2; --line:#4a5752;
+  --acc:#6b9ff0; --acc-soft:#1d2a40; --bad:#ef6b61; --bad-soft:#3a1d1b;
+  --ok:#5fcf95; --ok-soft:#173226; --mid:#e8b85c; --mid-soft:#3a2f17; --fig:#e7eeeb; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101614; --card:#18201d; --ink:#e7eeeb; --muted:#9aa8a2; --line:#4a5752;
+  --acc:#6b9ff0; --acc-soft:#1d2a40; --bad:#ef6b61; --bad-soft:#3a1d1b;
+  --ok:#5fcf95; --ok-soft:#173226; --mid:#e8b85c; --mid-soft:#3a2f17; --fig:#e7eeeb; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 60px}
+main{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-family:var(--f-display);font-size:1.7rem;line-height:1.15;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-size:1.15rem;margin:0;line-height:1.25;text-wrap:balance}
+h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0;font-weight:600}
+p{margin:0}
+.sub{color:var(--muted);font-size:.92rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{font:inherit;font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.search{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.search:focus-visible,.tab:focus-visible,summary:focus-visible,.chipf:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chipf{font:inherit;font-size:.82rem;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:5px 10px;cursor:pointer}
+.chipf[aria-pressed="true"]{background:var(--acc-soft);border-color:var(--acc);color:var(--acc);font-weight:600}
+.banner{border-radius:10px;padding:10px 14px;font-size:.92rem;background:var(--mid-soft);color:var(--ink);border:1px solid var(--line)}
+.banner b{color:var(--mid)}
+details.slot{background:var(--card);border:1px solid var(--line);border-radius:12px}
+details.slot>summary{list-style:none;cursor:pointer;padding:14px;display:flex;gap:12px;align-items:center}
+details.slot>summary::-webkit-details-marker{display:none}
+.num{font-family:var(--f-display);font-weight:700;color:var(--acc);font-size:1.1rem;min-width:1.6em;font-variant-numeric:tabular-nums}
+.sumtxt{flex:1;min-width:0}
+.sumtxt .sub{font-size:.85rem}
+.chev{color:var(--muted);transition:transform .15s}
+details[open]>summary .chev{transform:rotate(90deg)}
+.body{padding:0 14px 14px;display:flex;flex-direction:column;gap:12px}
+.crit{font-size:.92rem;background:var(--acc-soft);border-radius:8px;padding:8px 12px}
+.sub-list{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.alt{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.alt-head{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.alt-head .rank{font-family:var(--f-display);font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.alt-head .nm{font-weight:600;flex:1;min-width:0}
+.pill{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.eq-alta{background:var(--ok-soft);color:var(--ok)}
+.eq-media{background:var(--mid-soft);color:var(--mid)}
+.eq-baixa{background:var(--bad-soft);color:var(--bad)}
+.tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.tag.warn{color:var(--bad);border-color:var(--bad)}
+dl.kv{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:.9rem}
+dl.kv dt{color:var(--muted);font-weight:500}
+dl.kv dd{margin:0;min-width:0}
+.ev{font-size:.8rem;color:var(--muted)}
+.fig{background:#fff;border-radius:8px;border:1px solid var(--line);overflow:hidden}
+.fig svg{display:block;width:100%;height:auto}
+.avoid{border-left:3px solid var(--bad);padding:4px 0 4px 10px;font-size:.9rem}
+.avoid b{color:var(--bad)}
+.hidden-note{font-size:.85rem;color:var(--muted)}
+.cat{display:flex;flex-direction:column;gap:10px}
+footer{font-size:.82rem;color:var(--muted);display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);padding-top:12px}
+@media (prefers-reduced-motion: reduce){.chev{transition:none}}
+</style>
+
+<main>
+  <header style="display:flex;flex-direction:column;gap:6px">
+    <h1>Trocas de exercício</h1>
+    <p class="sub">Aparelho ocupado? Abra o exercício e pegue o primeiro substituto livre. A lista vai do mais parecido ao menos parecido.</p>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Treino"></nav>
+  <input class="search" id="q" type="search" placeholder="Buscar exercício, músculo ou aparelho" autocomplete="off">
+  <div class="filters" id="filters" aria-label="Filtrar substitutos por equipamento">
+    <span class="sub" style="font-size:.82rem">Mostrar só:</span>
+  </div>
+  <div id="banner"></div>
+  <section id="list" style="display:flex;flex-direction:column;gap:10px"></section>
+
+  <footer>
+    <p><b>Regra da carga:</b> carga não passa de um aparelho para outro. Use a primeira série como teste e ajuste pela reserva do dia.</p>
+    <p><b>Antes de trocar:</b> se libera em 2 a 3 min, faça o próximo e volte. O que é técnico ou pesado fica no começo.</p>
+    <p id="rev"></p>
+  </footer>
+</main>
+
+<script id="data" type="application/json">/*DATA*/</script>
+<script id="figs" type="application/json">/*FIGS*/</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent);
+const FIGS=JSON.parse(document.getElementById('figs').textContent);
+const EX={}; D.exercicios.forEach(e=>EX[e.id]=e);
+const TREINOS=D.treinos; // [{id,nome,curto,dia_semana,aviso}]
+const EQ_LABEL={maquina:'Máquina',cabo:'Cabo',halter:'Halter',barra:'Barra',smith:'Smith','peso-corporal':'Peso corporal',banco:'Banco',step:'Step',elastico:'Elástico',kettlebell:'Kettlebell','leg-press':'Leg press'};
+const FILTERS=[['livre','Sem máquina (halter, peso corporal, elástico)'],['cabo','Cabo'],['maquina','Máquina']];
+const FREE=new Set(['halter','peso-corporal','elastico','kettlebell','banco','step']);
+let state={treino:null,q:'',filtro:null};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+
+function today(){const d=new Date().getDay();const t=TREINOS.find(t=>t.dia_semana===d);return t?t.id:TREINOS[0].id}
+function passFilter(e){
+  if(!state.filtro||!e)return true;
+  const eq=e.equipamento||[];
+  if(state.filtro==='livre')return eq.length>0&&eq.every(x=>FREE.has(x));
+  return eq.includes(state.filtro);
+}
+function fig(id){const e=EX[id];const f=e&&e.ilustracao&&FIGS[e.ilustracao];return f?`<div class="fig">${f}</div>`:''}
+function tags(e){
+  if(!e)return '';
+  const t=(e.equipamento||[]).map(x=>`<span class="tag">${esc(EQ_LABEL[x]||x)}</span>`);
+  if(e.unilateral)t.push('<span class="tag">Unilateral</span>');
+  if(e.impacto>=2)t.push(`<span class="tag warn">Impacto ${e.impacto}/3</span>`);
+  if(e.fadiga==='alta')t.push('<span class="tag warn">Fadiga alta</span>');
+  if(e.transferencia_corrida&&e.transferencia_corrida.nota>=2)t.push(`<span class="tag">Corrida ${e.transferencia_corrida.nota}/3</span>`);
+  return `<div class="tags">${t.join('')}</div>`;
+}
+function altCard(s,i){
+  const e=EX[s.id];
+  return `<li class="alt">
+    <div class="alt-head"><span class="rank">${i+1}</span><span class="nm">${esc(e?e.nome:s.id)}</span><span class="pill eq-${esc(s.equivalencia)}">${esc({alta:'alta',media:'média',baixa:'baixa'}[s.equivalencia]||s.equivalencia)}</span></div>
+    ${tags(e)}
+    ${fig(s.id)}
+    <dl class="kv">
+      ${s.ajuste?`<dt>Ajuste</dt><dd>${esc(s.ajuste)}</dd>`:''}
+      ${s.quando?`<dt>Quando</dt><dd>${esc(s.quando)}</dd>`:''}
+      ${s.atencao?`<dt>Atenção</dt><dd>${esc(s.atencao)}</dd>`:''}
+      ${e&&e.dicas&&e.dicas.length?`<dt>Execução</dt><dd>${e.dicas.map(esc).join(' ')}</dd>`:''}
+    </dl>
+    ${s.evidencia?`<p class="ev">Base: ${esc(s.evidencia==='pratica comum'?'prática comum, sem estudo direto':s.evidencia)}</p>`:''}
+  </li>`;
+}
+function slotCard(sl,open){
+  const o=EX[sl.original];
+  const subs=sl.substitutos.filter(s=>passFilter(EX[s.id]));
+  const hidden=sl.substitutos.length-subs.length;
+  return `<details class="slot"${open?' open':''}>
+    <summary><span class="num">${esc(sl.ordem)}</span><span class="sumtxt"><h2>${esc(o?o.nome:sl.original)}</h2><p class="sub">${esc(sl.objetivo)}</p></span><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="body">
+      ${sl.criterios?`<p class="crit"><b>A troca precisa manter:</b> ${esc(sl.criterios)}</p>`:''}
+      <h3>Substitutos, do mais parecido ao menos</h3>
+      ${subs.length?`<ol class="sub-list">${subs.map(altCard).join('')}</ol>`:'<p class="hidden-note">Nenhum substituto com esse equipamento. Tire o filtro para ver todos.</p>'}
+      ${hidden&&subs.length?`<p class="hidden-note">${hidden} substituto(s) escondido(s) pelo filtro.</p>`:''}
+      ${sl.evitar&&sl.evitar.length?`<h3>Evitar aqui</h3>${sl.evitar.map(v=>`<p class="avoid"><b>${esc(EX[v.id]?EX[v.id].nome:v.id)}:</b> ${esc(v.porque)}</p>`).join('')}`:''}
+    </div>
+  </details>`;
+}
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=TREINOS.map(t=>`<button class="tab" id="tab-${t.id}" aria-pressed="${t.id===state.treino}" data-t="${t.id}">${esc(t.curto)}</button>`).join('');
+}
+function renderFilters(){
+  const box=document.getElementById('filters');
+  box.querySelectorAll('.chipf').forEach(b=>b.remove());
+  FILTERS.forEach(([k,l])=>{const b=document.createElement('button');b.className='chipf';b.id='f-'+k;b.textContent=l;b.setAttribute('aria-pressed',state.filtro===k);b.onclick=()=>{state.filtro=state.filtro===k?null:k;render()};box.appendChild(b)});
+}
+function render(){
+  renderTabs();renderFilters();
+  const list=document.getElementById('list'),ban=document.getElementById('banner');
+  const q=norm(state.q).trim();
+  if(q){
+    ban.innerHTML='';
+    const hits=D.slots.filter(sl=>{
+      const ids=[sl.original,...sl.substitutos.map(s=>s.id)];
+      return ids.some(id=>{const e=EX[id];return e&&norm([e.nome,...(e.aliases||[]),...(e.grupo_primario||[]),...(e.grupo_secundario||[]),e.padrao,...(e.equipamento||[])].join(' ')).includes(q)})||norm(sl.objetivo).includes(q);
+    });
+    list.innerHTML=hits.length?hits.map(sl=>{const t=TREINOS.find(t=>t.id===sl.treino);return `<p class="sub" style="margin-top:4px">${esc(t?t.nome:sl.treino)}</p>`+slotCard(sl,false)}).join(''):'<p class="sub">Nada encontrado. Tente o nome do músculo (glúteo, dorsal) ou do aparelho (cabo, halter).</p>';
+    return;
+  }
+  const t=TREINOS.find(t=>t.id===state.treino);
+  ban.innerHTML=t&&t.aviso?`<p class="banner"><b>${esc(t.nome)}.</b> ${esc(t.aviso)}</p>`:'';
+  list.innerHTML=D.slots.filter(s=>s.treino===state.treino).sort((a,b)=>String(a.ordem).localeCompare(String(b.ordem),undefined,{numeric:true})).map(sl=>slotCard(sl,false)).join('');
+}
+document.getElementById('tabs').addEventListener('click',ev=>{const b=ev.target.closest('.tab');if(!b)return;state.treino=b.dataset.t;state.q='';document.getElementById('q').value='';store('eq-treino',state.treino);render()});
+document.getElementById('q').addEventListener('input',ev=>{state.q=ev.target.value;render()});
+state.treino=today();
+document.getElementById('rev').textContent=`Lista revisada em ${D.revisado_em_br}. Próxima revisão: ${D.proxima_revisao_br}.`;
+render();
+})();
+</script>

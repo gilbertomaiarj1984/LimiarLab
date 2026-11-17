@@ -1,0 +1,137 @@
+{
+  "id": "superiores-quarta",
+  "nome": "Superiores B: costas, ombros e core (quarta)",
+  "dia": "quarta",
+  "status": "proposto",
+  "objetivo": "Estética com prioridade para costas, mais core antirrotação para a corrida. Dia sem corrida.",
+  "duracao_min": [
+    40,
+    45
+  ],
+  "rir": [
+    1,
+    3
+  ],
+  "descanso_s": [
+    60,
+    90
+  ],
+  "aquecimento": "5 min de remo ou elíptico leve e 1 série leve de 12 do primeiro exercício",
+  "nota_carga": "Faixa de 8 a 12 repetições (12 a 15 na elevação lateral). Core sem carga alta: qualidade antes de volume. % de 1RM aproximado para 8-12 repetições com 1-3 sobrando; vale a carga que deixa essa reserva.",
+  "exercicios": [
+    {
+      "ordem": 1,
+      "nome": "Remada unilateral com halter (serrote)",
+      "series": 3,
+      "reps": "8-12 por lado",
+      "foco": "Costas (dorsal)",
+      "dicas": [
+        "Joelho e mão do mesmo lado apoiados no banco, costas retas.",
+        "Puxe o halter em direção ao quadril.",
+        "Sem girar o tronco."
+      ],
+      "ilustracao": "assets/svg/serrote.svg",
+      "descanso_s": 90,
+      "carga_pct_1rm": [
+        65,
+        75
+      ]
+    },
+    {
+      "ordem": 2,
+      "nome": "Puxada com pegada neutra fechada",
+      "series": 3,
+      "reps": "8-12",
+      "foco": "Costas (dorsal)",
+      "dicas": [
+        "Triângulo ou pegada neutra.",
+        "Leve o puxador ao peito, cotovelos rentes ao corpo."
+      ],
+      "ilustracao": "assets/svg/puxada.svg",
+      "descanso_s": 90,
+      "carga_pct_1rm": [
+        65,
+        75
+      ]
+    },
+    {
+      "ordem": 3,
+      "nome": "Supino reto na máquina ou com halteres",
+      "series": 3,
+      "reps": "8-12",
+      "foco": "Peito",
+      "dicas": [
+        "Escápulas juntas e apoiadas.",
+        "Desça controlado até a linha do peito."
+      ],
+      "ilustracao": "assets/svg/supino-reto.svg",
+      "descanso_s": 90,
+      "carga_pct_1rm": [
+        65,
+        75
+      ]
+    },
+    {
+      "ordem": 4,
+      "nome": "Elevação lateral com halteres",
+      "series": 3,
+      "reps": "12-15",
+      "foco": "Ombros (lateral)",
+      "dicas": [
+        "Cotovelos levemente dobrados.",
+        "Suba até a linha dos ombros, sem balançar o tronco."
+      ],
+      "ilustracao": "assets/svg/elevacao-lateral.svg",
+      "descanso_s": 60,
+      "carga_pct_1rm": [
+        55,
+        65
+      ]
+    },
+    {
+      "ordem": 5,
+      "nome": "Rosca martelo + tríceps francês (alternados)",
+      "series": 2,
+      "reps": "10-12 cada",
+      "foco": "Braços",
+      "dicas": [
+        "Faça uma série de cada, um depois do outro, e descanse depois do par."
+      ],
+      "ilustracao": "assets/svg/martelo-frances.svg",
+      "descanso_s": 60,
+      "carga_pct_1rm": [
+        60,
+        70
+      ]
+    },
+    {
+      "ordem": 6,
+      "nome": "Pallof press no cabo",
+      "series": 3,
+      "reps": "10 por lado",
+      "foco": "Core antirrotação",
+      "dicas": [
+        "De lado para a polia, cabo na altura do peito.",
+        "Empurre as mãos à frente e segure 2 s sem deixar o tronco girar."
+      ],
+      "ilustracao": "assets/svg/pallof.svg",
+      "carga": "Leve a moderada",
+      "descanso_s": 45
+    },
+    {
+      "ordem": 7,
+      "nome": "Caminhada com halter em uma mão (suitcase carry)",
+      "series": 3,
+      "reps": "30 m por lado",
+      "foco": "Core lateral e quadril",
+      "dicas": [
+        "Halter pesado numa mão só.",
+        "Ande devagar com o tronco reto, sem inclinar para o lado do peso."
+      ],
+      "ilustracao": "assets/svg/suitcase-carry.svg",
+      "carga": "Halter pesado",
+      "descanso_s": 60
+    }
+  ],
+  "referencia": "Schoenfeld et al., 2017 (volume semanal por grupo). Core antirrotação conforme D10."
+}

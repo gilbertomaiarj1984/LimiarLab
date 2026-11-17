@@ -17,8 +17,26 @@ Projeto em fase inicial. O que existe hoje veio de uma sessão de análise com C
 | [`docs/musculacao.md`](docs/musculacao.md) | Avaliação do treino de força e a proposta para corredor. |
 | [`docs/roadmap.md`](docs/roadmap.md) | Ideias e próximos passos da aplicação. |
 | [`data/`](data/) | Dados estruturados: zonas, semana de treino e treinos de força em JSON. |
+| [`web/`](web/) | **App LimiarLab** (Next.js, PWA): semana, plano, análise e perfil. Ver abaixo. |
+| [`infra/`](infra/) | Deploy na VPS: compose, Caddy, banco, backup. Passos em [`infra/README.md`](infra/README.md). |
+| [`docs/evidencias.md`](docs/evidencias.md) | Referências científicas por trás de cada regra do app. |
+| [`docs/importacao.md`](docs/importacao.md) | Contrato do `POST /api/import` e o prompt da rotina do Claude. |
 | [`app/web/`](app/web/) | Primeira tela: treino de inferiores de quinta, para usar no celular. |
 | [`assets/svg/`](assets/svg/) | Ilustrações dos exercícios. |
+
+## App LimiarLab (`web/`)
+
+Uso diário no celular: a semana de segunda a domingo, o que está planejado, o que foi feito e as estatísticas (km, tempo, D+, força por tipo, distribuição de intensidade pelos limiares, salto de volume). A análise e a prescrição ficam com o Claude, que envia os dados por uma rotina (`POST /api/import`).
+
+```bash
+cd web
+npm ci
+npm test            # regras de domínio e sessão (node:test)
+npm run typecheck
+npm run dev         # precisa de DATABASE_URL, APP_PASSWORD, SESSION_SECRET, IMPORT_TOKEN
+```
+
+Fase 1: um atleta por instância e uma senha de acesso. O banco já é multiusuário (atletas, coaches, vínculos) para a esposa e, depois, treinadores.
 
 ## Rodar a tela do treino
 
