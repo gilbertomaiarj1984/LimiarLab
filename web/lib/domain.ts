@@ -37,6 +37,8 @@ export type Activity = {
   maxHr: number | null;
   hrZones: HrZone[] | null;
   source: string;
+  /** Voltas já lidas do Strava (cache); null enquanto não buscadas. */
+  laps?: import("./laps.ts").Lap[] | null;
 };
 
 export type Planned = {

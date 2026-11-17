@@ -5,6 +5,7 @@ import {
 } from "@/lib/domain";
 import { clock, km, pace } from "@/lib/format";
 import { SportIcon } from "./icons";
+import { intervalSummary } from "@/lib/laps";
 
 const dayLabel = (iso: string) => `${WEEKDAY_SHORT[weekdayIndex(iso)]} ${shortDate(iso)}`;
 const SOURCE_LABEL: Record<string, string> = { garmin: "Garmin", strava: "Strava", limiarlab: "plano semanal", claude: "Claude", manual: "manual" };
@@ -14,11 +15,12 @@ export function ActivityCard({ a, phys, time }: { a: Activity; phys: Physiology;
   if (a.sport === "run") {
     const pc = a.hrZones?.length ? splitPercents(intensitySplit(a.hrZones, phys)) : null;
     const off = easyDayOffTarget(a, phys);
+    const iv = intervalSummary(a.laps);
     return (
       <article className="sess">
         <div className="ico"><SportIcon sport="run" /></div>
         <div>
-          <h3>{a.name}</h3>
+          <h3><Link href={`/atividade/${a.id}`}>{a.name}</Link></h3>
           <div className="meta">
             {dayLabel(a.date)} · {time} · {KIND_LABEL[a.kind]}{a.kindInferred ? " (pelo plano)" : ""}
           </div>
@@ -29,7 +31,9 @@ export function ActivityCard({ a, phys, time }: { a: Activity; phys: Physiology;
             {a.avgHr != null && <span>FC {a.avgHr}{a.maxHr != null ? ` / ${a.maxHr}` : ""}</span>}
             {a.elevGainM != null && <span>D+ {Math.round(a.elevGainM)} m</span>}
           </div>
+          {iv && <div className="facts"><span><b>Intervalado</b> {iv}</span></div>}
           <div className="chips">
+            <Link href={`/atividade/${a.id}`} className="chip">detalhes das voltas ›</Link>
             {pc && (
               <>
                 <span className="chip easy">{pc.easy}% leve</span>
