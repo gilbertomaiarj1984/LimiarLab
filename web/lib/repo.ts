@@ -86,7 +86,7 @@ export async function lastImport(athleteId: string): Promise<Date | null> {
   return r?.at ?? null;
 }
 
-export type ImportResult = { planned: number; activities: number; workouts: number; races: number; removed: number };
+export type ImportResult = { planned: number; activities: number; workouts: number; races: number; removed: number; zones: number };
 
 /** Grava o lote numa transação única: ou entra tudo, ou nada. */
 export async function applyImport(athlete: Athlete, p: ImportPayload): Promise<ImportResult> {
@@ -159,9 +159,21 @@ export async function applyImport(athlete: Athlete, p: ImportPayload): Promise<I
           elevation_gain_m = EXCLUDED.elevation_gain_m, avg_hr = EXCLUDED.avg_hr, max_hr = EXCLUDED.max_hr,
           hr_zones = EXCLUDED.hr_zones, updated_at = now()`;
     }
+    // Zonas de FC em corridas existentes (a mais próxima do início, até 10 min).
+    let zonesSet = 0;
+    for (const z of p.zones ?? []) {
+      const res = await tx`
+        UPDATE activities SET hr_zones = ${tx.json(z.hr_zones)}, updated_at = now()
+        WHERE id = (
+          SELECT id FROM activities
+          WHERE athlete_id = ${athlete.id} AND sport = 'run'
+            AND start_time BETWEEN ${new Date(Date.parse(z.start_time) - 600_000)} AND ${new Date(Date.parse(z.start_time) + 600_000)}
+          ORDER BY abs(extract(epoch FROM start_time - ${new Date(z.start_time)}::timestamptz)) LIMIT 1)`;
+      zonesSet += res.count;
+    }
     await tx`
       INSERT INTO import_log (athlete_id, planned, activities, removed)
       VALUES (${athlete.id}, ${p.planned.length}, ${p.activities.length}, ${removed})`;
-    return { planned: p.planned.length, activities: p.activities.length, workouts: p.workouts.length, races: p.races.length, removed };
+    return { planned: p.planned.length, activities: p.activities.length, workouts: p.workouts.length, races: p.races.length, removed, zones: zonesSet };
   });
 }

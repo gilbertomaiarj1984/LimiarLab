@@ -269,3 +269,5 @@ a.wk{color:var(--acc);text-decoration:none;font-weight:600}
 .sync-btn{display:inline-block;text-decoration:none;color:var(--ink,inherit);min-height:40px}
 .sync-btn:disabled{opacity:.6}
 .sync-msg{font-size:.82rem;color:var(--muted)}
+
+.buildtag{margin:0;padding:0 16px 76px;text-align:center;font-size:.66rem;color:var(--muted);opacity:.7}

@@ -137,3 +137,10 @@ Cada entrada: o que foi decidido, por quê e o estado. Mais recentes no fim.
 - **Decisão:** o botão "Atualizar" e uma rotina diária às 9h (fuso do atleta, dentro do app) leem o Strava pela API oficial (só leitura, escopo `activity:read_all`) e gravam só atividades novas. Atividades do Strava que vêm do Garmin (`external_id` `garmin_push_<id>`) entram como fonte `garmin` com o mesmo id, sem duplicar. Parcialmente substitui D15 (Strava direto era fase 2).
 - **Por quê:** o app na VPS não alcança o conector Garmin, que só existe nas sessões do Claude; o Strava espelha o Garmin (308 atividades iguais no último ano). Sem credencial do Garmin na VPS. Zonas de FC por corrida seguem pela rotina do Claude. Nunca regrava atividade existente, para não apagar zonas.
 - **Estado:** adotada.
+
+## D20 · Zonas de FC por `zones`, sem duplicar atividades
+
+- **Data:** 17/11/2026
+- **Decisão:** o lote de importação aceita `zones` (início + zonas), que só preenche `hr_zones` de uma corrida existente, a mais próxima do início (até 10 min). A rotina do Claude envia zonas e planejados; as atividades vêm só do Strava.
+- **Por quê:** o Strava não traz tempo por zona, e reenviar a atividade pelo Garmin criaria linha dupla quando o id do Garmin não vem no Strava.
+- **Estado:** adotada.
