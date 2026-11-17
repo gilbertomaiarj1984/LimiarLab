@@ -18,7 +18,7 @@ export function ActivityCard({ a, phys, time }: { a: Activity; phys: Physiology;
       <article className="sess">
         <div className="ico"><SportIcon sport="run" /></div>
         <div>
-          <h3>{a.name}</h3>
+          <h3><Link href={`/atividade/${a.id}`}>{a.name}</Link></h3>
           <div className="meta">
             {dayLabel(a.date)} · {time} · {KIND_LABEL[a.kind]}{a.kindInferred ? " (pelo plano)" : ""}
           </div>
@@ -30,6 +30,7 @@ export function ActivityCard({ a, phys, time }: { a: Activity; phys: Physiology;
             {a.elevGainM != null && <span>D+ {Math.round(a.elevGainM)} m</span>}
           </div>
           <div className="chips">
+            <Link href={`/atividade/${a.id}`} className="chip">detalhes das voltas ›</Link>
             {pc && (
               <>
                 <span className="chip easy">{pc.easy}% leve</span>

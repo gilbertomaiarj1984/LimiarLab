@@ -50,6 +50,17 @@ export async function getActivities(athleteId: string, from: string, to: string)
   }));
 }
 
+export async function getActivity(athleteId: string, id: string): Promise<Activity | null> {
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return null;
+  const [r] = await sql<ActivityRow[]>`
+    SELECT id, to_char(date, 'YYYY-MM-DD') AS date, start_time AS "startTime", sport, kind, name,
+           duration_s AS "durationS", distance_m AS "distanceM", elevation_gain_m AS "elevGainM",
+           avg_hr AS "avgHr", max_hr AS "maxHr", hr_zones AS "hrZones", source
+    FROM activities WHERE athlete_id = ${athleteId} AND id = ${id}`;
+  if (!r) return null;
+  return { ...r, startTime: r.startTime.toISOString(), hrZones: r.hrZones?.map((z): HrZone => ({ minBpm: z.min_bpm, seconds: z.seconds })) ?? null };
+}
+
 export async function getPlanned(athleteId: string, from: string, to: string): Promise<Planned[]> {
   return sql<Planned[]>`
     SELECT id, to_char(date, 'YYYY-MM-DD') AS date, sport, kind, title, notes,

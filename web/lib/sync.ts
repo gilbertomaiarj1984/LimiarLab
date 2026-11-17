@@ -4,6 +4,7 @@ import { applyImport, getAthlete, type Athlete } from "./repo";
 import { localDate } from "./domain";
 import { mapStravaActivity, sameInstant, type StravaActivity } from "./strava";
 import type { ActivityIn } from "./import-schema";
+import { mapStravaLaps, type Lap, type StravaLap } from "./laps";
 
 const API = "https://www.strava.com/api/v3";
 export const SYNC_HOUR = 9; // no fuso do atleta
@@ -96,21 +97,43 @@ export async function syncStrava(athlete: Athlete, days = LOOKBACK_DAYS): Promis
   try {
     const token = await freshToken(c);
     const since = Date.now() - days * 86_400_000;
-    const existing = await sql<{ source: string; externalId: string; startTime: Date }[]>`
-      SELECT source, external_id AS "externalId", start_time AS "startTime" FROM activities
+    const existing = await sql<{ rowId: string; source: string; externalId: string; startTime: Date; stravaId: string | null }[]>`
+      SELECT id AS "rowId", source, external_id AS "externalId", start_time AS "startTime", strava_id::text AS "stravaId" FROM activities
       WHERE athlete_id = ${athlete.id} AND start_time >= ${new Date(since - 86_400_000)}`;
-    const known = existing.map((e) => ({ source: e.source, id: e.externalId, start: e.startTime.toISOString() }));
+    const known = existing.map((e) => ({ rowId: e.rowId as string | undefined, source: e.source, id: e.externalId, start: e.startTime.toISOString(), stravaId: e.stravaId }));
     let vistas = 0, novas = 0;
     for await (const list of pages(token, Math.floor(since / 1000), days > LOOKBACK_DAYS ? 60 : 3)) {
       vistas += list.length;
       const fresh: ActivityIn[] = [];
-      for (const m of list.filter((a) => !a.manual).map(mapStravaActivity)) {
+      const freshLinks: { source: string; ext: string; sid: string }[] = [];
+      const rowLinks: { rowId: string; sid: string }[] = [];
+      for (const a of list) {
+        if (a.manual) continue;
+        const m = mapStravaActivity(a);
         if (!m) continue;
-        if (known.some((e) => (e.source === m.source && e.id === m.external_id) || sameInstant(e.start, m.start_time))) continue;
-        known.push({ source: m.source, id: m.external_id, start: m.start_time });
+        const dup = known.find((e) => (e.source === m.source && e.id === m.external_id) || sameInstant(e.start, m.start_time));
+        if (dup) {
+          // Já existe: só guarda o id do Strava (para buscar as voltas depois), sem regravar a atividade.
+          if (!dup.stravaId && dup.rowId) { rowLinks.push({ rowId: dup.rowId, sid: String(a.id) }); dup.stravaId = String(a.id); }
+          continue;
+        }
+        known.push({ rowId: undefined, source: m.source, id: m.external_id, start: m.start_time, stravaId: String(a.id) });
         fresh.push(m);
+        freshLinks.push({ source: m.source, ext: m.external_id, sid: String(a.id) });
       }
-      if (fresh.length) await applyImport(athlete, { athlete: athlete.slug, planned: [], activities: fresh, zones: [], workouts: [], races: [] });
+      if (fresh.length) {
+        await applyImport(athlete, { athlete: athlete.slug, planned: [], activities: fresh, zones: [], workouts: [], races: [] });
+        await sql`
+          UPDATE activities a SET strava_id = v.sid::bigint
+          FROM unnest(${freshLinks.map((x) => x.source)}::text[], ${freshLinks.map((x) => x.ext)}::text[], ${freshLinks.map((x) => x.sid)}::text[]) AS v(src, ext, sid)
+          WHERE a.athlete_id = ${athlete.id} AND a.source = v.src AND a.external_id = v.ext`;
+      }
+      if (rowLinks.length) {
+        await sql`
+          UPDATE activities a SET strava_id = v.sid::bigint
+          FROM unnest(${rowLinks.map((x) => x.rowId)}::uuid[], ${rowLinks.map((x) => x.sid)}::text[]) AS v(id, sid)
+          WHERE a.athlete_id = ${athlete.id} AND a.id = v.id`;
+      }
       novas += fresh.length;
     }
     await sql`UPDATE strava_connections SET last_sync_at = now(), last_sync_error = NULL WHERE athlete_id = ${athlete.id}`;
@@ -143,5 +166,30 @@ export async function runDailySync(now = new Date()): Promise<void> {
     await sql`UPDATE strava_connections SET last_auto_date = ${today} WHERE athlete_id = ${athlete.id}`;
   } catch (e) {
     console.error("[limiarlab] sync diário falhou:", e instanceof Error ? e.message : e);
+  }
+}
+
+export type LapsResult = { laps: Lap[] | null; motivo?: "sem_strava" | "erro"; erro?: string };
+
+/** Voltas da corrida: do cache, ou do Strava (uma consulta) e guarda. */
+export async function loadLaps(athlete: Athlete, activityId: string): Promise<LapsResult> {
+  await ensureSchema();
+  const [row] = await sql<{ stravaId: string | null; laps: Lap[] | null }[]>`
+    SELECT strava_id::text AS "stravaId", laps FROM activities WHERE id = ${activityId} AND athlete_id = ${athlete.id}`;
+  if (!row) return { laps: null, motivo: "erro", erro: "atividade não encontrada" };
+  if (row.laps) return { laps: row.laps };
+  if (!row.stravaId) return { laps: null, motivo: "sem_strava" };
+  const c = await getConnection(athlete.id);
+  if (!c) return { laps: null, motivo: "sem_strava" };
+  try {
+    const token = await freshToken(c);
+    const res = await fetch(`${API}/activities/${row.stravaId}/laps`, { headers: { authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+    if (res.status === 429) return { laps: null, motivo: "erro", erro: "Limite de consultas do Strava. Tente em alguns minutos." };
+    if (!res.ok) return { laps: null, motivo: "erro", erro: `Strava respondeu HTTP ${res.status}` };
+    const laps = mapStravaLaps((await res.json()) as StravaLap[]);
+    await sql`UPDATE activities SET laps = ${sql.json(laps)} WHERE id = ${activityId} AND athlete_id = ${athlete.id}`;
+    return { laps };
+  } catch (e) {
+    return { laps: null, motivo: "erro", erro: e instanceof Error ? e.message : "falha ao buscar voltas" };
   }
 }
