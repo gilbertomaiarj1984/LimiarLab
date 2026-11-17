@@ -5,10 +5,11 @@ import {
   type Activity, type Physiology,
 } from "@/lib/domain";
 import { hm, km } from "@/lib/format";
+import Link from "next/link";
 import TabBar from "@/components/TabBar";
 
 export const dynamic = "force-dynamic";
-const WEEKS = 5;
+const RANGES = [5, 13, 26, 52, 104] as const;
 
 type W = { start: string; km: number; seconds: number; elev: number; longest: number; strength: number; lower: number; upper: number; race: boolean; pc: ReturnType<typeof splitPercents> };
 
@@ -29,7 +30,11 @@ function summarize(start: string, acts: Activity[], phys: Physiology): W {
   };
 }
 
-export default async function Analise() {
+export default async function Analise({ searchParams }: { searchParams: Promise<{ semanas?: string }> }) {
+  const { semanas } = await searchParams;
+  const WEEKS: number = RANGES.find((r) => String(r) === semanas) ?? 5;
+  const wide = WEEKS > 13;
+  const lblStep = Math.max(1, Math.ceil(WEEKS / 8));
   const { athlete, today, phys } = await loadContext();
   const cur = weekStart(today);
   const first = addDays(cur, -7 * (WEEKS - 1));
@@ -44,7 +49,7 @@ export default async function Analise() {
   const VW = 520, VH = 220, VL = 40, VR = 10, VT = 26, VB = 30, vih = VH - VT - VB, viw = VW - VL - VR;
   const vmax = Math.max(20, Math.ceil(Math.max(...weeks.map((w) => w.km)) / 20) * 20);
   const vy = (v: number) => VT + vih - (v / vmax) * vih;
-  const bw = (viw / WEEKS) * 0.56;
+  const bw = (viw / WEEKS) * (wide ? 0.8 : 0.56);
   const ticks = Array.from({ length: vmax / 20 + 1 }, (_, i) => i * 20);
 
   // FC média por corrida
@@ -57,13 +62,18 @@ export default async function Analise() {
   const fticks = [130, 140, 150, 160, 170].filter((v) => v > ylo && v < yhi);
 
   // Intensidade (barras 100%)
-  const IW = 520, rowH = 30, IL = 60, IR = 24, IT = 28, iiw = IW - IL - IR;
-  const iEnd = IT + WEEKS * (rowH + 10) - 10;
+  const IW = 520, rowH = wide ? 8 : 30, rowGap = wide ? 4 : 10, IL = 60, IR = 24, IT = 28, iiw = IW - IL - IR;
+  const iEnd = IT + WEEKS * (rowH + rowGap) - rowGap;
 
   return (
     <>
       <main className="view">
-        <header><p className="eyebrow">Análise</p><h1>Últimas {WEEKS} semanas</h1></header>
+        <header>
+          <p className="eyebrow">Análise</p><h1>Últimas {WEEKS} semanas</h1>
+          <nav className="weeknav" aria-label="Período" style={{ marginTop: 10 }}>
+            {RANGES.map((r) => <Link key={r} href={r === 5 ? "/analise" : `/analise?semanas=${r}`} aria-current={r === WEEKS ? "page" : undefined} style={r === WEEKS ? { fontWeight: 700, textDecoration: "underline" } : undefined}>{r === 52 ? "1 ano" : r === 104 ? "2 anos" : `${r} sem`}</Link>)}
+          </nav>
+        </header>
 
         <section>
           <div className="sec-head"><h2>Volume de corrida</h2><span>km por semana</span></div>
@@ -77,8 +87,8 @@ export default async function Analise() {
                 return (
                   <g key={w.start}>
                     <rect x={cx - bw / 2} y={vy(w.km)} width={bw} height={vy(0) - vy(w.km)} rx={3} style={{ fill: w.race ? "var(--acc)" : "var(--ink)" }} />
-                    <text className="lbl" x={cx} y={vy(w.km) - 6} textAnchor="middle">{km(w.km)}</text>
-                    <text x={cx} y={VH - 8} textAnchor="middle">{shortDate(w.start)}</text>
+                    {!wide && <text className="lbl" x={cx} y={vy(w.km) - 6} textAnchor="middle">{km(w.km)}</text>}
+                    {i % lblStep === 0 && <text x={cx} y={VH - 8} textAnchor="middle">{shortDate(w.start)}</text>}
                   </g>
                 );
               })}
@@ -90,23 +100,25 @@ export default async function Analise() {
         <section>
           <div className="sec-head"><h2>Distribuição de intensidade</h2><span>tempo de corrida na zona</span></div>
           <div className="panel">
+            {weeks.every((w) => !w.pc) ? <p className="muted">Sem zonas de FC neste período. O Strava não traz o tempo por zona; as zonas vêm do Garmin pela rotina do Claude.</p> : <>
             <svg className="chart" viewBox={`0 0 ${IW} ${iEnd + 26}`} role="img" aria-label="Percentual do tempo de corrida em cada faixa, por semana">
               <text x={IL} y={16}>0%</text><text x={IL + iiw / 2} y={16} textAnchor="middle">50%</text><text x={IL + iiw} y={16} textAnchor="end">100%</text>
               {weeks.map((w, i) => {
-                const y = IT + i * (rowH + 10);
-                if (!w.pc) return <g key={w.start}><text x={IL - 8} y={y + rowH / 2 + 5} textAnchor="end">{shortDate(w.start)}</text><text x={IL} y={y + rowH / 2 + 5}>sem corridas</text></g>;
+                const y = IT + i * (rowH + rowGap);
+                const lab = !wide || i % lblStep === 0;
+                if (!w.pc) return <g key={w.start}>{lab && <text x={IL - 8} y={y + rowH / 2 + 5} textAnchor="end">{shortDate(w.start)}</text>}{!wide && <text x={IL} y={y + rowH / 2 + 5}>{w.km > 0 ? "sem zonas de FC" : "sem corridas"}</text>}</g>;
                 const segs: [number, string][] = [[w.pc.easy, "var(--easy)"], [w.pc.moderate, "var(--mod)"], [w.pc.hard, "var(--hard)"]];
                 let x = IL;
                 return (
                   <g key={w.start}>
-                    <text x={IL - 8} y={y + rowH / 2 + 5} textAnchor="end">{shortDate(w.start)}</text>
+                    {lab && <text x={IL - 8} y={y + rowH / 2 + 5} textAnchor="end">{shortDate(w.start)}</text>}
                     {segs.map(([v, c], j) => {
                       const wd = (v / 100) * iiw, x0 = x;
                       x += wd;
                       return (
                         <g key={j}>
                           <rect x={x0} y={y} width={wd} height={rowH} style={{ fill: c }} />
-                          {v >= 10 && <text x={x0 + wd / 2} y={y + rowH / 2 + 5} textAnchor="middle" style={{ fill: "#fff", fontWeight: 600 }}>{v}%</text>}
+                          {!wide && v >= 10 && <text x={x0 + wd / 2} y={y + rowH / 2 + 5} textAnchor="middle" style={{ fill: "#fff", fontWeight: 600 }}>{v}%</text>}
                         </g>
                       );
                     })}
@@ -118,6 +130,7 @@ export default async function Analise() {
             </svg>
             <div className="keys"><span><i className="e" />leve, abaixo de {phys.lv1}</span><span><i className="m" />moderado, {phys.lv1} a {phys.hardFrom - 1}</span><span><i className="h" />forte, {phys.hardFrom} ou mais</span></div>
             <p>No período, o tempo leve chegou no máximo a {maxEasy}% numa semana. A referência para endurance é perto de 80% abaixo do LV1, com o resto concentrado em sessões fortes de verdade.</p>
+            </>}
           </div>
         </section>
 
@@ -130,9 +143,9 @@ export default async function Analise() {
               <text x={FL + fiw + 6} y={fy(phys.lv1) + 5} style={{ fill: "var(--ink)", fontWeight: 600 }}>LV1 {phys.lv1}</text>
               <line className="refg" x1={FL} x2={FL + fiw} y1={fy(phys.easyTarget)} y2={fy(phys.easyTarget)} />
               <text x={FL + fiw + 6} y={fy(phys.easyTarget) + 5} style={{ fill: "var(--easy)", fontWeight: 600 }}>meta {phys.easyTarget}</text>
-              {weeks.map((w) => <text key={w.start} x={fx(w.start)} y={FH - 6} textAnchor="middle">{shortDate(w.start)}</text>)}
+              {weeks.map((w, i) => i % lblStep === 0 && <text key={w.start} x={fx(w.start)} y={FH - 6} textAnchor="middle">{shortDate(w.start)}</text>)}
               {runs.map((a) => (
-                <circle key={a.id} cx={fx(a.date)} cy={fy(a.avgHr!)} r={5.5} style={{ fill: EASY_KINDS.includes(a.kind) ? "var(--acc)" : "var(--muted)", stroke: "var(--card)", strokeWidth: 1.5 }}>
+                <circle key={a.id} cx={fx(a.date)} cy={fy(a.avgHr!)} r={wide ? 3 : 5.5} style={{ fill: EASY_KINDS.includes(a.kind) ? "var(--acc)" : "var(--muted)", stroke: "var(--card)", strokeWidth: 1.5 }}>
                   <title>{`${shortDate(a.date)} · ${a.name} · FC ${a.avgHr}`}</title>
                 </circle>
               ))}

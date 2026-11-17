@@ -2,12 +2,15 @@ import { loadContext } from "@/lib/context";
 import { lastImport, listAthletes } from "@/lib/repo";
 import { localDate, localTime, shortDate } from "@/lib/domain";
 import TabBar from "@/components/TabBar";
+import HistoryButton from "@/components/HistoryButton";
+import { syncStatus } from "@/lib/sync-status";
 
 export const dynamic = "force-dynamic";
 
 export default async function Perfil() {
   const { athlete, phys, today } = await loadContext();
   const [last, athletes] = await Promise.all([lastImport(athlete.id), listAthletes()]);
+  const sync = await syncStatus(athlete.id, athlete.timezone);
   const lastTxt = last
     ? `${localDate(last, athlete.timezone) === today ? "hoje" : shortDate(localDate(last, athlete.timezone))}, ${localTime(last, athlete.timezone)}`
     : "ainda não recebeu dados";
@@ -51,7 +54,15 @@ export default async function Perfil() {
           <div className="sec-head"><h2>Conexões</h2></div>
           <div className="box">
             <div className="conn"><div><h3>Garmin Connect</h3><p className="muted small">Pela rotina do Claude. Última importação: {lastTxt}.</p></div><span className={`st ${last ? "ok" : "wait"}`}>{last ? "ativa" : "aguardando"}</span></div>
-            <div className="conn"><div><h3>Strava</h3><p className="muted small">Realizados automáticos pela API oficial. Entra na fase 2.</p></div><button className="btn" type="button" disabled>Conectar</button></div>
+            <div className="conn">
+              <div>
+                <h3>Strava</h3>
+                <p className="muted small">{!sync.configured ? "Ainda não configurado no servidor." : sync.connected ? `Realizados automáticos às 9h e no botão Atualizar. ${sync.lastSync ? `Última: ${sync.lastSync}.` : ""}` : "Leitura das atividades pela API oficial."}</p>
+              </div>
+              {sync.configured && !sync.connected && <a className="btn" href="/api/strava/connect">Conectar</a>}
+              {sync.connected && <span className="st ok">ativa</span>}
+            </div>
+            {sync.connected && <div className="conn"><div><h3>Histórico</h3><p className="muted small">Traz de novo os últimos 2 anos (só o que falta).</p></div><HistoryButton /></div>}
           </div>
         </section>
 
