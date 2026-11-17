@@ -8,7 +8,7 @@ import type { ActivityIn } from "./import-schema";
 const API = "https://www.strava.com/api/v3";
 export const SYNC_HOUR = 9; // no fuso do atleta
 const LOOKBACK_DAYS = 14;
-/** Histórico completo: 2 anos (o Strava do atleta começa em 2024). Até 12 páginas de 100. */
+/** Histórico completo: 2 anos (o Strava do atleta começa em 2024). Percorre as páginas até uma vir vazia (máx. 60). */
 export const HISTORY_DAYS = 800;
 const MAX_DAYS = 1500;
 const FETCH_TIMEOUT_MS = 20_000;
@@ -66,10 +66,10 @@ async function freshToken(c: Connection): Promise<string> {
   return t.access_token;
 }
 
-async function fetchRecent(token: string, afterEpoch: number, maxPages: number): Promise<StravaActivity[]> {
-  const out: StravaActivity[] = [];
+/** Uma página por vez (a mais antiga primeiro): quem chama grava cada página, então uma falha no meio não perde o que já veio. */
+async function* pages(token: string, afterEpoch: number, maxPages: number): AsyncGenerator<StravaActivity[]> {
   for (let page = 1; page <= maxPages; page++) {
-    const res = await fetch(`${API}/athlete/activities?after=${afterEpoch}&per_page=100&page=${page}`, {
+    const res = await fetch(`${API}/athlete/activities?after=${afterEpoch}&per_page=200&page=${page}`, {
       headers: { authorization: `Bearer ${token}` },
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
@@ -77,10 +77,10 @@ async function fetchRecent(token: string, afterEpoch: number, maxPages: number):
     if (res.status === 429) throw new Error("Limite de consultas do Strava. Tente em alguns minutos.");
     if (!res.ok) throw new Error(`Strava respondeu HTTP ${res.status}`);
     const list = (await res.json()) as StravaActivity[];
-    out.push(...list);
-    if (list.length < 100) break;
+    // O Strava pode devolver páginas incompletas: só uma página vazia indica o fim.
+    if (list.length === 0) return;
+    yield list;
   }
-  return out;
 }
 
 export type SyncResult = { vistas: number; novas: number; ignoradas: number };
@@ -96,21 +96,25 @@ export async function syncStrava(athlete: Athlete, days = LOOKBACK_DAYS): Promis
   try {
     const token = await freshToken(c);
     const since = Date.now() - days * 86_400_000;
-    const seen = await fetchRecent(token, Math.floor(since / 1000), days > LOOKBACK_DAYS ? 12 : 3);
-    const mapped = seen.filter((a) => !a.manual).map(mapStravaActivity).filter((x): x is ActivityIn => x !== null);
     const existing = await sql<{ source: string; externalId: string; startTime: Date }[]>`
       SELECT source, external_id AS "externalId", start_time AS "startTime" FROM activities
       WHERE athlete_id = ${athlete.id} AND start_time >= ${new Date(since - 86_400_000)}`;
-    const fresh: ActivityIn[] = [];
-    for (const m of mapped) {
-      const dup = existing.some((e) => (e.source === m.source && e.externalId === m.external_id) || sameInstant(e.startTime.toISOString(), m.start_time));
-      if (!dup) fresh.push(m);
-    }
-    for (let i = 0; i < fresh.length; i += 400) {
-      await applyImport(athlete, { athlete: athlete.slug, planned: [], activities: fresh.slice(i, i + 400), zones: [], workouts: [], races: [] });
+    const known = existing.map((e) => ({ source: e.source, id: e.externalId, start: e.startTime.toISOString() }));
+    let vistas = 0, novas = 0;
+    for await (const list of pages(token, Math.floor(since / 1000), days > LOOKBACK_DAYS ? 60 : 3)) {
+      vistas += list.length;
+      const fresh: ActivityIn[] = [];
+      for (const m of list.filter((a) => !a.manual).map(mapStravaActivity)) {
+        if (!m) continue;
+        if (known.some((e) => (e.source === m.source && e.id === m.external_id) || sameInstant(e.start, m.start_time))) continue;
+        known.push({ source: m.source, id: m.external_id, start: m.start_time });
+        fresh.push(m);
+      }
+      if (fresh.length) await applyImport(athlete, { athlete: athlete.slug, planned: [], activities: fresh, zones: [], workouts: [], races: [] });
+      novas += fresh.length;
     }
     await sql`UPDATE strava_connections SET last_sync_at = now(), last_sync_error = NULL WHERE athlete_id = ${athlete.id}`;
-    return { vistas: seen.length, novas: fresh.length, ignoradas: seen.length - fresh.length };
+    return { vistas, novas, ignoradas: vistas - novas };
   } catch (e) {
     const msg = e instanceof Error ? e.message : "erro desconhecido";
     await sql`UPDATE strava_connections SET last_sync_error = ${msg.slice(0, 300)} WHERE athlete_id = ${athlete.id}`;
