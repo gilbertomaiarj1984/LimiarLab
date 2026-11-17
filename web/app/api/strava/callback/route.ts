@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { appUrl } from "@/lib/app-url";
 import { getAthlete } from "@/lib/repo";
-import { saveConnectionFromCode, syncStrava } from "@/lib/sync";
+import { HISTORY_DAYS, saveConnectionFromCode, syncStrava } from "@/lib/sync";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
   if (!athlete) return back("erro");
   try {
     await saveConnectionFromCode(athlete.id, code);
-    await syncStrava(athlete, 30).catch(() => undefined);
+    await syncStrava(athlete, HISTORY_DAYS).catch(() => undefined);
   } catch {
     return back("erro");
   }

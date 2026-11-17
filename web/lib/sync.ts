@@ -8,6 +8,9 @@ import type { ActivityIn } from "./import-schema";
 const API = "https://www.strava.com/api/v3";
 export const SYNC_HOUR = 9; // no fuso do atleta
 const LOOKBACK_DAYS = 14;
+/** Histórico completo: 2 anos (o Strava do atleta começa em 2024). Até 12 páginas de 100. */
+export const HISTORY_DAYS = 800;
+const MAX_DAYS = 1500;
 const FETCH_TIMEOUT_MS = 20_000;
 
 export type Connection = {
@@ -63,9 +66,9 @@ async function freshToken(c: Connection): Promise<string> {
   return t.access_token;
 }
 
-async function fetchRecent(token: string, afterEpoch: number): Promise<StravaActivity[]> {
+async function fetchRecent(token: string, afterEpoch: number, maxPages: number): Promise<StravaActivity[]> {
   const out: StravaActivity[] = [];
-  for (let page = 1; page <= 3; page++) {
+  for (let page = 1; page <= maxPages; page++) {
     const res = await fetch(`${API}/athlete/activities?after=${afterEpoch}&per_page=100&page=${page}`, {
       headers: { authorization: `Bearer ${token}` },
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
@@ -87,12 +90,13 @@ export type SyncResult = { vistas: number; novas: number; ignoradas: number };
  * com início a até 10 min). Nunca regrava atividade existente, para não apagar zonas de FC já importadas.
  */
 export async function syncStrava(athlete: Athlete, days = LOOKBACK_DAYS): Promise<SyncResult> {
+  days = Math.min(Math.max(Math.round(days), 1), MAX_DAYS);
   const c = await getConnection(athlete.id);
   if (!c) throw new Error("Strava não conectado");
   try {
     const token = await freshToken(c);
     const since = Date.now() - days * 86_400_000;
-    const seen = await fetchRecent(token, Math.floor(since / 1000));
+    const seen = await fetchRecent(token, Math.floor(since / 1000), days > LOOKBACK_DAYS ? 12 : 3);
     const mapped = seen.filter((a) => !a.manual).map(mapStravaActivity).filter((x): x is ActivityIn => x !== null);
     const existing = await sql<{ source: string; externalId: string; startTime: Date }[]>`
       SELECT source, external_id AS "externalId", start_time AS "startTime" FROM activities
@@ -102,7 +106,9 @@ export async function syncStrava(athlete: Athlete, days = LOOKBACK_DAYS): Promis
       const dup = existing.some((e) => (e.source === m.source && e.externalId === m.external_id) || sameInstant(e.startTime.toISOString(), m.start_time));
       if (!dup) fresh.push(m);
     }
-    if (fresh.length) await applyImport(athlete, { athlete: athlete.slug, planned: [], activities: fresh, workouts: [], races: [] });
+    for (let i = 0; i < fresh.length; i += 400) {
+      await applyImport(athlete, { athlete: athlete.slug, planned: [], activities: fresh.slice(i, i + 400), workouts: [], races: [] });
+    }
     await sql`UPDATE strava_connections SET last_sync_at = now(), last_sync_error = NULL WHERE athlete_id = ${athlete.id}`;
     return { vistas: seen.length, novas: fresh.length, ignoradas: seen.length - fresh.length };
   } catch (e) {
