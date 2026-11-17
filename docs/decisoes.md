@@ -91,7 +91,7 @@ Cada entrada: o que foi decidido, por quê e o estado. Mais recentes no fim.
 ## D13 · Stack do app igual à do AgendaBoa
 
 - **Data:** 13/11/2026
-- **Decisão:** Next.js 16 + postgres.js + PWA, numa pasta `web/`, rodando na VPS como app isolado (`/opt/limiarlab`, container `limiarlab-app`, banco e rede `limiarlab_db` próprios no Postgres compartilhado, Caddy compartilhado).
+- **Decisão:** Next.js 16 + postgres.js + PWA, numa pasta `web/`, rodando na VPS como app isolado (`/opt/limiarlab`, container `limiarlab-app`, banco próprio num Postgres só do LimiarLab (ver D18), Caddy compartilhado).
 - **Por quê:** a VPS já roda esse modelo; reaproveita deploy, backup e regras de isolamento.
 - **Estado:** adotada (aprovada pelo atleta).
 
@@ -123,3 +123,17 @@ Cada entrada: o que foi decidido, por quê e o estado. Mais recentes no fim.
 - **Por quê:** o atleta tem uma prova de 15 km em 13/12 que não é a alvo, mas precisa entrar no planejamento. Regras e força da evidência em [`evidencias.md`](evidencias.md).
 - **Estado:** adotada; prova-alvo a definir.
 
+
+## D18 · Postgres próprio, sem tocar nos outros apps da VPS
+
+- **Data:** 17/11/2026
+- **Decisão:** o LimiarLab sobe o seu próprio Postgres (`limiarlab-postgres`, 256 MB) no mesmo compose do app, em vez de usar o Postgres compartilhado do garimpo. Substitui o plano de banco/role/rede dedicados na instância compartilhada (D13). O único recurso compartilhado que sobra é o Caddy, com um arquivo novo em `sites/`.
+- **Por quê:** regra do atleta: nenhum app que já roda pode ser afetado. Usar o Postgres do garimpo exigia religar a rede nele e alterar o compose do outro repositório; o deploy dele recria o container do Postgres (indisponibilidade breve para garimpo e AgendaBoa) e um `docker network connect` manual se perde nessa recriação. Um Postgres próprio custa ~100 a 150 MB de RAM e elimina esses riscos.
+- **Estado:** adotada.
+
+## D19 · Atualização dos realizados pelo Strava dentro do app
+
+- **Data:** 17/11/2026
+- **Decisão:** o botão "Atualizar" e uma rotina diária às 9h (fuso do atleta, dentro do app) leem o Strava pela API oficial (só leitura, escopo `activity:read_all`) e gravam só atividades novas. Atividades do Strava que vêm do Garmin (`external_id` `garmin_push_<id>`) entram como fonte `garmin` com o mesmo id, sem duplicar. Parcialmente substitui D15 (Strava direto era fase 2).
+- **Por quê:** o app na VPS não alcança o conector Garmin, que só existe nas sessões do Claude; o Strava espelha o Garmin (308 atividades iguais no último ano). Sem credencial do Garmin na VPS. Zonas de FC por corrida seguem pela rotina do Claude. Nunca regrava atividade existente, para não apagar zonas.
+- **Estado:** adotada.

@@ -1,6 +1,6 @@
 #!/bin/sh
 # Backup próprio do banco `limiarlab` (e só dele). Roda dentro de postgres:17-alpine, conectando
-# com o role `limiarlab` via DATABASE_URL (a mesma do app). Grava dumps comprimidos no volume
+# ao Postgres próprio do LimiarLab via DATABASE_URL (a mesma do app). Grava dumps comprimidos no volume
 # `backups`, com retenção local; nunca toca em outros bancos nem em arquivos fora de $BACKUP_DIR.
 # BACKUP_ONCE=1 faz um único dump e sai (usado em teste).
 set -eu
@@ -10,8 +10,7 @@ set -eu
 : "${BACKUP_INTERVAL_HOURS:=24}"
 : "${BACKUP_RETENTION_DAYS:=14}"
 
-# O role tem statement_timeout curto para proteger o Postgres compartilhado; o dump é
-# uma única operação mais longa, então desliga o limite só nesta sessão.
+# O dump é uma única operação longa: sem limite de tempo de consulta só nesta sessão.
 export PGOPTIONS="-c statement_timeout=0"
 
 dump_once() {

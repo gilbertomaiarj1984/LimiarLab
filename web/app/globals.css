@@ -264,3 +264,8 @@ a.wk{color:var(--acc);text-decoration:none;font-weight:600}
 .wo-avoid{font-size:.88rem;border-left:3px solid var(--hard);padding-left:10px}
 .wo-avoid summary{cursor:pointer;font-weight:600;color:var(--hard)}
 .wo-avoid p{margin-top:6px}
+
+.sync{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.sync-btn{display:inline-block;text-decoration:none;color:var(--ink,inherit);min-height:40px}
+.sync-btn:disabled{opacity:.6}
+.sync-msg{font-size:.82rem;color:var(--muted)}
