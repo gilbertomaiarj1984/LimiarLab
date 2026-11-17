@@ -98,3 +98,18 @@ export function readLaps(laps: Lap[]): LapsReading {
     rest: group(laps.filter((_, i) => roles[i] === "recuperacao")),
   };
 }
+
+const fmtPace = (s: number) => `${Math.floor(Math.round(s) / 60)}:${String(Math.round(s) % 60).padStart(2, "0")}`;
+const fmtDist = (m: number) => (m >= 1000 ? `${(m / 1000).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} km` : `${Math.round(m / 10) * 10} m`);
+
+/** Uma linha para o card: "8 × 800 m · 4:29/km · FC 159 · recup. 7 × 400 m". null quando não é intervalado. */
+export function intervalSummary(laps: Lap[] | null | undefined): string | null {
+  if (!laps?.length) return null;
+  const r = readLaps(laps);
+  if (r.kind !== "intervalado" || !r.work) return null;
+  const parts = [`${r.work.count} × ${fmtDist(r.work.avgDistanceM)}`];
+  if (r.work.paceS != null) parts.push(`${fmtPace(r.work.paceS)}/km`);
+  if (r.work.avgHr != null) parts.push(`FC ${r.work.avgHr}`);
+  if (r.rest) parts.push(`recup. ${r.rest.count} × ${fmtDist(r.rest.avgDistanceM)}`);
+  return parts.join(" · ");
+}

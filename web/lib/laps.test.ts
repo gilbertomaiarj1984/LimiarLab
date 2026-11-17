@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mapStravaLaps, readLaps, type Lap } from "./laps.ts";
+import { intervalSummary, mapStravaLaps, readLaps, type Lap } from "./laps.ts";
 
 const lap = (index: number, distanceM: number, elapsedS: number, avgHr = 140): Lap => ({ index, name: `Volta ${index}`, distanceM, elapsedS, avgHr, maxHr: avgHr + 8, elevM: 1 });
 
@@ -31,4 +31,13 @@ test("poucas voltas ou sem distância: contínuo", () => {
 test("mapeia voltas do Strava e ignora as sem tempo", () => {
   const m = mapStravaLaps([{ lap_index: 2, distance: 800, elapsed_time: 215, average_heartrate: 160.4, max_heartrate: 171 }, { lap_index: 1, distance: 0, elapsed_time: 0 }, { lap_index: 3, distance: 400, moving_time: 190, average_heartrate: 0 }]);
   assert.equal(m.length, 2); assert.equal(m[0].index, 2); assert.equal(m[0].avgHr, 160); assert.equal(m[1].avgHr, null);
+});
+
+test("linha de resumo do card", () => {
+  const laps: Lap[] = [lap(1, 1600, 560, 120)];
+  for (let i = 0; i < 8; i++) { laps.push(lap(laps.length + 1, 800, 215, 160)); if (i < 7) laps.push(lap(laps.length + 1, 400, 190, 135)); }
+  laps.push(lap(laps.length + 1, 1500, 540, 125));
+  assert.equal(intervalSummary(laps), "8 × 800 m · 4:29/km · FC 160 · recup. 7 × 400 m");
+  assert.equal(intervalSummary(Array.from({ length: 9 }, (_, i) => lap(i + 1, 1000, 360))), null);
+  assert.equal(intervalSummary(null), null);
 });

@@ -136,6 +136,7 @@ export async function syncStrava(athlete: Athlete, days = LOOKBACK_DAYS): Promis
       }
       novas += fresh.length;
     }
+    await prefetchRecentLaps(athlete);
     await sql`UPDATE strava_connections SET last_sync_at = now(), last_sync_error = NULL WHERE athlete_id = ${athlete.id}`;
     return { vistas, novas, ignoradas: vistas - novas };
   } catch (e) {
@@ -191,5 +192,17 @@ export async function loadLaps(athlete: Athlete, activityId: string): Promise<La
     return { laps };
   } catch (e) {
     return { laps: null, motivo: "erro", erro: e instanceof Error ? e.message : "falha ao buscar voltas" };
+  }
+}
+
+/** Busca as voltas das corridas dos últimos 7 dias que ainda não as têm (poucas consultas), para o resumo do card. */
+async function prefetchRecentLaps(athlete: Athlete): Promise<void> {
+  const rows = await sql<{ id: string }[]>`
+    SELECT id FROM activities
+    WHERE athlete_id = ${athlete.id} AND sport = 'run' AND strava_id IS NOT NULL AND laps IS NULL
+      AND start_time >= now() - interval '7 days' ORDER BY start_time DESC LIMIT 10`;
+  for (const r of rows) {
+    const res = await loadLaps(athlete, r.id);
+    if (res.motivo === "erro") break; // limite de taxa ou falha: o detalhe tenta de novo ao abrir
   }
 }
