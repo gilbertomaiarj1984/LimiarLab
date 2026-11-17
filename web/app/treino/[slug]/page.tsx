@@ -73,7 +73,7 @@ export default async function Treino({ params, searchParams }: { params: Promise
                   <div className="wo-title">
                     <h2>{e.name}</h2>
                     <div className="wo-chips">
-                      <span className="wo-chip">{e.sets} × {e.reps}</span>
+                      <span className="wo-chip wo-sr">{e.sets} × {e.reps}</span>
                       {e.load && <span className="wo-chip k">{e.load}</span>}
                       {e.focus && <span className="wo-chip wo-focus">{e.focus}</span>}
                     </div>

@@ -8,14 +8,14 @@ type Ex = {
   id: string; nome: string; equipamento: string[]; unilateral?: boolean; impacto: number; fadiga: string;
   grupo_primario?: string[]; ilustracao?: string | null; dicas?: string[];
 };
-type Sub = { id: string; equivalencia: "alta" | "media" | "baixa"; ajuste?: string; quando?: string; atencao?: string | null; evidencia?: string };
+type Sub = { id: string; series: number; reps: string; equivalencia: "alta" | "media" | "baixa"; ajuste?: string; quando?: string; atencao?: string | null; evidencia?: string };
 type Slot = { treino: string; ordem: number; original: string; objetivo: string; criterios?: string; substitutos: Sub[]; evitar?: { id: string; porque: string }[] };
 
 const EX = new Map<string, Ex>((data.exercicios as Ex[]).map((e) => [e.id, e]));
 const SLOTS = data.slots as Slot[];
 
 export type SwapAlt = {
-  id: string; nome: string; equivalencia: Sub["equivalencia"]; equipamento: string[]; foco: string;
+  id: string; nome: string; series: number; reps: string; equivalencia: Sub["equivalencia"]; equipamento: string[]; foco: string;
   ajuste: string | null; quando: string | null; atencao: string | null; evidencia: string | null; dicas: string[]; figure: Fig | null;
 };
 export type SwapGroup = { original: string; objetivo: string; criterios: string | null; alternativas: SwapAlt[]; evitar: { nome: string; porque: string }[] };
@@ -48,7 +48,7 @@ export function swapGroups(slug: string, ordem: number): SwapGroup[] {
     alternativas: s.substitutos.map((x) => {
       const e = EX.get(x.id);
       return {
-        id: x.id, nome: nome(x.id), equivalencia: x.equivalencia, equipamento: e?.equipamento ?? [],
+        id: x.id, nome: nome(x.id), series: x.series, reps: x.reps, equivalencia: x.equivalencia, equipamento: e?.equipamento ?? [],
         foco: grupos(e?.grupo_primario ?? []),
         ajuste: x.ajuste ?? null, quando: x.quando ?? null, atencao: x.atencao ?? null, evidencia: x.evidencia ?? null,
         dicas: e?.dicas ?? [], figure: figureOf(e),

@@ -6761,7 +6761,9 @@
      "ajuste": "Mesmas 3x8-12; carga parecida ou um pouco maior.",
      "quando": "Puxador aberto ocupado ou desconforto no ombro com pegada aberta.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "barra-fixa-assistida",
@@ -6769,7 +6771,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12 ajustando o contrapeso.",
      "quando": "Máquina de puxada ocupada.",
      "atencao": "Exige mais estabilidade; não deixe o corpo balançar.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "puxada-unilateral-cabo",
@@ -6777,7 +6781,9 @@
      "ajuste": "3x8-12 por lado; carga por lado cerca de metade da bilateral, ajustar pelo RIR.",
      "quando": "Só sobra uma polia alta livre.",
      "atencao": "Leva o dobro do tempo; se o treino estiver longo, faça 2 séries por lado.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12 por lado"
     },
     {
      "id": "barra-fixa",
@@ -6785,7 +6791,9 @@
      "ajuste": "3 séries perto de 8-12; se fizer menos de 6, use elástico de assistência. Se fizer mais de 12, adicione pausa ou descida lenta.",
      "quando": "Academia cheia ou treino fora, sem máquina.",
      "atencao": "Carga difícil de ajustar; não vá à falha toda série.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "puxada-elastico",
@@ -6793,7 +6801,9 @@
      "ajuste": "3x12-20 até RIR 1-3; a carga vem da tensão do elástico.",
      "quando": "Sem cabo ou máquina livres, ou treinando em casa.",
      "atencao": "Tensão menor no início do movimento.",
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
     },
     {
      "id": "pullover-halter",
@@ -6801,7 +6811,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 3x10-12 com carga moderada.",
      "quando": "Só há halter e banco livres.",
      "atencao": "Padrão diferente (extensão do ombro com braço quase reto); não treina bíceps.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–12"
     }
    ],
    "evitar": [
@@ -6828,7 +6840,9 @@
      "ajuste": "Mesmas 3x8-12; refazer a carga pela reserva (RIR 1-3), primeira série como teste.",
      "quando": "Polia de remada ocupada.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "remada-halter-apoio-peito",
@@ -6836,7 +6850,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
      "quando": "Só há halteres e banco livres; poupa totalmente a lombar.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "remada-unilateral-cabo",
@@ -6844,7 +6860,9 @@
      "ajuste": "3x8-12 por lado com carga por lado perto da metade da bilateral (às vezes um pouco mais), ajustada pelo RIR.",
      "quando": "Polia livre, mas sem o banco da remada baixa.",
      "atencao": "Não gire o tronco para roubar.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12 por lado"
     },
     {
      "id": "remada-serrote",
@@ -6852,7 +6870,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 3x8-12 por lado.",
      "quando": "Halteres e banco livres; já está no plano de quarta, então varie a pegada.",
      "atencao": "Repete o exercício principal da quarta; prefira outro se houver opção.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12 por lado"
     },
     {
      "id": "remada-elastico",
@@ -6860,7 +6880,9 @@
      "ajuste": "3x12-20 até RIR 1-3.",
      "quando": "Sem equipamento livre ou treinando em casa.",
      "atencao": "Tensão baixa no início do movimento.",
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
     },
     {
      "id": "remada-invertida",
@@ -6868,7 +6890,9 @@
      "ajuste": "3 séries perto de 8-12 ajustando a inclinação do corpo (pés mais à frente = mais difícil).",
      "quando": "Smith livre, academia cheia.",
      "atencao": "Exige prancha firme; pare se a lombar ceder.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     }
    ],
    "evitar": [
@@ -6899,7 +6923,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
      "quando": "Banco inclinado e halteres ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "supino-inclinado-smith",
@@ -6907,7 +6933,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
      "quando": "Smith livre; carga mais estável.",
      "atencao": "Trajetória fixa; ajuste o banco para a barra descer no alto do peito.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "crossover-baixo-cabo",
@@ -6915,7 +6943,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 3x12-15 com carga moderada.",
      "quando": "Só o crossover livre.",
      "atencao": "Movimento de isolamento, menos tríceps; menos carga total.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
     },
     {
      "id": "crucifixo-inclinado-halteres",
@@ -6923,7 +6953,9 @@
      "ajuste": "3x10-15 com halteres bem mais leves que no supino, RIR 2-3.",
      "quando": "Só sobram halteres leves.",
      "atencao": "Braço longo carrega o ombro; não abra além da linha do ombro.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–15"
     },
     {
      "id": "flexao-pes-elevados",
@@ -6931,7 +6963,9 @@
      "ajuste": "3 séries perto de 8-15; se passar de 15, use elástico nas costas ou pausa embaixo.",
      "quando": "Academia cheia, sem banco nem máquina livre.",
      "atencao": "Carga difícil de ajustar; corpo reto.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–15"
     },
     {
      "id": "supino-elastico",
@@ -6939,7 +6973,9 @@
      "ajuste": "3x12-20 até RIR 1-3, empurrando para cima e à frente.",
      "quando": "Treino em casa ou sem nada livre.",
      "atencao": "Tensão baixa no início do movimento.",
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
     }
    ],
    "evitar": [
@@ -6962,7 +6998,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
      "quando": "Halteres ou banco ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "desenvolvimento-smith",
@@ -6970,7 +7008,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
      "quando": "Smith livre.",
      "atencao": "Barra sempre pela frente, nunca atrás da nuca.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "arnold-press",
@@ -6978,7 +7018,9 @@
      "ajuste": "Mesmas 3x8-12 com um pouco menos de carga.",
      "quando": "Halteres livres; variar o estímulo.",
      "atencao": "A rotação pode incomodar quem tem ombro sensível.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "desenvolvimento-elastico",
@@ -6986,7 +7028,9 @@
      "ajuste": "3x12-20 até RIR 1-3, sentado para poupar a lombar.",
      "quando": "Sem halteres livres ou treino em casa.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
     },
     {
      "id": "flexao-pike",
@@ -6994,7 +7038,9 @@
      "ajuste": "3 séries perto de 8-12; pés no banco para ficar mais difícil.",
      "quando": "Academia cheia, sem nada livre.",
      "atencao": "Carga difícil de ajustar; exige punho e ombro confortáveis.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     }
    ],
    "evitar": [
@@ -7021,7 +7067,9 @@
      "ajuste": "Mesmas 2x12-15; escolha um elástico que deixe 2-3 reps sobrando.",
      "quando": "Polia ocupada ou treino em casa.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 2,
+     "reps": "12–15"
     },
     {
      "id": "crucifixo-invertido-maquina",
@@ -7029,7 +7077,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x12-15.",
      "quando": "Peck deck livre.",
      "atencao": "Não tem rotação externa; complemente com 1 série de band pull-apart se puder.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "12–15"
     },
     {
      "id": "crucifixo-invertido-halteres-apoio",
@@ -7037,7 +7087,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x12-15 com halteres leves.",
      "quando": "Só há banco e halteres.",
      "atencao": "Sem rotação externa.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "12–15"
     },
     {
      "id": "band-pull-apart",
@@ -7045,7 +7097,9 @@
      "ajuste": "2x15-20, RIR 2-3.",
      "quando": "Sem nada livre; pode fazer até no aquecimento.",
      "atencao": "Carga baixa; faça mais repetições.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "15–20"
     }
    ],
    "evitar": [
@@ -7072,7 +7126,9 @@
      "ajuste": "Mesmas 2x10-12 por braço.",
      "quando": "Mesmos halteres, variação.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12 por braço"
     },
     {
      "id": "rosca-barra-w",
@@ -7080,7 +7136,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 2x10-12.",
      "quando": "Halteres ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "rosca-cabo",
@@ -7088,7 +7146,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 2x10-12.",
      "quando": "Polia baixa livre.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "rosca-inclinada-halteres",
@@ -7096,7 +7156,9 @@
      "ajuste": "2x10-12 com halteres um pouco mais leves.",
      "quando": "Banco inclinado livre; maior alongamento do bíceps.",
      "atencao": "Pode incomodar a frente do ombro.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "rosca-scott-maquina",
@@ -7104,7 +7166,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x10-12 com carga menor.",
      "quando": "Máquina Scott livre.",
      "atencao": "Não solte o peso no fim; tensão alta no cotovelo esticado.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "rosca-elastico",
@@ -7112,7 +7176,9 @@
      "ajuste": "2x12-20 até RIR 1-3.",
      "quando": "Sem halter livre ou em casa.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 2,
+     "reps": "12–20"
     }
    ],
    "evitar": [
@@ -7135,7 +7201,9 @@
      "ajuste": "Mesmas 2x10-12, carga um pouco maior que na corda.",
      "quando": "Corda ocupada.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "triceps-unilateral-cabo",
@@ -7143,7 +7211,9 @@
      "ajuste": "2x10-12 por braço, carga por braço perto da metade; primeira série como teste.",
      "quando": "Só sobra um pegador de uma mão.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12 por braço"
     },
     {
      "id": "triceps-elastico",
@@ -7151,7 +7221,9 @@
      "ajuste": "2x12-20 até RIR 1-3.",
      "quando": "Sem polia livre ou em casa.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 2,
+     "reps": "12–20"
     },
     {
      "id": "triceps-coice-halter",
@@ -7159,7 +7231,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x12-15 com carga leve.",
      "quando": "Só halteres e banco livres.",
      "atencao": "Pouca carga no início do movimento.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "12–15"
     },
     {
      "id": "triceps-testa-halteres",
@@ -7167,7 +7241,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x10-12.",
      "quando": "Halteres e banco livres.",
      "atencao": "Cotovelo sensível: reduza a carga.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     }
    ],
    "evitar": [
@@ -7190,7 +7266,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12 por lado.",
      "quando": "Halteres ou bancos ocupados.",
      "atencao": "Não gire o tronco.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12 por lado"
     },
     {
      "id": "remada-halter-apoio-peito",
@@ -7198,7 +7276,9 @@
      "ajuste": "Mesmas 3x8-12, os dois braços juntos.",
      "quando": "Banco inclinado livre; ainda mais lombar poupada.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "remada-maquina-apoio-peito",
@@ -7206,7 +7286,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12; se a máquina permitir, um braço por vez.",
      "quando": "Halteres ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "remada-baixa-neutra",
@@ -7214,7 +7296,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
      "quando": "Polia de remada livre.",
      "atencao": "Repete o exercício de segunda; prefira outro se houver opção.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "remada-elastico",
@@ -7222,7 +7306,9 @@
      "ajuste": "3x12-20 até RIR 1-3, pode ser um braço por vez.",
      "quando": "Sem nada livre ou em casa.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
     },
     {
      "id": "remada-invertida",
@@ -7230,7 +7316,9 @@
      "ajuste": "3 séries perto de 8-12 ajustando a inclinação.",
      "quando": "Smith livre, academia cheia.",
      "atencao": "Exige prancha firme.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     }
    ],
    "evitar": [
@@ -7261,7 +7349,9 @@
      "ajuste": "Mesmas 3x8-12.",
      "quando": "Triângulo ou puxador neutro ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "barra-fixa-assistida",
@@ -7269,7 +7359,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12, pegada neutra se a máquina tiver.",
      "quando": "Máquina de puxada ocupada.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "puxada-unilateral-cabo",
@@ -7277,7 +7369,9 @@
      "ajuste": "3x8-12 por lado, ajustar carga pelo RIR.",
      "quando": "Só uma polia alta livre.",
      "atencao": "Leva mais tempo.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12 por lado"
     },
     {
      "id": "barra-fixa",
@@ -7285,7 +7379,9 @@
      "ajuste": "3 séries perto de 8-12 com pegada neutra; elástico de assistência se fizer menos de 6.",
      "quando": "Academia cheia ou fora.",
      "atencao": "Carga difícil de ajustar; não vá à falha.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "puxada-elastico",
@@ -7293,7 +7389,9 @@
      "ajuste": "3x12-20 até RIR 1-3.",
      "quando": "Sem nada livre ou em casa.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
     },
     {
      "id": "pullover-cabo",
@@ -7301,7 +7399,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 3x12-15.",
      "quando": "Só uma polia alta com barra reta ou corda.",
      "atencao": "Isola o dorsal sem bíceps; padrão diferente.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
     }
    ],
    "evitar": [
@@ -7324,7 +7424,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
      "quando": "Máquina e halteres ocupados.",
      "atencao": "Use as travas de segurança.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "supino-reto-barra",
@@ -7332,7 +7434,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
      "quando": "Rack com barra livre.",
      "atencao": "Sem parceiro, use travas; não vá à falha.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "supino-chao-halteres",
@@ -7340,7 +7444,9 @@
      "ajuste": "Mesmas 3x8-12 com a mesma carga ou um pouco mais.",
      "quando": "Sem banco livre: só precisa de halteres e chão.",
      "atencao": "Amplitude menor que no supino comum.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "crucifixo-maquina",
@@ -7348,7 +7454,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 3x12-15.",
      "quando": "Peck deck livre.",
      "atencao": "Isolamento, menos tríceps.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
     },
     {
      "id": "flexao-de-bracos",
@@ -7356,7 +7464,9 @@
      "ajuste": "3 séries perto de 8-15; se passar de 15, pés elevados ou elástico nas costas.",
      "quando": "Academia cheia, sem nada livre.",
      "atencao": "Carga difícil de ajustar.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–15"
     },
     {
      "id": "supino-elastico",
@@ -7364,7 +7474,9 @@
      "ajuste": "3x12-20 até RIR 1-3.",
      "quando": "Em casa ou sem nada livre.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
     }
    ],
    "evitar": [
@@ -7387,7 +7499,9 @@
      "ajuste": "3x12-15 por lado, carga por lado ajustada pelo RIR.",
      "quando": "Halteres leves ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por lado"
     },
     {
      "id": "elevacao-lateral-maquina",
@@ -7395,7 +7509,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x12-15.",
      "quando": "Máquina livre.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
     },
     {
      "id": "elevacao-lateral-inclinada-halter",
@@ -7403,7 +7519,9 @@
      "ajuste": "3x12-15 por lado com halter mais leve.",
      "quando": "Banco inclinado livre; mais tensão no início do movimento.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por lado"
     },
     {
      "id": "elevacao-lateral-elastico",
@@ -7411,7 +7529,9 @@
      "ajuste": "3x15-20 até RIR 1-3.",
      "quando": "Sem halter livre ou em casa.",
      "atencao": "Tensão baixa no início, alta no fim.",
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "15–20"
     }
    ],
    "evitar": [
@@ -7434,7 +7554,9 @@
      "ajuste": "Mesmas 2x10-12 por braço.",
      "quando": "Variação com os mesmos halteres.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12 por braço"
     },
     {
      "id": "rosca-martelo-corda",
@@ -7442,7 +7564,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 2x10-12.",
      "quando": "Polia baixa livre; faça o francês na mesma polia em sequência.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "rosca-martelo-elastico",
@@ -7450,7 +7574,9 @@
      "ajuste": "2x12-20 até RIR 1-3.",
      "quando": "Sem halter livre ou em casa.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 2,
+     "reps": "12–20"
     },
     {
      "id": "rosca-inversa-barra-w",
@@ -7458,7 +7584,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x10-12 com carga menor.",
      "quando": "Barra W livre.",
      "atencao": "Punho pode cansar antes do braço.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "rosca-direta-halteres",
@@ -7466,7 +7594,9 @@
      "ajuste": "Mesmas 2x10-12.",
      "quando": "Só há halteres.",
      "atencao": "Mais bíceps e menos braquial; repete o exercício de segunda.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     }
    ],
    "evitar": []
@@ -7484,7 +7614,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 2x10-12.",
      "quando": "Halteres ocupados; combina com a rosca martelo na corda na mesma polia.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "triceps-frances-unilateral-halter",
@@ -7492,7 +7624,9 @@
      "ajuste": "2x10-12 por braço com halter mais leve.",
      "quando": "Só sobram halteres leves.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12 por braço"
     },
     {
      "id": "triceps-frances-elastico",
@@ -7500,7 +7634,9 @@
      "ajuste": "2x12-20 até RIR 1-3.",
      "quando": "Sem halter livre ou em casa.",
      "atencao": null,
-     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)"
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 2,
+     "reps": "12–20"
     },
     {
      "id": "triceps-testa-halteres",
@@ -7508,7 +7644,9 @@
      "ajuste": "Mesmas 2x10-12.",
      "quando": "Ombro incomoda com braço acima da cabeça.",
      "atencao": "Braço menos elevado, menor alongamento da cabeça longa.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     },
     {
      "id": "triceps-corda",
@@ -7516,7 +7654,9 @@
      "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x10-12.",
      "quando": "Só a polia com corda livre.",
      "atencao": "Braço ao lado do corpo; repete o exercício de segunda.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
     }
    ],
    "evitar": [
@@ -7539,7 +7679,9 @@
      "ajuste": "Mesmas 3x10 por lado com 2 s de pausa; afaste-se da ancoragem para aumentar a carga.",
      "quando": "Polia ocupada ou em casa.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10 por lado"
     },
     {
      "id": "pallof-meio-ajoelhado",
@@ -7547,7 +7689,9 @@
      "ajuste": "3x8-10 por lado com carga um pouco menor que em pé.",
      "quando": "Quer mais exigência de estabilidade com a mesma carga.",
      "atencao": "Use um colchonete no joelho.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–10 por lado"
     },
     {
      "id": "prancha-toque-ombro",
@@ -7555,7 +7699,9 @@
      "ajuste": "3x10 toques por lado, devagar.",
      "quando": "Sem cabo nem elástico livres.",
      "atencao": "Mais exigência de ombro; pés mais afastados facilitam.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10 toques por lado"
     },
     {
      "id": "prancha-remada-halter",
@@ -7563,7 +7709,9 @@
      "ajuste": "3x6-8 por lado com halteres leves.",
      "quando": "Só há halteres livres.",
      "atencao": "Exige ombro e punho; se o quadril girar, reduza a carga ou afaste os pés.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "6–8 por lado"
     },
     {
      "id": "bird-dog",
@@ -7571,7 +7719,9 @@
      "ajuste": "3x6 por lado com 5-8 s de pausa.",
      "quando": "Dia em que a lombar está sensível ou como aquecimento.",
      "atencao": "Carga baixa; é mais controle que força.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "6 por lado"
     }
    ],
    "evitar": [
@@ -7602,7 +7752,9 @@
      "ajuste": "Mesmas 3x30 m por lado com carga equivalente.",
      "quando": "Halteres pesados ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "30 m por lado"
     },
     {
      "id": "suitcase-hold",
@@ -7610,7 +7762,9 @@
      "ajuste": "3x30-40 s por lado com a mesma carga.",
      "quando": "Sem espaço para andar (academia cheia).",
      "atencao": "Sem caminhada, menos exigência do quadril.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "30–40 s por lado"
     },
     {
      "id": "prancha-lateral",
@@ -7618,7 +7772,9 @@
      "ajuste": "3x30-45 s por lado.",
      "quando": "Sem halter pesado livre.",
      "atencao": "Exige ombro; para facilitar, joelhos dobrados.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "30–45 s por lado"
     },
     {
      "id": "farmer-walk",
@@ -7626,7 +7782,9 @@
      "ajuste": "3x30 m com um halter em cada mão.",
      "quando": "Só para variar a pegada e o trapézio.",
      "atencao": "Com o peso dividido nas duas mãos, a exigência lateral do tronco cai bastante.",
-     "evidencia": "McGill, Marshall & Andersen, 2013, Ergonomics (carga em uma mão exige mais do tronco lateral que dividir o peso nas duas)"
+     "evidencia": "McGill, Marshall & Andersen, 2013, Ergonomics (carga em uma mão exige mais do tronco lateral que dividir o peso nas duas)",
+     "series": 3,
+     "reps": "30 m"
     },
     {
      "id": "waiter-walk",
@@ -7634,7 +7792,9 @@
      "ajuste": "3x20-30 m por lado com carga bem menor.",
      "quando": "Quer também estabilidade de ombro.",
      "atencao": "Exige ombro saudável; não arqueie a lombar.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "20–30 m por lado"
     }
    ],
    "evitar": [
@@ -7657,7 +7817,9 @@
      "ajuste": "Metade do tempo por série (8-12 contatos por perna), 2-3 séries por perna.",
      "quando": "Quando quer o mesmo estímulo com menos contatos totais, ou para corrigir diferença entre pernas.",
      "atencao": "Carga por perna maior: comece mais baixo e pare se o joelho cair para dentro.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12 contatos por perna"
     },
     {
      "id": "pular-corda",
@@ -7665,7 +7827,9 @@
      "ajuste": "3 blocos de 20-30 s, saltos baixos.",
      "quando": "Quando o pogo incomoda ou como opção mais suave em semana carregada.",
      "atencao": "Estímulo reativo menor que o pogo.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "20–30 s"
     },
     {
      "id": "saltos-step-baixo",
@@ -7673,7 +7837,9 @@
      "ajuste": "3 séries de 10-15 contatos, step de 10-15 cm.",
      "quando": "Quando quer contato reativo com aterrissagem bem controlada.",
      "atencao": "Mantenha o step baixo; altura maior vira salto em profundidade.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–15 contatos"
     },
     {
      "id": "saltitos-laterais-linha",
@@ -7681,7 +7847,9 @@
      "ajuste": "3 séries de 10-15 s.",
      "quando": "Na preparação para trilha, para incluir estabilidade lateral do tornozelo.",
      "atencao": "Evite em caso de entorse recente.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–15 s"
     },
     {
      "id": "panturrilha-explosiva-leg-press",
@@ -7689,7 +7857,9 @@
      "ajuste": "3 x 10-15 repetições rápidas com carga leve.",
      "quando": "Quando decidiu pular o impacto (dor, cansaço, pós-prova) mas quer manter velocidade de tornozelo.",
      "atencao": "Sem aterrissagem, transfere menos para a corrida.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–15"
     }
    ],
    "evitar": [
@@ -7720,7 +7890,9 @@
      "ajuste": "Mesmas 4 x 5-6. A carga não é a mesma do smith: refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando o smith está ocupado; mantém a trajetória guiada.",
      "atencao": "Mais ênfase no joelho; reduza a amplitude se o tendão patelar incomodar.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 4,
+     "reps": "5–6"
     },
     {
      "id": "leg-press-45",
@@ -7728,7 +7900,9 @@
      "ajuste": "4 x 5-6 com carga bem maior que no smith. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a lombar está cansada (por exemplo, depois do intervalado) ou a academia está cheia.",
      "atencao": "Menos estabilização do tronco; não deixe a lombar descolar do encosto no fundo.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 4,
+     "reps": "5–6"
     },
     {
      "id": "agachamento-livre",
@@ -7736,7 +7910,9 @@
      "ajuste": "4 x 5-6. Comece cerca de 10-20% abaixo da carga do smith. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Se já tem técnica no livre; mesmo padrão com mais demanda de estabilização.",
      "atencao": "Use rack com travas; técnica e lombar exigem mais que no smith.",
-     "evidencia": "Schwanbeck et al., 2009, J Strength Cond Res (EMG em média 43% maior no agachamento livre que no smith com a mesma 8RM, n=6; EMG indica ativação, não ganho)"
+     "evidencia": "Schwanbeck et al., 2009, J Strength Cond Res (EMG em média 43% maior no agachamento livre que no smith com a mesma 8RM, n=6; EMG indica ativação, não ganho)",
+     "series": 4,
+     "reps": "5–6"
     },
     {
      "id": "agachamento-bulgaro",
@@ -7744,7 +7920,9 @@
      "ajuste": "4 x 6 por perna, pesado, com halteres ou no smith. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a lombar não tolera carga axial alta ou não há aparelho livre.",
      "atencao": "Pesado gera mais dor tardia que o búlgaro moderado; se for novo nessa carga, suba aos poucos. No dia, reduza o búlgaro do slot 3.",
-     "evidencia": "Speirs et al., 2016, J Strength Cond Res (búlgaro e agachamento com barra deram ganhos de força parecidos em 5 semanas, em jogadores de rugby)"
+     "evidencia": "Speirs et al., 2016, J Strength Cond Res (búlgaro e agachamento com barra deram ganhos de força parecidos em 5 semanas, em jogadores de rugby)",
+     "series": 4,
+     "reps": "6 por perna"
     },
     {
      "id": "agachamento-goblet",
@@ -7752,7 +7930,9 @@
      "ajuste": "4 x 8-10 com o halter mais pesado disponível, pausa de 1 s embaixo.",
      "quando": "Último recurso com academia lotada; mantém o padrão, não a força máxima.",
      "atencao": "Carga limitada pelo halter: não substitui o estímulo de força máxima por mais de uma semana.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 4,
+     "reps": "8–10"
     }
    ],
    "evitar": [
@@ -7783,7 +7963,9 @@
      "ajuste": "Mesmas 3 x 8 por perna; a carga tende a subir. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando o equilíbrio limita a carga ou quer mais estabilidade.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8 por perna"
     },
     {
      "id": "afundo-estatico",
@@ -7791,7 +7973,9 @@
      "ajuste": "3 x 8 por perna com halteres um pouco mais pesados.",
      "quando": "Quando não há banco livre ou o pé de trás incomoda.",
      "atencao": "Menos alongamento do quadril de trás.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8 por perna"
     },
     {
      "id": "afundo-reverso",
@@ -7799,7 +7983,9 @@
      "ajuste": "3 x 8 por perna.",
      "quando": "Quando o joelho da frente incomoda no búlgaro.",
      "atencao": "Exige mais coordenação; mantenha passo constante.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8 por perna"
     },
     {
      "id": "step-up",
@@ -7807,7 +7993,9 @@
      "ajuste": "3 x 8 por perna, banco na altura do joelho.",
      "quando": "Quando quer menos dor tardia (semana de prova ou cansaço).",
      "atencao": "Mais concêntrico; menos estímulo na descida.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8 por perna"
     },
     {
      "id": "leg-press-unilateral",
@@ -7815,7 +8003,9 @@
      "ajuste": "3 x 8-10 por perna. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando quer unilateral sem equilíbrio (academia cheia ou tornozelo dolorido).",
      "atencao": "Não treina estabilidade de quadril.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–10 por perna"
     }
    ],
    "evitar": [
@@ -7842,7 +8032,9 @@
      "ajuste": "3 x 8 por perna com halter. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando quer unilateral ou não há barra; bom para corrida (apoio único).",
      "atencao": "Equilíbrio limita a carga; apoie a mão num banco se precisar.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8 por perna"
     },
     {
      "id": "hiperextensao-45",
@@ -7850,7 +8042,9 @@
      "ajuste": "3 x 10-12 com anilha no peito. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a lombar está cansada ou a pegada falha.",
      "atencao": "Dobre no quadril, não na lombar.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–12"
     },
     {
      "id": "pull-through-cabo",
@@ -7858,7 +8052,9 @@
      "ajuste": "3 x 12. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Com academia cheia; carga leve na lombar.",
      "atencao": "Carga máxima menor que no stiff.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12"
     },
     {
      "id": "hip-thrust",
@@ -7866,7 +8062,9 @@
      "ajuste": "3 x 8 com pausa de 1 s.",
      "quando": "Quando a lombar ou o posterior estão sensíveis: mesmo grupo, sem alongamento sob carga.",
      "atencao": "Treina menos os isquiotibiais.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8"
     },
     {
      "id": "cadeira-flexora",
@@ -7874,7 +8072,9 @@
      "ajuste": "3 x 10-12. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Só quando nenhuma dobradiça de quadril é possível.",
      "atencao": "Não treina extensão de quadril.",
-     "evidencia": "Maeo et al., 2021, Med Sci Sports Exerc (flexora sentado deu mais hipertrofia dos posteriores que flexora deitado, em iniciantes)"
+     "evidencia": "Maeo et al., 2021, Med Sci Sports Exerc (flexora sentado deu mais hipertrofia dos posteriores que flexora deitado, em iniciantes)",
+     "series": 3,
+     "reps": "10–12"
     }
    ],
    "evitar": [
@@ -7901,7 +8101,9 @@
      "ajuste": "3 x 8 com pausa de 1 s. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando quer montar rápido ou o banco e a barra estão ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8"
     },
     {
      "id": "hip-thrust-unilateral",
@@ -7909,7 +8111,9 @@
      "ajuste": "3 x 8-10 por perna, halter sobre o quadril. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Sem barra ou para corrigir diferença entre lados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–10 por perna"
     },
     {
      "id": "ponte-gluteo",
@@ -7917,7 +8121,9 @@
      "ajuste": "3 x 10-12 com halter ou barra, pausa de 2 s.",
      "quando": "Academia cheia, sem banco livre.",
      "atencao": "Amplitude menor; precisa de mais repetições ou pausa.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–12"
     },
     {
      "id": "stiff",
@@ -7925,7 +8131,9 @@
      "ajuste": "3 x 8.",
      "quando": "Quando quer mais isquiotibiais no lugar do glúteo.",
      "atencao": "Mais dor tardia nos posteriores que o hip thrust.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8"
     },
     {
      "id": "pull-through-cabo",
@@ -7933,7 +8141,9 @@
      "ajuste": "3 x 12-15.",
      "quando": "Com tudo ocupado e cabo livre.",
      "atencao": "Carga máxima menor.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
     }
    ],
    "evitar": [
@@ -7960,7 +8170,9 @@
      "ajuste": "Mesmo protocolo 15 + 20 curtos. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a máquina está ocupada.",
      "atencao": "Use step firme sob a ponta dos pés.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 4,
+     "reps": "15 completos + 20 curtos"
     },
     {
      "id": "panturrilha-leg-press",
@@ -7968,7 +8180,9 @@
      "ajuste": "Mesmo protocolo. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando quer tirar carga da coluna.",
      "atencao": "Não solte as travas; joelhos sem travar.",
-     "evidencia": "Kinoshita et al., 2023, Front Physiol"
+     "evidencia": "Kinoshita et al., 2023, Front Physiol",
+     "series": 4,
+     "reps": "15 completos + 20 curtos"
     },
     {
      "id": "panturrilha-unilateral-halter",
@@ -7976,7 +8190,9 @@
      "ajuste": "4 x 12-15 completos + 15 curtos por perna.",
      "quando": "Sem máquina; boa para igualar as pernas.",
      "atencao": "Dobra o tempo da série; descanse o necessário.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 4,
+     "reps": "12–15 completos + 15 curtos por perna"
     },
     {
      "id": "panturrilha-joelho-flexionado",
@@ -7984,7 +8200,9 @@
      "ajuste": "3 x 15 por perna.",
      "quando": "Só se o tendão de Aquiles incomodar na amplitude completa com joelho estendido.",
      "atencao": "Pouco gastrocnêmio; não substitui o protocolo completo.",
-     "evidencia": "Kinoshita et al., 2023, Front Physiol"
+     "evidencia": "Kinoshita et al., 2023, Front Physiol",
+     "series": 3,
+     "reps": "15 por perna"
     }
    ],
    "evitar": [
@@ -8011,7 +8229,9 @@
      "ajuste": "3 x 15. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a máquina está ocupada.",
      "atencao": "Almofada na barra sobre as coxas.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "15"
     },
     {
      "id": "panturrilha-sentado-halter",
@@ -8019,7 +8239,9 @@
      "ajuste": "3 x 15-20 ou uma perna por vez.",
      "quando": "Sem máquina; carga limitada pelos halteres.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "15–20"
     },
     {
      "id": "panturrilha-joelho-flexionado",
@@ -8027,7 +8249,9 @@
      "ajuste": "3 x 12-15 por perna.",
      "quando": "Sem máquina; treina o sóleo em pé.",
      "atencao": "Equilíbrio limita a carga.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por perna"
     },
     {
      "id": "panturrilha-leg-press",
@@ -8035,7 +8259,9 @@
      "ajuste": "3 x 15 com joelhos estendidos.",
      "quando": "Quando só o leg press está livre.",
      "atencao": "Joelho estendido também treina o sóleo, mas a ênfase vai para o gastrocnêmio.",
-     "evidencia": "Kinoshita et al., 2023, Front Physiol"
+     "evidencia": "Kinoshita et al., 2023, Front Physiol",
+     "series": 3,
+     "reps": "15"
     }
    ],
    "evitar": [
@@ -8058,7 +8284,9 @@
      "ajuste": "3 x 12-15 ou 3 isometrias de 30-45 s.",
      "quando": "Sem máquina ou com joelho sensível.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 (ou isometria de 30–45 s)"
     },
     {
      "id": "agachamento-goblet",
@@ -8066,7 +8294,9 @@
      "ajuste": "3 x 12 com calcanhares elevados.",
      "quando": "Sem máquina; ênfase em quadríceps.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12"
     },
     {
      "id": "leg-press-45",
@@ -8074,7 +8304,9 @@
      "ajuste": "3 x 12 com pés mais baixos na plataforma, carga moderada. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Se só o leg press está livre.",
      "atencao": "Já houve agachamento pesado; mantenha RIR 2-3.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12"
     },
     {
      "id": "agachamento-hack",
@@ -8082,7 +8314,9 @@
      "ajuste": "2-3 x 12 leve.",
      "quando": "Se só o hack está livre.",
      "atencao": "Soma carga ao agachamento pesado; leve.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12"
     }
    ],
    "evitar": [
@@ -8109,7 +8343,9 @@
      "ajuste": "3 x 10-12. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a cadeira está ocupada.",
      "atencao": "Quadril estendido (músculo menos alongado) tende a dar menos hipertrofia (cerca de 9% contra 14% em 12 semanas no estudo de Maeo).",
-     "evidencia": "Maeo et al., 2021, Med Sci Sports Exerc (flexora sentado deu mais hipertrofia dos posteriores que flexora deitado, em iniciantes)"
+     "evidencia": "Maeo et al., 2021, Med Sci Sports Exerc (flexora sentado deu mais hipertrofia dos posteriores que flexora deitado, em iniciantes)",
+     "series": 3,
+     "reps": "10–12"
     },
     {
      "id": "flexora-em-pe-maquina",
@@ -8117,7 +8353,9 @@
      "ajuste": "3 x 10-12 por perna. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando as outras flexoras estão ocupadas.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–12 por perna"
     },
     {
      "id": "flexora-cabo-em-pe",
@@ -8125,7 +8363,9 @@
      "ajuste": "3 x 12-15 por perna.",
      "quando": "Sem máquina de flexora.",
      "atencao": "Carga baixa.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por perna"
     },
     {
      "id": "flexora-com-bola",
@@ -8133,7 +8373,9 @@
      "ajuste": "3 x 8-12.",
      "quando": "Sem máquina; se já está acostumado.",
      "atencao": "Se for novo, faça 2 séries curtas: o excêntrico gera dor tardia.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
     },
     {
      "id": "flexora-halter-deitado",
@@ -8141,7 +8383,9 @@
      "ajuste": "3 x 12.",
      "quando": "Sem máquina e sem bola.",
      "atencao": "Halter pode escorregar; peça ajuda.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12"
     }
    ],
    "evitar": [
@@ -8164,7 +8408,9 @@
      "ajuste": "3 x 8 por perna, step mais baixo.",
      "quando": "Quando quer mais glúteo médio ou o banco alto está ocupado.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8 por perna"
     },
     {
      "id": "leg-press-unilateral",
@@ -8172,7 +8418,9 @@
      "ajuste": "3 x 10 por perna, RIR 3. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Academia cheia ou tornozelo dolorido.",
      "atencao": "Não treina equilíbrio.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10 por perna"
     },
     {
      "id": "afundo-reverso",
@@ -8180,7 +8428,9 @@
      "ajuste": "2-3 x 8 por perna, carga leve.",
      "quando": "Só se já é exercício habitual.",
      "atencao": "Tem mais frenagem que o step-up; se for novo, não use na quinta.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8 por perna"
     },
     {
      "id": "afundo-estatico",
@@ -8188,7 +8438,9 @@
      "ajuste": "2-3 x 8 por perna, só peso do corpo ou halter leve.",
      "quando": "Sem banco nem step; só se já é habitual.",
      "atencao": "Descida sob carga: mantenha leve.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8 por perna"
     }
    ],
    "evitar": [
@@ -8223,7 +8475,9 @@
      "ajuste": "3 x 12. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a cadeira está ocupada.",
      "atencao": "Quadril estendido (músculo menos alongado) tende a dar menos hipertrofia; para a quinta, o que importa é não gerar fadiga.",
-     "evidencia": "Maeo et al., 2021, Med Sci Sports Exerc (flexora sentado deu mais hipertrofia dos posteriores que flexora deitado, em iniciantes)"
+     "evidencia": "Maeo et al., 2021, Med Sci Sports Exerc (flexora sentado deu mais hipertrofia dos posteriores que flexora deitado, em iniciantes)",
+     "series": 3,
+     "reps": "12"
     },
     {
      "id": "flexora-em-pe-maquina",
@@ -8231,7 +8485,9 @@
      "ajuste": "3 x 12 por perna. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando as outras flexoras estão ocupadas.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12 por perna"
     },
     {
      "id": "flexora-cabo-em-pe",
@@ -8239,7 +8495,9 @@
      "ajuste": "3 x 12-15 por perna.",
      "quando": "Sem máquina de flexora.",
      "atencao": "Carga baixa.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por perna"
     },
     {
      "id": "flexora-halter-deitado",
@@ -8247,7 +8505,9 @@
      "ajuste": "3 x 12-15, halter leve.",
      "quando": "Sem máquina nem cabo.",
      "atencao": "Peça ajuda para posicionar o halter.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
     }
    ],
    "evitar": [
@@ -8282,7 +8542,9 @@
      "ajuste": "3 x 15. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a máquina está ocupada.",
      "atencao": null,
-     "evidencia": "Kinoshita et al., 2023, Front Physiol"
+     "evidencia": "Kinoshita et al., 2023, Front Physiol",
+     "series": 3,
+     "reps": "15"
     },
     {
      "id": "panturrilha-smith",
@@ -8290,7 +8552,9 @@
      "ajuste": "3 x 15. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Quando a máquina e o leg press estão ocupados.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "15"
     },
     {
      "id": "panturrilha-unilateral-halter",
@@ -8298,7 +8562,9 @@
      "ajuste": "3 x 12-15 por perna.",
      "quando": "Sem máquina.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por perna"
     },
     {
      "id": "panturrilha-joelho-flexionado",
@@ -8306,7 +8572,9 @@
      "ajuste": "2-3 x 15 por perna.",
      "quando": "Só se o tendão de Aquiles incomodar com joelho estendido.",
      "atencao": "Pouco gastrocnêmio.",
-     "evidencia": "Kinoshita et al., 2023, Front Physiol"
+     "evidencia": "Kinoshita et al., 2023, Front Physiol",
+     "series": 3,
+     "reps": "15 por perna"
     }
    ],
    "evitar": [
@@ -8337,7 +8605,9 @@
      "ajuste": "3 x 15. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Se não quiser inclinar o tronco ou a máquina não permitir.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "15"
     },
     {
      "id": "abducao-cabo-em-pe",
@@ -8345,7 +8615,9 @@
      "ajuste": "3 x 12-15 por perna.",
      "quando": "Máquina ocupada.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por perna"
     },
     {
      "id": "abducao-deitado-lateral",
@@ -8353,7 +8625,9 @@
      "ajuste": "3 x 15-20 por perna, caneleira se tiver.",
      "quando": "Sem aparelho.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "15–20 por perna"
     },
     {
      "id": "monster-walk",
@@ -8361,7 +8635,9 @@
      "ajuste": "3 x 10-15 passos para cada lado.",
      "quando": "Sem aparelho e com elástico à mão.",
      "atencao": "O atleta já trocou este exercício pela abdutora; use só se não houver outra opção.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–15 passos por lado"
     },
     {
      "id": "concha-elastico",
@@ -8369,7 +8645,9 @@
      "ajuste": "2-3 x 15-20 por lado.",
      "quando": "Sem aparelho; carga muito baixa.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "15–20 por lado"
     }
    ],
    "evitar": [
@@ -8396,7 +8674,9 @@
      "ajuste": "3 x 15. Refazer a carga pela reserva (RIR), primeira série como teste.",
      "quando": "Máquina ocupada.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "15"
     },
     {
      "id": "panturrilha-sentado-halter",
@@ -8404,7 +8684,9 @@
      "ajuste": "3 x 15-20.",
      "quando": "Sem máquina.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "15–20"
     },
     {
      "id": "panturrilha-joelho-flexionado",
@@ -8412,7 +8694,9 @@
      "ajuste": "3 x 12-15 por perna.",
      "quando": "Sem máquina.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por perna"
     },
     {
      "id": "panturrilha-leg-press",
@@ -8420,7 +8704,9 @@
      "ajuste": "3 x 15.",
      "quando": "Só o leg press livre.",
      "atencao": "Ênfase maior no gastrocnêmio, mas o sóleo também trabalha.",
-     "evidencia": "Kinoshita et al., 2023, Front Physiol"
+     "evidencia": "Kinoshita et al., 2023, Front Physiol",
+     "series": 3,
+     "reps": "15"
     }
    ],
    "evitar": [
@@ -8447,7 +8733,9 @@
      "ajuste": "3 percursos de 20-30 m por lado.",
      "quando": "Quando quer o estímulo em pé e andando.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "20–30 m por lado"
     },
     {
      "id": "prancha-lateral-joelhos",
@@ -8455,7 +8743,9 @@
      "ajuste": "3 x 30-40 s por lado.",
      "quando": "Quando o ombro incomoda ou está cansado.",
      "atencao": "Carga menor.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "30–40 s por lado"
     },
     {
      "id": "prancha-lateral-com-abducao",
@@ -8463,7 +8753,9 @@
      "ajuste": "3 x 20 s por lado.",
      "quando": "Se a prancha lateral ficou fácil.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "20 s por lado"
     },
     {
      "id": "pallof-press",
@@ -8471,7 +8763,9 @@
      "ajuste": "3 x 10 por lado com 2 s parado.",
      "quando": "Quando quer antirrotação no lugar.",
      "atencao": "Padrão diferente (antirrotação).",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10 por lado"
     }
    ],
    "evitar": [
@@ -8494,7 +8788,9 @@
      "ajuste": "3 x 30-45 s.",
      "quando": "Quando o cotovelo incomoda no chão.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "30–45 s"
     },
     {
      "id": "prancha-toque-ombro",
@@ -8502,7 +8798,9 @@
      "ajuste": "3 x 10-16 toques.",
      "quando": "Se a prancha ficou fácil.",
      "atencao": null,
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–16 toques"
     },
     {
      "id": "dead-bug",
@@ -8510,7 +8808,9 @@
      "ajuste": "3 x 8-10 por lado.",
      "quando": "Se a lombar incomoda na prancha.",
      "atencao": "O atleta já trocou este exercício pela prancha.",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–10 por lado"
     },
     {
      "id": "pallof-press",
@@ -8518,7 +8818,9 @@
      "ajuste": "3 x 10 por lado.",
      "quando": "Quando quer variar o core.",
      "atencao": "Padrão diferente (antirrotação).",
-     "evidencia": "pratica comum"
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10 por lado"
     }
    ],
    "evitar": [

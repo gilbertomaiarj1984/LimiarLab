@@ -47,7 +47,9 @@
   function snapshot(card) {
     if (card.__orig) return card.__orig;
     var f = card.querySelector("svg.fig"), t = card.querySelector(".wo-tips"), v = card.querySelector(".wo-var"), c = card.querySelector(".wo-focus");
+    var sr = card.querySelector(".wo-sr");
     card.__orig = {
+      sr: sr ? sr.textContent : null, sets: card.querySelectorAll(".wo-set").length,
       name: card.dataset.name, h2: card.querySelector("h2").textContent, focus: c ? c.textContent : null,
       fig: f ? { vb: f.getAttribute("viewBox"), label: f.getAttribute("aria-label"), html: f.innerHTML } : null,
       tips: t ? t.innerHTML : null, vari: v ? v.innerHTML : null
@@ -58,11 +60,24 @@
     var e = card.querySelector(sel); if (e) return e;
     e = make(); var ref = card.querySelector(after); if (ref) ref.insertAdjacentElement("afterend", e); else card.appendChild(e); return e;
   }
+  // Séries: ajusta o número de botões (as marcas já feitas continuam valendo, até o novo total).
+  function setCount(card, n) {
+    var box = card.querySelector(".wo-sets"); if (!box) return;
+    var btns = box.querySelectorAll(".wo-set");
+    while (btns.length > n) { btns[btns.length - 1].remove(); btns = box.querySelectorAll(".wo-set"); }
+    while (btns.length < n && btns.length) {
+      var c = btns[btns.length - 1].cloneNode(true), k = btns.length + 1;
+      c.dataset.set = String(k); c.textContent = String(k); c.setAttribute("aria-pressed", "false"); c.setAttribute("aria-label", "Série " + k + " feita");
+      box.appendChild(c); btns = box.querySelectorAll(".wo-set");
+    }
+  }
   function applySwap(card, found) {
     var o = snapshot(card), box = card.querySelector(".wo-swapped"), btn = card.querySelector(".wo-swap");
     var f = card.querySelector("svg.fig"), t = card.querySelector(".wo-tips"), v = card.querySelector(".wo-var"), c = card.querySelector(".wo-focus"), k = card.querySelector(".wo-chip.k");
+    var sr = card.querySelector(".wo-sr");
     if (k) k.hidden = !!found; // a carga do plano não vale para o exercício trocado
     if (!found) {
+      if (sr && o.sr != null) sr.textContent = o.sr; setCount(card, o.sets);
       card.dataset.name = o.name; card.querySelector("h2").textContent = o.h2;
       if (c && o.focus != null) c.textContent = o.focus;
       if (f && o.fig) { f.setAttribute("viewBox", o.fig.vb); f.setAttribute("aria-label", o.fig.label); f.innerHTML = o.fig.html; f.hidden = false; }
@@ -72,6 +87,8 @@
       return;
     }
     var a = found.alt;
+    if (sr && a.series && a.reps) sr.textContent = a.series + " × " + a.reps;
+    if (a.series) setCount(card, a.series);
     card.dataset.name = a.nome; card.querySelector("h2").textContent = a.nome;
     if (c && a.foco) c.textContent = a.foco;
     if (a.figure) {
@@ -135,7 +152,7 @@
         (a.equipamento || []).forEach(function (q) { tg.appendChild(el("span", "wo-tag", EQUIP[q] || q)); });
         b.appendChild(tg);
         function row(k, txt) { if (!txt) return; var p = el("p", "wo-alt-row"); p.appendChild(el("strong", null, k + " ")); p.appendChild(document.createTextNode(txt)); b.appendChild(p); }
-        row("Quando:", a.quando); row("Ajuste:", a.ajuste); row("Atenção:", a.atencao);
+        row("Séries:", a.series + " × " + a.reps); row("Quando:", a.quando); row("Ajuste:", a.ajuste); row("Atenção:", a.atencao);
         b.addEventListener("click", function () {
           var s2 = swaps(log); s2[ex] = { g: gi, id: a.id }; saveSwaps(log, s2);
           applySwap(card, { group: g, alt: a }); closeSheet();
