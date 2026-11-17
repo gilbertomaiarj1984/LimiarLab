@@ -42,3 +42,11 @@ test("url de autorização pede só leitura", () => {
   const u = new URL(authorizeUrl("1", "https://x/cb", "s"));
   assert.equal(u.searchParams.get("scope"), "activity:read_all"); assert.equal(u.searchParams.get("state"), "s");
 });
+
+import { importSchema } from "./import-schema.ts";
+test("lote só de zonas é aceito; zona sem fuso ou vazia é recusada", () => {
+  const ok = importSchema.safeParse({ athlete: "giba", zones: [{ start_time: "2026-11-12T06:27:11-03:00", hr_zones: [{ min_bpm: 102, seconds: 60 }] }] });
+  assert.ok(ok.success);
+  assert.ok(!importSchema.safeParse({ athlete: "giba", zones: [{ start_time: "2026-11-12T06:27:11", hr_zones: [{ min_bpm: 102, seconds: 60 }] }] }).success);
+  assert.ok(!importSchema.safeParse({ athlete: "giba", zones: [{ start_time: "2026-11-12T06:27:11Z", hr_zones: [] }] }).success);
+});

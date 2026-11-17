@@ -1,6 +1,6 @@
 # Importação de dados
 
-O app não fala direto com Garmin nem Strava nesta fase. Uma rotina do Claude (com os conectores Garmin e Strava, só leitura) monta um lote JSON e envia para `POST /api/import`. Os números de exemplo estão em [`web/fixtures/semana-2026-11-09.json`](../web/fixtures/semana-2026-11-09.json).
+Os realizados vêm do Strava, que o próprio app lê (botão Atualizar e rotina das 9h; ver D19). O que o Strava não traz (zonas de FC, treinos agendados no Garmin, plano de força) chega por uma rotina do Claude com o conector Garmin (só leitura), que monta um lote JSON e envia para `POST /api/import`. Os números de exemplo estão em [`web/fixtures/semana-2026-11-09.json`](../web/fixtures/semana-2026-11-09.json).
 
 ## Requisição
 
@@ -41,6 +41,7 @@ Content-Type: application/json
 | `kind` | ver `KINDS` em `web/lib/domain.ts` (`corrida_leve`, `longo`, `qualidade`, `prova`, `corrida`, `forca_inferiores`, `forca_superiores`, `forca`, `mobilidade`, `descanso`, `outro`) |
 | `start_time` | ISO 8601 **com fuso**. A data do dia é calculada no fuso do atleta. |
 | `hr_zones` | tempo por zona do Garmin (`get_activity_hr_in_timezones`), com o limite inferior de cada zona |
+| `zones` | `[{start_time, hr_zones}]`: preenche as zonas de FC de uma corrida **que já existe** (a mais próxima do início, até 10 min, com `start_time` do Garmin). Não cria atividade, então não duplica o que veio do Strava. A resposta traz quantas casaram (`zones`). |
 | `planned_replace` | os planejados dessa fonte no intervalo que **não** vierem no lote são apagados (treino removido do calendário). Um planejado fora do intervalo recusa o lote. |
 | `optional` | marca sessão opcional (não conta como devida) |
 | `workout` | (planejado de força) slug de um treino detalhado em `workouts`, do mesmo lote ou já gravado; um slug inexistente recusa o lote |
@@ -52,9 +53,10 @@ Força vinda do Garmin chega só como `strength`. O app infere inferiores ou sup
 
 ## Prompt da rotina do Claude
 
-> Para o atleta `giba`, monte um lote para `POST /api/import` do LimiarLab cobrindo a semana atual (segunda a domingo) e a próxima.
-> 1. Atividades: leia no Garmin as atividades de segunda passada até hoje. Para cada corrida, leia também o tempo por zona de FC. Use `source: "garmin"` e o `activityId` como `external_id`. Corrida em esteira ou rua vira `sport: "run"`; musculação vira `strength`.
-> 2. Planejados: leia os treinos agendados no Garmin para as duas semanas (`source: "garmin"`) e inclua `planned_replace` para `garmin` cobrindo exatamente esse intervalo. Inclua as sessões de força do plano semanal com `source: "limiarlab"` e um `planned_replace` próprio.
-> 3. Força: para cada dia do plano semanal (`data/semana.json`), envie a sessão com `source: "limiarlab"`, `planned_replace` próprio e `workout` apontando para o treino de `data/treinos/` correspondente, incluído em `workouts`.
-> 4. Classifique `kind` pelo título do treino; rodagem leve é `corrida_leve`; na dúvida use `corrida` para corrida e `forca` para força (o app infere inferiores ou superiores pelo plano).
-> 5. Não escreva nada no Garmin nem no Strava. Envie o lote com o token guardado no ambiente e mostre a resposta. Se vier 422, corrija os campos apontados e reenvie uma vez.
+Roda todo dia às 8h30 (Brasília), antes da atualização das 9h do Strava no app.
+
+> Para o atleta `giba`, monte um lote para `POST /api/import` do LimiarLab e envie com o token do ambiente (`IMPORT_TOKEN`, header `Authorization: Bearer`). Só leitura no Garmin e no Strava; nada é escrito neles.
+> 1. Zonas: leia no Garmin as corridas dos últimos 3 dias e, para cada uma, o tempo por zona de FC (`get_activity_hr_in_timezones`). Envie em `zones` com o `start_time` do Garmin (fuso -03:00) e `hr_zones` (`min_bpm` e `seconds` de cada zona). **Não envie `activities`**: elas vêm do Strava.
+> 2. Planejados: leia os treinos agendados no Garmin para hoje e os próximos 14 dias e envie em `planned` (`source: "garmin"`, `external_id` do treino agendado), com `planned_replace` para `garmin` cobrindo exatamente esse intervalo. Classifique `kind` pelo título; rodagem leve é `corrida_leve`; na dúvida use `corrida`.
+> 3. Força: as sessões de força do plano semanal (`source: "limiarlab"`, com `workout` e `workouts`) só são enviadas quando o plano mudar; não reenvie sem necessidade.
+> 4. Se vier 422, corrija os campos apontados e reenvie uma vez. Mostre a resposta.

@@ -107,7 +107,7 @@ export async function syncStrava(athlete: Athlete, days = LOOKBACK_DAYS): Promis
       if (!dup) fresh.push(m);
     }
     for (let i = 0; i < fresh.length; i += 400) {
-      await applyImport(athlete, { athlete: athlete.slug, planned: [], activities: fresh.slice(i, i + 400), workouts: [], races: [] });
+      await applyImport(athlete, { athlete: athlete.slug, planned: [], activities: fresh.slice(i, i + 400), zones: [], workouts: [], races: [] });
     }
     await sql`UPDATE strava_connections SET last_sync_at = now(), last_sync_error = NULL WHERE athlete_id = ${athlete.id}`;
     return { vistas: seen.length, novas: fresh.length, ignoradas: seen.length - fresh.length };

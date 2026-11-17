@@ -54,6 +54,15 @@ export const workoutSchema = z.object({
   reference: text(400).nullish(),
 }).strict();
 
+/** Zonas de FC de uma corrida que já existe (vinda do Strava, sem zonas): casa pelo início (até 10 min). */
+export const zonesSchema = z.object({
+  start_time: z.string().refine(
+    (s) => /([+-]\d{2}:\d{2}|Z)$/.test(s) && !Number.isNaN(Date.parse(s)),
+    "start_time precisa de fuso, ex.: 2026-11-12T06:27:11-03:00",
+  ),
+  hr_zones: z.array(z.object({ min_bpm: bpm, seconds: z.number().min(0) }).strict()).min(1).max(10),
+}).strict();
+
 export const activitySchema = z.object({
   source,
   external_id: externalId,
@@ -95,6 +104,8 @@ export const importSchema = z.object({
   planned_replace: z.array(replaceSchema).max(10).optional(),
   planned: z.array(plannedSchema).max(500).default([]),
   activities: z.array(activitySchema).max(500).default([]),
+  /** Só preenche hr_zones de corridas já existentes; não cria atividade. */
+  zones: z.array(zonesSchema).max(500).default([]),
   workouts: z.array(workoutSchema).max(30).default([]),
   /** Provas desta fonte no intervalo que não vierem no lote são apagadas (prova cancelada). */
   races_replace: z.array(replaceSchema).max(10).optional(),
