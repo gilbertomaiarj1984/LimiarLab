@@ -54,12 +54,15 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) {
         if (!j || !j.trocas) return;
-        var local = swaps(log);
-        saveSwaps(log, j.trocas); // o servidor vale (troca feita em outro aparelho)
+        // Junta: o que veio do servidor vale (troca feita em outro aparelho); o que só existe aqui
+        // (feito offline ou antes desta versão) é enviado ao servidor em vez de apagado.
+        var local = swaps(log), junto = {}, ex;
+        for (ex in local) { if (!j.trocas[ex]) { junto[ex] = local[ex]; remote(log, "PUT", { ex: Number(ex), g: local[ex].g, id: local[ex].id }); } }
+        for (ex in j.trocas) junto[ex] = j.trocas[ex];
+        saveSwaps(log, junto);
         log.querySelectorAll(".wo-card").forEach(function (card) {
-          var ex = card.dataset.ex, ref = j.trocas[ex];
-          if (ref) { var f = findAlt(log, ex, ref); if (f) applySwap(card, f); }
-          else if (local[ex]) applySwap(card, null);
+          var ref = j.trocas[card.dataset.ex];
+          if (ref) { var f = findAlt(log, card.dataset.ex, ref); if (f) applySwap(card, f); }
         });
       })
       .catch(function () {});
