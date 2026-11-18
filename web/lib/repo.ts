@@ -91,6 +91,40 @@ export async function getWorkout(athleteId: string, slug: string): Promise<Worko
 }
 
 /** Lote que referencia um treino de força inexistente: recusado inteiro (vira 422 na rota). */
+// ---------- Trocas de exercício ----------
+
+/** Troca escolhida para o exercício `ex` (1, 2, …): grupo `g` e substituto `id` da base de equivalência. */
+export type SwapRow = { date: string; slug: string; ex: number; g: number; id: string };
+
+export async function getSwaps(athleteId: string, from: string, to: string, slug?: string): Promise<SwapRow[]> {
+  return sql<SwapRow[]>`
+    SELECT to_char(date, 'YYYY-MM-DD') AS date, workout_slug AS slug, ex, grp AS g, alt_id AS id
+    FROM exercise_swaps
+    WHERE athlete_id = ${athleteId} AND date BETWEEN ${from} AND ${to}
+      ${slug ? sql`AND workout_slug = ${slug}` : sql``}
+    ORDER BY date, workout_slug, ex`;
+}
+
+export async function setSwap(athleteId: string, s: SwapRow): Promise<void> {
+  await sql`
+    INSERT INTO exercise_swaps (athlete_id, date, workout_slug, ex, grp, alt_id)
+    VALUES (${athleteId}, ${s.date}, ${s.slug}, ${s.ex}, ${s.g}, ${s.id})
+    ON CONFLICT (athlete_id, date, workout_slug, ex)
+    DO UPDATE SET grp = EXCLUDED.grp, alt_id = EXCLUDED.alt_id, updated_at = now()`;
+}
+
+export async function deleteSwap(athleteId: string, date: string, slug: string, ex: number): Promise<void> {
+  await sql`DELETE FROM exercise_swaps WHERE athlete_id = ${athleteId} AND date = ${date} AND workout_slug = ${slug} AND ex = ${ex}`;
+}
+
+/** Vários treinos de uma vez (para o relógio). */
+export async function getWorkouts(athleteId: string, slugs: string[]): Promise<Map<string, Workout>> {
+  if (!slugs.length) return new Map();
+  const rows = await sql<{ slug: string; content: Workout }[]>`
+    SELECT slug, content FROM workouts WHERE athlete_id = ${athleteId} AND slug = ANY(${slugs}::text[])`;
+  return new Map(rows.map((r) => [r.slug, r.content]));
+}
+
 export class ImportRefError extends Error {}
 
 export async function lastImport(athleteId: string): Promise<Date | null> {

@@ -154,6 +154,18 @@ export function ensureSchema(): Promise<void> {
           last_try_at     timestamptz,
           created_at      timestamptz NOT NULL DEFAULT now()
         )`;
+      // Trocas de exercício feitas na academia (celular ou relógio), por treino, dia e posição do exercício.
+      await tx`
+        CREATE TABLE IF NOT EXISTS exercise_swaps (
+          athlete_id    uuid NOT NULL REFERENCES athletes(id) ON DELETE CASCADE,
+          date          date NOT NULL,
+          workout_slug  text NOT NULL,
+          ex            smallint NOT NULL CHECK (ex BETWEEN 1 AND 15),
+          grp           smallint NOT NULL CHECK (grp BETWEEN 0 AND 9),
+          alt_id        text NOT NULL,
+          updated_at    timestamptz NOT NULL DEFAULT now(),
+          PRIMARY KEY (athlete_id, date, workout_slug, ex)
+        )`;
       await tx`
         CREATE TABLE IF NOT EXISTS import_log (
           id           bigserial PRIMARY KEY,

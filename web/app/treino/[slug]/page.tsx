@@ -9,15 +9,9 @@ import TabBar from "@/components/TabBar";
 import Script from "next/script";
 import SyncButton from "@/components/SyncButton";
 import { syncStatus } from "@/lib/sync-status";
+import { midRest } from "@/lib/relogio";
 
 export const dynamic = "force-dynamic";
-
-/** Primeiro número de uma faixa como "60–90 s" (para o contador de descanso). */
-function midRest(rest: string | null | undefined): number {
-  const n = (rest ?? "").match(/\d+/g)?.map(Number) ?? [];
-  if (!n.length) return 75;
-  return n.length > 1 ? Math.round((n[0] + n[1]) / 2 / 15) * 15 : n[0];
-}
 
 export default async function Treino({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ dia?: string }> }) {
   const { slug } = await params;

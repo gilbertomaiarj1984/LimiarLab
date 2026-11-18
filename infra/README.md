@@ -20,7 +20,7 @@ Os únicos pontos de contato com o que já existe, e como cada um é protegido:
 Os comandos completos de cada passo foram entregues um por vez na conversa. Resumo:
 
 1. **Conferir a VPS (somente leitura):** containers, redes, memória, disco, cron, pasta e nome do Caddy.
-2. **Pasta e arquivos:** `/opt/limiarlab` com `docker-compose.yml`, `backup.sh`, `check.sh`, `limiarlab.caddy`, `.env` (só `POSTGRES_PASSWORD`) e `.env.production` (`APP_PASSWORD`, `SESSION_SECRET`, `IMPORT_TOKEN`, `DEFAULT_ATHLETE`), ambos `chmod 600`. Gere os segredos com `openssl rand -hex 24` (senha do Postgres, só hexadecimal para não quebrar a URL) e `openssl rand -hex 32` (sessão e token).
+2. **Pasta e arquivos:** `/opt/limiarlab` com `docker-compose.yml`, `backup.sh`, `check.sh`, `limiarlab.caddy`, `.env` (só `POSTGRES_PASSWORD`) e `.env.production` (`APP_PASSWORD`, `SESSION_SECRET`, `IMPORT_TOKEN`, `RELOGIO_TOKEN`, `DEFAULT_ATHLETE`), ambos `chmod 600`. Gere os segredos com `openssl rand -hex 24` (senha do Postgres, só hexadecimal para não quebrar a URL) e `openssl rand -hex 32` (sessão e token).
 3. **Validar o compose** sem subir nada: `docker compose config -q`.
 4. **Imagem:** `docker compose pull`. Se o GHCR negar, torne o pacote público em GitHub > Packages > limiarlab > Package settings > Change visibility. Se preferir mantê-lo privado, use um `DOCKER_CONFIG` separado em vez de `docker login` direto, para não sobrescrever o login que os outros apps possam usar: `DOCKER_CONFIG=/opt/limiarlab/.docker docker login ghcr.io` e depois `DOCKER_CONFIG=/opt/limiarlab/.docker docker compose pull`.
 5. **Subir e esperar ficar saudável** (`docker compose up -d`, depois `docker compose ps`). O schema é criado pelo próprio app na primeira chamada de `/api/health`.
