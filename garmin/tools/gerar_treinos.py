@@ -50,7 +50,9 @@ for arq in glob.glob(os.path.join(RAIZ, "data", "treinos", "*.json")):
                 "c": carga(e),
                 "d": int(e["descanso_s"]),
                 "f": e.get("foco", ""),
-                "t": e.get("dicas", [])[:3],
+                "t": e.get("dicas", []),
+                "g": os.path.splitext(os.path.basename(e.get("ilustracao") or ""))[0],
+                "o": "",
             }
             for e in sorted(t["exercicios"], key=lambda e: e["ordem"])
         ],
@@ -59,5 +61,6 @@ treinos.sort(key=lambda t: ORDEM_DIAS.index(t["dia"]) if t["dia"] in ORDEM_DIAS 
 
 saida = os.path.join(RAIZ, "garmin", "resources", "jsonData", "treinos.json")
 with open(saida, "w", encoding="utf-8") as f:
-    json.dump(treinos, f, ensure_ascii=False, separators=(",", ":"))
+    # Mesmo formato da rota /api/relogio, mas sem data: o relógio usa o dia da semana ("dia").
+    json.dump({"sessoes": treinos}, f, ensure_ascii=False, separators=(",", ":"))
 print(f"{len(treinos)} treinos, {os.path.getsize(saida)} bytes -> {saida}")

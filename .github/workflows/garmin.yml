@@ -1,5 +1,6 @@
 # App do relógio (pasta garmin/): compila para o Forerunner 955 e tira capturas do simulador.
 # O .prg e as telas ficam no artifact "garmin-build" da execução (nada é commitado).
+# O .prg leva o token só de leitura do relógio (secret RELOGIO_TOKEN); o artifact expira em 14 dias.
 name: garmin
 
 on:
@@ -18,8 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Compilar e capturar telas
+        env:
+          RELOGIO_TOKEN: ${{ secrets.RELOGIO_TOKEN }}
         run: |
-          docker run --rm -v "$PWD/garmin:/app" --entrypoint /bin/bash \
+          docker run --rm -e RELOGIO_TOKEN -v "$PWD/garmin:/app" --entrypoint /bin/bash \
             ghcr.io/matco/connectiq-tester:latest /app/tools/ci.sh
           sudo chown -R "$(id -u):$(id -g)" garmin/build
           cat garmin/build/ambiente.txt garmin/build/compilacao.txt
@@ -37,3 +40,4 @@ jobs:
         with:
           name: garmin-build
           path: garmin/build/
+          retention-days: 14

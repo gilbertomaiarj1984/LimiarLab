@@ -21,34 +21,46 @@ class TreinoView extends WatchUi.View {
     var serie = 1;
     var estado = EXERCICIO;
     var restante = 0;
-    var detalhes = false;
+    var detalhe = null;
+    hidden var fimMs = 0;
+    hidden var avisou = false;
     hidden var timer;
 
+    // O contador roda mesmo com a tela de dicas aberta, pelo horário de término do descanso.
     function initialize(t) {
         View.initialize();
         treino = t;
         exs = t["ex"];
         timer = new Timer.Timer();
-    }
-
-    function onShow() {
         timer.start(method(:tick), 1000, true);
-    }
-
-    function onHide() {
-        timer.stop();
     }
 
     function tick() as Void {
         if (estado == DESCANSO) {
-            restante -= 1;
+            restante = (fimMs - System.getTimer() + 999) / 1000;
             if (restante <= 0) {
+                restante = 0;
                 fimDescanso(true);
-            } else if (restante == 10) {
+            } else if (restante <= 10 && !avisou) {
+                avisou = true;
                 vibrar(150);
             }
         }
         WatchUi.requestUpdate();
+    }
+
+    function comecarDescanso(seg) {
+        estado = DESCANSO;
+        restante = seg;
+        avisou = seg <= 10;
+        fimMs = System.getTimer() + seg * 1000;
+    }
+
+    // Só para a demonstração do simulador.
+    function encurtarDescanso(seg) {
+        if (estado == DESCANSO) {
+            comecarDescanso(seg);
+        }
     }
 
     // START: marca a série feita; no descanso, pula o descanso; no fim, salva e sai.
@@ -63,19 +75,17 @@ class TreinoView extends WatchUi.View {
         }
         Sessao.volta();
         var ex = exs[exIdx];
-        restante = ex["d"];
         if (serie < ex["s"]) {
             serie += 1;
-            estado = DESCANSO;
+            comecarDescanso(ex["d"]);
         } else if (exIdx < exs.size() - 1) {
             exIdx += 1;
             serie = 1;
-            estado = DESCANSO;
+            comecarDescanso(ex["d"]);
         } else {
             estado = FIM;
             vibrar(600);
         }
-        detalhes = false;
         WatchUi.requestUpdate();
     }
 
@@ -103,14 +113,16 @@ class TreinoView extends WatchUi.View {
         exIdx = novo;
         serie = 1;
         estado = EXERCICIO;
-        detalhes = false;
         WatchUi.requestUpdate();
     }
 
-    // Segurar UP (menu): mostra as dicas do exercício.
-    function alternarDetalhes() {
-        detalhes = !detalhes;
-        WatchUi.requestUpdate();
+    // Segurar UP (menu): abre a explicação completa do exercício, com ilustração e rolagem.
+    function abrirDetalhes() {
+        if (estado == FIM) {
+            return;
+        }
+        detalhe = new DetalheView(exs[exIdx]);
+        WatchUi.pushView(detalhe, new DetalheDelegate(detalhe), WatchUi.SLIDE_UP);
     }
 
     function vibrar(ms) {
@@ -126,8 +138,6 @@ class TreinoView extends WatchUi.View {
         var cx = w / 2;
         if (estado == FIM) {
             desenharFim(dc, cx);
-        } else if (detalhes) {
-            desenharDetalhes(dc, w, cx);
         } else if (estado == DESCANSO) {
             desenharDescanso(dc, w, cx);
         } else {
@@ -138,7 +148,11 @@ class TreinoView extends WatchUi.View {
 
     function desenharExercicio(dc, w, cx) {
         var ex = exs[exIdx];
-        texto(dc, cx, 22, Graphics.FONT_XTINY, COR_SUAVE, "Exercício " + (exIdx + 1) + "/" + exs.size());
+        var topo = "Exercício " + (exIdx + 1) + "/" + exs.size();
+        if (ex["o"] != null && ex["o"].length() > 0) {
+            topo += " (trocado)";
+        }
+        texto(dc, cx, 22, Graphics.FONT_XTINY, COR_SUAVE, topo);
         var y = linhas(dc, cx, 46, w - 50, Graphics.FONT_SMALL, Graphics.COLOR_WHITE, ex["n"], 2);
         y += 4;
         texto(dc, cx, y, Graphics.FONT_MEDIUM, COR_DESTAQUE, "Série " + serie + " de " + ex["s"]);
@@ -179,16 +193,6 @@ class TreinoView extends WatchUi.View {
         texto(dc, cx, y, Graphics.FONT_TINY, COR_DESTAQUE, "Série " + serie + " de " + ex["s"] + ", " + ex["r"]);
     }
 
-    function desenharDetalhes(dc, w, cx) {
-        var ex = exs[exIdx];
-        texto(dc, cx, 22, Graphics.FONT_XTINY, COR_DESTAQUE, ex["f"]);
-        var y = 44;
-        var dicas = ex["t"];
-        for (var i = 0; i < dicas.size() && y < 200; i++) {
-            y = linhas(dc, cx, y, w - 40, Graphics.FONT_XTINY, Graphics.COLOR_WHITE, dicas[i], 3) + 4;
-        }
-    }
-
     function desenharFim(dc, cx) {
         texto(dc, cx, 60, Graphics.FONT_SMALL, COR_DESTAQUE, "Treino concluído");
         texto(dc, cx, 100, Graphics.FONT_NUMBER_MILD, Graphics.COLOR_WHITE, tempoTotal());
@@ -211,56 +215,6 @@ class TreinoView extends WatchUi.View {
             s = info.timerTime / 1000;
         }
         return (s / 60) + ":" + (s % 60).format("%02d");
-    }
-
-    function texto(dc, x, y, fonte, cor, s) {
-        dc.setColor(cor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(x, y, fonte, s, Graphics.TEXT_JUSTIFY_CENTER);
-    }
-
-    // Quebra o texto em até `max` linhas centralizadas; devolve o y logo abaixo da última.
-    function linhas(dc, x, y, largura, fonte, cor, s, max) {
-        var palavras = dividir(s);
-        var atual = "";
-        var n = 0;
-        var altura = dc.getFontHeight(fonte);
-        for (var i = 0; i < palavras.size(); i++) {
-            var teste = atual.length() == 0 ? palavras[i] : atual + " " + palavras[i];
-            if (dc.getTextWidthInPixels(teste, fonte) > largura && atual.length() > 0) {
-                n += 1;
-                if (n == max) {
-                    texto(dc, x, y, fonte, cor, atual + "...");
-                    return y + altura;
-                }
-                texto(dc, x, y, fonte, cor, atual);
-                y += altura;
-                atual = palavras[i];
-            } else {
-                atual = teste;
-            }
-        }
-        if (atual.length() > 0) {
-            texto(dc, x, y, fonte, cor, atual);
-            y += altura;
-        }
-        return y;
-    }
-
-    function dividir(s) {
-        var partes = [];
-        var resto = s;
-        var i = resto.find(" ");
-        while (i != null) {
-            if (i > 0) {
-                partes.add(resto.substring(0, i));
-            }
-            resto = resto.substring(i + 1, resto.length());
-            i = resto.find(" ");
-        }
-        if (resto.length() > 0) {
-            partes.add(resto);
-        }
-        return partes;
     }
 }
 
@@ -288,7 +242,7 @@ class TreinoDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onMenu() {
-        view.alternarDetalhes();
+        view.abrirDetalhes();
         return true;
     }
 
