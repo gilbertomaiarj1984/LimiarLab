@@ -2,6 +2,7 @@ import Toybox.Application;
 import Toybox.Application.Storage;
 import Toybox.Communications;
 import Toybox.Lang;
+import Toybox.PersistedContent;
 import Toybox.Time;
 import Toybox.Time.Gregorian;
 import Toybox.Timer;
@@ -73,7 +74,7 @@ class LimiarApp extends Application.AppBase {
         }, method(:aoReceber));
     }
 
-    function aoReceber(codigo as Number, dados as Dictionary or String or Null) as Void {
+    function aoReceber(codigo as Number, dados as Dictionary or String or PersistedContent.Iterator or Null) as Void {
         baixando = false;
         var d = (dados instanceof Dictionary) ? dados as Dictionary : null;
         if (codigo == 200 && d != null && d["sessoes"] instanceof Array) {
