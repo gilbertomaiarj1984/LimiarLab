@@ -73,12 +73,13 @@ class LimiarApp extends Application.AppBase {
         }, method(:aoReceber));
     }
 
-    function aoReceber(codigo as Number, dados) as Void {
+    function aoReceber(codigo as Number, dados as Dictionary or String or Null) as Void {
         baixando = false;
-        if (codigo == 200 && dados instanceof Dictionary && dados["sessoes"] instanceof Array) {
-            guardar(dados);
-            usarPlano(dados["sessoes"]);
-            estado = "Atualizado " + dados["atualizado"];
+        var d = (dados instanceof Dictionary) ? dados as Dictionary : null;
+        if (codigo == 200 && d != null && d["sessoes"] instanceof Array) {
+            guardar(d);
+            usarPlano(d["sessoes"]);
+            estado = "Atualizado " + d["atualizado"];
         } else if (codigo == 401) {
             estado = "Token recusado";
         } else {
@@ -104,7 +105,7 @@ class LimiarApp extends Application.AppBase {
     }
 
     function carregarCache() {
-        var meta = Storage.getValue("plano");
+        var meta = Storage.getValue("plano") as Dictionary?;
         if (meta == null) {
             return false;
         }
