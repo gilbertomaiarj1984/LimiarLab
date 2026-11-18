@@ -1,6 +1,7 @@
 // Acompanhamento do treino de força: marcar as séries feitas e contar o descanso.
 // Script simples sobre o HTML da página (sem React), para funcionar igual no app e no preview.
-// As marcas ficam só neste aparelho (localStorage), por treino e por dia; nada vai ao servidor.
+// As marcas de série ficam só neste aparelho (localStorage). As trocas de exercício também vão ao servidor
+// (/api/trocas), para o relógio e outros aparelhos verem a mesma troca.
 (function () {
   if (window.__llTreino) return;
   window.__llTreino = true;
@@ -18,6 +19,7 @@
     var st = state(log);
     log.querySelectorAll(".wo-set").forEach(function (b) { b.setAttribute("aria-pressed", st[setId(b)] ? "true" : "false"); });
     applyAll(log);
+    pullSwaps(log);
   }
   function save(log) {
     var st = {};
@@ -27,7 +29,7 @@
 
 
   // ---- Trocar exercício (base de equivalência) ----
-  // Os substitutos vêm do próprio HTML (script.wo-swapdata). A escolha fica só neste aparelho, por treino e por dia.
+  // Os substitutos vêm do próprio HTML (script.wo-swapdata). A escolha fica neste aparelho e no servidor, por treino e por dia.
   var EQ = { alta: "alta", media: "média", baixa: "baixa" };
   var EQUIP = { maquina: "Máquina", cabo: "Cabo", halter: "Halter", barra: "Barra", smith: "Smith", "peso-corporal": "Peso corporal", banco: "Banco", step: "Step", elastico: "Elástico", kettlebell: "Kettlebell", "leg-press": "Leg press" };
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -39,6 +41,32 @@
   function swapKey(log) { return log.dataset.key + ":trocas"; }
   function swaps(log) { try { return JSON.parse(get(swapKey(log)) || "{}") || {}; } catch (e) { return {}; } }
   function saveSwaps(log, st) { put(swapKey(log), JSON.stringify(st)); }
+  // data-key = "ll:treino:<slug>:<dia>". Sem servidor (preview), as chamadas só falham em silêncio.
+  function where(log) { var p = (log.dataset.key || "").split(":"); return p.length === 4 ? { treino: p[2], dia: p[3] } : null; }
+  function remote(log, method, body) {
+    var w = where(log); if (!w || !window.fetch) return;
+    var b = { treino: w.treino, dia: w.dia }; for (var k in body) b[k] = body[k];
+    fetch("/api/trocas", { method: method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(b), credentials: "same-origin" }).catch(function () {});
+  }
+  function pullSwaps(log) {
+    var w = where(log); if (!w || !window.fetch) return;
+    fetch("/api/trocas?treino=" + encodeURIComponent(w.treino) + "&dia=" + encodeURIComponent(w.dia), { credentials: "same-origin" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.trocas) return;
+        // Junta: o que veio do servidor vale (troca feita em outro aparelho); o que só existe aqui
+        // (feito offline ou antes desta versão) é enviado ao servidor em vez de apagado.
+        var local = swaps(log), junto = {}, ex;
+        for (ex in local) { if (!j.trocas[ex]) { junto[ex] = local[ex]; remote(log, "PUT", { ex: Number(ex), g: local[ex].g, id: local[ex].id }); } }
+        for (ex in j.trocas) junto[ex] = j.trocas[ex];
+        saveSwaps(log, junto);
+        log.querySelectorAll(".wo-card").forEach(function (card) {
+          var ref = j.trocas[card.dataset.ex];
+          if (ref) { var f = findAlt(log, card.dataset.ex, ref); if (f) applySwap(card, f); }
+        });
+      })
+      .catch(function () {});
+  }
   function findAlt(log, ex, ref) {
     var g = (swapData(log)[ex] || [])[ref.g]; if (!g) return null;
     for (var i = 0; i < g.alternativas.length; i++) if (g.alternativas[i].id === ref.id) return { group: g, alt: g.alternativas[i] };
@@ -133,7 +161,7 @@
     sheet.appendChild(el("p", "wo-sheet-sub", "Do mais parecido ao menos parecido. A carga não passa de um aparelho para outro: refaça pela reserva, usando a primeira série como teste."));
     if (cur) {
       var back = el("button", "wo-alt wo-alt-orig", "Usar o exercício do plano"); back.type = "button";
-      back.addEventListener("click", function () { var s2 = swaps(log); delete s2[ex]; saveSwaps(log, s2); applySwap(card, null); closeSheet(); });
+      back.addEventListener("click", function () { var s2 = swaps(log); delete s2[ex]; saveSwaps(log, s2); remote(log, "DELETE", { ex: Number(ex) }); applySwap(card, null); closeSheet(); });
       sheet.appendChild(back);
     }
     groups.forEach(function (g, gi) {
@@ -154,7 +182,7 @@
         function row(k, txt) { if (!txt) return; var p = el("p", "wo-alt-row"); p.appendChild(el("strong", null, k + " ")); p.appendChild(document.createTextNode(txt)); b.appendChild(p); }
         row("Séries:", a.series + " × " + a.reps); row("Quando:", a.quando); row("Ajuste:", a.ajuste); row("Atenção:", a.atencao);
         b.addEventListener("click", function () {
-          var s2 = swaps(log); s2[ex] = { g: gi, id: a.id }; saveSwaps(log, s2);
+          var s2 = swaps(log); s2[ex] = { g: gi, id: a.id }; saveSwaps(log, s2); remote(log, "PUT", { ex: Number(ex), g: gi, id: a.id });
           applySwap(card, { group: g, alt: a }); closeSheet();
           var h = card.getBoundingClientRect(); if (h.top < 0) card.scrollIntoView({ block: "start" });
         });
@@ -204,7 +232,7 @@
     if (sw) { openSheet(log, sw.closest(".wo-card")); return; }
     var un = ev.target.closest(".wo-undo");
     if (un) {
-      var cd = un.closest(".wo-card"), s3 = swaps(log); delete s3[cd.dataset.ex]; saveSwaps(log, s3); applySwap(cd, null); return;
+      var cd = un.closest(".wo-card"), s3 = swaps(log); delete s3[cd.dataset.ex]; saveSwaps(log, s3); remote(log, "DELETE", { ex: Number(cd.dataset.ex) }); applySwap(cd, null); return;
     }
     var b = ev.target.closest(".wo-set");
     if (b) {

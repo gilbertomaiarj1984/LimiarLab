@@ -17,12 +17,19 @@ const SLOTS = data.slots as Slot[];
 export type SwapAlt = {
   id: string; nome: string; series: number; reps: string; equivalencia: Sub["equivalencia"]; equipamento: string[]; foco: string;
   ajuste: string | null; quando: string | null; atencao: string | null; evidencia: string | null; dicas: string[]; figure: Fig | null;
+  /** Chave da ilustração (em FIGURES), para o relógio. */
+  figura: string | null;
 };
 export type SwapGroup = { original: string; objetivo: string; criterios: string | null; alternativas: SwapAlt[]; evitar: { nome: string; porque: string }[] };
 
-export function figureOf(ex: Ex | undefined): Fig | null {
+export function figureKey(ex: Ex | undefined): string | null {
   const key = ex?.ilustracao?.replace(/^assets\/svg\//, "").replace(/\.svg$/, "");
-  return key ? FIGURES[key] ?? null : null;
+  return key && FIGURES[key] ? key : null;
+}
+
+export function figureOf(ex: Ex | undefined): Fig | null {
+  const key = figureKey(ex);
+  return key ? FIGURES[key] : null;
 }
 
 const GRUPOS: Record<string, string> = {
@@ -51,7 +58,7 @@ export function swapGroups(slug: string, ordem: number): SwapGroup[] {
         id: x.id, nome: nome(x.id), series: x.series, reps: x.reps, equivalencia: x.equivalencia, equipamento: e?.equipamento ?? [],
         foco: grupos(e?.grupo_primario ?? []),
         ajuste: x.ajuste ?? null, quando: x.quando ?? null, atencao: x.atencao ?? null, evidencia: x.evidencia ?? null,
-        dicas: e?.dicas ?? [], figure: figureOf(e),
+        dicas: e?.dicas ?? [], figure: figureOf(e), figura: figureKey(e),
       };
     }),
     evitar: (s.evitar ?? []).map((v) => ({ nome: nome(v.id), porque: v.porque })),
