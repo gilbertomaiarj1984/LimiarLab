@@ -26,6 +26,7 @@ openssl pkcs8 -topk8 -inform PEM -outform DER -in /tmp/key.pem -out /tmp/key.der
 monkeyc -f monkey.jungle -d fr955 -o "$OUT/limiarlab-forca.prg" -y /tmp/key.der -w > "$OUT/compilacao.txt" 2>&1
 STATUS=$?
 echo "status=$STATUS" >> "$OUT/compilacao.txt"
+ls -l "$OUT"/*.prg >> "$OUT/compilacao.txt" 2>/dev/null
 if [ $STATUS -ne 0 ]; then
   exit 0
 fi

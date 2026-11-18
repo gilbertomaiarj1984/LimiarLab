@@ -2,14 +2,14 @@ import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-// Explicação completa do exercício: ilustração (início e fim), séries, foco e todas as dicas.
+// Explicação completa do exercício: séries, foco, ilustração (início e fim, uma embaixo da outra) e todas as dicas.
 // UP/DOWN rolam o texto; BACK ou START voltam ao treino (o descanso continua contando).
 class DetalheView extends WatchUi.View {
     hidden var ex;
     hidden var desloc = 0;
     hidden var alturaTotal = 0;
     hidden var alturaTela = 260;
-    hidden var bmp = null;
+    hidden var figs = [];
 
     function initialize(e) {
         View.initialize();
@@ -18,11 +18,17 @@ class DetalheView extends WatchUi.View {
 
     function onShow() {
         var r = figuraDe(ex["g"]);
-        bmp = r == null ? null : WatchUi.loadResource(r);
+        figs = [];
+        if (r != null) {
+            for (var i = 0; i < r.size(); i++) {
+                figs.add(WatchUi.loadResource(r[i]));
+            }
+        }
     }
 
+    // Libera a memória das imagens ao sair da tela.
     function onHide() {
-        bmp = null;
+        figs = [];
     }
 
     // passo > 0 desce, < 0 sobe (um terço da tela por clique).
@@ -55,32 +61,34 @@ class DetalheView extends WatchUi.View {
         if (ex["o"] != null && ex["o"].length() > 0) {
             y = linhas(dc, cx, y, lw, Graphics.FONT_XTINY, COR_SUAVE, "No lugar de: " + ex["o"], 3);
         }
-        y += 6;
-        if (bmp != null) {
-            dc.drawBitmap(cx - bmp.getWidth() / 2, y, bmp);
-            y += bmp.getHeight() + 6;
-        }
+        y += 4;
         var series = ex["s"] + " x " + ex["r"];
         if (ex["c"].length() > 0) {
             series += "  " + ex["c"];
         }
         y = linhas(dc, cx, y, lw, Graphics.FONT_TINY, Graphics.COLOR_WHITE, series, 2);
         y = linhas(dc, cx, y, lw, Graphics.FONT_XTINY, COR_SUAVE, ex["f"] + ", descanso " + ex["d"] + " s", 2);
-        y += 8;
+        y += 6;
+        for (var i = 0; i < figs.size(); i++) {
+            dc.drawBitmap(cx - figs[i].getWidth() / 2, y, figs[i]);
+            y += figs[i].getHeight() + 4;
+        }
+        y += 4;
         var dicas = ex["t"];
         for (var i = 0; i < dicas.size(); i++) {
             y = linhas(dc, cx, y, lw, Graphics.FONT_XTINY, Graphics.COLOR_WHITE, dicas[i], 99) + 8;
         }
         alturaTotal = y + desloc + 20;
 
-        // Setas de rolagem: há conteúdo acima ou abaixo.
+        // Setas de rolagem na borda esquerda (onde ficam os botões UP/DOWN do 955): há conteúdo acima ou abaixo.
         dc.setColor(COR_DESTAQUE, Graphics.COLOR_TRANSPARENT);
+        var xa = 12;
+        var ym = alturaTela / 2;
         if (desloc > 0) {
-            dc.fillPolygon([[cx - 8, 14], [cx + 8, 14], [cx, 6]]);
+            dc.fillPolygon([[xa - 6, ym - 14], [xa + 6, ym - 14], [xa, ym - 24]]);
         }
         if (alturaTotal - desloc > alturaTela) {
-            var b = alturaTela - 6;
-            dc.fillPolygon([[cx - 8, b - 8], [cx + 8, b - 8], [cx, b]]);
+            dc.fillPolygon([[xa - 6, ym + 14], [xa + 6, ym + 14], [xa, ym + 24]]);
         }
     }
 }

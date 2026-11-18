@@ -14,7 +14,9 @@ const { chromium } = require("playwright");
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), "..");
 const PASTA = join(RAIZ, "resources", "drawables", "figuras");
-const LARGURA = 200; // px na tela de 260 px do Forerunner 955
+// A figura tem duas poses lado a lado (início e fim). Renderiza com o dobro da largura e corta ao meio:
+// cada pose fica com 200 px na tela de 260 px do Forerunner 955, uma embaixo da outra.
+const LARGURA = 400;
 
 const CSS = `
   html,body{margin:0;background:#000}
@@ -29,7 +31,7 @@ const CSS = `
   .t{fill:#fff;font:600 26px sans-serif;text-anchor:middle}
 `;
 
-const id = (k) => "fig_" + k.replace(/-/g, "_");
+const id = (k, n) => `fig_${k.replace(/-/g, "_")}_${n}`;
 
 rmSync(PASTA, { recursive: true, force: true });
 mkdirSync(PASTA, { recursive: true });
@@ -40,13 +42,20 @@ const chaves = Object.keys(FIGURES).sort();
 for (const k of chaves) {
   const f = FIGURES[k];
   await page.setContent(`<style>${CSS}</style><svg xmlns="http://www.w3.org/2000/svg" viewBox="${f.viewBox}">${f.body}</svg>`);
-  await page.locator("svg").screenshot({ path: join(PASTA, `${k}.png`) });
+  const box = await page.locator("svg").boundingBox();
+  const meio = Math.round(box.width / 2);
+  const h = Math.round(box.height);
+  await page.screenshot({ path: join(PASTA, `${k}_1.png`), clip: { x: box.x, y: box.y, width: meio, height: h } });
+  await page.screenshot({ path: join(PASTA, `${k}_2.png`), clip: { x: box.x + meio, y: box.y, width: Math.round(box.width) - meio, height: h } });
 }
 await browser.close();
 
 writeFileSync(
   join(RAIZ, "resources", "drawables", "figuras.xml"),
-  "<drawables>\n" + chaves.map((k) => `    <bitmap id="${id(k)}" filename="figuras/${k}.png" dithering="none"/>`).join("\n") + "\n</drawables>\n",
+  // packingFormat="png": guarda comprimido no app (são 316 imagens); poucas cores, sem pontilhado.
+  "<drawables>\n" +
+    chaves.flatMap((k) => [1, 2].map((n) => `    <bitmap id="${id(k, n)}" filename="figuras/${k}_${n}.png" dithering="none" packingFormat="png"/>`)).join("\n") +
+    "\n</drawables>\n",
 );
 
 writeFileSync(
@@ -55,13 +64,13 @@ writeFileSync(
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-// Ilustração (chave igual à do app web) -> recurso do relógio. null se não houver.
+// Ilustração (chave igual à do app web) -> [início, fim] como recursos do relógio. null se não houver.
 function figuraDe(chave) {
     if (chave == null || chave.length() == 0) {
         return null;
     }
     var m = {
-${chaves.map((k) => `        "${k}" => Rez.Drawables.${id(k)}`).join(",\n")}
+${chaves.map((k) => `        "${k}" => [Rez.Drawables.${id(k, 1)}, Rez.Drawables.${id(k, 2)}]`).join(",\n")}
     };
     return m.get(chave);
 }
