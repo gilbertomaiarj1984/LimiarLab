@@ -63,3 +63,25 @@ test("recuperação parada (dados reais do Garmin): 8 × 800 m, recup. 7 × 1:25
   const s = intervalSummary(laps)!;
   assert.match(s, /^8 × 800 m · 4:\d\d\/km · FC 14\d · recup\. 7 × 1:25 parado$/);
 });
+
+test("rua, areia fofa e rua (dados reais, 19/11/2026): voltas automáticas de 1 km não viram intervalado", () => {
+  // Garmin, 20' Z2 na rua + 20' na areia fofa + 20' Z2 na rua; voltas a cada 1 km e na troca de etapa do treino.
+  const laps: Lap[] = [
+    lap(1, 1000, 333, 116), lap(2, 1000, 321, 131), lap(3, 1000, 320, 139), lap(4, 678.66, 225, 139),
+    lap(5, 1000, 383, 143), lap(6, 1000, 398, 145), lap(7, 965.54, 457, 144),
+    lap(8, 1000, 351, 142), lap(9, 1000, 352, 144), lap(10, 1000, 334, 147), lap(11, 251.52, 93, 148),
+  ];
+  laps[6].movingS = 416;
+  assert.equal(readLaps(laps).kind, "continuo");
+  assert.equal(intervalSummary(laps), null);
+});
+
+test("6 × 1 km com 1 km trotando entre os tiros, tudo em voltas de 1 km: continua intervalado", () => {
+  const laps: Lap[] = [lap(1, 1000, 360, 125), lap(2, 1000, 355, 130)];
+  for (let i = 0; i < 6; i++) { laps.push(lap(laps.length + 1, 1000, 250, 160)); if (i < 5) laps.push(lap(laps.length + 1, 1000, 390, 140)); }
+  laps.push(lap(laps.length + 1, 1000, 370, 130), lap(laps.length + 2, 300, 110, 125));
+  const r = readLaps(laps);
+  assert.equal(r.kind, "intervalado");
+  assert.equal(r.work?.count, 6);
+  assert.equal(r.rest?.count, 5);
+});

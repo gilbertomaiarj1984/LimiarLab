@@ -82,6 +82,18 @@ function group(ls: Lap[]): LapGroup | null {
   };
 }
 
+const AUTO_LAP_M = [1000, 1609.344];
+const AUTO_LAP_TOL = 0.015;
+const AUTO_LAP_SHARE = 0.6;
+
+/** Voltas marcadas pelo relógio a cada 1 km (ou 1 milha): a maioria das voltas, sem contar a última, tem essa distância. */
+export function isAutoLapped(laps: Pick<Lap, "distanceM">[]): boolean {
+  const body = laps.slice(0, -1);
+  if (body.length < 3) return false;
+  const auto = body.filter((l) => AUTO_LAP_M.some((d) => Math.abs(l.distanceM - d) <= d * AUTO_LAP_TOL)).length;
+  return auto / body.length >= AUTO_LAP_SHARE;
+}
+
 /**
  * Lê as voltas. Intervalado = pelo menos 2 tiros (voltas em ritmo rápido) com recuperação no meio.
  * Recuperação pode ser trotando (voltas mais lentas que os tiros) ou PARADA (voltas com velocidade média
@@ -89,6 +101,8 @@ function group(ls: Lap[]): LapGroup | null {
  * dois ritmos (k-means); quando os ritmos não se separam, valem as voltas coladas a uma recuperação parada.
  * Antes do primeiro tiro é aquecimento; depois do último, desaquecimento (a recuperação logo após o último
  * tiro conta como recuperação na tabela, mas fica fora do resumo).
+ * Com voltas automáticas de 1 km e sem paradas, tiros colados indicam corrida contínua com mudança de terreno
+ * (ex.: rua, areia fofa, rua): fica contínuo.
  */
 export function readLaps(laps: Lap[]): LapsReading {
   const flat: LapsReading = { kind: "continuo", roles: laps.map(() => "volta"), work: null, rest: null };
@@ -113,6 +127,9 @@ export function readLaps(laps: Lap[]): LapsReading {
   const isWork = (l: Lap, i: number) => isMoving(l) && (separated ? v(l) > cut : adjacentRest(i)) && (!hasRests || adjacentRest(i));
   const workIdx = laps.map((l, i) => (isWork(l, i) ? i : -1)).filter((i) => i >= 0);
   if (workIdx.length < 2) return flat;
+  // Volta automática (1 km / 1 milha) sem parada: o ritmo muda com o terreno (areia, subida) e não por tiros.
+  // Se dois "tiros" vêm colados, é corrida contínua com trechos mais lentos, não intervalado.
+  if (!hasRests && isAutoLapped(laps) && workIdx.some((i, k) => k > 0 && workIdx[k - 1] === i - 1)) return flat;
   const first = workIdx[0], last = workIdx[workIdx.length - 1];
   const between = laps.slice(first + 1, last).some((l, k) => !isWork(l, first + 1 + k));
   if (!between) return flat;
