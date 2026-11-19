@@ -2,8 +2,8 @@ import { NextResponse, type NextRequest } from "next/server";
 import { SESSION_COOKIE, verifySessionToken } from "@/lib/session";
 
 // Fase 1, sem login de usuários: tudo exige a sessão criada pela senha do app (APP_PASSWORD),
-// menos o que precisa funcionar sem ela. /api/import e /api/relogio têm tokens próprios (IMPORT_TOKEN, RELOGIO_TOKEN).
-const PUBLIC = ["/entrar", "/api/health", "/api/import", "/api/relogio", "/manifest.webmanifest", "/sw.js"];
+// menos o que precisa funcionar sem ela. /api/import e /api/forca/historico usam IMPORT_TOKEN; /api/relogio usa RELOGIO_TOKEN.
+const PUBLIC = ["/entrar", "/api/health", "/api/import", "/api/relogio", "/api/forca/historico", "/manifest.webmanifest", "/sw.js"];
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;

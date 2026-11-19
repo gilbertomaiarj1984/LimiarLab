@@ -1,6 +1,6 @@
 // Acompanhamento do treino de força: marcar as séries feitas e contar o descanso.
 // Script simples sobre o HTML da página (sem React), para funcionar igual no app e no preview.
-// As marcas de série ficam só neste aparelho (localStorage). As trocas de exercício também vão ao servidor
+// As marcas de série ficam só neste aparelho (localStorage). A confirmação do treino feito vai ao servidor (/api/forca). As trocas de exercício também vão ao servidor
 // (/api/trocas), para o relógio e outros aparelhos verem a mesma troca.
 (function () {
   if (window.__llTreino) return;
@@ -20,6 +20,7 @@
     log.querySelectorAll(".wo-set").forEach(function (b) { b.setAttribute("aria-pressed", st[setId(b)] ? "true" : "false"); });
     applyAll(log);
     pullSwaps(log);
+    confRender(log);
   }
   function save(log) {
     var st = {};
@@ -64,6 +65,7 @@
           var ref = j.trocas[card.dataset.ex];
           if (ref) { var f = findAlt(log, card.dataset.ex, ref); if (f) applySwap(card, f); }
         });
+        confRender(log);
       })
       .catch(function () {});
   }
@@ -100,6 +102,10 @@
     }
   }
   function applySwap(card, found) {
+    applySwapDom(card, found);
+    var lg = card.closest(".wo-log"); if (lg && lg.dataset.ready) { if (lg.__ce) delete lg.__ce[card.dataset.ex]; confRender(lg); }
+  }
+  function applySwapDom(card, found) {
     var o = snapshot(card), box = card.querySelector(".wo-swapped"), btn = card.querySelector(".wo-swap");
     var f = card.querySelector("svg.fig"), t = card.querySelector(".wo-tips"), v = card.querySelector(".wo-var"), c = card.querySelector(".wo-focus"), k = card.querySelector(".wo-chip.k");
     var sr = card.querySelector(".wo-sr");
@@ -198,6 +204,98 @@
     if (sheet.showModal) sheet.showModal(); else sheet.setAttribute("open", "");
   }
 
+
+  // ---- Confirmar o que foi feito (histórico de força, /api/forca) ----
+  // A lista sai dos cartões como estão (com as trocas). Séries feitas: as marcadas; sem nenhuma marca no treino,
+  // assume o planejado. Depois de confirmado, vale o que foi confirmado. O que o atleta ajustar na lista vale até recarregar.
+  function confData(log) {
+    if (log.__cd !== undefined) return log.__cd;
+    try { log.__cd = JSON.parse(log.querySelector("script.wo-confdata").textContent); } catch (e) { log.__cd = null; }
+    return log.__cd;
+  }
+  function confMotivos(log) {
+    if (log.__mo) return log.__mo;
+    try { log.__mo = JSON.parse(log.querySelector(".wo-conf").dataset.motivos) || {}; } catch (e) { log.__mo = {}; }
+    return log.__mo;
+  }
+  function confItems(log) {
+    var reg = confData(log), st = swaps(log), anyMark = !!log.querySelector('.wo-set[aria-pressed="true"]');
+    log.__ce = log.__ce || {};
+    var out = [];
+    log.querySelectorAll(".wo-card").forEach(function (card) {
+      var ex = card.dataset.ex, ref = st[ex] || null, plan = card.querySelectorAll(".wo-set").length;
+      var marked = card.querySelectorAll('.wo-set[aria-pressed="true"]').length;
+      var prev = null;
+      if (reg && reg.itens) reg.itens.forEach(function (it) { if (String(it.ex) === ex && it.trocado === !!ref && (!ref || it.id === ref.id)) prev = it; });
+      var n = log.__ce[ex] != null ? log.__ce[ex] : prev ? prev.series_feitas : anyMark ? marked : plan;
+      log.__cm = log.__cm || {};
+      var mot = log.__cm[ex] !== undefined ? log.__cm[ex] : prev ? prev.motivo || "" : "";
+      out.push({ ex: Number(ex), nome: card.dataset.name, orig: ref && card.__orig ? card.__orig.h2 : null, plan: plan, n: Math.min(n, 10), troca: ref ? { g: ref.g, id: ref.id } : null, motivo: mot });
+    });
+    return out;
+  }
+  function confRender(log) {
+    var box = log.querySelector(".wo-conf"); if (!box) return;
+    var ol = box.querySelector(".wo-conf-list"); ol.textContent = "";
+    confItems(log).forEach(function (it) {
+      var li = el("li", "wo-conf-it" + (it.n === 0 ? " off" : it.n < it.plan ? " part" : ""));
+      li.dataset.ex = String(it.ex);
+      var txt = el("div", "wo-conf-n");
+      txt.appendChild(el("strong", null, it.nome));
+      if (it.orig) txt.appendChild(el("span", null, "no lugar de " + it.orig));
+      li.appendChild(txt);
+      var stp = el("div", "wo-conf-step");
+      var m = el("button", "wo-conf-m", "−"); m.type = "button"; m.setAttribute("aria-label", "Menos uma série");
+      var v = el("span", "wo-conf-v", it.n === 0 ? "não fiz" : it.n + " de " + it.plan);
+      var p = el("button", "wo-conf-p", "+"); p.type = "button"; p.setAttribute("aria-label", "Mais uma série");
+      m.disabled = it.n <= 0; p.disabled = it.n >= 10;
+      stp.appendChild(m); stp.appendChild(v); stp.appendChild(p); li.appendChild(stp);
+      if (it.troca || it.n < it.plan) {
+        var lab = el("label", "wo-conf-mot"); lab.appendChild(el("span", null, it.troca ? "Por que trocou?" : "Por que ficou incompleto?"));
+        var sel = el("select"); sel.appendChild(new Option("Escolha (opcional)", ""));
+        var M = confMotivos(log); for (var k in M) sel.appendChild(new Option(M[k], k));
+        sel.value = it.motivo || ""; lab.appendChild(sel); li.appendChild(lab);
+      }
+      ol.appendChild(li);
+    });
+  }
+  function confMsg(log, t, bad) { var m = log.querySelector(".wo-conf-msg"); if (m) { m.textContent = t; m.classList.toggle("bad", !!bad); } }
+  function confSetDone(log, reg) {
+    log.__cd = reg; log.__ce = {}; log.__cm = {};
+    var box = log.querySelector(".wo-conf");
+    box.querySelector("h2").textContent = reg ? "Treino confirmado" : "Confirmar o que foi feito";
+    box.querySelector(".wo-conf-sub").textContent = reg
+      ? "Confirmado. Se algo mudou, ajuste e confirme de novo. Isso vai para o histórico que orienta os próximos treinos."
+      : "Ao terminar, confira os exercícios (com as trocas) e as séries feitas. Isso vai para o histórico que orienta os próximos treinos.";
+    box.querySelector(".wo-conf-ok").textContent = reg ? "Confirmar de novo" : "Confirmar treino";
+    box.querySelector(".wo-conf-undo").hidden = !reg;
+    confRender(log);
+  }
+  function confSend(log, method) {
+    var w = where(log); if (!w || !window.fetch) { confMsg(log, "Sem conexão com o servidor.", true); return; }
+    var box = log.querySelector(".wo-conf"), body = { treino: w.treino, dia: w.dia };
+    if (method === "PUT") {
+      body.itens = confItems(log).map(function (it) { return { ex: it.ex, series: it.n, troca: it.troca, motivo: it.motivo || null }; });
+      body.obs = box.querySelector("textarea").value;
+      var ps = box.querySelector(".wo-conf-pse select"); body.pse = ps && ps.value !== "" ? Number(ps.value) : null;
+    }
+    box.querySelectorAll("button").forEach(function (b) { b.disabled = true; });
+    confMsg(log, "Salvando…");
+    fetch("/api/forca", { method: method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), credentials: "same-origin" })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        box.querySelectorAll(".wo-conf-act button").forEach(function (b) { b.disabled = false; });
+        if (!x.ok) { confRender(log); confMsg(log, "Não salvou: " + (x.j.erro || "erro no servidor") + ".", true); return; }
+        if (method === "PUT") {
+          confSetDone(log, x.j.registro);
+          var feitos = x.j.registro.itens.filter(function (i) { return i.situacao !== "nao_feito"; }).length;
+          var trocas = x.j.registro.itens.filter(function (i) { return i.trocado; }).length;
+          confMsg(log, "Confirmado: " + feitos + " de " + x.j.registro.itens.length + " exercícios feitos" + (trocas ? ", " + trocas + " troca" + (trocas > 1 ? "s" : "") : "") + ". Entrou no histórico.");
+        } else { confSetDone(log, null); confMsg(log, "Confirmação desfeita."); }
+      })
+      .catch(function () { box.querySelectorAll(".wo-conf-act button").forEach(function (b) { b.disabled = false; }); confRender(log); confMsg(log, "Sem conexão. Tente de novo quando a internet voltar.", true); });
+  }
+
   // Contador de descanso, pelo horário de término (continua certo se a tela apagar).
   var end = 0, tick = null, curLog = null;
   function paint() {
@@ -226,6 +324,11 @@
   window.__llTreinoStop = function () { stop(false); };
   window.__llTreinoHydrate = function (root) { (root || document).querySelectorAll(".wo-log").forEach(hydrate); };
 
+  document.addEventListener("change", function (ev) {
+    var sel = ev.target.closest && ev.target.closest(".wo-conf-mot select"); if (!sel) return;
+    var log = sel.closest(".wo-log"), li = sel.closest(".wo-conf-it");
+    log.__cm = log.__cm || {}; log.__cm[li.dataset.ex] = sel.value;
+  });
   document.addEventListener("click", function (ev) {
     var log = ev.target.closest && ev.target.closest(".wo-log"); if (!log) return;
     var sw = ev.target.closest(".wo-swap");
@@ -234,19 +337,28 @@
     if (un) {
       var cd = un.closest(".wo-card"), s3 = swaps(log); delete s3[cd.dataset.ex]; saveSwaps(log, s3); remote(log, "DELETE", { ex: Number(cd.dataset.ex) }); applySwap(cd, null); return;
     }
+    var cm = ev.target.closest(".wo-conf-m, .wo-conf-p");
+    if (cm) {
+      var li = cm.closest(".wo-conf-it"), cur = confItems(log).filter(function (i) { return String(i.ex) === li.dataset.ex; })[0];
+      log.__ce[li.dataset.ex] = Math.max(0, Math.min(10, cur.n + (cm.classList.contains("wo-conf-p") ? 1 : -1)));
+      confRender(log); var again = log.querySelector('.wo-conf-it[data-ex="' + li.dataset.ex + '"] .' + cm.className); if (again) again.focus();
+      return;
+    }
+    if (ev.target.closest(".wo-conf-ok")) { confSend(log, "PUT"); return; }
+    if (ev.target.closest(".wo-conf-undo")) { confSend(log, "DELETE"); return; }
     var b = ev.target.closest(".wo-set");
     if (b) {
       var on = b.getAttribute("aria-pressed") !== "true";
       b.setAttribute("aria-pressed", on ? "true" : "false");
       if (on) start(log, Number(b.closest(".wo-card").dataset.rest) || 75);
-      save(log);
+      save(log); confRender(log);
       return;
     }
     if (ev.target.closest(".wo-plus")) { end += 15000; paint(); return; }
     if (ev.target.closest(".wo-skip")) { stop(false); return; }
     if (ev.target.closest(".wo-reset")) {
       log.querySelectorAll(".wo-set").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
-      save(log); stop(false);
+      save(log); stop(false); confRender(log);
     }
   });
 

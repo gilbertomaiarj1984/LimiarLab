@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { loadContext } from "@/lib/context";
-import { getWorkout } from "@/lib/repo";
-import { isIsoDate, longDate } from "@/lib/domain";
+import { getActivities, getPlanned, getStrengthLogs, getWorkout } from "@/lib/repo";
+import { inferKinds, isIsoDate, localDate, localTime, longDate, matchPlan, shortDate } from "@/lib/domain";
 import { FIGURES } from "@/lib/figures";
 import { swapGroups } from "@/lib/equivalencias";
 import TabBar from "@/components/TabBar";
@@ -10,8 +10,15 @@ import Script from "next/script";
 import SyncButton from "@/components/SyncButton";
 import { syncStatus } from "@/lib/sync-status";
 import { midRest } from "@/lib/relogio";
+import { MOTIVOS } from "@/lib/forca";
 
 export const dynamic = "force-dynamic";
+
+// Escala CR-10 de esforço percebido da sessão (Foster et al., 2001), respondida ao fim do treino.
+const PSE: [number, string][] = [
+  [0, "repouso"], [1, "muito, muito fácil"], [2, "fácil"], [3, "moderado"], [4, "um pouco difícil"], [5, "difícil"],
+  [6, ""], [7, "muito difícil"], [8, ""], [9, ""], [10, "máximo"],
+];
 
 export default async function Treino({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ dia?: string }> }) {
   const { slug } = await params;
@@ -23,6 +30,16 @@ export default async function Treino({ params, searchParams }: { params: Promise
   const sync = await syncStatus(athlete.id, athlete.timezone);
   const day = dia && isIsoDate(dia) ? dia : today;
   const back = day === today ? "/" : `/?dia=${day}`;
+  // Confirmação do que foi feito (histórico de força): só para hoje ou dias que já passaram.
+  const canConfirm = day <= today;
+  const [planned, acts, logs] = canConfirm
+    ? await Promise.all([getPlanned(athlete.id, day, day), getActivities(athlete.id, day, day), getStrengthLogs(athlete.id, day, day, slug)])
+    : [[], [], []];
+  const realizado = matchPlan(planned, inferKinds(acts, planned), today).some((p) => p.workout === slug && p.status === "feito");
+  const registro = logs[0] ?? null;
+  const confirmadoEm = registro
+    ? `Confirmado em ${shortDate(localDate(new Date(registro.confirmado_em), athlete.timezone))} às ${localTime(new Date(registro.confirmado_em), athlete.timezone)}`
+    : null;
   const defRest = midRest(w.rest);
   // Trocas de exercício (base de equivalência): por posição do exercício no treino.
   const swaps: Record<number, ReturnType<typeof swapGroups>> = {};
@@ -83,6 +100,34 @@ export default async function Treino({ params, searchParams }: { params: Promise
             );
           })}
           <div className="wo-foot"><button className="wo-btn wo-reset" type="button">Zerar séries marcadas</button></div>
+          {canConfirm && (
+            <div className="wo-conf" id="confirmar" data-realizado={realizado ? "1" : undefined} data-motivos={JSON.stringify(MOTIVOS)}>
+              <script type="application/json" className="wo-confdata" dangerouslySetInnerHTML={{ __html: JSON.stringify(registro).replace(/</g, "\\u003c") }} />
+              <h2>{registro ? "Treino confirmado" : realizado ? "Treino realizado: confirme os exercícios" : "Confirmar o que foi feito"}</h2>
+              <p className="wo-conf-sub">
+                {registro
+                  ? `${confirmadoEm}. Se algo mudou, ajuste e confirme de novo.`
+                  : realizado
+                    ? "O relógio já registrou este treino. Confira se foi feito o que está abaixo, com as trocas, e ajuste as séries do que ficou pela metade ou não foi feito e diga o motivo das trocas."
+                    : "Ao terminar, confira os exercícios (com as trocas) e as séries feitas."}
+                {" "}Isso vai para o histórico que orienta os próximos treinos.
+              </p>
+              <ol className="wo-conf-list"></ol>
+              <label className="wo-conf-pse">
+                <span>Esforço da sessão (PSE, opcional)</span>
+                <select defaultValue={registro?.pse ?? ""}>
+                  <option value="">Escolha</option>
+                  {PSE.map(([v, t]) => <option key={v} value={v}>{t ? `${v} · ${t}` : v}</option>)}
+                </select>
+              </label>
+              <label className="wo-conf-obs"><span>Observação (opcional)</span><textarea maxLength={500} rows={2} placeholder="Ex.: aparelho ocupado, dor no joelho, carga subiu" defaultValue={registro?.obs ?? ""} /></label>
+              <div className="wo-conf-act">
+                <button type="button" className="wo-btn wo-conf-ok">{registro ? "Confirmar de novo" : "Confirmar treino"}</button>
+                <button type="button" className="wo-btn wo-conf-undo" hidden={!registro}>Desfazer confirmação</button>
+              </div>
+              <p className="wo-conf-msg" role="status" aria-live="polite"></p>
+            </div>
+          )}
           <div className="wo-rest" hidden aria-live="polite">
             <div><div className="wo-rest-k">Descanso</div><b>0:00</b></div>
             <div className="wo-rest-b"><button type="button" className="wo-plus">+15 s</button><button type="button" className="wo-skip">Pular</button></div>

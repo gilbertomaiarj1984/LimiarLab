@@ -273,3 +273,70 @@ a.wk{color:var(--acc);text-decoration:none;font-weight:600}
 .buildtag{margin:0;padding:0 16px 76px;text-align:center;font-size:.66rem;color:var(--muted);opacity:.7}
 .sess h3 a{color:inherit;text-decoration:none}
 a.chip{text-decoration:none;color:inherit}
+
+/* Confirmar o treino de força feito (histórico) */
+.wo-conf{background:var(--card);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-margin-top:16px}
+.wo-conf[data-realizado]{box-shadow:inset 0 0 0 2px var(--acc)}
+.wo-conf h2{font-family:var(--f-display);font-size:1.05rem;margin:0}
+.wo-conf-sub{font-size:.88rem;color:var(--muted);margin:0}
+.wo-conf-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.wo-conf-it{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--grid);padding-top:8px}
+.wo-conf-it:first-child{border-top:0;padding-top:0}
+.wo-conf-n{flex:1 1 0;display:flex;flex-direction:column;min-width:0;font-size:.92rem}
+.wo-conf-n span{font-size:.78rem;color:var(--muted)}
+.wo-conf-it.off .wo-conf-n strong{text-decoration:line-through;color:var(--muted)}
+.wo-conf-it.part .wo-conf-v{color:var(--mod)}
+.wo-conf-it.off .wo-conf-v{color:var(--hard)}
+.wo-conf-step{flex:none;display:flex;align-items:center;gap:6px}
+.wo-conf-step button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--ink);font:600 1.1rem var(--f-body);cursor:pointer}
+.wo-conf-step button:disabled{opacity:.35;cursor:default}
+.wo-conf-v{min-width:56px;text-align:center;font-size:.85rem;font-weight:600;font-variant-numeric:tabular-nums}
+.wo-conf-obs,.wo-conf-pse{display:flex;flex-direction:column;gap:4px;font-size:.82rem;color:var(--muted)}
+.wo-conf-obs textarea{font:inherit;font-size:.92rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical}
+.wo-conf-act{display:flex;gap:8px;flex-wrap:wrap}
+.wo-conf-ok{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.wo-conf-msg{font-size:.85rem;margin:0;color:var(--easy);min-height:1em}
+.wo-conf-msg.bad{color:var(--hard)}
+.wo-conf-step button:focus-visible,.wo-conf textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.conf-note{display:block;text-decoration:none;color:inherit}
+
+/* Mapa de calor dos músculos (Análise) */
+:root{--h0:var(--grid);--h1:#f6dcc8;--h2:#efae7f;--h3:#e0713e;--h4:#b8361b;--bh-body:#d9e0dd}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--h0:#2b3531;--h1:#4d3024;--h2:#8a4426;--h3:#d0612f;--h4:#ff8a5c;--bh-body:#222b28}}
+:root[data-theme="dark"]{--h0:#2b3531;--h1:#4d3024;--h2:#8a4426;--h3:#d0612f;--h4:#ff8a5c;--bh-body:#222b28}
+.bh{display:flex;flex-direction:column;gap:12px}
+.bh-figs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bh-fig{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bh-fig svg{width:100%;max-width:190px;height:auto}
+.bh-fig figcaption{font-size:.8rem;color:var(--muted)}
+.bh-body > *{fill:var(--bh-body)}
+.bh-m{stroke:var(--card);stroke-width:1}
+.bh-m.h0,.bh-key .h0,.bh-list .h0{fill:var(--h0);background:var(--h0)}
+.bh-m.h1,.bh-key .h1,.bh-list .h1{fill:var(--h1);background:var(--h1)}
+.bh-m.h2,.bh-key .h2,.bh-list .h2{fill:var(--h2);background:var(--h2)}
+.bh-m.h3,.bh-key .h3,.bh-list .h3{fill:var(--h3);background:var(--h3)}
+.bh-m.h4,.bh-key .h4,.bh-list .h4{fill:var(--h4);background:var(--h4)}
+.bh-key{display:flex;align-items:center;gap:4px 6px;flex-wrap:wrap;font-size:.75rem;color:var(--muted)}
+.bh-key span{margin-right:4px}
+.bh-key i,.bh-list i{display:inline-block;width:14px;height:14px;border-radius:4px;flex:none}
+.bh-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:.88rem}
+.bh-list li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:2px 8px;align-items:center}
+.bh-list small{grid-column:2;color:var(--muted);font-size:.78rem}
+.seg{display:inline-flex;background:var(--grid);border-radius:999px;padding:3px;gap:2px}
+.seg a{font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;padding:5px 12px;border-radius:999px}
+.seg a[aria-current="page"]{background:var(--card);color:var(--ink)}
+.bh-hist summary{cursor:pointer;font-weight:600;font-size:.9rem}
+.bh-sess{margin-top:10px;font-size:.88rem}
+.bh-sess ul{margin:4px 0 0;padding-left:18px}
+.bh-sess li.nao_feito{color:var(--muted);text-decoration:line-through}
+.bh-sess li.parcial{color:var(--mod)}
+.wo-conf-it{flex-wrap:wrap}
+.wo-conf-mot{flex-basis:100%;display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted)}
+.wo-conf-mot select{flex:1;min-width:0;font:inherit;font-size:.88rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.tbl.mvol td{text-align:center;font-variant-numeric:tabular-nums}
+.tbl.mvol td:first-child{text-align:left;white-space:nowrap}
+.tbl.mvol td.h1{background:var(--h1)}.tbl.mvol td.h2{background:var(--h2)}.tbl.mvol td.h3{background:var(--h3);color:#fff}.tbl.mvol td.h4{background:var(--h4);color:#fff}
+.ader{display:flex;flex-direction:column;gap:12px}
+.ader h3{margin:4px 0 0;font-size:.95rem}
+.wo-conf-pse select{font:inherit;font-size:.92rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.tbl.mvol th{white-space:nowrap;text-align:center}.tbl.mvol th:first-child{text-align:left}

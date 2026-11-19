@@ -1,12 +1,16 @@
 import { loadContext } from "@/lib/context";
-import { getActivities, getPlanned } from "@/lib/repo";
+import { getActivities, getPlanned, getStrengthLogs } from "@/lib/repo";
 import {
-  EASY_KINDS, addDays, inferKinds, intensitySplit, shortDate, splitPercents, sumSplits, weekStart,
+  EASY_KINDS, addDays, inferKinds, matchPlan, intensitySplit, shortDate, splitPercents, sumSplits, weekStart,
   type Activity, type Physiology,
 } from "@/lib/domain";
 import { hm, km } from "@/lib/format";
 import Link from "next/link";
 import TabBar from "@/components/TabBar";
+import BodyHeatmap from "@/components/BodyHeatmap";
+import { mapaMuscular, volumeSemanal } from "@/lib/musculos";
+import { aderencia } from "@/lib/forca";
+import { AderenciaPainel, VolumeSemanal } from "@/components/ForcaPainel";
 
 export const dynamic = "force-dynamic";
 const RANGES = [5, 13, 26, 52, 104] as const;
@@ -30,8 +34,8 @@ function summarize(start: string, acts: Activity[], phys: Physiology): W {
   };
 }
 
-export default async function Analise({ searchParams }: { searchParams: Promise<{ semanas?: string }> }) {
-  const { semanas } = await searchParams;
+export default async function Analise({ searchParams }: { searchParams: Promise<{ semanas?: string; forca?: string }> }) {
+  const { semanas, forca } = await searchParams;
   const WEEKS: number = RANGES.find((r) => String(r) === semanas) ?? 5;
   const wide = WEEKS > 13;
   const lblStep = Math.max(1, Math.ceil(WEEKS / 8));
@@ -41,6 +45,23 @@ export default async function Analise({ searchParams }: { searchParams: Promise<
   const end = addDays(cur, 6);
   const [raw, planned] = await Promise.all([getActivities(athlete.id, first, end), getPlanned(athlete.id, first, end)]);
   const acts = inferKinds(raw, planned);
+
+  // Força: músculos trabalhados nesta semana (seg a hoje) ou nesta e na anterior, pelo que foi confirmado.
+  const fWeeks = forca === "2" ? 2 : 1;
+  const fStart = addDays(cur, -7 * (fWeeks - 1));
+  // Histórico de força do período da página (no mínimo 5 semanas, que cobre o mapa e o volume semanal).
+  const sLogs = await getStrengthLogs(athlete.id, first, today);
+  const fLogs = sLogs.filter((l) => l.data >= fStart);
+  const plan = matchPlan(planned, acts, today);
+  const previstas = plan
+    .filter((p) => p.sport === "strength" && p.workout && p.date <= today)
+    .map((p) => ({ data: p.date, treino: p.workout!, titulo: p.title, realizado: p.status === "feito" }));
+  const unconfirmed = aderencia(previstas.filter((p) => p.data >= fStart), fLogs).pendentes;
+  const ader = aderencia(previstas, sLogs);
+  const volWeeks = Array.from({ length: 5 }, (_, i) => addDays(cur, -7 * (4 - i)));
+  const vol = volumeSemanal(volWeeks, sLogs);
+  const mapa = mapaMuscular(fLogs);
+  const fHref = (n: number) => { const q = new URLSearchParams(); if (WEEKS !== 5) q.set("semanas", String(WEEKS)); if (n === 2) q.set("forca", "2"); const t = q.toString(); return `/analise${t ? `?${t}` : ""}`; };
   const weeks = Array.from({ length: WEEKS }, (_, i) => summarize(addDays(first, 7 * i), acts, phys));
   const runs = acts.filter((a) => a.sport === "run" && a.avgHr != null);
   const maxEasy = Math.max(0, ...weeks.map((w) => w.pc?.easy ?? 0));
@@ -74,6 +95,55 @@ export default async function Analise({ searchParams }: { searchParams: Promise<
             {RANGES.map((r) => <Link key={r} href={r === 5 ? "/analise" : `/analise?semanas=${r}`} aria-current={r === WEEKS ? "page" : undefined} style={r === WEEKS ? { fontWeight: 700, textDecoration: "underline" } : undefined}>{r === 52 ? "1 ano" : r === 104 ? "2 anos" : `${r} sem`}</Link>)}
           </nav>
         </header>
+
+        <section aria-labelledby="forca-titulo">
+          <div className="sec-head">
+            <h2 id="forca-titulo">Músculos trabalhados</h2>
+            <nav className="seg" aria-label="Período do treino de força">
+              <Link href={fHref(1)} scroll={false} aria-current={fWeeks === 1 ? "page" : undefined}>Esta semana</Link>
+              <Link href={fHref(2)} scroll={false} aria-current={fWeeks === 2 ? "page" : undefined}>2 semanas</Link>
+            </nav>
+          </div>
+          <div className="panel">
+            <p className="muted small">{shortDate(fStart)} a {shortDate(today)} · {fLogs.length} treino{fLogs.length === 1 ? "" : "s"} de força confirmado{fLogs.length === 1 ? "" : "s"}. Série feita conta 1 para o músculo principal e 0,5 para o secundário.</p>
+            <BodyHeatmap mapa={mapa} semanas={fWeeks} />
+            {fLogs.length === 0 && <p className="muted">Nenhum treino de força confirmado no período. Ao terminar um treino, confirme os exercícios no fim da tela do treino.</p>}
+            {unconfirmed.length > 0 && (
+              <div className="note warn">
+                {unconfirmed.length === 1 ? "1 treino realizado ainda não foi confirmado e não entra no mapa: " : `${unconfirmed.length} treinos realizados ainda não foram confirmados e não entram no mapa: `}
+                {unconfirmed.map((p, i) => <span key={p.data + p.treino}>{i ? ", " : ""}<Link className="wk" href={`/treino/${p.treino}?dia=${p.data}#confirmar`}>{p.titulo} ({shortDate(p.data)})</Link></span>)}.
+              </div>
+            )}
+            {fLogs.length > 0 && (
+              <details className="bh-hist">
+                <summary>O que foi feito em cada treino</summary>
+                {[...fLogs].reverse().map((l) => (
+                  <div key={l.data + l.treino} className="bh-sess">
+                    <b>{shortDate(l.data)} · {l.titulo}</b>
+                    <ul>
+                      {l.itens.map((it) => (
+                        <li key={it.ex} className={it.situacao}>
+                          {it.nome} {it.situacao === "nao_feito" ? "· não feito" : `· ${it.series_feitas} de ${it.series_plano}`}{it.trocado ? ` · no lugar de ${it.plano.nome}` : ""}
+                        </li>
+                      ))}
+                    </ul>
+                    {l.obs && <p className="muted small">{l.obs}</p>}
+                  </div>
+                ))}
+              </details>
+            )}
+          </div>
+        </section>
+
+        <section aria-labelledby="vol-titulo">
+          <div className="sec-head"><h2 id="vol-titulo">Volume semanal por músculo</h2><span>séries confirmadas</span></div>
+          <div className="panel"><VolumeSemanal semanas={vol} atual={cur} /></div>
+        </section>
+
+        <section aria-labelledby="ader-titulo">
+          <div className="sec-head"><h2 id="ader-titulo">Aderência à força</h2><span>últimas {WEEKS} semanas</span></div>
+          <div className="panel"><AderenciaPainel a={ader} /></div>
+        </section>
 
         <section>
           <div className="sec-head"><h2>Volume de corrida</h2><span>km por semana</span></div>

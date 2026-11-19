@@ -60,3 +60,15 @@ Roda todo dia às 8h30 (Brasília), antes da atualização das 9h do Strava no a
 > 2. Planejados: leia os treinos agendados no Garmin para hoje e os próximos 14 dias e envie em `planned` (`source: "garmin"`, `external_id` do treino agendado), com `planned_replace` para `garmin` cobrindo exatamente esse intervalo. Classifique `kind` pelo título; rodagem leve é `corrida_leve`; na dúvida use `corrida`.
 > 3. Força: as sessões de força do plano semanal (`source: "limiarlab"`, com `workout` e `workouts`) só são enviadas quando o plano mudar; não reenvie sem necessidade.
 > 4. Se vier 422, corrija os campos apontados e reenvie uma vez. Mostre a resposta.
+> 5. Antes de montar ou mudar um treino de força, leia o histórico em `GET /api/forca/historico` (mesmo token) e leve em conta o que vem sendo feito: exercícios trocados com frequência (e o motivo), os que ficam pela metade ou de fora, e a PSE das sessões.
+
+## Histórico de força (leitura)
+
+`GET /api/forca/historico?de=YYYY-MM-DD&ate=YYYY-MM-DD` com `Authorization: Bearer <IMPORT_TOKEN>`. Sem parâmetros: as últimas 8 semanas até hoje. Período máximo: 1 ano. Só leitura.
+
+Resposta:
+
+- `registros`: um por treino de força confirmado no app (tela do treino, "Confirmar treino"), com `data`, `treino` (slug), `titulo`, `pse` (0–10, opcional), `obs` e `itens`. Cada item: `ex` (posição), `nome` e `id` do que foi feito (id da base de equivalência), `plano` (`nome` e `id` do que estava prescrito), `trocado`, `series_plano`, `reps`, `series_feitas`, `situacao` (`feito`, `parcial` ou `nao_feito`) e `motivo` (`ocupado`, `sem_equipamento`, `dor`, `cansaco`, `tempo`, `preferencia`, `outro` ou `null`).
+- `resumo`: por exercício, quantas vezes foi feito, quantas entrou como troca, quantas foi trocado por outro, quantas ficou de fora, séries somadas e última data.
+
+O registro é um retrato do momento da confirmação: mudar o treino ou a base depois não altera o histórico.

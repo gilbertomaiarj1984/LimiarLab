@@ -4,6 +4,7 @@ import type { Activity, HrZone, Kind, Physiology, Planned, Sport } from "./domai
 import { activityDate, type ImportPayload, type Workout } from "./import-schema";
 import type { Race } from "./races";
 import type { Lap } from "./laps";
+import type { ItemFeito, RegistroForca } from "./forca";
 
 export type Athlete = { id: string; slug: string; name: string; timezone: string; goal: string | null };
 export type PhysiologyRow = Physiology & { validFrom: string; hrMax: number | null; vo2max: number | null; source: string };
@@ -115,6 +116,50 @@ export async function setSwap(athleteId: string, s: SwapRow): Promise<void> {
 
 export async function deleteSwap(athleteId: string, date: string, slug: string, ex: number): Promise<void> {
   await sql`DELETE FROM exercise_swaps WHERE athlete_id = ${athleteId} AND date = ${date} AND workout_slug = ${slug} AND ex = ${ex}`;
+}
+
+// ---------- Treinos de força realizados (histórico) ----------
+
+type LogRow = { data: string; treino: string; titulo: string; itens: ItemFeito[]; obs: string | null; pse: number | null; confirmadoEm: Date };
+const toRegistro = (r: LogRow): RegistroForca => ({
+  data: r.data, treino: r.treino, titulo: r.titulo, itens: r.itens, obs: r.obs, pse: r.pse, confirmado_em: r.confirmadoEm.toISOString(),
+});
+
+export async function getStrengthLogs(athleteId: string, from: string, to: string, slug?: string): Promise<RegistroForca[]> {
+  const rows = await sql<LogRow[]>`
+    SELECT to_char(date, 'YYYY-MM-DD') AS data, workout_slug AS treino, title AS titulo, items AS itens, notes AS obs, rpe AS pse,
+           confirmed_at AS "confirmadoEm"
+    FROM strength_logs
+    WHERE athlete_id = ${athleteId} AND date BETWEEN ${from} AND ${to}
+      ${slug ? sql`AND workout_slug = ${slug}` : sql``}
+    ORDER BY date, workout_slug`;
+  return rows.map(toRegistro);
+}
+
+/** Grava a confirmação e deixa as trocas do dia iguais às confirmadas (o relógio e outros aparelhos leem de lá). */
+export async function saveStrengthLog(
+  athleteId: string, date: string, slug: string, title: string, items: ItemFeito[], swaps: { ex: number; g: number; id: string }[], notes: string | null, rpe: number | null,
+): Promise<RegistroForca> {
+  return sql.begin(async (tx) => {
+    const [r] = await tx<LogRow[]>`
+      INSERT INTO strength_logs (athlete_id, date, workout_slug, title, items, notes, rpe)
+      VALUES (${athleteId}, ${date}, ${slug}, ${title}, ${tx.json(items as never)}, ${notes}, ${rpe})
+      ON CONFLICT (athlete_id, date, workout_slug)
+      DO UPDATE SET title = EXCLUDED.title, items = EXCLUDED.items, notes = EXCLUDED.notes, rpe = EXCLUDED.rpe, confirmed_at = now()
+      RETURNING to_char(date, 'YYYY-MM-DD') AS data, workout_slug AS treino, title AS titulo, items AS itens, notes AS obs, rpe AS pse,
+                confirmed_at AS "confirmadoEm"`;
+    await tx`DELETE FROM exercise_swaps WHERE athlete_id = ${athleteId} AND date = ${date} AND workout_slug = ${slug}`;
+    for (const s of swaps) {
+      await tx`
+        INSERT INTO exercise_swaps (athlete_id, date, workout_slug, ex, grp, alt_id)
+        VALUES (${athleteId}, ${date}, ${slug}, ${s.ex}, ${s.g}, ${s.id})`;
+    }
+    return toRegistro(r);
+  });
+}
+
+export async function deleteStrengthLog(athleteId: string, date: string, slug: string): Promise<void> {
+  await sql`DELETE FROM strength_logs WHERE athlete_id = ${athleteId} AND date = ${date} AND workout_slug = ${slug}`;
 }
 
 /** Vários treinos de uma vez (para o relógio). */

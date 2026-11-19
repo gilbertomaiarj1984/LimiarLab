@@ -6,6 +6,7 @@ import {
 import { clock, km, pace } from "@/lib/format";
 import { SportIcon } from "./icons";
 import { intervalSummary } from "@/lib/laps";
+import type { RegistroForca } from "@/lib/forca";
 
 const dayLabel = (iso: string) => `${WEEKDAY_SHORT[weekdayIndex(iso)]} ${shortDate(iso)}`;
 const SOURCE_LABEL: Record<string, string> = { garmin: "Garmin", strava: "Strava", limiarlab: "plano semanal", claude: "Claude", manual: "manual" };
@@ -113,4 +114,24 @@ export function UpcomingItem({ p }: { p: PlanItem }) {
 /** Link para o treino de força detalhado do dia. */
 export function WorkoutLink({ p }: { p: Pick<PlanItem, "workout" | "date"> }) {
   return <div className="chips"><Link className="chip wk" href={`/treino/${p.workout}?dia=${p.date}`}>Ver exercícios ›</Link></div>;
+}
+
+/** Treino de força já registrado como feito: pede para confirmar os exercícios, ou resume o que foi confirmado. */
+export function StrengthConfirmNote({ p, log }: { p: Pick<PlanItem, "workout" | "date" | "title">; log: RegistroForca | null }) {
+  const href = `/treino/${p.workout}?dia=${p.date}#confirmar`;
+  if (!log) {
+    return (
+      <Link href={href} className="note warn conf-note">
+        <b>{p.title}</b> foi registrado como feito. Confirme os exercícios realizados, com as trocas, para entrar no histórico ›
+      </Link>
+    );
+  }
+  const feitos = log.itens.filter((i) => i.situacao !== "nao_feito").length;
+  const trocas = log.itens.filter((i) => i.trocado);
+  return (
+    <Link href={href} className="note conf-note">
+      Exercícios confirmados: <b>{feitos} de {log.itens.length}</b> feitos
+      {trocas.length ? `, ${trocas.length} troca${trocas.length > 1 ? "s" : ""} (${trocas.map((t) => t.nome).join(", ")})` : ", sem trocas"}. ›
+    </Link>
+  );
 }
