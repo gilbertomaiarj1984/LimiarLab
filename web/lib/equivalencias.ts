@@ -76,3 +76,8 @@ export function checkData(): string[] {
   }
   return erros;
 }
+
+/** Id na base do exercício original do slot (grupo `g`) do exercício `ordem` do treino, ou null se não está na base. */
+export function originalId(slug: string, ordem: number, g = 0): string | null {
+  return SLOTS.filter((s) => s.treino === slug && s.ordem === ordem)[g]?.original ?? null;
+}

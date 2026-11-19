@@ -166,6 +166,21 @@ export function ensureSchema(): Promise<void> {
           updated_at    timestamptz NOT NULL DEFAULT now(),
           PRIMARY KEY (athlete_id, date, workout_slug, ex)
         )`;
+      // Treino de força realizado, confirmado pelo atleta: o que foi feito de fato (com as trocas), por dia e treino.
+      // Retrato no momento da confirmação (nomes e séries), para o histórico não mudar com o treino ou a base.
+      await tx`
+        CREATE TABLE IF NOT EXISTS strength_logs (
+          athlete_id    uuid NOT NULL REFERENCES athletes(id) ON DELETE CASCADE,
+          date          date NOT NULL,
+          workout_slug  text NOT NULL,
+          title         text NOT NULL,
+          items         jsonb NOT NULL,
+          notes         text,
+          confirmed_at  timestamptz NOT NULL DEFAULT now(),
+          PRIMARY KEY (athlete_id, date, workout_slug)
+        )`;
+      // PSE da sessão (0–10, Foster 2001): carga da força = PSE × minutos.
+      await tx`ALTER TABLE strength_logs ADD COLUMN IF NOT EXISTS rpe smallint CHECK (rpe BETWEEN 0 AND 10)`;
       await tx`
         CREATE TABLE IF NOT EXISTS import_log (
           id           bigserial PRIMARY KEY,

@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { loadContext } from "@/lib/context";
-import { getActivities, getPlanned, getRaces } from "@/lib/repo";
+import { getActivities, getPlanned, getRaces, getStrengthLogs } from "@/lib/repo";
 import { countdown, notesForDay, PRIORITY_LABEL } from "@/lib/races";
 import {
   WEEKDAY_LONG, WEEKDAY_SHORT, addDays, inferKinds, isIsoDate, localTime, longDate, matchPlan, shortDate, splitPercents,
   weekDays, weekStart, weekStats, weekdayIndex, VOLUME_JUMP_WARN,
 } from "@/lib/domain";
 import { hm, km } from "@/lib/format";
-import { ActivityCard, PlannedCard, UpcomingItem } from "@/components/Cards";
+import { ActivityCard, PlannedCard, StrengthConfirmNote, UpcomingItem } from "@/components/Cards";
 import TabBar from "@/components/TabBar";
 import SyncButton from "@/components/SyncButton";
 import { syncStatus } from "@/lib/sync-status";
@@ -30,11 +30,12 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
   const sel = pick;
   const dayHref = (d: string) => (d === today ? "/" : `/?dia=${d}`);
 
-  const [rawActs, planned, prevActs, races] = await Promise.all([
+  const [rawActs, planned, prevActs, races, strengthLogs] = await Promise.all([
     getActivities(athlete.id, start, end),
     getPlanned(athlete.id, start, end),
     getActivities(athlete.id, addDays(start, -7), addDays(start, -1)),
     getRaces(athlete.id, addDays(start, -21), addDays(today > end ? today : end, 400)),
+    getStrengthLogs(athlete.id, start, end),
   ]);
   const nextRace = races.find((r) => r.date >= today);
   const selNotes = notesForDay(sel, races);
@@ -46,6 +47,8 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
 
   const selActs = acts.filter((a) => a.date === sel);
   const selPlan = plan.filter((p) => p.date === sel && p.status !== "feito");
+  // Força realizada com treino detalhado: pede a confirmação dos exercícios feitos (histórico).
+  const selDoneStrength = plan.filter((p) => p.date === sel && p.status === "feito" && p.sport === "strength" && p.workout);
   const upcoming = plan.filter((p) => p.date > today);
   const history = [...acts].sort((a, b) => b.startTime.localeCompare(a.startTime));
   const tomorrow = plan.find((p) => p.date === addDays(today, 1) && p.sport === "run");
@@ -120,6 +123,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
           <div className="list">
             {selNotes.map((n) => <div key={n.raceId + n.kind} className={`note race-n${n.kind === "prova" ? " strong" : ""}`}>{n.kind === "prova" ? <b>{n.text}</b> : n.text}</div>)}
             {selActs.map((a) => <ActivityCard key={a.id} a={a} phys={phys} time={time(a.startTime)} />)}
+            {selDoneStrength.map((p) => <StrengthConfirmNote key={p.id} p={p} log={strengthLogs.find((l) => l.data === p.date && l.treino === p.workout) ?? null} />)}
             {selPlan.map((p) => <PlannedCard key={p.id} p={p} />)}
             {!selActs.length && !selPlan.length && !selNotes.length && <div className="empty">Nada planejado nem registrado neste dia.</div>}
             {sel === today && tomorrow && (

@@ -144,3 +144,17 @@ Cada entrada: o que foi decidido, por quê e o estado. Mais recentes no fim.
 - **Decisão:** o lote de importação aceita `zones` (início + zonas), que só preenche `hr_zones` de uma corrida existente, a mais próxima do início (até 10 min). A rotina do Claude envia zonas e planejados; as atividades vêm só do Strava.
 - **Por quê:** o Strava não traz tempo por zona, e reenviar a atividade pelo Garmin criaria linha dupla quando o id do Garmin não vem no Strava.
 - **Estado:** adotada.
+
+## D21 · Histórico do treino de força confirmado pelo atleta
+
+- **Data:** 18/11/2026
+- **Decisão:** quando o treino de força do dia aparece como feito (atividade do relógio casada com o plano), o app pede para confirmar os exercícios na tela do treino: o que foi feito (com as trocas), séries feitas, motivo de troca ou de incompleto, PSE da sessão (CR-10, Foster et al., 2001) e observação. Fica gravado em `strength_logs` como retrato do momento. A rotina que prescreve lê em `/api/forca/historico`. A confirmação também acerta as trocas do dia no servidor.
+- **Por quê:** o Garmin registra só "força", sem saber o que foi feito. Sem o histórico real, a prescrição não enxerga trocas recorrentes (ex.: saltitos trocados pela panturrilha explosiva no leg press em 18/11) nem o que fica de fora. Dados estruturados também servem para análise futura por IA.
+- **Estado:** adotada.
+
+## D22 · Mapa de calor e volume por músculo pela contagem fracionada
+
+- **Data:** 18/11/2026
+- **Decisão:** cada série feita conta 1 para o músculo principal do exercício e 0,5 para o secundário (grupos da base de equivalência). A aba Análise mostra o mapa de calor do corpo (esta semana ou 2 semanas), a tabela de séries por músculo das últimas 5 semanas e a aderência (treinos feitos, séries feitas, trocas e motivos). Referências do volume: abaixo de ~5 séries semanais o ganho tende a ser menor e 10 ou mais se associa a mais hipertrofia (Schoenfeld, Ogborn e Krieger, 2017, meta-análise); acima de 20 o app avisa por fadiga (referência prática, sem corte firme). Alerta de pouco volume só para os músculos de perna (foco em longos e ultra) e só em semana fechada com treino confirmado.
+- **Por quê:** é a forma mais simples e transparente de somar exercícios diferentes no mesmo músculo; o peso 0,5 para o secundário é convenção usada em análises de dose-resposta de volume, não medida exata.
+- **Estado:** adotada.

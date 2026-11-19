@@ -28,6 +28,8 @@ Projeto em fase inicial. O que existe hoje veio de uma sessão de análise com C
 
 Uso diário no celular: a semana de segunda a domingo, o que está planejado, o que foi feito e as estatísticas (km, tempo, D+, força por tipo, distribuição de intensidade pelos limiares, salto de volume). A análise e a prescrição ficam com o Claude, que envia os dados por uma rotina (`POST /api/import`).
 
+Treino de força: ao terminar, o atleta confirma na tela do treino o que fez (com as trocas, séries, motivo e PSE). Isso forma o histórico (`strength_logs`, lido pela rotina em `GET /api/forca/historico`) e alimenta, na Análise, o mapa de calor dos músculos, o volume semanal por músculo e a aderência. Ver D21 e D22 em [`docs/decisoes.md`](docs/decisoes.md).
+
 ```bash
 cd web
 npm ci
