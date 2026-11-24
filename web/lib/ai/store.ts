@@ -3,37 +3,43 @@ import { sql, ensureSchema } from "../db";
 import { getActivities, getPhysiology, getPlanned, getRaces, getStrengthLogs } from "../repo";
 import { addDays, localDate, weekStart } from "../domain";
 import { formatEstado } from "./estado";
-import { DEFAULT_DIRECTIVE, MAX_DIRECTIVE_CHARS, buildSystem } from "./directive";
+import { MAX_DIRECTIVE_CHARS, buildSystem, defaultDirectiveFor } from "./directive";
 import { AI_PROVIDERS, isAiProvider, normalizeModel, type AiProvider } from "./providers";
 import { providerConfigured, runText, type AiRequest, type AiResult } from "./run";
 
-export type AiSettings = { provider: AiProvider; models: Record<AiProvider, string>; directive: string; directiveIsDefault: boolean };
+export type AiSettings = { provider: AiProvider; models: Record<AiProvider, string>; directive: string; defaultDirective: string; directiveIsDefault: boolean };
 
 export function configuredMap(): Record<AiProvider, boolean> {
   return { anthropic: providerConfigured("anthropic"), gemini: providerConfigured("gemini"), groq: providerConfigured("groq") };
 }
 
-function build(provider: unknown, models: unknown, directive?: unknown): AiSettings {
+function build(athlete: { slug: string; name: string }, provider: unknown, models: unknown, directive?: unknown): AiSettings {
+  const base = defaultDirectiveFor(athlete);
   const m = (models && typeof models === "object" ? models : {}) as Record<string, unknown>;
   const custom = typeof directive === "string" && directive.trim() ? directive.trim().slice(0, MAX_DIRECTIVE_CHARS) : null;
   return {
     provider: isAiProvider(provider) ? provider : "anthropic",
     models: Object.fromEntries(AI_PROVIDERS.map((p) => [p, normalizeModel(p, m[p])])) as Record<AiProvider, string>,
-    directive: custom ?? DEFAULT_DIRECTIVE,
-    directiveIsDefault: custom === null || custom === DEFAULT_DIRECTIVE.trim(),
+    directive: custom ?? base,
+    defaultDirective: base,
+    directiveIsDefault: custom === null || custom === base.trim(),
   };
 }
 
 export async function getAiSettings(athleteId: string): Promise<AiSettings> {
   await ensureSchema();
+  const [a] = await sql<{ slug: string; name: string }[]>`SELECT slug, name FROM athletes WHERE id = ${athleteId}`;
+  if (!a) throw new Error("atleta não existe");
   const [r] = await sql<{ provider: string; models: unknown; directive: string | null }[]>`SELECT provider, models, directive FROM ai_settings WHERE athlete_id = ${athleteId}`;
-  return build(r?.provider, r?.models, r?.directive);
+  return build(a, r?.provider, r?.models, r?.directive);
 }
 
 /** `directive`: texto editado; vazio ou igual ao padrão volta a usar o padrão do código (assim melhorias no padrão chegam sozinhas). */
 export async function saveAiSettings(athleteId: string, provider: unknown, models: unknown, directive?: unknown): Promise<AiSettings> {
   await ensureSchema();
-  const s = build(provider, models, directive);
+  const [a] = await sql<{ slug: string; name: string }[]>`SELECT slug, name FROM athletes WHERE id = ${athleteId}`;
+  if (!a) throw new Error("atleta não existe");
+  const s = build(a, provider, models, directive);
   const stored = s.directiveIsDefault ? null : s.directive;
   await sql`
     INSERT INTO ai_settings (athlete_id, provider, models, directive) VALUES (${athleteId}, ${s.provider}, ${sql.json(s.models)}, ${stored})
