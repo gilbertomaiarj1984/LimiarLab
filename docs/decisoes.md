@@ -166,3 +166,10 @@ Cada entrada: o que foi decidido, por quê e o estado. Mais recentes no fim.
 - **Por quê:** o Giba quer plugar IA para análises futuras (relatório semanal, prontidão) sem trocar de código para trocar de provedor, e quer histórico estruturado de tudo. Só entram ids de modelo já confirmados em produção no garimpo (um id inventado dá 400 e não faz failover). A mesma chave nos dois apps significa a mesma cota: se um esgotar o free tier, o outro sofre.
 - **Estado:** adotada. Ainda sem análise de IA ligada; a primeira será definida depois.
 
+## D24 · Direcionamento editável e contexto atualizado em toda chamada de IA
+
+- **Data:** 24/11/2026
+- **Decisão:** toda chamada de IA (`askAi`) monta o mesmo instrução de sistema, em texto puro, igual para Claude, Gemini e Groq: (1) o **Direcionamento**, texto editável no Perfil, já vindo preenchido com o contexto de corrida e força deste projeto (`web/lib/ai/directive.ts`; vazio ou igual ao padrão volta a usar o padrão do código, assim melhorias chegam sozinhas). Cada atleta tem o seu: quem já tem contexto pronto (hoje só o Giba) começa por ele, e atleta novo começa por um modelo genérico com o nome dele e um bloco "Sobre o atleta" para preencher (rotina, clima, treinador, lesões); (2) o **Estado atual**, gerado na hora a partir do banco (`web/lib/ai/estado.ts`): objetivo, limiares vigentes e histórico de testes, provas e metas à frente e recentes, últimas 4 semanas de corrida com distribuição leve/moderado/forte e dias leves acima do LV1, últimas atividades, força confirmada (séries, trocas, motivos, PSE, volume semanal dos músculos de foco, alertas) e plano dos próximos 7 dias; (3) a tarefa específica da análise. O Perfil tem "Ver o que é enviado" com o texto e a estimativa de tokens.
+- **Por quê:** o Giba quer que a IA, em qualquer uso, conheça o atleta, as metas e a evolução recente sem depender de ninguém colar contexto. Texto editável fica no banco (não em arquivo) porque o container é somente leitura e o banco entra no backup. O teto do texto editável é 6.000 caracteres para caber no limite do Groq free (8K tokens por minuto, entrada + saída).
+- **Estado:** adotada.
+

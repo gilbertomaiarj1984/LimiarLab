@@ -71,7 +71,7 @@ export default async function Perfil() {
 
         <section>
           <div className="sec-head"><h2>IA</h2><span>provedor e modelo</span></div>
-          <AiSettings provider={ai.provider} models={ai.models} configured={configuredMap()} />
+          <AiSettings provider={ai.provider} models={ai.models} configured={configuredMap()} directive={ai.directive} defaultDirective={ai.defaultDirective} />
           {aiRuns.length > 0 && (
             <p className="foot">
               Últimas chamadas: {aiRuns.map((r) => `${shortDate(localDate(new Date(r.at), athlete.timezone))} ${localTime(new Date(r.at), athlete.timezone)} ${r.kind} ${r.ok ? `${r.provider} ${r.latencyMs ?? 0} ms${r.switched ? " (trocou)" : ""}` : "falhou"}`).join(" · ")}
