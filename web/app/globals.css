@@ -340,3 +340,6 @@ a.chip{text-decoration:none;color:inherit}
 .ader h3{margin:4px 0 0;font-size:.95rem}
 .wo-conf-pse select{font:inherit;font-size:.92rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
 .tbl.mvol th{white-space:nowrap;text-align:center}.tbl.mvol th:first-child{text-align:left}
+.fb-btn{align-self:flex-start;font:600 .9rem var(--f-body);border-radius:999px;padding:10px 18px;border:0;background:var(--acc);color:#fff;cursor:pointer}
+.fb-btn:disabled{opacity:.6;cursor:wait}
+.fb-btn:focus-visible{outline:3px solid var(--acc);outline-offset:2px}

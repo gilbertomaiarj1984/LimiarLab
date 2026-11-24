@@ -35,7 +35,8 @@ export function providerConfigured(p: AiProvider): boolean {
 /** Quota esgotada ou sem créditos: vale tentar outro provedor. */
 export function isQuotaError(e: unknown): boolean {
   const x = e as { status?: number; message?: string } | null;
-  if (x?.status === 429 || x?.status === 402) return true;
+  // 413 = pedido grande demais para o limite de tokens por minuto (Groq free): outro provedor aguenta.
+  if (x?.status === 429 || x?.status === 402 || x?.status === 413) return true;
   const m = String(x?.message ?? e ?? "").toLowerCase();
   return ["credit balance", "insufficient", "quota", "exhausted", "billing", "too low"].some((k) => m.includes(k));
 }

@@ -2,11 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { loadContext } from "@/lib/context";
 import { getActivity, getPlanned } from "@/lib/repo";
-import { KIND_LABEL, inferKinds, localTime, longDate } from "@/lib/domain";
+import { KIND_LABEL, inferKinds, localDate as localDateOf, localTime, longDate } from "@/lib/domain";
 import { clock, km, pace } from "@/lib/format";
 import { loadLaps } from "@/lib/sync";
 import { paceSecPerKm, readLaps, type LapGroup, type LapRole } from "@/lib/laps";
 import TabBar from "@/components/TabBar";
+import FeedbackPanel from "@/components/FeedbackPanel";
+import { getLatestFeedback } from "@/lib/ai/feedback-store";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +38,7 @@ export default async function Atividade({ params }: { params: Promise<{ id: stri
   const { laps, motivo, erro } = await loadLaps(athlete, a.id);
   const reading = laps && laps.length ? readLaps(laps) : null;
   const plan = planned.find((p) => p.sport === "run");
+  const fb = await getLatestFeedback(athlete.id, a.id);
 
   return (
     <>
@@ -63,6 +66,12 @@ export default async function Atividade({ params }: { params: Promise<{ id: stri
             </div>
           </section>
         )}
+
+        <FeedbackPanel
+          activityId={a.id}
+          initial={fb ? { createdAt: fb.createdAt, provider: fb.provider, model: fb.model, rawText: fb.rawText, structured: fb.structured } : null}
+          whenLabel={fb ? `${longDate(localDateOf(new Date(fb.createdAt), athlete.timezone))}, ${localTime(new Date(fb.createdAt), athlete.timezone)}` : null}
+        />
 
         <section>
           <div className="sec-head"><h2>Voltas</h2><span>{laps?.length ? `${laps.length} voltas` : ""}</span></div>
