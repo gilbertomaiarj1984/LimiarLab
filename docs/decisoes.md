@@ -158,3 +158,11 @@ Cada entrada: o que foi decidido, por quê e o estado. Mais recentes no fim.
 - **Decisão:** cada série feita conta 1 para o músculo principal do exercício e 0,5 para o secundário (grupos da base de equivalência). A aba Análise mostra o mapa de calor do corpo (esta semana ou 2 semanas), a tabela de séries por músculo das últimas 5 semanas e a aderência (treinos feitos, séries feitas, trocas e motivos). Referências do volume: abaixo de ~5 séries semanais o ganho tende a ser menor e 10 ou mais se associa a mais hipertrofia (Schoenfeld, Ogborn e Krieger, 2017, meta-análise); acima de 20 o app avisa por fadiga (referência prática, sem corte firme). Alerta de pouco volume só para os músculos de perna (foco em longos e ultra) e só em semana fechada com treino confirmado.
 - **Por quê:** é a forma mais simples e transparente de somar exercícios diferentes no mesmo músculo; o peso 0,5 para o secundário é convenção usada em análises de dose-resposta de volume, não medida exata.
 - **Estado:** adotada.
+
+## D23 · IA configurável com provedor escolhido no app
+
+- **Data:** 24/11/2026
+- **Decisão:** a aba Perfil tem uma seção **IA** onde se escolhe o provedor (Claude, Gemini ou Groq free tier) e o modelo, com selo de chave por provedor e botão Testar. A camada (`web/lib/ai/`) é portada do app Leilão Finder Buddy: fetch puro nos três provedores, sem dependência nova, retry em erro transitório e failover para os outros provedores com chave quando o escolhido está sem quota ou fora do ar. As chaves (`ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, `GROQ_API_KEY`) ficam só em `.env.production` na VPS (mesmas do garimpo, por escolha do Giba), nunca no banco, no repo nem no navegador. Toda chamada passa por `askAi` e é gravada em `ai_runs` (tipo, provedor, modelo, entrada, saída, tokens, latência, erro, troca de provedor). A escolha fica em `ai_settings`, por atleta.
+- **Por quê:** o Giba quer plugar IA para análises futuras (relatório semanal, prontidão) sem trocar de código para trocar de provedor, e quer histórico estruturado de tudo. Só entram ids de modelo já confirmados em produção no garimpo (um id inventado dá 400 e não faz failover). A mesma chave nos dois apps significa a mesma cota: se um esgotar o free tier, o outro sofre.
+- **Estado:** adotada. Ainda sem análise de IA ligada; a primeira será definida depois.
+

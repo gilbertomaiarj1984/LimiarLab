@@ -68,6 +68,18 @@ O botão **Atualizar** (Início e telas de treino) e uma rotina diária às 9h (
 
 Atividades do Strava que vêm do Garmin entram com a mesma identidade do import do Garmin (sem duplicar), e nunca sobrescrevem uma atividade que já existe, para preservar as zonas de FC.
 
+## IA (Claude, Gemini, Groq)
+
+A seção IA do Perfil lê as chaves do ambiente do container. Copie as mesmas do garimpo para `/opt/limiarlab/.env.production` (`chmod 600`, nunca no git):
+
+```
+ANTHROPIC_API_KEY=...
+GEMINI_API_KEY=...
+GROQ_API_KEY=...
+```
+
+Depois `docker compose up -d app` (só o `app`, dentro de `/opt/limiarlab`). Basta uma chave para funcionar; com mais de uma, o app troca de provedor sozinho se o escolhido ficar sem cota. As tabelas `ai_settings` e `ai_runs` são criadas sozinhas na subida.
+
 ## Rotina do Claude
 
 Configure a rotina com o `IMPORT_TOKEN` (ver [`docs/importacao.md`](../docs/importacao.md)).

@@ -191,6 +191,36 @@ export function ensureSchema(): Promise<void> {
           removed      integer NOT NULL
         )`;
 
+      // IA configurável: provedor e modelo escolhidos por atleta. As chaves ficam só no servidor (env), nunca aqui.
+      await tx`
+        CREATE TABLE IF NOT EXISTS ai_settings (
+          athlete_id  uuid PRIMARY KEY REFERENCES athletes(id) ON DELETE CASCADE,
+          provider    text NOT NULL CHECK (provider IN ('anthropic', 'gemini', 'groq')),
+          models      jsonb NOT NULL DEFAULT '{}'::jsonb,
+          updated_at  timestamptz NOT NULL DEFAULT now()
+        )`;
+      // Histórico estruturado de toda chamada de IA (sucesso ou falha), para análises futuras.
+      await tx`
+        CREATE TABLE IF NOT EXISTS ai_runs (
+          id                  bigserial PRIMARY KEY,
+          athlete_id          uuid NOT NULL REFERENCES athletes(id) ON DELETE CASCADE,
+          created_at          timestamptz NOT NULL DEFAULT now(),
+          kind                text NOT NULL,
+          requested_provider  text NOT NULL,
+          provider            text,
+          model               text,
+          switched            boolean NOT NULL DEFAULT false,
+          ok                  boolean NOT NULL,
+          error               text,
+          attempt_errors      jsonb NOT NULL DEFAULT '{}'::jsonb,
+          input               jsonb NOT NULL,
+          output              text,
+          input_tokens        integer,
+          output_tokens       integer,
+          latency_ms          integer
+        )`;
+      await tx`CREATE INDEX IF NOT EXISTS ai_runs_athlete_created ON ai_runs (athlete_id, created_at DESC)`;
+
       // Atleta inicial (fase 1: um só). Números do teste cardiopulmonar de 23/07/2026 (data/zonas.json).
       const [{ n }] = await tx<{ n: number }[]>`SELECT count(*)::int AS n FROM athletes`;
       if (n === 0) {
