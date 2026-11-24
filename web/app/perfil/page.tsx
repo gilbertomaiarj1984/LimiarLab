@@ -4,6 +4,8 @@ import { localDate, localTime, shortDate } from "@/lib/domain";
 import TabBar from "@/components/TabBar";
 import HistoryButton from "@/components/HistoryButton";
 import { syncStatus } from "@/lib/sync-status";
+import AiSettings from "@/components/AiSettings";
+import { configuredMap, getAiSettings, recentAiRuns } from "@/lib/ai/store";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +13,7 @@ export default async function Perfil() {
   const { athlete, phys, today } = await loadContext();
   const [last, athletes] = await Promise.all([lastImport(athlete.id), listAthletes()]);
   const sync = await syncStatus(athlete.id, athlete.timezone);
+  const [ai, aiRuns] = await Promise.all([getAiSettings(athlete.id), recentAiRuns(athlete.id)]);
   const lastTxt = last
     ? `${localDate(last, athlete.timezone) === today ? "hoje" : shortDate(localDate(last, athlete.timezone))}, ${localTime(last, athlete.timezone)}`
     : "ainda não recebeu dados";
@@ -64,6 +67,16 @@ export default async function Perfil() {
             </div>
             {sync.connected && <div className="conn"><div><h3>Histórico</h3><p className="muted small">Traz de novo os últimos 2 anos (só o que falta).</p></div><HistoryButton /></div>}
           </div>
+        </section>
+
+        <section>
+          <div className="sec-head"><h2>IA</h2><span>provedor e modelo</span></div>
+          <AiSettings provider={ai.provider} models={ai.models} configured={configuredMap()} />
+          {aiRuns.length > 0 && (
+            <p className="foot">
+              Últimas chamadas: {aiRuns.map((r) => `${shortDate(localDate(new Date(r.at), athlete.timezone))} ${localTime(new Date(r.at), athlete.timezone)} ${r.kind} ${r.ok ? `${r.provider} ${r.latencyMs ?? 0} ms${r.switched ? " (trocou)" : ""}` : "falhou"}`).join(" · ")}
+            </p>
+          )}
         </section>
 
         <section>
