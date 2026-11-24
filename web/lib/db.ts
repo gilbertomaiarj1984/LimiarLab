@@ -199,6 +199,8 @@ export function ensureSchema(): Promise<void> {
           models      jsonb NOT NULL DEFAULT '{}'::jsonb,
           updated_at  timestamptz NOT NULL DEFAULT now()
         )`;
+      // Direcionamento editável enviado em toda chamada de IA (null = usa o padrão do código).
+      await tx`ALTER TABLE ai_settings ADD COLUMN IF NOT EXISTS directive text`;
       // Histórico estruturado de toda chamada de IA (sucesso ou falha), para análises futuras.
       await tx`
         CREATE TABLE IF NOT EXISTS ai_runs (
