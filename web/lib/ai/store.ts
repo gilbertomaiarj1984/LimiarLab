@@ -79,7 +79,7 @@ export async function liveContext(athleteId: string, timezone: string): Promise<
  * Ponto único para qualquer análise de IA do app: usa o provedor escolhido, faz failover
  * injeta o direcionamento e grava a chamada em ai_runs (sucesso ou falha). `kind` nomeia a análise ("teste", "relatorio-semanal"...).
  */
-export async function askAi(athleteId: string, kind: string, req: AiRequest, timezone = "America/Sao_Paulo"): Promise<AiResult> {
+export async function askAi(athleteId: string, kind: string, req: AiRequest, timezone = "America/Sao_Paulo"): Promise<AiResult & { runId: number }> {
   const s = await getAiSettings(athleteId);
   // O direcionamento (editável) e os limiares vigentes vão antes do pedido específico de cada análise.
   const system = buildSystem(s.directive, await liveContext(athleteId, timezone), req.system);
@@ -87,10 +87,11 @@ export async function askAi(athleteId: string, kind: string, req: AiRequest, tim
   const input = { system: req.system, text: req.text, maxTokens: req.maxTokens, json: req.json ?? false, directiveIsDefault: s.directiveIsDefault };
   try {
     const r = await runText(req, s.provider, s.models);
-    await sql`
+    const [row] = await sql<{ id: number }[]>`
       INSERT INTO ai_runs (athlete_id, kind, requested_provider, provider, model, switched, ok, attempt_errors, input, output, input_tokens, output_tokens, latency_ms)
-      VALUES (${athleteId}, ${kind}, ${s.provider}, ${r.provider}, ${r.model}, ${r.switched}, true, ${sql.json(r.attemptErrors)}, ${sql.json(input)}, ${r.text}, ${r.inputTokens}, ${r.outputTokens}, ${r.latencyMs})`;
-    return r;
+      VALUES (${athleteId}, ${kind}, ${s.provider}, ${r.provider}, ${r.model}, ${r.switched}, true, ${sql.json(r.attemptErrors)}, ${sql.json(input)}, ${r.text}, ${r.inputTokens}, ${r.outputTokens}, ${r.latencyMs})
+      RETURNING id::int`;
+    return { ...r, runId: row.id };
   } catch (e) {
     const msg = e instanceof Error ? e.message : "falha desconhecida";
     await sql`

@@ -35,6 +35,7 @@ export function ActivityCard({ a, phys, time }: { a: Activity; phys: Physiology;
           {iv && <div className="facts"><span><b>Intervalado</b> {iv}</span></div>}
           <div className="chips">
             <Link href={`/atividade/${a.id}`} className="chip">detalhes das voltas ›</Link>
+            <Link href={`/atividade/${a.id}#feedback`} className="chip acc">feedback da IA ›</Link>
             {pc && (
               <>
                 <span className="chip easy">{pc.easy}% leve</span>

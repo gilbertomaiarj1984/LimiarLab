@@ -222,6 +222,25 @@ export function ensureSchema(): Promise<void> {
           latency_ms          integer
         )`;
       await tx`CREATE INDEX IF NOT EXISTS ai_runs_athlete_created ON ai_runs (athlete_id, created_at DESC)`;
+      // Feedback de IA de uma corrida (botão Feedback). Várias por atividade (regerar não apaga as antigas);
+      // a tela mostra a mais recente. O texto exato enviado e a resposta bruta ficam em ai_runs (ai_run_id).
+      await tx`
+        CREATE TABLE IF NOT EXISTS run_feedback (
+          id               bigserial PRIMARY KEY,
+          athlete_id       uuid NOT NULL REFERENCES athletes(id) ON DELETE CASCADE,
+          activity_id      uuid NOT NULL REFERENCES activities(id) ON DELETE CASCADE,
+          ai_run_id        bigint REFERENCES ai_runs(id) ON DELETE SET NULL,
+          created_at       timestamptz NOT NULL DEFAULT now(),
+          payload_version  smallint NOT NULL,
+          provider         text NOT NULL,
+          model            text NOT NULL,
+          verdict          text,
+          intensity        text,
+          structured       jsonb,
+          raw_text         text NOT NULL,
+          input_summary    jsonb NOT NULL
+        )`;
+      await tx`CREATE INDEX IF NOT EXISTS run_feedback_activity ON run_feedback (athlete_id, activity_id, created_at DESC)`;
 
       // Atleta inicial (fase 1: um só). Números do teste cardiopulmonar de 23/07/2026 (data/zonas.json).
       const [{ n }] = await tx<{ n: number }[]>`SELECT count(*)::int AS n FROM athletes`;

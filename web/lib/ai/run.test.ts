@@ -23,6 +23,7 @@ test("modelo desconhecido cai no padrão; provedor inválido é recusado", () =>
 test("classifica quota e erro transitório", () => {
   assert.ok(isQuotaError({ status: 429 }));
   assert.ok(isTransientError({ status: 503 }));
+  assert.ok(isQuotaError({ status: 413 }));
   assert.ok(!isQuotaError({ status: 400, message: "bad request" }));
   assert.ok(!isTransientError({ status: 401 }));
 });
