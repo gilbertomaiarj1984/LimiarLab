@@ -34,9 +34,18 @@ echo "--- produtos dentro do .iq ---" >> "$OUT/dispositivos.txt"
   7z x -y -o/tmp/iqx "/app/$OUT/sao-garrafa-run.iq" > /tmp/7z.log 2>&1 || true
   echo "7z: $(tail -3 /tmp/7z.log | tr '\n' ' ')"
   ls -R /tmp/iqx | head -30
-  echo "produtos no manifest do .iq:"
-  grep -rhoE 'product id="[a-z0-9_]+"' /tmp/iqx 2>/dev/null | sort -u | sed 's/product id=//' | tr -d '"' | tr '\n' ' '
-  echo
+  python3 - <<'PY'
+import json, os
+dirs = {d for d in os.listdir("/tmp/iqx") if d.startswith("006-")}
+print("pastas de part number no .iq:", len(dirs))
+dentro, fora = [], []
+for dev in open("/app/tools/produtos.txt").read().split():
+    j = json.load(open(f"/root/.Garmin/ConnectIQ/Devices/{dev}/compiler.json"))
+    nums = {p.get("number") for p in j.get("partNumbers", [])}
+    (dentro if nums & dirs else fora).append(dev)
+print("DENTRO do .iq:", " ".join(dentro))
+print("FORA do .iq:", " ".join(fora))
+PY
 } >> "$OUT/dispositivos.txt" 2>&1
 ls -l "$OUT"/*.prg "$OUT"/*.iq >> "$OUT/compilacao.txt" 2>&1
 
