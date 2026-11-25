@@ -28,12 +28,15 @@ for dev in $(cat tools/produtos.txt); do
 done
 echo "--- produtos dentro do .iq ---" >> "$OUT/dispositivos.txt"
 {
-  echo "tipo do .iq: $(file -b "$OUT/sao-garrafa-run.iq" 2>&1)"
-  echo "inicio: $(head -c 16 "$OUT/sao-garrafa-run.iq" | od -An -tx1)"
-  echo "ids de fr* encontrados em texto dentro do .iq:"
-  strings -n 3 "$OUT/sao-garrafa-run.iq" | grep -oE '(^|[^a-z0-9])fr[0-9][0-9a-z]*' | tr -d '[:space:][:punct:]' | sort -u | tr '\n' ' '
+  # O .iq é um arquivo 7z (começa com 37 7a bc af): instala o 7z só para listar o conteúdo.
+  (apt-get update -qq && apt-get install -y -qq p7zip-full) > /dev/null 2>&1
+  rm -rf /tmp/iqx && mkdir /tmp/iqx
+  7z x -y -o/tmp/iqx "/app/$OUT/sao-garrafa-run.iq" > /tmp/7z.log 2>&1 || true
+  echo "7z: $(tail -3 /tmp/7z.log | tr '\n' ' ')"
+  ls -R /tmp/iqx | head -30
+  echo "produtos no manifest do .iq:"
+  grep -rhoE 'product id="[a-z0-9_]+"' /tmp/iqx 2>/dev/null | sort -u | sed 's/product id=//' | tr -d '"' | tr '\n' ' '
   echo
-  (cd /tmp && rm -rf iqx && mkdir iqx && cd iqx && (unzip -o -q /app/$OUT/sao-garrafa-run.iq 2>&1 | head -3; ls -R . | head -40))
 } >> "$OUT/dispositivos.txt" 2>&1
 ls -l "$OUT"/*.prg "$OUT"/*.iq >> "$OUT/compilacao.txt" 2>&1
 
