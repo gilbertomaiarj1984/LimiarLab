@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
+    <iq:application id="cb4753e708c24ac783819264621005a8" type="watchface" name="@Strings.AppName" entry="MostradorApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.2.0">
+        <iq:products>
+            <iq:product id="fr955"/>
+        </iq:products>
+        <iq:permissions/>
+        <iq:languages>
+            <iq:language>por</iq:language>
+        </iq:languages>
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>

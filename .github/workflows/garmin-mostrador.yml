@@ -1,0 +1,46 @@
+# Mostrador (watch face) São Garrafa Run para o Forerunner 955.
+# Gera sao-garrafa-run.prg (instalar por USB) e sao-garrafa-run.iq (Connect IQ Store) no artifact "mostrador-build".
+# Chave fixa: secret CIQ_DEVELOPER_KEY (base64 da chave .der). Sem ela, usa chave aleatória (só teste).
+name: garmin-mostrador
+
+on:
+  push:
+    branches: ["claude/**"]
+    paths: ["garmin-mostrador/**", ".github/workflows/garmin-mostrador.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compilar
+        env:
+          CIQ_DEVELOPER_KEY: ${{ secrets.CIQ_DEVELOPER_KEY }}
+        run: |
+          docker run --rm -e CIQ_DEVELOPER_KEY -v "$PWD/garmin-mostrador:/app" --entrypoint /bin/bash \
+            ghcr.io/matco/connectiq-tester:latest /app/tools/ci.sh
+          sudo chown -R "$(id -u):$(id -g)" garmin-mostrador/build
+          cat garmin-mostrador/build/ambiente.txt garmin-mostrador/build/compilacao.txt
+          grep -q '^status=0$' garmin-mostrador/build/compilacao.txt
+          grep -q '^status_iq=0$' garmin-mostrador/build/compilacao.txt
+      - name: Telas reduzidas no log (base64)
+        if: always()
+        run: |
+          sudo apt-get install -y -qq imagemagick > /dev/null 2>&1 || true
+          for f in garmin-mostrador/build/tela-*.png; do
+            [ -f "$f" ] || continue
+            convert "$f" -resize 50% -quality 60 "${f%.png}.jpg"
+            echo "=== $(basename "${f%.png}.jpg") ==="
+            base64 -w 0 "${f%.png}.jpg"; echo
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mostrador-build
+          path: garmin-mostrador/build/
+          retention-days: 14
