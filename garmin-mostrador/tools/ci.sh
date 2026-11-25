@@ -20,6 +20,14 @@ monkeyc -f monkey.jungle -d fr955 -o "$OUT/sao-garrafa-run.prg" -y /tmp/key.der 
 echo "status=$?" >> "$OUT/compilacao.txt"
 monkeyc -e -r -f monkey.jungle -o "$OUT/sao-garrafa-run.iq" -y /tmp/key.der -w >> "$OUT/compilacao.txt" 2>&1
 echo "status_iq=$?" >> "$OUT/compilacao.txt"
+# Confere cada dispositivo da lista, um a um (o export pode ignorar algum sem avisar).
+: > "$OUT/dispositivos.txt"
+for dev in $(cat tools/produtos.txt); do
+  monkeyc -f monkey.jungle -d "$dev" -o "/tmp/$dev.prg" -y /tmp/key.der > "/tmp/$dev.log" 2>&1
+  echo "$dev status=$?" >> "$OUT/dispositivos.txt"
+done
+echo "--- produtos dentro do .iq ---" >> "$OUT/dispositivos.txt"
+(cd /tmp && rm -rf iqx && mkdir iqx && cd iqx && unzip -q -o /app/$OUT/sao-garrafa-run.iq 2>/dev/null; grep -rho 'product id="[a-z0-9]*"' . 2>/dev/null | sort -u) >> "$OUT/dispositivos.txt"
 ls -l "$OUT"/*.prg "$OUT"/*.iq >> "$OUT/compilacao.txt" 2>&1
 
 exit 0

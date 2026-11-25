@@ -13,6 +13,8 @@ DISPOSITIVOS = {
     "fr57042mm": 390, "fr57047mm": 454, "fr970": 454,
     "fr70": 390, "fr170": 390, "fr170m": 390,
 }
+# Tamanho do ícone do launcher exigido pelo SDK em cada largura de tela.
+ICONE = {208: 40, 218: 40, 240: 40, 260: 40, 360: 60, 390: 54, 416: 60, 454: 65}
 sg = Image.open("tools/fontes/sao_garrafa_cheia.png").convert("RGB")
 rr = Image.open("tools/fontes/rafinha_cheia_vermelha.png").convert("RGB")
 
@@ -28,7 +30,7 @@ for w in sorted(set(DISPOSITIVOS.values())):
     os.makedirs(pasta)
     ajustar(sg, round(100 * w / 260)).save(f"{pasta}/sao_garrafa.png")
     ajustar(rr, round(84 * w / 260)).save(f"{pasta}/rafinha.png")
-    ic = round(40 * w / 260)
+    ic = ICONE[w]
     icone = Image.new("RGB", (ic, ic), (0, 0, 0))
     peq = ajustar(sg, ic)
     icone.paste(peq, (0, (ic - peq.height) // 2))

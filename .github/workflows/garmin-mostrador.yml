@@ -25,7 +25,7 @@ jobs:
           docker run --rm -e CIQ_DEVELOPER_KEY -v "$PWD/garmin-mostrador:/app" --entrypoint /bin/bash \
             ghcr.io/matco/connectiq-tester:latest /app/tools/ci.sh
           sudo chown -R "$(id -u):$(id -g)" garmin-mostrador/build
-          cat garmin-mostrador/build/ambiente.txt garmin-mostrador/build/compilacao.txt
+          cat garmin-mostrador/build/ambiente.txt garmin-mostrador/build/dispositivos.txt garmin-mostrador/build/compilacao.txt
           grep -q '^status=0$' garmin-mostrador/build/compilacao.txt
           grep -q '^status_iq=0$' garmin-mostrador/build/compilacao.txt
           grep -E 'DEVICES BUILT' garmin-mostrador/build/compilacao.txt
