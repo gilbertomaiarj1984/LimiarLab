@@ -4,13 +4,14 @@ Rodar da pasta garmin-mostrador: python3 tools/gerar_recursos.py"""
 from PIL import Image
 import os, shutil
 
-# id do dispositivo -> largura da tela (px). Forerunner de 2020 em diante (lista do SDK 8.x).
+# id do dispositivo -> largura da tela (px). Forerunner de 2019 em diante (lista do SDK 8.x).
 DISPOSITIVOS = {
     "fr745": 240, "fr945lte": 240, "fr55": 208,
     "fr255": 260, "fr255m": 260, "fr255s": 218, "fr255sm": 218, "fr955": 260,
     "fr265": 416, "fr265s": 360, "fr965": 454,
     "fr165": 390, "fr165m": 390,
     "fr57042mm": 390, "fr57047mm": 454, "fr970": 454,
+    "fr45": 208, "fr245": 240, "fr245m": 240, "fr945": 240,
     "fr70": 390, "fr170": 390, "fr170m": 390,
 }
 # Tamanho do ícone do launcher exigido pelo SDK em cada largura de tela.
