@@ -27,17 +27,14 @@ for dev in $(cat tools/produtos.txt); do
   echo "$dev status=$?" >> "$OUT/dispositivos.txt"
 done
 echo "--- produtos dentro do .iq ---" >> "$OUT/dispositivos.txt"
-python3 - >> "$OUT/dispositivos.txt" 2>&1 <<'PY'
-import zipfile, re
-z = zipfile.ZipFile("/app/build/sao-garrafa-run.iq")
-print("arquivos no .iq:", z.namelist()[:12])
-for n in z.namelist():
-    if n.endswith(".xml") or n.endswith(".json") or "manifest" in n.lower():
-        t = z.read(n).decode("utf-8", "ignore")
-        ids = sorted(set(re.findall(r'product id="([a-z0-9_]+)"', t)))
-        if ids:
-            print(n, len(ids), "produtos:", " ".join(ids))
-PY
+{
+  echo "tipo do .iq: $(file -b "$OUT/sao-garrafa-run.iq" 2>&1)"
+  echo "inicio: $(head -c 16 "$OUT/sao-garrafa-run.iq" | od -An -tx1)"
+  echo "ids de fr* encontrados em texto dentro do .iq:"
+  strings -n 3 "$OUT/sao-garrafa-run.iq" | grep -oE '(^|[^a-z0-9])fr[0-9][0-9a-z]*' | tr -d '[:space:][:punct:]' | sort -u | tr '\n' ' '
+  echo
+  (cd /tmp && rm -rf iqx && mkdir iqx && cd iqx && (unzip -o -q /app/$OUT/sao-garrafa-run.iq 2>&1 | head -3; ls -R . | head -40))
+} >> "$OUT/dispositivos.txt" 2>&1
 ls -l "$OUT"/*.prg "$OUT"/*.iq >> "$OUT/compilacao.txt" 2>&1
 
 exit 0
