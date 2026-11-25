@@ -27,7 +27,17 @@ for dev in $(cat tools/produtos.txt); do
   echo "$dev status=$?" >> "$OUT/dispositivos.txt"
 done
 echo "--- produtos dentro do .iq ---" >> "$OUT/dispositivos.txt"
-(cd /tmp && rm -rf iqx && mkdir iqx && cd iqx && unzip -q -o /app/$OUT/sao-garrafa-run.iq 2>/dev/null; grep -rho 'product id="[a-z0-9]*"' . 2>/dev/null | sort -u) >> "$OUT/dispositivos.txt"
+python3 - >> "$OUT/dispositivos.txt" 2>&1 <<'PY'
+import zipfile, re
+z = zipfile.ZipFile("/app/build/sao-garrafa-run.iq")
+print("arquivos no .iq:", z.namelist()[:12])
+for n in z.namelist():
+    if n.endswith(".xml") or n.endswith(".json") or "manifest" in n.lower():
+        t = z.read(n).decode("utf-8", "ignore")
+        ids = sorted(set(re.findall(r'product id="([a-z0-9_]+)"', t)))
+        if ids:
+            print(n, len(ids), "produtos:", " ".join(ids))
+PY
 ls -l "$OUT"/*.prg "$OUT"/*.iq >> "$OUT/compilacao.txt" 2>&1
 
 exit 0
