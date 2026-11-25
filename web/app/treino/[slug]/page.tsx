@@ -130,7 +130,7 @@ export default async function Treino({ params, searchParams }: { params: Promise
           )}
           <div className="wo-rest" hidden aria-live="polite">
             <div><div className="wo-rest-k">Descanso</div><b>0:00</b></div>
-            <div className="wo-rest-b"><button type="button" className="wo-plus">+15 s</button><button type="button" className="wo-skip">Pular</button></div>
+            <div className="wo-rest-b"><button type="button" className="wo-minus" aria-label="Menos 10 segundos">−10 s</button><button type="button" className="wo-plus" aria-label="Mais 10 segundos">+10 s</button><button type="button" className="wo-skip">Pular</button></div>
           </div>
         </section>
         <Script src="/treino-log.js" strategy="afterInteractive" />

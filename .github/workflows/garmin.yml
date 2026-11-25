@@ -1,6 +1,6 @@
 # App do relógio (pasta garmin/): compila para o Forerunner 955 e tira capturas do simulador.
 # O .prg e as telas ficam no artifact "garmin-build" da execução (nada é commitado).
-# O .prg leva o token só de leitura do relógio (secret RELOGIO_TOKEN); o artifact expira em 14 dias.
+# O .prg leva o token do relógio (lê o plano e confirma o treino feito) (secret RELOGIO_TOKEN); o artifact expira em 14 dias.
 name: garmin
 
 on:

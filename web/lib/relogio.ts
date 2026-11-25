@@ -2,6 +2,7 @@
 // de exercício aplicadas. Sem acesso a banco: recebe os dados prontos (testável).
 import { addDays, shortDate, weekdayIndex, WEEKDAY_SHORT, type Planned } from "./domain.ts";
 import { swapGroups } from "./equivalencias.ts";
+import type { Confirmacao } from "./forca.ts";
 import type { Workout } from "./import-schema.ts";
 
 /** Dias para frente que o relógio guarda (hoje incluído). */
@@ -77,4 +78,21 @@ export function buildWatchPlan(today: string, planned: Planned[], workouts: Map<
     sessoes.push({ data: p.date, rotulo: watchLabel(p.date, today), nome: limpa(w.title.replace(/\s*\([^)]*\)\s*$/, "")), slug: p.workout, ex: exercises(w, p.workout, p.date, swaps) });
   }
   return { hoje: today, sessoes };
+}
+
+/**
+ * Confirmação do treino a partir do que o relógio mandou: séries feitas de cada exercício, na ordem do treino.
+ * As trocas do dia (as mesmas que o relógio exibiu) entram como a troca de cada exercício.
+ * Devolve null se a lista não tem um número inteiro de 0 a 10 por exercício.
+ */
+export function confirmacaoDoRelogio(nExercicios: number, series: unknown, swaps: { ex: number; g: number; id: string }[]): Confirmacao[] | null {
+  if (!Array.isArray(series) || series.length !== nExercicios) return null;
+  const out: Confirmacao[] = [];
+  for (let i = 0; i < series.length; i++) {
+    const n = series[i];
+    if (!Number.isInteger(n) || n < 0 || n > 10) return null;
+    const sw = swaps.find((x) => x.ex === i + 1);
+    out.push({ ex: i + 1, series: n, troca: sw ? { g: sw.g, id: sw.id } : null });
+  }
+  return out;
 }

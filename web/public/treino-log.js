@@ -296,6 +296,14 @@
       .catch(function () { box.querySelectorAll(".wo-conf-act button").forEach(function (b) { b.disabled = false; }); confRender(log); confMsg(log, "Sem conexão. Tente de novo quando a internet voltar.", true); });
   }
 
+  // Fim do treino pelo app: com todas as séries marcadas, confirma sozinho (vai ao histórico e fica "feito").
+  // Só quando o treino ainda não está confirmado; para corrigir depois, é só ajustar e confirmar de novo.
+  function autoConfirm(log) {
+    var box = log.querySelector(".wo-conf"); if (!box || !where(log)) return;
+    if (!box.querySelector(".wo-conf-undo").hidden) return;
+    confSend(log, "PUT");
+  }
+
   // Contador de descanso, pelo horário de término (continua certo se a tela apagar).
   var end = 0, tick = null, curLog = null;
   function paint() {
@@ -319,6 +327,13 @@
     clearInterval(tick); tick = null; end = 0;
     document.querySelectorAll(".wo-rest").forEach(function (b) { b.hidden = true; });
     if (finished) beep();
+  }
+  // Soma ou subtrai segundos da contagem; chegando a zero, o descanso termina (sem apito).
+  function adjust(s) {
+    if (!end) return;
+    end += s * 1000;
+    if (end - Date.now() <= 0) { stop(false); return; }
+    paint();
   }
   function start(log, s) { curLog = log; end = Date.now() + s * 1000; clearInterval(tick); tick = setInterval(paint, 250); paint(); }
   window.__llTreinoStop = function () { stop(false); };
@@ -350,11 +365,16 @@
     if (b) {
       var on = b.getAttribute("aria-pressed") !== "true";
       b.setAttribute("aria-pressed", on ? "true" : "false");
-      if (on) start(log, Number(b.closest(".wo-card").dataset.rest) || 75);
+      var all = !log.querySelector('.wo-set[aria-pressed="false"]');
+      // Última série de todos os exercícios marcada: não precisa de descanso e o treino já é confirmado sozinho.
+      if (on && !all) start(log, Number(b.closest(".wo-card").dataset.rest) || 75);
+      if (on && all) stop(false);
       save(log); confRender(log);
+      if (on && all) autoConfirm(log);
       return;
     }
-    if (ev.target.closest(".wo-plus")) { end += 15000; paint(); return; }
+    if (ev.target.closest(".wo-plus")) { adjust(10); return; }
+    if (ev.target.closest(".wo-minus")) { adjust(-10); return; }
     if (ev.target.closest(".wo-skip")) { stop(false); return; }
     if (ev.target.closest(".wo-reset")) {
       log.querySelectorAll(".wo-set").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });

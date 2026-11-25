@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildWatchPlan, limpa, midRest, repsText, watchLabel } from "./relogio.ts";
+import { buildWatchPlan, confirmacaoDoRelogio, limpa, midRest, repsText, watchLabel } from "./relogio.ts";
 import type { Planned } from "./domain.ts";
 import type { Workout } from "./import-schema.ts";
 
@@ -65,4 +65,17 @@ test("relógio: troca do dia substitui nome, séries, reps, dicas e figura; não
   // troca inexistente na base: fica o original
   const q = buildWatchPlan("2026-11-18", [plano("2026-11-18")], ws, [{ ...swaps[0], id: "nao-existe" }]);
   assert.equal(q.sessoes[0].ex[0].n, "Puxada frontal (pulldown)");
+});
+
+test("relógio: confirmação do treino a partir das séries feitas", () => {
+  const sw = [{ ex: 2, g: 0, id: "x" }];
+  assert.deepEqual(confirmacaoDoRelogio(2, [3, 1], sw), [
+    { ex: 1, series: 3, troca: null },
+    { ex: 2, series: 1, troca: { g: 0, id: "x" } },
+  ]);
+  assert.equal(confirmacaoDoRelogio(2, [3], []), null);
+  assert.equal(confirmacaoDoRelogio(2, [3, 11], []), null);
+  assert.equal(confirmacaoDoRelogio(2, [3, -1], []), null);
+  assert.equal(confirmacaoDoRelogio(2, [3, 1.5], []), null);
+  assert.equal(confirmacaoDoRelogio(1, "3", []), null);
 });
