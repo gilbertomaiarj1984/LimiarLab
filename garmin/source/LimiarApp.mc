@@ -12,6 +12,7 @@ import Toybox.WatchUi;
 const DEMO = false;
 
 const URL_PLANO = "https://limiar.143-95-214-240.sslip.io/api/relogio";
+const URL_CONCLUIR = "https://limiar.143-95-214-240.sslip.io/api/relogio/concluir";
 const MAX_SESSOES = 7;
 const DIAS_CURTOS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
 const DIAS_LONGOS = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
@@ -133,7 +134,7 @@ class LimiarApp extends Application.AppBase {
         for (var i = 0; i < ss.size(); i++) {
             var data = ss[i]["data"];
             if (numeroData(data) >= hoje) {
-                lista.add({ "nome" => ss[i]["nome"], "rotulo" => rotulo(data), "ex" => ss[i]["ex"] });
+                lista.add({ "nome" => ss[i]["nome"], "rotulo" => rotulo(data), "ex" => ss[i]["ex"], "slug" => ss[i]["slug"], "dia" => data });
             }
         }
         sessoes = lista;
@@ -222,7 +223,10 @@ class LimiarApp extends Application.AppBase {
         } else if (demoPasso == 7) {
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
             demoView.exIdx = demoView.exs.size() - 1;
-            demoView.serie = demoView.exs[demoView.exIdx]["s"];
+            for (var i = 0; i < demoView.exs.size(); i++) {
+                demoView.feitas[i] = demoView.exs[i]["s"];
+            }
+            demoView.feitas[demoView.exIdx] -= 1;
             demoView.acaoPrincipal();
         } else if (demoPasso >= 8) {
             demoTimer.stop();
