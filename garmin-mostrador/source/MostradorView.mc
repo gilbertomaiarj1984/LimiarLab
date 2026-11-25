@@ -28,6 +28,8 @@ function numeroDoDia(ano as Number, mes as Number, dia as Number) as Number {
 class MostradorView extends WatchUi.WatchFace {
     hidden var logoSg;
     hidden var logoRr;
+    // Modo de baixo consumo (telas AMOLED): só texto, sem logos, para proteger a tela.
+    hidden var dormindo = false;
 
     function initialize() {
         WatchFace.initialize();
@@ -36,6 +38,21 @@ class MostradorView extends WatchUi.WatchFace {
     function onLayout(dc as Dc) as Void {
         logoSg = WatchUi.loadResource(Rez.Drawables.SaoGarrafa);
         logoRr = WatchUi.loadResource(Rez.Drawables.Rafinha);
+    }
+
+    function onEnterSleep() as Void {
+        dormindo = true;
+        WatchUi.requestUpdate();
+    }
+
+    function onExitSleep() as Void {
+        dormindo = false;
+        WatchUi.requestUpdate();
+    }
+
+    hidden function economizaTela() as Boolean {
+        var s = System.getDeviceSettings();
+        return dormindo && (s has :requiresBurnInProtection) && s.requiresBurnInProtection;
     }
 
     // Dias que faltam até a prova, pela data local do relógio (negativo = já passou).
@@ -50,9 +67,12 @@ class MostradorView extends WatchUi.WatchFace {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
 
-        // Logos (já no tamanho final, 260 px de largura de referência).
-        dc.drawBitmap(cx - logoSg.getWidth() / 2, 12, logoSg);
-        dc.drawBitmap(cx - logoRr.getWidth() / 2, 190, logoRr);
+        // Posições proporcionais à tela (projeto em 260 px); os logos já vêm no tamanho certo de cada tela.
+        var poupa = economizaTela();
+        if (!poupa) {
+            dc.drawBitmap(cx - logoSg.getWidth() / 2, 12 * w / 260, logoSg);
+            dc.drawBitmap(cx - logoRr.getWidth() / 2, 190 * w / 260, logoRr);
+        }
 
         // Hora.
         var t = System.getClockTime();
@@ -64,11 +84,11 @@ class MostradorView extends WatchUi.WatchFace {
             }
         }
         var hora = h.format("%02d") + ":" + t.min.format("%02d");
-        dc.drawText(cx, 118, Graphics.FONT_NUMBER_MEDIUM, hora, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(cx, 118 * w / 260, Graphics.FONT_NUMBER_MEDIUM, hora, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
         // Contagem regressiva.
         var d = diasRestantes();
-        var yc = 164;
+        var yc = 164 * w / 260;
         if (d > 0) {
             var pre = WatchUi.loadResource(Rez.Strings.Faltam) + " ";
             var num = d.toString();

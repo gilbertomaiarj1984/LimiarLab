@@ -2,7 +2,25 @@
 <iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
     <iq:application id="cb4753e708c24ac783819264621005a8" type="watchface" name="@Strings.AppName" entry="MostradorApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.2.0">
         <iq:products>
+            <iq:product id="fr745"/>
+            <iq:product id="fr945lte"/>
+            <iq:product id="fr55"/>
+            <iq:product id="fr255"/>
+            <iq:product id="fr255m"/>
+            <iq:product id="fr255s"/>
+            <iq:product id="fr255sm"/>
             <iq:product id="fr955"/>
+            <iq:product id="fr265"/>
+            <iq:product id="fr265s"/>
+            <iq:product id="fr965"/>
+            <iq:product id="fr165"/>
+            <iq:product id="fr165m"/>
+            <iq:product id="fr57042mm"/>
+            <iq:product id="fr57047mm"/>
+            <iq:product id="fr970"/>
+            <iq:product id="fr70"/>
+            <iq:product id="fr170"/>
+            <iq:product id="fr170m"/>
         </iq:products>
         <iq:permissions/>
         <iq:languages>

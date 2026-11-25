@@ -28,16 +28,7 @@ jobs:
           cat garmin-mostrador/build/ambiente.txt garmin-mostrador/build/compilacao.txt
           grep -q '^status=0$' garmin-mostrador/build/compilacao.txt
           grep -q '^status_iq=0$' garmin-mostrador/build/compilacao.txt
-      - name: Telas reduzidas no log (base64)
-        if: always()
-        run: |
-          sudo apt-get install -y -qq imagemagick > /dev/null 2>&1 || true
-          for f in garmin-mostrador/build/tela-*.png; do
-            [ -f "$f" ] || continue
-            convert "$f" -resize 50% -quality 60 "${f%.png}.jpg"
-            echo "=== $(basename "${f%.png}.jpg") ==="
-            base64 -w 0 "${f%.png}.jpg"; echo
-          done
+          grep -E 'DEVICES BUILT' garmin-mostrador/build/compilacao.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
