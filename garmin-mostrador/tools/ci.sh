@@ -5,6 +5,12 @@ cd /app
 OUT=build
 rm -rf "$OUT" && mkdir -p "$OUT"
 { echo "monkeyc: $(command -v monkeyc)"; } > "$OUT/ambiente.txt"
+# Lista de dispositivos Forerunner conhecidos pelo SDK (id, tela, tipo) para conferência.
+for d in /root/.Garmin/ConnectIQ/Devices/fr*; do
+  [ -f "$d/compiler.json" ] || continue
+  echo "DISPOSITIVO $(basename "$d") $(python3 -c "import json,sys;j=json.load(open('$d/compiler.json'));print(j['resolution'] if 'resolution' in j else '', j.get('displayType', ''), j.get('partNumbers',[{}])[0].get('connectIQVersion',''))" 2>&1)" >> "$OUT/ambiente.txt"
+done
+ls /root/.Garmin/ConnectIQ/Devices | tr '\n' ' ' >> "$OUT/ambiente.txt"
 
 # Chave de desenvolvedor: fixa (secret CIQ_DEVELOPER_KEY, base64 do .der) ou, na falta dela, aleatória (só serve para teste).
 if [ -n "${CIQ_DEVELOPER_KEY:-}" ]; then
