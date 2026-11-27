@@ -1,0 +1,126 @@
+{
+  "athlete": "giba",
+  "_comment": "Opcional de sexta 27/11/2026 com treino detalhado (Superiores C). Substitui o item sem exercícios do plano de 23/11. Escolhido considerando o já feito na semana (3 corridas, 2 sessões de superiores e 2 de inferiores) e o longão de 20 km no sábado.",
+  "planned": [
+    {
+      "source": "limiarlab",
+      "external_id": "2026-11-27-opc",
+      "date": "2026-11-27",
+      "sport": "strength",
+      "kind": "forca_superiores",
+      "title": "Opcional: superiores curtos (ou descanso total)",
+      "optional": true,
+      "workout": "superiores-opcional",
+      "notes": "Véspera do longão: só superiores, 35–40 min, parando com 2 a 3 reps sobrando. Se o corpo pedir, descanso total."
+    }
+  ],
+  "activities": [],
+  "workouts": [
+    {
+      "slug": "superiores-opcional",
+      "title": "Superiores C: peito, ombros e braços (opcional, sexta)",
+      "goal": "Opcional de sexta, véspera do longão de 20 km: só superiores, curto e sem ir à falha. Costas já somaram 12 séries na semana (seg e qua), então o foco é estético em peito, ombros e braços.",
+      "duration": "35–40 min",
+      "rir": "2–3",
+      "rest": "45–90 s",
+      "warmup": "5 min de remo ou elíptico leve e 1 série leve de 12 do primeiro exercício",
+      "load_note": "Use cargas 5 a 10% abaixo das de quarta e pare sempre com 2 a 3 repetições sobrando. Sem perna e sem pliometria por causa do longão. Se estiver cansado, descanso total também vale.",
+      "exercises": [
+        {
+          "name": "Supino reto na máquina ou com halteres",
+          "sets": 3,
+          "reps": "10–12",
+          "load": "60–70% 1RM",
+          "figure": "supino-reto",
+          "rest_s": 90,
+          "focus": "Peito",
+          "tips": [
+            "Escápulas juntas e apoiadas.",
+            "Desça controlado até a linha do peito."
+          ]
+        },
+        {
+          "name": "Supino inclinado com halteres",
+          "sets": 2,
+          "reps": "10–12",
+          "load": "60–70% 1RM",
+          "figure": "supino-inclinado",
+          "rest_s": 75,
+          "focus": "Peito",
+          "tips": [
+            "Banco em 30°.",
+            "Desça até os halteres ficarem na linha do peito, cotovelos a ~45° do tronco.",
+            "Empurre sem bater os halteres em cima."
+          ]
+        },
+        {
+          "name": "Elevação lateral com halteres",
+          "sets": 3,
+          "reps": "12–15",
+          "load": "55–65% 1RM",
+          "figure": "elevacao-lateral",
+          "rest_s": 60,
+          "focus": "Ombros (lateral)",
+          "tips": [
+            "Cotovelos levemente dobrados.",
+            "Suba até a linha dos ombros, sem balançar o tronco."
+          ]
+        },
+        {
+          "name": "Desenvolvimento com halteres sentado",
+          "sets": 2,
+          "reps": "10–12",
+          "load": "60–70% 1RM",
+          "figure": "desenvolvimento",
+          "rest_s": 75,
+          "focus": "Ombros",
+          "tips": [
+            "Encosto quase vertical, lombar apoiada.",
+            "Desça até a altura das orelhas e empurre para cima."
+          ]
+        },
+        {
+          "name": "Face pull na polia",
+          "sets": 2,
+          "reps": "15",
+          "load": "55–65% 1RM",
+          "figure": "face-pull",
+          "rest_s": 45,
+          "focus": "Ombro posterior e postura",
+          "tips": [
+            "Corda na altura do rosto.",
+            "Puxe abrindo as mãos para os lados da cabeça, cotovelos altos."
+          ]
+        },
+        {
+          "name": "Rosca alternada com halteres",
+          "sets": 2,
+          "reps": "10–12",
+          "load": "60–70% 1RM",
+          "figure": "rosca-direta",
+          "rest_s": 60,
+          "focus": "Bíceps",
+          "tips": [
+            "Cotovelos junto ao corpo, sem balançar o tronco.",
+            "Suba sem pressa e desça em 2 s."
+          ]
+        },
+        {
+          "name": "Tríceps na polia com corda",
+          "sets": 2,
+          "reps": "10–12",
+          "load": "60–70% 1RM",
+          "figure": "triceps-polia",
+          "rest_s": 60,
+          "focus": "Tríceps",
+          "tips": [
+            "Cotovelos colados ao corpo.",
+            "Estenda e abra a corda no final."
+          ]
+        }
+      ],
+      "reference": "Schoenfeld et al., 2017 (volume semanal por grupo). Sessão curta e longe da falha para não interferir no longão de sábado."
+    }
+  ],
+  "zones": []
+}

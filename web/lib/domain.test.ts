@@ -216,3 +216,18 @@ test("plano de força da semana de 16/11: treinos detalhados e referências", ()
   dup.workouts.push(dup.workouts[0]);
   assert.equal(importSchema.safeParse(dup).success, false);
 });
+
+test("opcional de 27/11 tem treino detalhado, ilustrações e entra no relógio", () => {
+  const raw = JSON.parse(readFileSync(new URL("../fixtures/opcional-2026-11-27.json", import.meta.url), "utf8"));
+  const p = importSchema.parse(raw);
+  const plans = payloadPlanned(p);
+  assert.equal(plans.length, 1);
+  assert.equal(plans[0].optional, true);
+  assert.equal(plans[0].workout, "superiores-opcional");
+  assert.deepEqual(p.workouts.map((w) => w.slug), ["superiores-opcional"]);
+  for (const e of p.workouts[0].exercises) {
+    assert.ok(e.figure && FIGURES[e.figure], `${e.name} sem ilustração`);
+    assert.ok(e.load && e.rest_s, `${e.name} sem carga ou descanso`);
+  }
+  assert.equal(matchPlan(plans, [], "2026-11-27")[0].status, "opcional");
+});
