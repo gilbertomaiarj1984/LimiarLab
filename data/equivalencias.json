@@ -31,6 +31,13 @@
    "curto": "Qui · Inf leve",
    "dia_semana": 4,
    "aviso": "Véspera do longão: nada de excêntrico pesado novo, nada de pliometria. Na dúvida, máquina e o mais estável."
+  },
+  {
+   "id": "superiores-opcional",
+   "nome": "Superiores C (opcional, sexta)",
+   "curto": "Sex · Sup C",
+   "dia_semana": 5,
+   "aviso": "Véspera do longão: só superiores, sem ir à falha. A troca não pode exigir lombar, pernas nem carga alta."
   }
  ],
  "exercicios": [
@@ -8827,6 +8834,479 @@
     {
      "id": "roda-abdominal",
      "porque": "Excêntrico intenso para o abdômen; dor tardia e carga lombar alta se for nova."
+    }
+   ]
+  },
+  {
+   "treino": "superiores-opcional",
+   "ordem": 1,
+   "original": "supino-reto",
+   "objetivo": "Peito para estética, 3x8-12, em máquina ou halteres.",
+   "criterios": "Manter empurrar horizontal com carga para 8-12 reps e escápulas apoiadas.",
+   "substitutos": [
+    {
+     "id": "supino-smith",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
+     "quando": "Máquina e halteres ocupados.",
+     "atencao": "Use as travas de segurança.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    },
+    {
+     "id": "supino-reto-barra",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
+     "quando": "Rack com barra livre.",
+     "atencao": "Sem parceiro, use travas; não vá à falha.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    },
+    {
+     "id": "supino-chao-halteres",
+     "equivalencia": "media",
+     "ajuste": "Mesmas 3x8-12 com a mesma carga ou um pouco mais.",
+     "quando": "Sem banco livre: só precisa de halteres e chão.",
+     "atencao": "Amplitude menor que no supino comum.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    },
+    {
+     "id": "crucifixo-maquina",
+     "equivalencia": "media",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 3x12-15.",
+     "quando": "Peck deck livre.",
+     "atencao": "Isolamento, menos tríceps.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
+    },
+    {
+     "id": "flexao-de-bracos",
+     "equivalencia": "media",
+     "ajuste": "3 séries perto de 8-15; se passar de 15, pés elevados ou elástico nas costas.",
+     "quando": "Academia cheia, sem nada livre.",
+     "atencao": "Carga difícil de ajustar.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–15"
+    },
+    {
+     "id": "supino-elastico",
+     "equivalencia": "media",
+     "ajuste": "3x12-20 até RIR 1-3.",
+     "quando": "Em casa ou sem nada livre.",
+     "atencao": null,
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
+    }
+   ],
+   "evitar": [
+    {
+     "id": "mergulho-paralelas",
+     "porque": "Ombro em extensão profunda com o peso do corpo; não equivale e aumenta o risco no ombro."
+    }
+   ]
+  },
+  {
+   "treino": "superiores-opcional",
+   "ordem": 2,
+   "original": "supino-inclinado-halteres",
+   "objetivo": "Peito superior para estética, 3x8-12, sem fadiga para as pernas.",
+   "criterios": "Manter empurrar com inclinação de 30-45°, carga para 8-12 reps e ombro confortável.",
+   "substitutos": [
+    {
+     "id": "supino-inclinado-maquina",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
+     "quando": "Banco inclinado e halteres ocupados.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    },
+    {
+     "id": "supino-inclinado-smith",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
+     "quando": "Smith livre; carga mais estável.",
+     "atencao": "Trajetória fixa; ajuste o banco para a barra descer no alto do peito.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    },
+    {
+     "id": "crossover-baixo-cabo",
+     "equivalencia": "media",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 3x12-15 com carga moderada.",
+     "quando": "Só o crossover livre.",
+     "atencao": "Movimento de isolamento, menos tríceps; menos carga total.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
+    },
+    {
+     "id": "crucifixo-inclinado-halteres",
+     "equivalencia": "media",
+     "ajuste": "3x10-15 com halteres bem mais leves que no supino, RIR 2-3.",
+     "quando": "Só sobram halteres leves.",
+     "atencao": "Braço longo carrega o ombro; não abra além da linha do ombro.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "10–15"
+    },
+    {
+     "id": "flexao-pes-elevados",
+     "equivalencia": "media",
+     "ajuste": "3 séries perto de 8-15; se passar de 15, use elástico nas costas ou pausa embaixo.",
+     "quando": "Academia cheia, sem banco nem máquina livre.",
+     "atencao": "Carga difícil de ajustar; corpo reto.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–15"
+    },
+    {
+     "id": "supino-elastico",
+     "equivalencia": "media",
+     "ajuste": "3x12-20 até RIR 1-3, empurrando para cima e à frente.",
+     "quando": "Treino em casa ou sem nada livre.",
+     "atencao": "Tensão baixa no início do movimento.",
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
+    }
+   ],
+   "evitar": [
+    {
+     "id": "mergulho-paralelas",
+     "porque": "Ombro em extensão profunda sob o peso do corpo; não equivale e aumenta o risco no ombro."
+    }
+   ]
+  },
+  {
+   "treino": "superiores-opcional",
+   "ordem": 3,
+   "original": "elevacao-lateral",
+   "objetivo": "Deltoide lateral (largura dos ombros), 3x12-15, carga leve.",
+   "criterios": "Manter abdução do ombro até a linha do ombro, carga leve para 12-15 reps, sem balanço.",
+   "substitutos": [
+    {
+     "id": "elevacao-lateral-cabo",
+     "equivalencia": "alta",
+     "ajuste": "3x12-15 por lado, carga por lado ajustada pelo RIR.",
+     "quando": "Halteres leves ocupados.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por lado"
+    },
+    {
+     "id": "elevacao-lateral-maquina",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x12-15.",
+     "quando": "Máquina livre.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15"
+    },
+    {
+     "id": "elevacao-lateral-inclinada-halter",
+     "equivalencia": "alta",
+     "ajuste": "3x12-15 por lado com halter mais leve.",
+     "quando": "Banco inclinado livre; mais tensão no início do movimento.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "12–15 por lado"
+    },
+    {
+     "id": "elevacao-lateral-elastico",
+     "equivalencia": "media",
+     "ajuste": "3x15-20 até RIR 1-3.",
+     "quando": "Sem halter livre ou em casa.",
+     "atencao": "Tensão baixa no início, alta no fim.",
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "15–20"
+    }
+   ],
+   "evitar": [
+    {
+     "id": "remada-alta-barra",
+     "porque": "Pegada fechada com cotovelos acima dos ombros e rotação interna comprime o ombro."
+    }
+   ]
+  },
+  {
+   "treino": "superiores-opcional",
+   "ordem": 4,
+   "original": "desenvolvimento-halteres",
+   "objetivo": "Ombros (anterior e lateral) em empurrar vertical sentado, lombar apoiada.",
+   "criterios": "Manter empurrar vertical sentado com encosto, carga para 8-12 reps, sem arquear a lombar.",
+   "substitutos": [
+    {
+     "id": "desenvolvimento-maquina",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
+     "quando": "Halteres ou banco ocupados.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    },
+    {
+     "id": "desenvolvimento-smith",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 3x8-12.",
+     "quando": "Smith livre.",
+     "atencao": "Barra sempre pela frente, nunca atrás da nuca.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    },
+    {
+     "id": "arnold-press",
+     "equivalencia": "alta",
+     "ajuste": "Mesmas 3x8-12 com um pouco menos de carga.",
+     "quando": "Halteres livres; variar o estímulo.",
+     "atencao": "A rotação pode incomodar quem tem ombro sensível.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    },
+    {
+     "id": "desenvolvimento-elastico",
+     "equivalencia": "media",
+     "ajuste": "3x12-20 até RIR 1-3, sentado para poupar a lombar.",
+     "quando": "Sem halteres livres ou treino em casa.",
+     "atencao": null,
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 3,
+     "reps": "12–20"
+    },
+    {
+     "id": "flexao-pike",
+     "equivalencia": "media",
+     "ajuste": "3 séries perto de 8-12; pés no banco para ficar mais difícil.",
+     "quando": "Academia cheia, sem nada livre.",
+     "atencao": "Carga difícil de ajustar; exige punho e ombro confortáveis.",
+     "evidencia": "pratica comum",
+     "series": 3,
+     "reps": "8–12"
+    }
+   ],
+   "evitar": [
+    {
+     "id": "desenvolvimento-barra-em-pe",
+     "porque": "Em pé com barra pesada, a lombar arqueia e o tronco todo trabalha; mais fadiga sem ganho para o ombro."
+    },
+    {
+     "id": "desenvolvimento-atras-nuca",
+     "porque": "Rotação externa e abdução máximas sob carga; risco desnecessário para o ombro."
+    }
+   ]
+  },
+  {
+   "treino": "superiores-opcional",
+   "ordem": 5,
+   "original": "face-pull",
+   "objetivo": "Ombro posterior e rotadores externos para postura e equilíbrio do ombro, carga leve.",
+   "criterios": "Manter puxada alta com cotovelos altos e rotação externa (ou ao menos abdução horizontal), carga leve, 12-15 reps.",
+   "substitutos": [
+    {
+     "id": "face-pull-elastico",
+     "equivalencia": "media",
+     "ajuste": "Mesmas 2x12-15; escolha um elástico que deixe 2-3 reps sobrando.",
+     "quando": "Polia ocupada ou treino em casa.",
+     "atencao": null,
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 2,
+     "reps": "12–15"
+    },
+    {
+     "id": "crucifixo-invertido-maquina",
+     "equivalencia": "media",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x12-15.",
+     "quando": "Peck deck livre.",
+     "atencao": "Não tem rotação externa; complemente com 1 série de band pull-apart se puder.",
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "12–15"
+    },
+    {
+     "id": "crucifixo-invertido-halteres-apoio",
+     "equivalencia": "media",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x12-15 com halteres leves.",
+     "quando": "Só há banco e halteres.",
+     "atencao": "Sem rotação externa.",
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "12–15"
+    },
+    {
+     "id": "band-pull-apart",
+     "equivalencia": "media",
+     "ajuste": "2x15-20, RIR 2-3.",
+     "quando": "Sem nada livre; pode fazer até no aquecimento.",
+     "atencao": "Carga baixa; faça mais repetições.",
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "15–20"
+    }
+   ],
+   "evitar": [
+    {
+     "id": "remada-alta-barra",
+     "porque": "Cotovelos acima dos ombros com rotação interna comprimem o ombro; o oposto do objetivo do face pull."
+    },
+    {
+     "id": "crucifixo-invertido-curvado",
+     "porque": "Sem apoio, a lombar segura o tronco; prefira a versão apoiada no banco."
+    }
+   ]
+  },
+  {
+   "treino": "superiores-opcional",
+   "ordem": 6,
+   "original": "rosca-direta-halteres",
+   "objetivo": "Bíceps para estética, 2x10-12, isolado e sem fadiga sistêmica.",
+   "criterios": "Manter flexão do cotovelo com supinação, carga para 10-12 reps, cotovelo parado.",
+   "substitutos": [
+    {
+     "id": "rosca-alternada-halteres",
+     "equivalencia": "alta",
+     "ajuste": "Mesmas 2x10-12 por braço.",
+     "quando": "Mesmos halteres, variação.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12 por braço"
+    },
+    {
+     "id": "rosca-barra-w",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 2x10-12.",
+     "quando": "Halteres ocupados.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
+    },
+    {
+     "id": "rosca-cabo",
+     "equivalencia": "alta",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. Mesmas 2x10-12.",
+     "quando": "Polia baixa livre.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
+    },
+    {
+     "id": "rosca-inclinada-halteres",
+     "equivalencia": "media",
+     "ajuste": "2x10-12 com halteres um pouco mais leves.",
+     "quando": "Banco inclinado livre; maior alongamento do bíceps.",
+     "atencao": "Pode incomodar a frente do ombro.",
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
+    },
+    {
+     "id": "rosca-scott-maquina",
+     "equivalencia": "media",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x10-12 com carga menor.",
+     "quando": "Máquina Scott livre.",
+     "atencao": "Não solte o peso no fim; tensão alta no cotovelo esticado.",
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
+    },
+    {
+     "id": "rosca-elastico",
+     "equivalencia": "media",
+     "ajuste": "2x12-20 até RIR 1-3.",
+     "quando": "Sem halter livre ou em casa.",
+     "atencao": null,
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 2,
+     "reps": "12–20"
+    }
+   ],
+   "evitar": [
+    {
+     "id": "rosca-barra-reta",
+     "porque": "Barra reta força o punho e, com carga alta, induz balanço de tronco e lombar; prefira barra W ou halter."
+    }
+   ]
+  },
+  {
+   "treino": "superiores-opcional",
+   "ordem": 7,
+   "original": "triceps-corda",
+   "objetivo": "Tríceps para estética, 2x10-12, isolado no cabo.",
+   "criterios": "Manter extensão do cotovelo com braço ao lado do corpo, carga para 10-12 reps.",
+   "substitutos": [
+    {
+     "id": "triceps-barra-polia",
+     "equivalencia": "alta",
+     "ajuste": "Mesmas 2x10-12, carga um pouco maior que na corda.",
+     "quando": "Corda ocupada.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
+    },
+    {
+     "id": "triceps-unilateral-cabo",
+     "equivalencia": "alta",
+     "ajuste": "2x10-12 por braço, carga por braço perto da metade; primeira série como teste.",
+     "quando": "Só sobra um pegador de uma mão.",
+     "atencao": null,
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12 por braço"
+    },
+    {
+     "id": "triceps-elastico",
+     "equivalencia": "media",
+     "ajuste": "2x12-20 até RIR 1-3.",
+     "quando": "Sem polia livre ou em casa.",
+     "atencao": null,
+     "evidencia": "Lopes et al., 2019, SAGE Open Medicine (elástico e peso convencional dão ganhos de força parecidos)",
+     "series": 2,
+     "reps": "12–20"
+    },
+    {
+     "id": "triceps-coice-halter",
+     "equivalencia": "media",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x12-15 com carga leve.",
+     "quando": "Só halteres e banco livres.",
+     "atencao": "Pouca carga no início do movimento.",
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "12–15"
+    },
+    {
+     "id": "triceps-testa-halteres",
+     "equivalencia": "media",
+     "ajuste": "Troca de máquina/cabo para livre (ou o contrário): refazer a carga pela reserva (RIR 1-3), primeira série como teste. 2x10-12.",
+     "quando": "Halteres e banco livres.",
+     "atencao": "Cotovelo sensível: reduza a carga.",
+     "evidencia": "pratica comum",
+     "series": 2,
+     "reps": "10–12"
+    }
+   ],
+   "evitar": [
+    {
+     "id": "mergulho-banco",
+     "porque": "Ombro em extensão e rotação interna com o peso do corpo; risco no ombro sem ganho extra para o tríceps."
     }
    ]
   }
