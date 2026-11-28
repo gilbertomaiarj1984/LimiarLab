@@ -231,3 +231,11 @@ test("opcional de 27/11 tem treino detalhado, ilustrações e entra no relógio"
   }
   assert.equal(matchPlan(plans, [], "2026-11-27")[0].status, "opcional");
 });
+
+test("corridas de 23 a 29/11: lote válido, dentro do intervalo e com zonas", () => {
+  const raw = JSON.parse(readFileSync(new URL("../fixtures/corridas-2026-11-23.json", import.meta.url), "utf8"));
+  const p = importSchema.parse(raw);
+  assert.equal(p.planned.length, 4);
+  assert.deepEqual(p.planned.map((x) => x.date), ["2026-11-23", "2026-11-24", "2026-11-26", "2026-11-28"]);
+  assert.equal(p.zones.length, 3);
+});
