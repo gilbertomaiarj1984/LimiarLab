@@ -1,0 +1,132 @@
+{
+  "athlete": "giba",
+  "_comment": "Corridas da semana de 23 a 29/11/2026 (Treinus pelo Garmin, criadas em 23/11) e zonas de FC das corridas já feitas (23, 24 e 26/11).",
+  "planned_replace": [
+    {
+      "source": "garmin",
+      "from": "2026-11-23",
+      "to": "2026-11-29"
+    }
+  ],
+  "planned": [
+    {
+      "source": "garmin",
+      "external_id": "1771486415",
+      "date": "2026-11-23",
+      "sport": "run",
+      "kind": "corrida_leve",
+      "title": "Rodagem leve 40 min",
+      "notes": "Treinus: Z1 leve, regenerativo",
+      "target_duration_s": 2400,
+      "target_hr_max": 135
+    },
+    {
+      "source": "garmin",
+      "external_id": "1771486427",
+      "date": "2026-11-24",
+      "sport": "run",
+      "kind": "qualidade",
+      "title": "Intervalado 10 × 600 m",
+      "notes": "Treinus: aquecer 10', 10 × 600 m Z3 (moderado/forte) com 1'15\" de descanso, desaquecer 5'"
+    },
+    {
+      "source": "garmin",
+      "external_id": "1850482429",
+      "date": "2026-11-26",
+      "sport": "run",
+      "kind": "qualidade",
+      "title": "Tiros 9 × 300 m fortes",
+      "notes": "Treinus: aquecer 2 km, depois 9 × (700 m Z1 leve + 300 m Z5 forte)",
+      "target_distance_m": 11000
+    },
+    {
+      "source": "garmin",
+      "external_id": "1850482364",
+      "date": "2026-11-28",
+      "sport": "run",
+      "kind": "longo",
+      "title": "Longão 20 km",
+      "notes": "Treinus: correr 20 km",
+      "target_distance_m": 20000
+    }
+  ],
+  "activities": [],
+  "zones": [
+    {
+      "start_time": "2026-11-23T07:04:10-03:00",
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 129
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 1993
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 520
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 0
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 0
+        }
+      ]
+    },
+    {
+      "start_time": "2026-11-24T05:57:10-03:00",
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 773
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 689
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 833
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 874
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 365
+        }
+      ]
+    },
+    {
+      "start_time": "2026-11-26T06:13:41-03:00",
+      "hr_zones": [
+        {
+          "min_bpm": 102,
+          "seconds": 125
+        },
+        {
+          "min_bpm": 125,
+          "seconds": 1069
+        },
+        {
+          "min_bpm": 141,
+          "seconds": 1245
+        },
+        {
+          "min_bpm": 150,
+          "seconds": 372
+        },
+        {
+          "min_bpm": 157,
+          "seconds": 540
+        }
+      ]
+    }
+  ],
+  "workouts": []
+}

@@ -54,6 +54,8 @@ bash -n autodeploy.sh && echo "sintaxe ok"
 crontab -l
 ```
 
+Importação automática: o mesmo cron roda `autoimport.sh`, que lê `web/fixtures/auto/INDEX.txt` na `main`, baixa cada lote listado e envia para `POST /api/import` usando o `IMPORT_TOKEN` do `.env.production` (nunca vai para log nem sai da VPS). Lote já aplicado não é reenviado; lote recusado fica registrado em `/opt/limiarlab/autoimport.log`. Para atualizar o `autoimport.sh` não precisa reinstalar: o `autodeploy.sh` o baixa da `main` a cada ciclo. Para reinstalar o `autodeploy.sh` com essa função, repita só os comandos `curl` e `chmod` acima (sem repetir a linha do cron).
+
 Desligar: `crontab -e` e apagar a linha do `autodeploy.sh`. O deploy manual (`docker compose pull app && docker compose up -d app && bash check.sh`) continua valendo.
 
 ## Desfazer tudo (só o LimiarLab)
