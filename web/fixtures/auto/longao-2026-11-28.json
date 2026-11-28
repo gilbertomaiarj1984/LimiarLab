@@ -1,0 +1,25 @@
+{
+  "athlete": "giba",
+  "_comment": "Longão de sábado 28/11/2026 ajustado pelo Giba no Garmin: substitui o 'correr 20 km' do Treinus por treino estruturado.",
+  "planned_replace": [
+    {
+      "source": "garmin",
+      "from": "2026-11-28",
+      "to": "2026-11-28"
+    }
+  ],
+  "planned": [
+    {
+      "source": "garmin",
+      "external_id": "1775535737",
+      "date": "2026-11-28",
+      "sport": "run",
+      "kind": "longo",
+      "title": "Longão 20 km: 1 aquec. + 16 Z2 + 3 Z4",
+      "notes": "1 km aquecimento; 16 km em Z2 (125–140 bpm, ritmo de conversa); 3 km em Z4 (150–156 bpm). Gel a cada 40–45 min.",
+      "target_distance_m": 20000
+    }
+  ],
+  "activities": [],
+  "zones": []
+}
