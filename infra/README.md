@@ -38,6 +38,24 @@ bash check.sh
 
 O CI publica `ghcr.io/gilbertomaiarj1984/limiarlab:latest` e `:<sha do commit>` a cada push na `main`. Para voltar a uma versão anterior: `APP_IMAGE=ghcr.io/gilbertomaiarj1984/limiarlab:<sha> docker compose up -d app`.
 
+## Atualização automática (sem rodar comando)
+
+O script `autodeploy.sh` roda a cada 3 minutos pelo cron, baixa a imagem `:latest` (o CI só a publica com testes e typecheck verdes na `main`) e, se for nova, sobe **só o `app`**, espera ficar saudável e, se não ficar, volta sozinho para a imagem anterior. Não toca em postgres, backup, Caddy nem em outros apps. O histórico fica em `/opt/limiarlab/autodeploy.log`.
+
+Instalação (uma vez, na VPS, como o usuário `deploy`):
+
+```bash
+cd /opt/limiarlab
+curl -fsSL https://raw.githubusercontent.com/gilbertomaiarj1984/LimiarLab/main/infra/autodeploy.sh -o autodeploy.sh
+chmod 700 autodeploy.sh
+bash -n autodeploy.sh && echo "sintaxe ok"
+./autodeploy.sh; tail -n 5 autodeploy.log   # teste manual (sem linha nova = já estava atualizado)
+(crontab -l 2>/dev/null; echo '*/3 * * * * /opt/limiarlab/autodeploy.sh') | crontab -
+crontab -l
+```
+
+Desligar: `crontab -e` e apagar a linha do `autodeploy.sh`. O deploy manual (`docker compose pull app && docker compose up -d app && bash check.sh`) continua valendo.
+
 ## Desfazer tudo (só o LimiarLab)
 
 ```bash
