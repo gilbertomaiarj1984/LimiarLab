@@ -19,6 +19,16 @@ log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$LOG"; }
 exec 9>"$DIR/.autodeploy.lock"
 flock -n 9 || exit 0
 
+# Importação automática dos lotes de web/fixtures/auto/ (infra/autoimport.sh): atualiza o script a partir da main
+# (só se a sintaxe estiver ok) e roda ao fim de toda execução, haja imagem nova ou não.
+SRC="${SRC_BASE:-https://raw.githubusercontent.com/gilbertomaiarj1984/LimiarLab/main/infra}"
+if curl -fsS --max-time 20 "$SRC/autoimport.sh" -o "$DIR/autoimport.sh.new" 2>/dev/null && bash -n "$DIR/autoimport.sh.new" 2>/dev/null; then
+  mv "$DIR/autoimport.sh.new" "$DIR/autoimport.sh"; chmod 700 "$DIR/autoimport.sh"
+else
+  rm -f "$DIR/autoimport.sh.new"
+fi
+[ -x "$DIR/autoimport.sh" ] && trap 'bash "$DIR/autoimport.sh"' EXIT
+
 # Mantém o log pequeno (últimas 500 linhas).
 if [ -f "$LOG" ] && [ "$(wc -l < "$LOG")" -gt 1000 ]; then tail -n 500 "$LOG" > "$LOG.tmp" && mv "$LOG.tmp" "$LOG"; fi
 
