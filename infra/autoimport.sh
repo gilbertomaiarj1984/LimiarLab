@@ -14,7 +14,8 @@ touch "$APPLIED" "$FAILED"
 log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$LOG"; }
 if [ -f "$LOG" ] && [ "$(wc -l < "$LOG")" -gt 1000 ]; then tail -n 500 "$LOG" > "$LOG.tmp" && mv "$LOG.tmp" "$LOG"; fi
 
-TOKEN=$(grep -m1 '^IMPORT_TOKEN=' .env.production 2>/dev/null | cut -d= -f2- | tr -d "\"'")
+TOKEN=$(grep -m1 '^IMPORT_TOKEN=' .env.production 2>/dev/null | cut -d= -f2- | tr -d "\"'
+")
 [ -n "$TOKEN" ] || { log "sem IMPORT_TOKEN em .env.production"; exit 1; }
 
 tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
